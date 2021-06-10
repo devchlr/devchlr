@@ -5,9 +5,20 @@ import 'package:client_chaliar/ui/styles/chaliar_font_size.dart';
 import 'package:client_chaliar/ui/styles/chaliar_icon_size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:client_chaliar/ui/widgets/svg_button.dart';
+import 'dart:async';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
+  @override
+  _SplashScreenState createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  void initState() {
+    super.initState();
+    Timer(Duration(seconds: 5),
+        () => Navigator.pushReplacementNamed(context, '/tuto'));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

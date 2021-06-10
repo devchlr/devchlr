@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:client_chaliar/ui/views/splash_screen.dart';
+import 'package:client_chaliar/ui/views/tuto_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
       ),
       routes: <String, WidgetBuilder>{
         "/splash": (BuildContext context) => new SplashScreen(),
+        "/tuto": (BuildContext context) => new OnboardingScreen(),
       },
     );
   }
