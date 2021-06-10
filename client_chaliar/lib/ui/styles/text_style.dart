@@ -41,7 +41,6 @@ class AppTextStyle {
       fontFamily: AppFontFamilly.montserrat,
       fontWeight: FontWeight.w300,
       fontStyle: FontStyle.normal,
-      letterSpacing: -1.5,
     );
   }
 

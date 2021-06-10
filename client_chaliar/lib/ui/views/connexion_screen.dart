@@ -83,7 +83,10 @@ class ConnexionScreen extends StatelessWidget {
               ),
               Center(
                 child: ButtonChaliar(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushReplacementNamed(
+                          context, '/pro_particulier');
+                    },
                     buttonText: 'Inscription',
                     height: 40.0,
                     mediaQueryWidth: 0.48,
