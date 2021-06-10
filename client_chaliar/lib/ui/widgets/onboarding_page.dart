@@ -2,6 +2,7 @@ import 'package:client_chaliar/ui/styles/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:client_chaliar/ui/styles/chaliar_color.dart';
+import 'package:client_chaliar/ui/widgets/button.dart';
 
 class OnboardingPageWidget extends StatelessWidget {
   final String imageAsset;
@@ -9,40 +10,53 @@ class OnboardingPageWidget extends StatelessWidget {
   final String subTitle;
   final String buttonText;
   final List<Widget> buildPageIndicator;
+  final VoidCallback onTap;
   OnboardingPageWidget(
       {this.imageAsset,
       this.title,
       this.subTitle,
       this.buttonText,
-      this.buildPageIndicator});
+      this.buildPageIndicator,
+      this.onTap});
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Container(
-          color: ChaliarColors.whiteColor,
+          color: ChaliarColors.whiteGreyColor,
         ),
         Container(
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * 1,
-          child: SvgPicture.asset(
-            imageAsset,
-            alignment: Alignment.center,
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
+          height: MediaQuery.of(context).size.height * 10,
+          child: Center(
+            child: SvgPicture.asset(
+              imageAsset,
+              alignment: Alignment.center,
+              width: 100.0,
+              height: MediaQuery.of(context).size.height,
+            ),
           ),
         ),
         Padding(
           padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 0.6,
-              left: 10.0,
-              right: 10.0),
+            top: MediaQuery.of(context).size.height * 0.6,
+          ),
           child: Container(
-            color: ChaliarColors.whiteColor,
+            decoration: BoxDecoration(
+              color: ChaliarColors.whiteColor,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20.0),
+                topRight: Radius.circular(20.0),
+              ),
+            ),
+            padding: EdgeInsets.only(
+                left: MediaQuery.of(context).size.height * 0.09,
+                right: MediaQuery.of(context).size.height * 0.14),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                SizedBox(height: 15.0),
+                SizedBox(height: 5.0),
                 Center(
                     child: Text(
                   title,
@@ -63,32 +77,16 @@ class OnboardingPageWidget extends StatelessWidget {
                 ),
                 SizedBox(height: 15.0),
                 Center(
-                  child: Container(
-                    height: 55.0,
-                    width: MediaQuery.of(context).size.height * 0.5,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        boxShadow: [
-                          BoxShadow(
-                              color: ChaliarColors.primaryColors,
-                              spreadRadius: 1),
-                        ],
-                        color: ChaliarColors.whiteColor,
-                        border: Border.all(color: ChaliarColors.primaryColors)),
-                    child: GestureDetector(
-                      onTap: () => print('Get started'),
-                      child: Center(
-                        child: Padding(
-                          padding: EdgeInsets.only(bottom: 0.0),
-                          child: Text(
-                            buttonText,
-                            style: AppTextStyle.header3(
-                                color: ChaliarColors.primaryColors),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  child: ButtonChaliar(
+                      onTap: onTap,
+                      buttonText: buttonText,
+                      height: 40.0,
+                      mediaQueryWidth: 0.48,
+                      borderRaduis: 50,
+                      backgroundcolor: ChaliarColors.whiteColor,
+                      bordercolor: ChaliarColors.primaryColors,
+                      textStyle: AppTextStyle.button(
+                          color: ChaliarColors.primaryColors)),
                 )
               ],
             ),

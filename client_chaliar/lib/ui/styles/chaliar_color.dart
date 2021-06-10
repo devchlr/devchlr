@@ -5,4 +5,5 @@ class ChaliarColors {
   static const Color secondaryColors = Color(0xFF042C5C);
   static const Color whiteColor = Color(0xFFFFFFFF);
   static const Color blackColor = Color(0xFF2F3547);
+  static const Color whiteGreyColor = Color(0xFFEFF3F3);
 }
