@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:client_chaliar/ui/styles/chaliar_icon_size.dart';
 
 class SvgIconButton extends StatelessWidget {
   final String iconAsset;

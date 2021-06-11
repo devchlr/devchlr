@@ -9,116 +9,131 @@ class ConnexionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Stack(
+        fit: StackFit.expand,
         children: [
           Container(
             decoration: BoxDecoration(
-              color: ChaliarColors.primaryColors,
+              color: ChaliarColors.whiteColor,
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 0.65,
-            ),
-            child: Container(
-              decoration: BoxDecoration(
-                color: ChaliarColors.whiteColor,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.elliptical(100, 8),
-                    topRight: Radius.elliptical(100, 8)),
+          Column(
+            children: [
+              Expanded(
+                flex: 1,
+                child: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("assets/images/blueGradCourbe.png"),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ),
               ),
-            ),
+              Container(
+                height: 300,
+                decoration: BoxDecoration(
+                  color: ChaliarColors.whiteColor,
+                ),
+              ),
+            ],
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Padding(
-                padding: EdgeInsets.only(top: 45),
-                child: Center(
-                  child: SvgPicture.asset(
-                    "assets/images/logo.svg",
-                    height: AppIconSize.large,
-                    width: AppIconSize.large,
+              Expanded(
+                  child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.00,
+                    ),
+                    child: Center(
+                      child: SvgPicture.asset(
+                        "assets/images/logo.svg",
+                        height: AppIconSize.large,
+                        width: AppIconSize.large,
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Text.rich(
-                TextSpan(
-                  text: "CHALIAR",
-                  style: AppTextStyle.header3(color: ChaliarColors.whiteColor),
-                ),
-              ),
-              SizedBox(
-                height: 5.0,
-              ),
-              Text(
-                "Commandez un \ntransporteur",
-                textAlign: TextAlign.center,
-                style: AppTextStyle.header1(color: ChaliarColors.whiteColor),
-              ),
-              SizedBox(
-                height: 5.0,
-              ),
-              Text(
-                "Ouvert entre 06h00 et 23h00",
-                textAlign: TextAlign.center,
-                style: AppTextStyle.body(color: ChaliarColors.whiteColor),
-              ),
-              SizedBox(
-                height: 1.0,
-              ),
-              Center(
+                  Text.rich(
+                    TextSpan(
+                      text: "CHALIAR",
+                      style:
+                          AppTextStyle.header3(color: ChaliarColors.whiteColor),
+                    ),
+                  ),
+                  Text(
+                    "Commandez un \ntransporteur",
+                    textAlign: TextAlign.center,
+                    style:
+                        AppTextStyle.header1(color: ChaliarColors.whiteColor),
+                  ),
+                  Text(
+                    "Ouvert entre 06h00 et 23h00",
+                    textAlign: TextAlign.center,
+                    style: AppTextStyle.body(color: ChaliarColors.whiteColor),
+                  ),
+                ],
+              )),
+              Expanded(
+                  child: Center(
                 child: SvgPicture.asset(
                   "assets/images/courier.svg",
-                  height: 250,
-                  width: 160,
+                  height: 280,
+                  width: 180,
                 ),
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              Center(
-                child: ButtonChaliar(
-                    onTap: () {
-                      Navigator.pushReplacementNamed(
-                          context, '/pro_particulier');
-                    },
-                    buttonText: 'Inscription',
-                    height: 40.0,
-                    mediaQueryWidth: 0.48,
-                    borderRaduis: 50,
-                    backgroundcolor: ChaliarColors.primaryColors,
-                    bordercolor: ChaliarColors.primaryColors,
-                    textStyle:
-                        AppTextStyle.button(color: ChaliarColors.whiteColor)),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Center(
-                child: ButtonChaliar(
-                    onTap: () {},
-                    buttonText: 'Connexion',
-                    height: 40.0,
-                    mediaQueryWidth: 0.48,
-                    borderRaduis: 50,
-                    backgroundcolor: ChaliarColors.whiteColor,
-                    bordercolor: ChaliarColors.primaryColors,
-                    textStyle: AppTextStyle.button(
-                        color: ChaliarColors.primaryColors)),
-              ),
-              SizedBox(
-                height: 15.0,
-              ),
-              Text(
-                "Devenir Chaliar",
-                textAlign: TextAlign.center,
-                style: AppTextStyle.body(color: ChaliarColors.blackColor),
-              ),
+              )),
+              Expanded(
+                  child: Container(
+                padding: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.height * 0.05,
+                    right: MediaQuery.of(context).size.height * 0.05),
+                child: Column(
+                  children: [
+                    Center(
+                      child: ButtonChaliar(
+                          onTap: () {
+                            Navigator.pushReplacementNamed(
+                                context, '/pro_particulier');
+                          },
+                          buttonText: 'Inscription',
+                          height: 60.0,
+                          mediaQueryWidth: 0.48,
+                          borderRaduis: 50,
+                          backgroundcolor: ChaliarColors.primaryColors,
+                          bordercolor: ChaliarColors.primaryColors,
+                          textStyle: AppTextStyle.button(
+                              color: ChaliarColors.whiteColor)),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.01,
+                    ),
+                    Center(
+                      child: ButtonChaliar(
+                          onTap: () {},
+                          buttonText: 'Connexion',
+                          height: 60.0,
+                          mediaQueryWidth: 0.48,
+                          borderRaduis: 50,
+                          backgroundcolor: ChaliarColors.whiteColor,
+                          bordercolor: ChaliarColors.primaryColors,
+                          textStyle: AppTextStyle.button(
+                              color: ChaliarColors.primaryColors)),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.009,
+                    ),
+                    Text(
+                      "Devenir Chaliar",
+                      textAlign: TextAlign.center,
+                      style: AppTextStyle.body(color: ChaliarColors.blackColor),
+                    ),
+                  ],
+                ),
+              ))
             ],
           )
         ],

@@ -8,9 +8,18 @@ class AppTextStyle {
       color: color,
       fontSize: AppFontSize.largest,
       fontFamily: AppFontFamilly.montserrat,
-      fontWeight: FontWeight.w300,
+      fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
-      letterSpacing: -1.5,
+    );
+  }
+
+  static TextStyle header1_title({Color color}) {
+    return TextStyle(
+      color: color,
+      fontSize: AppFontSize.large2_1_1,
+      fontFamily: AppFontFamilly.montserrat,
+      fontWeight: FontWeight.w400,
+      fontStyle: FontStyle.normal,
     );
   }
 
@@ -39,7 +48,7 @@ class AppTextStyle {
       color: color,
       fontSize: AppFontSize.large2,
       fontFamily: AppFontFamilly.montserrat,
-      fontWeight: FontWeight.w300,
+      fontWeight: FontWeight.w200,
       fontStyle: FontStyle.normal,
     );
   }

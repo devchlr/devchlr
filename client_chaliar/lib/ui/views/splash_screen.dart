@@ -23,18 +23,14 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
+        fit: StackFit.expand,
         children: [
           Container(
-            decoration: new BoxDecoration(
-              gradient: new LinearGradient(
-                  colors: [
-                    ChaliarColors.primaryColors,
-                    ChaliarColors.secondaryColors,
-                  ],
-                  begin: const FractionalOffset(0.0, 0.0),
-                  end: const FractionalOffset(1.0, 0.0),
-                  stops: [0.0, 1.0],
-                  tileMode: TileMode.clamp),
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/images/blueGrad.png"),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           Column(

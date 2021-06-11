@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:client_chaliar/constants/iconList.dart';
+import 'package:client_chaliar/ui/styles/chaliar_color.dart';
+import 'package:client_chaliar/ui/widgets/svg_button.dart';
+
 class ButtonChaliar extends StatelessWidget {
   final VoidCallback onTap;
   final String buttonText;
@@ -38,6 +42,31 @@ class ButtonChaliar extends StatelessWidget {
               style: textStyle,
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class ContainerButton extends StatelessWidget {
+  final double height;
+  final double width;
+  final SvgIconButton iconSvg;
+  ContainerButton({this.height, this.width, this.iconSvg});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: height,
+      width: width,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(0.0),
+          color: ChaliarColors.whiteColor,
+          border: Border.all(color: ChaliarColors.whiteGreyColor)),
+      child: Center(
+        child: Padding(
+          padding: EdgeInsets.only(bottom: 0.0),
+          child: iconSvg,
         ),
       ),
     );

@@ -3,6 +3,7 @@ import 'package:client_chaliar/ui/views/splash_screen.dart';
 import 'package:client_chaliar/ui/views/tuto_screen.dart';
 import 'package:client_chaliar/ui/views/connexion_screen.dart';
 import 'package:client_chaliar/ui/views/pro_particulier_screen.dart';
+import 'package:client_chaliar/ui/views/inscription_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         "/connexion": (BuildContext context) => new ConnexionScreen(),
         "/pro_particulier": (BuildContext context) =>
             new ProParticulierScreen(),
+        "/inscription": (BuildContext context) => new InscriptionHomeScreen(),
       },
     );
   }

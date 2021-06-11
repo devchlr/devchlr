@@ -61,7 +61,7 @@ class CustomRadioListTile extends StatelessWidget {
                 subtile,
                 style: AppTextStyle.caption(color: ChaliarColors.blackColor),
               ),
-              trailing: Radio(
+              trailing: new Radio(
                 value: value,
                 groupValue: group,
                 onChanged: onChange,
