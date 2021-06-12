@@ -55,14 +55,16 @@ class _SplashScreenState extends State<SplashScreen> {
                       SizedBox(
                         height: 10.0,
                       ),
-                      Text.rich(TextSpan(
-                        text: "CHALIAR",
-                        style: TextStyle(
-                            fontFamily: AppFontFamilly.montserrat,
-                            color: ChaliarColors.whiteColor,
-                            fontSize: AppFontSize.largest,
-                            fontWeight: FontWeight.w300),
-                      ))
+                      Text.rich(
+                        TextSpan(
+                          text: "CHALIAR",
+                          style: TextStyle(
+                              fontFamily: AppFontFamilly.montserrat,
+                              color: ChaliarColors.whiteColor,
+                              fontSize: AppFontSize.largest,
+                              fontWeight: FontWeight.w300),
+                        ),
+                      ),
                     ],
                   )),
               Expanded(

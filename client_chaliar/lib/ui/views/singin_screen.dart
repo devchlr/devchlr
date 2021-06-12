@@ -157,7 +157,7 @@ class _SingInScreenState extends State<SingInScreen> {
                         right: MediaQuery.of(context).size.width * 0.25),
                     child: ButtonChaliar(
                       onTap: () => Navigator.pushReplacementNamed(
-                          context, '/inscription'),
+                          context, '/condition_generale'),
                       buttonText: 'Suivant',
                       height: 60.0,
                       mediaQueryWidth: 0.25,

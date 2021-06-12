@@ -43,6 +43,16 @@ class AppTextStyle {
     );
   }
 
+  static TextStyle header3_light({Color color, bool isUnderlined = false}) {
+    return TextStyle(
+        color: color,
+        fontSize: AppFontSize.large2_1_1,
+        fontFamily: AppFontFamilly.montserrat,
+        fontWeight: FontWeight.w300,
+        fontStyle: FontStyle.normal,
+        decoration: isUnderlined ? TextDecoration.underline : null);
+  }
+
   static TextStyle header4({Color color}) {
     return TextStyle(
       color: color,

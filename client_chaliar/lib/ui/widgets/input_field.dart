@@ -44,63 +44,61 @@ class InputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: 45.0,
-        child: TextField(
-            cursorColor: ChaliarColors.whiteColor,
-            onTap: onTap,
-            onChanged: onChanged,
-            onSubmitted: onSubmitted,
-            controller: controller,
-            autofocus: autofocus,
-            style: AppTextStyle.header2(
-                color: textFillColor == null
-                    ? ChaliarColors.blackColor
-                    : textFillColor),
-            textAlignVertical: TextAlignVertical(y: 0.6),
-            decoration: InputDecoration(
-              border: isBorder
-                  ? OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(raduis),
-                      borderSide: BorderSide(
-                          color: borderColor,
-                          width: 1.0,
-                          style: BorderStyle.solid))
-                  : null,
-              labelText: label == null ? 'label' : label,
-              labelStyle: AppTextStyle.header4(
-                  color: textLabelColor == null
-                      ? ChaliarColors.blackColor
-                      : textLabelColor),
-              filled: true,
-              fillColor: backgroundColor == null
-                  ? ChaliarColors.whiteGreyColor
-                  : backgroundColor,
-              hintStyle: AppTextStyle.body(
-                  color: textFillColor == null
-                      ? ChaliarColors.blackColor
-                      : textFillColor),
-              suffixIcon: suffixIcon,
-              prefixIcon: prefixIcon,
-              enabledBorder: isBorder
-                  ? OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(raduis),
-                      borderSide: BorderSide(
-                          color: borderColor,
-                          width: 1.0,
-                          style: BorderStyle.solid))
-                  : null,
-              // focusedBorder: OutlineInputBorder(
-              //     borderRadius: BorderRadius.circular(4.0),
-              //     borderSide: BorderSide(
-              //         color: borderColor, width: 1.0, style: BorderStyle.solid)
-              // ),
-              hintText: placeholder,
-              // isDense: true, // Added this
-              contentPadding: EdgeInsets.only(
-                  top: fieldSize == null ? 10 : fieldSize,
-                  bottom: fieldSize == null ? 10 : fieldSize,
-                  left: 20,
-                  right: 20),
-            )));
+      width: 45.0,
+      child: TextField(
+        cursorColor: ChaliarColors.whiteColor,
+        onTap: onTap,
+        onChanged: onChanged,
+        onSubmitted: onSubmitted,
+        controller: controller,
+        autofocus: autofocus,
+        style: AppTextStyle.header2(
+            color: textFillColor == null
+                ? ChaliarColors.blackColor
+                : textFillColor),
+        textAlignVertical: TextAlignVertical(y: 0.6),
+        decoration: InputDecoration(
+          border: isBorder
+              ? OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(raduis),
+                  borderSide: BorderSide(
+                      color: borderColor, width: 1.0, style: BorderStyle.solid))
+              : null,
+          labelText: label == null ? 'label' : label,
+          labelStyle: AppTextStyle.header4(
+              color: textLabelColor == null
+                  ? ChaliarColors.blackColor
+                  : textLabelColor),
+          filled: true,
+          fillColor: backgroundColor == null
+              ? ChaliarColors.whiteGreyColor
+              : backgroundColor,
+          hintStyle: AppTextStyle.body(
+              color: textFillColor == null
+                  ? ChaliarColors.blackColor
+                  : textFillColor),
+          suffixIcon: suffixIcon,
+          prefixIcon: prefixIcon,
+          enabledBorder: isBorder
+              ? OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(raduis),
+                  borderSide: BorderSide(
+                      color: borderColor, width: 1.0, style: BorderStyle.solid))
+              : null,
+          // focusedBorder: OutlineInputBorder(
+          //     borderRadius: BorderRadius.circular(4.0),
+          //     borderSide: BorderSide(
+          //         color: borderColor, width: 1.0, style: BorderStyle.solid)
+          // ),
+          hintText: placeholder,
+          // isDense: true, // Added this
+          contentPadding: EdgeInsets.only(
+              top: fieldSize == null ? 10 : fieldSize,
+              bottom: fieldSize == null ? 10 : fieldSize,
+              left: 20,
+              right: 20),
+        ),
+      ),
+    );
   }
 }
