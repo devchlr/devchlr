@@ -21,12 +21,11 @@ class OnboardingPageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      fit: StackFit.expand,
       children: [
         Container(
           color: ChaliarColors.whiteGreyColor,
         ),
-        Expanded(
+        Flexible(
             flex: 1,
             child: Container(
               margin: EdgeInsets.only(left: 40.0),
@@ -34,64 +33,65 @@ class OnboardingPageWidget extends StatelessWidget {
                 child: Image.asset(imageAsset),
               ),
             )),
-        Expanded(
-            flex: 1,
-            child: Padding(
+        Flexible(
+          flex: 1,
+          child: Padding(
+            padding: EdgeInsets.only(
+              top: MediaQuery.of(context).size.height * 0.57,
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                color: ChaliarColors.whiteColor,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20.0),
+                  topRight: Radius.circular(20.0),
+                ),
+              ),
               padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.57,
-              ),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: ChaliarColors.whiteColor,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20.0),
-                    topRight: Radius.circular(20.0),
+                  left: MediaQuery.of(context).size.height * 0.09,
+                  right: MediaQuery.of(context).size.height * 0.14),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(height: 5.0),
+                  Center(
+                      child: Text(
+                    title,
+                    textAlign: TextAlign.center,
+                    style:
+                        AppTextStyle.header2(color: ChaliarColors.blackColor),
+                  )),
+                  SizedBox(height: 5.0),
+                  Center(
+                    child: Text(subTitle,
+                        textAlign: TextAlign.center,
+                        style:
+                            AppTextStyle.body(color: ChaliarColors.blackColor)),
                   ),
-                ),
-                padding: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.height * 0.09,
-                    right: MediaQuery.of(context).size.height * 0.14),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(height: 5.0),
-                    Center(
-                        child: Text(
-                      title,
-                      textAlign: TextAlign.center,
-                      style:
-                          AppTextStyle.header2(color: ChaliarColors.blackColor),
-                    )),
-                    SizedBox(height: 5.0),
-                    Center(
-                      child: Text(subTitle,
-                          textAlign: TextAlign.center,
-                          style: AppTextStyle.body(
-                              color: ChaliarColors.blackColor)),
-                    ),
-                    SizedBox(height: 10.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: buildPageIndicator,
-                    ),
-                    SizedBox(height: 15.0),
-                    Center(
-                      child: ButtonChaliar(
-                          onTap: onTap,
-                          buttonText: buttonText,
-                          height: 60.0,
-                          mediaQueryWidth: 0.48,
-                          borderRaduis: 50,
-                          backgroundcolor: ChaliarColors.whiteColor,
-                          bordercolor: ChaliarColors.primaryColors,
-                          textStyle: AppTextStyle.button(
-                              color: ChaliarColors.primaryColors)),
-                    )
-                  ],
-                ),
+                  SizedBox(height: 10.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: buildPageIndicator,
+                  ),
+                  SizedBox(height: 15.0),
+                  Center(
+                    child: ButtonChaliar(
+                        onTap: onTap,
+                        buttonText: buttonText,
+                        height: 60.0,
+                        mediaQueryWidth: 0.48,
+                        borderRaduis: 50,
+                        backgroundcolor: ChaliarColors.whiteColor,
+                        bordercolor: ChaliarColors.primaryColors,
+                        textStyle: AppTextStyle.button(
+                            color: ChaliarColors.primaryColors)),
+                  )
+                ],
               ),
-            ))
+            ),
+          ),
+        )
       ],
     );
   }

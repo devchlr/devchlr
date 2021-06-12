@@ -19,6 +19,8 @@ class InputField extends StatelessWidget {
   final Color textLabelColor;
   final bool isBorder;
   final double fieldSize;
+  final double raduis;
+  final Color backgroundColor;
 
   InputField(
       {this.placeholder,
@@ -35,7 +37,9 @@ class InputField extends StatelessWidget {
       this.textLabelColor,
       this.controller,
       this.isBorder = false,
-      this.fieldSize});
+      this.fieldSize,
+      this.raduis = 6.0,
+      this.backgroundColor});
 
   @override
   Widget build(BuildContext context) {
@@ -54,14 +58,23 @@ class InputField extends StatelessWidget {
                     : textFillColor),
             textAlignVertical: TextAlignVertical(y: 0.6),
             decoration: InputDecoration(
-              border: isBorder ? OutlineInputBorder() : null,
+              border: isBorder
+                  ? OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(raduis),
+                      borderSide: BorderSide(
+                          color: borderColor,
+                          width: 1.0,
+                          style: BorderStyle.solid))
+                  : null,
               labelText: label == null ? 'label' : label,
               labelStyle: AppTextStyle.header4(
                   color: textLabelColor == null
                       ? ChaliarColors.blackColor
                       : textLabelColor),
-              // filled: true,
-              fillColor: ChaliarColors.whiteGreyColor,
+              filled: true,
+              fillColor: backgroundColor == null
+                  ? ChaliarColors.whiteGreyColor
+                  : backgroundColor,
               hintStyle: AppTextStyle.body(
                   color: textFillColor == null
                       ? ChaliarColors.blackColor
@@ -70,7 +83,7 @@ class InputField extends StatelessWidget {
               prefixIcon: prefixIcon,
               enabledBorder: isBorder
                   ? OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(6.0),
+                      borderRadius: BorderRadius.circular(raduis),
                       borderSide: BorderSide(
                           color: borderColor,
                           width: 1.0,

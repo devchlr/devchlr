@@ -9,6 +9,7 @@ class InscriptionHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         flexibleSpace: Image(
@@ -21,7 +22,7 @@ class InscriptionHomeScreen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: new SingleChildScrollView(
+      body: SingleChildScrollView(
         child: StatefulBuilder(
             builder: (BuildContext context, StateSetter setState) {
           return Container(

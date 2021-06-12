@@ -93,7 +93,9 @@ class InscriptionParticulierScreen extends StatelessWidget {
         ),
         Center(
           child: ButtonChaliar(
-              onTap: () {},
+              onTap: () {
+                Navigator.pushReplacementNamed(context, '/singin');
+              },
               buttonText: 'Connexion',
               height: 50.0,
               mediaQueryWidth: 0.51,

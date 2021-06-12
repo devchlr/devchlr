@@ -100,7 +100,7 @@ class ProParticulierScreen extends StatelessWidget {
                           title: 'Je suis un particuier',
                           subtile:
                               'je veux me faire livrer des colis personnellement',
-                          group: 'pro_particulier',
+                          group: 'professionnel',
                           value: 'particulier',
                           onChange: (value) {
                             print(value);
@@ -116,7 +116,7 @@ class ProParticulierScreen extends StatelessWidget {
                           title: 'Je suis un profesionnel',
                           subtile:
                               'je veux me faire livrer des colis pour ma société',
-                          group: 'pro_particulier',
+                          group: 'professionnel',
                           value: 'professionnel',
                           onChange: (value) {
                             print(value);

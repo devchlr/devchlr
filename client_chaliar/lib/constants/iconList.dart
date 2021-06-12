@@ -1,7 +1,7 @@
 const String assets = "assets/icons/";
 
 class SvgIcons {
-  static const String profile = assets + "profile.svg";
+  static const String profile = assets + "profil.svg";
   static const String home = assets + "home.svg";
   static const String deal = assets + "deal.svg";
   static const String shop = assets + "shop.svg";
@@ -16,4 +16,5 @@ class SvgIcons {
   static const String facebook_blue = assets + "facebook_blue.svg";
   static const String google_account = assets + "google_account.svg";
   static const String apple = assets + "apple.svg";
+  static const String padlock = assets + "padlock.svg";
 }
