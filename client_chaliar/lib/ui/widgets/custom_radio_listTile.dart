@@ -31,10 +31,10 @@ class CustomRadioListTile extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(raduis),
       ),
-      elevation: 6,
+      elevation: 2,
       child: Container(
-        width: MediaQuery.of(context).size.height * width,
-        height: MediaQuery.of(context).size.height * heigth,
+        // width: MediaQuery.of(context).size.width * width,
+        height: MediaQuery.of(context).size.height * 0.1,
         decoration: BoxDecoration(
             border: Border.all(
                 color: group == value
@@ -55,7 +55,6 @@ class CustomRadioListTile extends StatelessWidget {
               trailing: new Radio(
                 value: value,
                 groupValue: group,
-                onChanged: onChange,
                 activeColor: ChaliarColors.secondaryColors,
               ),
             ),

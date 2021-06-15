@@ -28,59 +28,65 @@ class OnboardingPageWidget extends StatelessWidget {
         Flexible(
             flex: 1,
             child: Container(
-              margin: EdgeInsets.only(left: 40.0),
-              child: Center(
-                child: Image.asset(imageAsset),
+              margin: EdgeInsets.only(
+                  left:MediaQuery.of(context).size.width * 0.1,
               ),
-            )),
+              decoration:BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(imageAsset),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+        ),
         Flexible(
           flex: 1,
           child: Padding(
             padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 0.57,
+              top: MediaQuery.of(context).size.height * 0.59,
             ),
             child: Container(
               decoration: BoxDecoration(
                 color: ChaliarColors.whiteColor,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20.0),
-                  topRight: Radius.circular(20.0),
+                  topLeft: Radius.circular(MediaQuery.of(context).size.height * 0.04),
+                  topRight: Radius.circular(MediaQuery.of(context).size.height * 0.04),
                 ),
               ),
               padding: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.height * 0.09,
-                  right: MediaQuery.of(context).size.height * 0.14),
+                  left: MediaQuery.of(context).size.height * 0.05,
+                  right: MediaQuery.of(context).size.height * 0.05),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  SizedBox(height: 5.0),
+
                   Center(
                       child: Text(
                     title,
                     textAlign: TextAlign.center,
                     style:
-                        AppTextStyle.header2(color: ChaliarColors.blackColor),
+                        AppTextStyle.tutorialHeader(color: ChaliarColors.blackColor),
                   )),
-                  SizedBox(height: 5.0),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                   Center(
                     child: Text(subTitle,
                         textAlign: TextAlign.center,
                         style:
-                            AppTextStyle.body(color: ChaliarColors.blackColor)),
+                            AppTextStyle.tutorialDescription(color: ChaliarColors.blackColor)),
                   ),
-                  SizedBox(height: 10.0),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.015),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: buildPageIndicator,
                   ),
-                  SizedBox(height: 15.0),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.03),
                   Center(
                     child: ButtonChaliar(
                         onTap: onTap,
                         buttonText: buttonText,
-                        height: 60.0,
-                        mediaQueryWidth: 0.48,
+                        height: MediaQuery.of(context).size.height * 0.07,
+                        mediaQueryWidth: 0.8,
                         borderRaduis: 50,
                         backgroundcolor: ChaliarColors.whiteColor,
                         bordercolor: ChaliarColors.primaryColors,

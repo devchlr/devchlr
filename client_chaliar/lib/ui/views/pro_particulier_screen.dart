@@ -20,9 +20,8 @@ class ProParticulierScreen extends StatelessWidget {
           ),
           Column(
             children: [
-              Expanded(
-                flex: 1,
-                child: Container(
+               Container(
+                  height: MediaQuery.of(context).size.height * 0.52,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage("assets/images/bgBlueHmVelo.png"),
@@ -30,70 +29,67 @@ class ProParticulierScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-              ),
               Expanded(
-                  flex: 2,
+                flex: 1,
                   child: Container(
                     decoration: BoxDecoration(
                       color: ChaliarColors.whiteColor,
                     ),
-                  )),
+                  ),),
             ],
           ),
           Container(
             padding: EdgeInsets.only(left: 15, right: 15),
-            child: Column(children: [
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+
               Expanded(
-                  flex: 1,
                   child: Column(
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(top: 45),
+                        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.115),
                         child: Center(
                           child: SvgPicture.asset(
                             "assets/images/logo.svg",
-                            height: AppIconSize.large,
-                            width: AppIconSize.large,
+                            height: 129,
+                            width: 128,
                           ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      Text.rich(
-                        TextSpan(
-                          text: "CHALIAR",
-                          style: AppTextStyle.header3(
-                              color: ChaliarColors.whiteColor),
                         ),
                       ),
                     ],
                   )),
               Expanded(
-                  flex: 2,
+                  flex: 1,
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.04,
+                      ),
                       Text.rich(
                         TextSpan(
                           text: "Bienvenue sur Chaliar",
-                          style: AppTextStyle.header3(
+                          style: AppTextStyle.headerApp1(
                               color: ChaliarColors.blackColor),
                         ),
                       ),
                       SizedBox(
-                        height: 5.0,
+                        height: MediaQuery.of(context).size.height * 0.02,
                       ),
                       Container(
-                        height: 2,
+                        height: 3,
                         width: MediaQuery.of(context).size.height * 0.1,
                         decoration:
                             BoxDecoration(color: ChaliarColors.whiteGreyColor),
                       ),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.12,
+                        height: MediaQuery.of(context).size.height * 0.02,
                       ),
                       CustomRadioListTile(
-                          radioColor: ChaliarColors.primaryColors,
+                          radioColor: ChaliarColors.secondaryColors,
                           width: 0.55,
                           heigth: 0.13,
                           raduis: 5.0,
@@ -106,10 +102,10 @@ class ProParticulierScreen extends StatelessWidget {
                             print(value);
                           }),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.02,
+                        height: MediaQuery.of(context).size.height * 0.01,
                       ),
                       CustomRadioListTile(
-                          radioColor: ChaliarColors.primaryColors,
+                          radioColor: ChaliarColors.secondaryColors,
                           width: 0.55,
                           heigth: 0.13,
                           raduis: 5.0,
@@ -122,13 +118,13 @@ class ProParticulierScreen extends StatelessWidget {
                             print(value);
                           }),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.04,
+                        height: MediaQuery.of(context).size.height * 0.05,
                       ),
                       ButtonChaliar(
                           onTap: () => Navigator.pushReplacementNamed(
                               context, '/inscription'),
                           buttonText: 'Suivant',
-                          height: 60.0,
+                          height: MediaQuery.of(context).size.height * 0.07,
                           mediaQueryWidth: 0.25,
                           borderRaduis: 50,
                           backgroundcolor: ChaliarColors.primaryColors,

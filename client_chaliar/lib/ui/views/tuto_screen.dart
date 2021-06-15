@@ -27,11 +27,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return AnimatedContainer(
       duration: Duration(milliseconds: 10),
       margin: EdgeInsets.symmetric(horizontal: 8.0),
-      height: isActive ? 10.0 : 7.0,
-      width: isActive ? 10.0 : 7.0,
+      height: isActive ? 12.0 : 7.0,
+      width: isActive ? 12.0 : 7.0,
       decoration: BoxDecoration(
         color: isActive
-            ? ChaliarColors.primaryColors
+            ? Color(0xff74c6f0)
             : ChaliarColors.whiteGreyColor,
         borderRadius: BorderRadius.all(Radius.circular(100)),
       ),
@@ -42,14 +42,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        backgroundColor: ChaliarColors.whiteGreyColor,
         flexibleSpace: Image(
           image: AssetImage('assets/images/header.png'),
           fit: BoxFit.fill,
         ),
         title: Text(
           'DÉMARRER',
-          style: AppTextStyle.header2(color: ChaliarColors.whiteColor),
+          style: AppTextStyle.appBarHeader(color: ChaliarColors.whiteColor),
         ),
         centerTitle: true,
       ),
@@ -60,7 +61,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             children: <Widget>[
               Container(
                 color: ChaliarColors.whiteGreyColor,
-                height: MediaQuery.of(context).size.height * 0.88,
+                height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
                 child: PageView(
                   physics: ClampingScrollPhysics(),
                   controller: _pageController,
@@ -74,7 +76,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       imageAsset: "assets/images/slider1.png",
                       title: 'Commandez un livreur en 3 clics',
                       subTitle:
-                          'Choisissez une livraison express en 1h ou une livraison programmée',
+                          'Choisissez une livraison express en \n1h ou une livraison programmée',
                       buttonText: 'Suivant',
                       buildPageIndicator: _buildPageIndicator(),
                       onTap: () {
@@ -85,7 +87,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       imageAsset: "assets/images/slider2.png",
                       title: 'Choisissez le mode de livraison',
                       subTitle:
-                          'Vous trouverez un chaliar adapté à vos besoins dans les plus brefs délais',
+                          'Vous trouverez un chaliar adapté à \nvos besoins dans les plus brefs \ndélais',
                       buttonText: 'Suivant',
                       buildPageIndicator: _buildPageIndicator(),
                       onTap: () {
@@ -96,7 +98,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       imageAsset: "assets/images/slider3.png",
                       title: 'Accédez à toutes vos courses',
                       subTitle:
-                          'Découvrez votre historique et accédez facilement aux détails de vos courses ',
+                          'Découvrez votre historique et\n accédez facilement aux détails de\n vos courses ',
                       buttonText: 'Suivant',
                       buildPageIndicator: _buildPageIndicator(),
                       onTap: () {

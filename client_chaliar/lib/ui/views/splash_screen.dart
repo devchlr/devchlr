@@ -47,22 +47,8 @@ class _SplashScreenState extends State<SplashScreen> {
                       Center(
                         child: SvgPicture.asset(
                           "assets/images/logo.svg",
-                          color: ChaliarColors.whiteColor,
                           height: AppIconSize.large,
                           width: AppIconSize.large,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      Text.rich(
-                        TextSpan(
-                          text: "CHALIAR",
-                          style: TextStyle(
-                              fontFamily: AppFontFamilly.montserrat,
-                              color: ChaliarColors.whiteColor,
-                              fontSize: AppFontSize.largest,
-                              fontWeight: FontWeight.w300),
                         ),
                       ),
                     ],

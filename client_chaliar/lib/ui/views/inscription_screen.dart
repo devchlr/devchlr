@@ -10,18 +10,19 @@ class InscriptionHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        flexibleSpace: Image(
-          image: AssetImage('assets/images/header.png'),
-          fit: BoxFit.fill,
+        appBar: AppBar(
+          elevation: 0.0,
+          backgroundColor: ChaliarColors.whiteColor,
+          flexibleSpace: Image(
+            image: AssetImage('assets/images/header.png'),
+            fit: BoxFit.fill,
+          ),
+          title: Text(
+            'Inscription',
+            style: AppTextStyle.appBarHeader(color: ChaliarColors.whiteColor),
+          ),
+          centerTitle: true,
         ),
-        title: Text(
-          'Inscription',
-          style: AppTextStyle.header2(color: ChaliarColors.whiteColor),
-        ),
-        centerTitle: true,
-      ),
       body: SingleChildScrollView(
         child: StatefulBuilder(
             builder: (BuildContext context, StateSetter setState) {
@@ -40,27 +41,30 @@ class InscriptionHomeScreen extends StatelessWidget {
                 length: 2,
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 1),
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         TabBar(
                           isScrollable: false,
+                          labelStyle: AppTextStyle.tabHeader(
+                              color: ChaliarColors.whiteGreyColor),
+
                           tabs: [
-                            Tab(
-                              icon: Text(
+                            Container(
+                              child: Text(
                                 'Particulier',
-                                textAlign: TextAlign.center,
-                                style: AppTextStyle.header1_title(
-                                    color: ChaliarColors.primaryColors),
+                                textAlign: TextAlign.left,
+                                style: AppTextStyle.tabHeader(
+                                    color: ChaliarColors.whiteGreyColor),
                               ),
                             ),
-                            Tab(
-                              icon: Text(
+                            Container(
+                              child: Text(
                                 'Professionnel',
-                                textAlign: TextAlign.center,
-                                style: AppTextStyle.header1_title(
+                                textAlign: TextAlign.right,
+                                style: AppTextStyle.tabHeader(
                                     color: ChaliarColors.primaryColors),
                               ),
                             ),

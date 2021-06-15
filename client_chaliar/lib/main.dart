@@ -26,9 +26,9 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           unselectedWidgetColor: Colors.grey,
-          disabledColor: Colors.blue),
+          disabledColor: Colors.blueAccent),
       routes: <String, WidgetBuilder>{
-        "/splash": (BuildContext context) => new PhoneOptValidateScreen(),
+        "/splash": (BuildContext context) => new SplashScreen(),
         "/tuto": (BuildContext context) => new OnboardingScreen(),
         "/connexion": (BuildContext context) => new ConnexionScreen(),
         "/pro_particulier": (BuildContext context) =>

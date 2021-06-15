@@ -62,10 +62,10 @@ class InputField extends StatelessWidget {
               ? OutlineInputBorder(
                   borderRadius: BorderRadius.circular(raduis),
                   borderSide: BorderSide(
-                      color: borderColor, width: 1.0, style: BorderStyle.solid))
+                      color: borderColor, width: 2.0, style: BorderStyle.solid))
               : null,
           labelText: label == null ? 'label' : label,
-          labelStyle: AppTextStyle.header4(
+          labelStyle: AppTextStyle.bodyfooterField(
               color: textLabelColor == null
                   ? ChaliarColors.blackColor
                   : textLabelColor),
@@ -83,14 +83,14 @@ class InputField extends StatelessWidget {
               ? OutlineInputBorder(
                   borderRadius: BorderRadius.circular(raduis),
                   borderSide: BorderSide(
-                      color: borderColor, width: 1.0, style: BorderStyle.solid))
+                      color: borderColor, width: 2.0, style: BorderStyle.solid))
               : null,
           // focusedBorder: OutlineInputBorder(
           //     borderRadius: BorderRadius.circular(4.0),
           //     borderSide: BorderSide(
           //         color: borderColor, width: 1.0, style: BorderStyle.solid)
           // ),
-          hintText: placeholder,
+          // hintText: placeholder,
           // isDense: true, // Added this
           contentPadding: EdgeInsets.only(
               top: fieldSize == null ? 10 : fieldSize,

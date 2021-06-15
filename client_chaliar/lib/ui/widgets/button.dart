@@ -30,10 +30,16 @@ class ButtonChaliar extends StatelessWidget {
       child: Container(
         height: height,
         width: MediaQuery.of(context).size.height * mediaQueryWidth,
-        decoration: BoxDecoration(
+        decoration: backgroundcolor==ChaliarColors.primaryColors?BoxDecoration(
+          color: Colors.transparent,
+            borderRadius: BorderRadius.circular(borderRaduis),
+            image: DecorationImage(
+              image: AssetImage("assets/images/blueGrad.png"),
+              fit: BoxFit.cover,
+            )):BoxDecoration(
             borderRadius: BorderRadius.circular(borderRaduis),
             color: backgroundcolor,
-            border: Border.all(color: bordercolor)),
+            border: Border.all(color: bordercolor,width: 2.0)),
         child: Center(
           child: Padding(
             padding: EdgeInsets.only(bottom: 0.0),

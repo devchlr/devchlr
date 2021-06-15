@@ -12,9 +12,9 @@ class InscriptionParticulierScreen extends StatelessWidget {
     return ListView(
       children: [
         Padding(
-          padding: EdgeInsets.only(left: 20, right: 20),
+          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.1, right: MediaQuery.of(context).size.width * 0.1),
           child: InputField(
-            fieldSize: 20,
+            fieldSize: MediaQuery.of(context).size.height * 0.03,
             label: "Prénom",
             placeholder: "Prénom",
             textFillColor: ChaliarColors.blackColor,
@@ -26,9 +26,9 @@ class InscriptionParticulierScreen extends StatelessWidget {
           height: 8,
         ),
         Padding(
-          padding: EdgeInsets.only(left: 20, right: 20),
+          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.1, right: MediaQuery.of(context).size.width * 0.1),
           child: InputField(
-            fieldSize: 20,
+            fieldSize: MediaQuery.of(context).size.height * 0.03,
             label: "Nom",
             placeholder: "Nom",
             textFillColor: ChaliarColors.blackColor,
@@ -40,9 +40,9 @@ class InscriptionParticulierScreen extends StatelessWidget {
           height: 8,
         ),
         Padding(
-          padding: EdgeInsets.only(left: 20, right: 20),
+    padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.1, right: MediaQuery.of(context).size.width * 0.1),
           child: InputField(
-            fieldSize: 20,
+            fieldSize: MediaQuery.of(context).size.height * 0.03,
             label: "Email",
             placeholder: "Email",
             textFillColor: ChaliarColors.blackColor,
@@ -54,12 +54,12 @@ class InscriptionParticulierScreen extends StatelessWidget {
           height: 8,
         ),
         Padding(
-          padding: EdgeInsets.only(left: 20, right: 20),
+          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.1, right: MediaQuery.of(context).size.width * 0.1),
           child: InputField(
-            fieldSize: 20,
+            fieldSize: MediaQuery.of(context).size.height * 0.03,
             label: "Mot de passe",
             placeholder: "Mot de passe",
-            textFillColor: ChaliarColors.blackColor,
+            textFillColor: Colors.grey,
             suffixIcon: SvgIconButton(
                 iconAsset: SvgIcons.eye_close,
                 onPressed: () {
@@ -73,9 +73,9 @@ class InscriptionParticulierScreen extends StatelessWidget {
           height: 8,
         ),
         Padding(
-          padding: EdgeInsets.only(left: 20, right: 20),
+          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.1, right: MediaQuery.of(context).size.width * 0.1),
           child: InputField(
-            fieldSize: 20,
+            fieldSize: MediaQuery.of(context).size.height * 0.03,
             label: "Confirmation de mot de passe",
             placeholder: "Confirmation de mot de passe",
             textFillColor: ChaliarColors.blackColor,
@@ -97,8 +97,8 @@ class InscriptionParticulierScreen extends StatelessWidget {
                 Navigator.pushReplacementNamed(context, '/singin');
               },
               buttonText: 'Connexion',
-              height: 50.0,
-              mediaQueryWidth: 0.51,
+              height: MediaQuery.of(context).size.height * 0.075,
+              mediaQueryWidth: 0.4,
               borderRaduis: 6,
               backgroundcolor: ChaliarColors.primaryColors,
               bordercolor: ChaliarColors.primaryColors,
@@ -111,14 +111,14 @@ class InscriptionParticulierScreen extends StatelessWidget {
           child: Text(
             "Ou",
             textAlign: TextAlign.center,
-            style: AppTextStyle.body(color: ChaliarColors.blackColor),
+            style: AppTextStyle.appBarHeader(color: ChaliarColors.blackColor),
           ),
         ),
         SizedBox(
           height: 15,
         ),
         Container(
-            margin: EdgeInsets.only(left: 20, right: 20),
+            margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.1, right: MediaQuery.of(context).size.width * 0.1),
             child: Center(
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -149,18 +149,27 @@ class InscriptionParticulierScreen extends StatelessWidget {
                             })),
                   ]),
             )),
-        GestureDetector(
-          onTap: () {},
-          child: Container(
-            margin: EdgeInsets.only(left: 20, right: 20),
-            child: Center(
-              child: Text(
-                'Vous acceptez nos conditions générales d’utilisations',
-                textAlign: TextAlign.center,
-                style: AppTextStyle.caption(color: ChaliarColors.blackColor),
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.07,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            GestureDetector(
+              onTap: () {},
+              child: Container(
+                margin: EdgeInsets.only(left: 20, right: 20),
+                child: Center(
+                  child: Text(
+                    'Vous acceptez nos conditions générales d’utilisations',
+                    textAlign: TextAlign.center,
+                    style: AppTextStyle.caption(color: ChaliarColors.blackColor),
+                  ),
+                ),
               ),
-            ),
-          ),
+            )
+          ],
         )
       ],
     );
