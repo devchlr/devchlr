@@ -36,44 +36,28 @@ class _SingInScreenState extends State<SingInScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Expanded(
-                  flex: 2,
+                  flex: 3,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(
-                        height: 50.0,
+                        height: MediaQuery.of(context).size.height * 0.1,
                       ),
                       Center(
                         child: SvgPicture.asset(
                           "assets/images/logo.svg",
-                          height: AppIconSize.medium,
-                          width: AppIconSize.medium,
+                          height: 120,
+                          width: 120,
                         ),
                       ),
                       SizedBox(
-                        height: 1.0,
-                      ),
-                      Text.rich(
-                        TextSpan(
-                          text: "CHALIAR",
-                          style: TextStyle(
-                              fontFamily: AppFontFamilly.montserrat,
-                              color: ChaliarColors.whiteColor,
-                              fontSize: AppFontSize.largest,
-                              fontWeight: FontWeight.w300),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10.0,
+                        height: MediaQuery.of(context).size.height * 0.02,
                       ),
                       Text.rich(
                         TextSpan(
                           text: "Contents de vous revoir",
-                          style: TextStyle(
-                              fontFamily: AppFontFamilly.montserrat,
-                              color: ChaliarColors.whiteColor,
-                              fontSize: AppFontSize.largest,
-                              fontWeight: FontWeight.w300),
+                          style: AppTextStyle.headerApp1(color: ChaliarColors.whiteColor),
                         ),
                       ),
                     ],
@@ -102,7 +86,7 @@ class _SingInScreenState extends State<SingInScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: 8,
+                    height: MediaQuery.of(context).size.height * 0.02,
                   ),
                   Padding(
                     padding: EdgeInsets.only(
@@ -130,7 +114,7 @@ class _SingInScreenState extends State<SingInScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: MediaQuery.of(context).size.height * 0.02,
                   ),
                   GestureDetector(
                     onTap: () {},
@@ -142,14 +126,14 @@ class _SingInScreenState extends State<SingInScreen> {
                         child: Text(
                           'Mot de passe oublié ?',
                           textAlign: TextAlign.center,
-                          style: AppTextStyle.button(
+                          style: AppTextStyle.bodyApp1(
                               color: ChaliarColors.whiteColor),
                         ),
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 30,
+                    height: MediaQuery.of(context).size.height * 0.04,
                   ),
                   Padding(
                     padding: EdgeInsets.only(
@@ -159,13 +143,30 @@ class _SingInScreenState extends State<SingInScreen> {
                       onTap: () => Navigator.pushReplacementNamed(
                           context, '/condition_generale'),
                       buttonText: 'Suivant',
-                      height: 60.0,
+                      height: MediaQuery.of(context).size.height * 0.065,
                       mediaQueryWidth: 0.25,
                       borderRaduis: 40,
                       backgroundcolor: ChaliarColors.secondaryColors,
                       bordercolor: ChaliarColors.secondaryColors,
                       textStyle:
                           AppTextStyle.button(color: ChaliarColors.whiteColor),
+                    ),
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.04,
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      margin: EdgeInsets.only(left: 20, right: 20),
+                      child: Center(
+                        child: Text(
+                          'Vous acceptez nos conditions générales d’utilisations',
+                          textAlign: TextAlign.center,
+                          style: AppTextStyle.caption(
+                              color: ChaliarColors.whiteColor),
+                        ),
+                      ),
                     ),
                   ),
                 ]),
@@ -175,20 +176,7 @@ class _SingInScreenState extends State<SingInScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        margin: EdgeInsets.only(left: 20, right: 20),
-                        child: Center(
-                          child: Text(
-                            'Vous acceptez nos conditions générales d’utilisations',
-                            textAlign: TextAlign.center,
-                            style: AppTextStyle.caption(
-                                color: ChaliarColors.whiteColor),
-                          ),
-                        ),
-                      ),
-                    ),
+
                   ],
                 ),
               )

@@ -1,3 +1,4 @@
+import 'package:client_chaliar/ui/styles/chaliar_color.dart';
 import 'package:flutter/material.dart';
 import 'package:client_chaliar/ui/styles/chaliar_font_size.dart';
 import 'package:client_chaliar/ui/styles/chaliar_font.dart';
@@ -18,7 +19,7 @@ class AppTextStyle {
       color: color,
       fontSize: 27,
       fontFamily: AppFontFamilly.montserrat,
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.bold,
       fontStyle: FontStyle.normal,
 
     );
@@ -143,8 +144,9 @@ class AppTextStyle {
       fontStyle: FontStyle.normal,
     );
   }
-  static TextStyle bodyApp1({Color color}) {
+  static TextStyle bodyApp1({Color color,bool isUnderlined=false}) {
     return TextStyle(
+      decoration: isUnderlined?TextDecoration.underline:null,
       color: color,
       fontSize: 13,
       fontFamily: AppFontFamilly.montserrat,
@@ -165,7 +167,7 @@ class AppTextStyle {
 
   static TextStyle caption({Color color}) {
     return TextStyle(
-      color: Color(0xff98A2C0),
+      color: Color(0xff98A2C0)==ChaliarColors.blackColor?Color(0xff98A2C0):color,
       fontSize: 12,
       fontFamily: AppFontFamilly.avenirLight,
       fontWeight: FontWeight.w400,
