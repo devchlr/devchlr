@@ -24,7 +24,7 @@ class RegisterViewModel extends BaseModel {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController passwordBis = TextEditingController();
-  String? phone;
+  String phone;
 
   void showPasswor(value) {
     obscureText = value ? false : true;
@@ -43,10 +43,10 @@ class RegisterViewModel extends BaseModel {
   }
 
   Future registerUser(
-      {required String email,
-      required String password,
-      required String name,
-      required String surname}) async {
+      {@required String email,
+      @required String password,
+      @required String name,
+      @required String surname}) async {
     var result = await _authenticationService.signUpWithEmail(
       email: email,
       password: password,

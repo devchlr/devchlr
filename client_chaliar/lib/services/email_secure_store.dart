@@ -3,7 +3,7 @@ import 'package:meta/meta.dart';
 
 /// Used to store and retrieve the user email address
 class EmailSecureStore {
-  EmailSecureStore({required this.flutterSecureStorage})
+  EmailSecureStore({@required this.flutterSecureStorage})
       : assert(flutterSecureStorage != null);
   final FlutterSecureStorage flutterSecureStorage;
 

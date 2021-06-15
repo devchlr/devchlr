@@ -9,7 +9,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 class FirebaseAuthService implements AuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
-  MyAppUser? _userFromFirebase(User? user) {
+  MyAppUser _userFromFirebase(User user) {
     if (user == null) {
       return null;
     }
@@ -22,19 +22,19 @@ class FirebaseAuthService implements AuthService {
   }
 
   @override
-  Stream<MyAppUser?> get onAuthStateChanged {
+  Stream<MyAppUser> get onAuthStateChanged {
     return _firebaseAuth.authStateChanges().map(_userFromFirebase);
   }
 
   @override
-  Future<MyAppUser?> signInAnonymously() async {
+  Future<MyAppUser> signInAnonymously() async {
     final UserCredential userCredential =
         await _firebaseAuth.signInAnonymously();
     return _userFromFirebase(userCredential.user);
   }
 
   @override
-  Future<MyAppUser?> signInWithEmailAndPassword(
+  Future<MyAppUser> signInWithEmailAndPassword(
       String email, String password) async {
     final UserCredential userCredential =
         await _firebaseAuth.signInWithEmailAndPassword(
@@ -45,7 +45,7 @@ class FirebaseAuthService implements AuthService {
   }
 
   @override
-  Future<MyAppUser?> createUserWithEmailAndPassword(
+  Future<MyAppUser> createUserWithEmailAndPassword(
       String email, String password) async {
     final UserCredential userCredential = await _firebaseAuth
         .createUserWithEmailAndPassword(email: email, password: password);
@@ -58,9 +58,9 @@ class FirebaseAuthService implements AuthService {
   }
 
   @override
-  Future<MyAppUser?> signInWithEmailAndLink({String? email, String? link}) async {
+  Future<MyAppUser> signInWithEmailAndLink({String email, String link}) async {
     final UserCredential userCredential =
-        await _firebaseAuth.signInWithEmailLink(email: email!, emailLink: link!);
+        await _firebaseAuth.signInWithEmailLink(email: email, emailLink: link);
     return _userFromFirebase(userCredential.user);
   }
 
@@ -71,13 +71,13 @@ class FirebaseAuthService implements AuthService {
 
   @override
   Future<void> sendSignInWithEmailLink({
-    required String email,
-    required String url,
-    required bool handleCodeInApp,
-    required String iOSBundleId,
-    required String androidPackageName,
-    required bool androidInstallApp,
-    required String androidMinimumVersion,
+    @required String email,
+    @required String url,
+    @required bool handleCodeInApp,
+    @required String iOSBundleId,
+    @required String androidPackageName,
+    @required bool androidInstallApp,
+    @required String androidMinimumVersion,
   }) async {
     return await _firebaseAuth.sendSignInLinkToEmail(
       email: email,
@@ -93,7 +93,7 @@ class FirebaseAuthService implements AuthService {
   }
 
   @override
-  Future<MyAppUser?> signInWithGoogle() async {
+  Future<MyAppUser> signInWithGoogle() async {
     final GoogleSignIn googleSignIn = GoogleSignIn();
     final GoogleSignInAccount googleUser = await googleSignIn.signIn();
 
@@ -119,7 +119,7 @@ class FirebaseAuthService implements AuthService {
   }
 
   @override
-  Future<MyAppUser?> signInWithFacebook() async {
+  Future<MyAppUser> signInWithFacebook() async {
     final fb = FacebookLogin();
     final response = await fb.logIn(permissions: [
       FacebookPermission.publicProfile,
@@ -148,9 +148,9 @@ class FirebaseAuthService implements AuthService {
   }
 
   @override
-  Future<MyAppUser?> signInWithApple({List<Scope>? scopes = const []}) async {
+  Future<MyAppUser> signInWithApple({List<Scope> scopes = const []}) async {
     final AuthorizationResult result = await AppleSignIn.performRequests(
-        [AppleIdRequest(requestedScopes: scopes!)]);
+        [AppleIdRequest(requestedScopes: scopes)]);
     switch (result.status) {
       case AuthorizationStatus.authorized:
         final appleIdCredential = result.credential;
@@ -166,7 +166,7 @@ class FirebaseAuthService implements AuthService {
         if (scopes.contains(Scope.fullName)) {
           final String displayName =
               '${appleIdCredential.fullName.givenName} ${appleIdCredential.fullName.familyName}';
-          await firebaseUser!.updateProfile(displayName: displayName);
+          await firebaseUser.updateProfile(displayName: displayName);
         }
         return _userFromFirebase(firebaseUser);
       case AuthorizationStatus.error:
@@ -184,7 +184,7 @@ class FirebaseAuthService implements AuthService {
   }
 
   @override
-  Future<MyAppUser?> currentUser() async {
+  Future<MyAppUser> currentUser() async {
     return _userFromFirebase(_firebaseAuth.currentUser);
   }
 

@@ -13,8 +13,8 @@ class AuthenticationService {
   FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   FirestoreService _firestoreService = FirestoreService();
   final FirebaseAuthService auth = FirebaseAuthService();
-  UserChaliar? _currentUser;
-  UserChaliar? get currentUser => _currentUser;
+  UserChaliar _currentUser;
+  UserChaliar get currentUser => _currentUser;
 
   Future<bool> isUserLoggedIn() async {
     var user = await _firebaseAuth.currentUser;
@@ -22,11 +22,11 @@ class AuthenticationService {
   }
 
   Future signUpWithEmail({
-    required String email,
-    required String password,
-    String? name,
-    String? surname,
-    String? role,
+    @required String email,
+    @required String password,
+    String name,
+    String surname,
+    String role,
   }) async {
     try {
       var authResult =
@@ -37,7 +37,7 @@ class AuthenticationService {
           userRole: role,
           name: name,
           surname: surname);
-      await _firestoreService.createUser(_currentUser!);
+      await _firestoreService.createUser(_currentUser);
       return authResult != null;
     } catch (e) {
       return e.toString();

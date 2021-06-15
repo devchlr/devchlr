@@ -22,16 +22,16 @@ class MockAuthService implements AuthService {
 
   final Map<String, _UserData> _usersStore = <String, _UserData>{};
 
-  MyAppUser? _currentUser;
+  MyAppUser _currentUser;
 
-  final StreamController<MyAppUser?> _onAuthStateChangedController =
-      StreamController<MyAppUser?>();
+  final StreamController<MyAppUser> _onAuthStateChangedController =
+      StreamController<MyAppUser>();
   @override
-  Stream<MyAppUser?> get onAuthStateChanged =>
+  Stream<MyAppUser> get onAuthStateChanged =>
       _onAuthStateChangedController.stream;
 
   @override
-  Future<MyAppUser?> currentUser() async {
+  Future<MyAppUser> currentUser() async {
     await Future<void>.delayed(startupTime);
     return _currentUser;
   }
@@ -63,7 +63,7 @@ class MockAuthService implements AuthService {
         message: 'The email address is not registered. Need an account?',
       );
     }
-    final _UserData _userData = _usersStore[email]!;
+    final _UserData _userData = _usersStore[email];
     if (_userData.password != password) {
       throw PlatformException(
         code: 'ERROR_WRONG_PASSWORD',
@@ -78,7 +78,7 @@ class MockAuthService implements AuthService {
   Future<void> sendPasswordResetEmail(String email) async {}
 
   @override
-  Future<MyAppUser> signInWithEmailAndLink({String? email, String? link}) async {
+  Future<MyAppUser> signInWithEmailAndLink({String email, String link}) async {
     await Future<void>.delayed(responseTime);
     final MyAppUser user = MyAppUser(uid: random.randomAlphaNumeric(32));
     _add(user);
@@ -90,13 +90,13 @@ class MockAuthService implements AuthService {
 
   @override
   Future<void> sendSignInWithEmailLink({
-    required String email,
-    required String url,
-    required bool handleCodeInApp,
-    required String iOSBundleId,
-    required String androidPackageName,
-    required bool androidInstallApp,
-    required String androidMinimumVersion,
+    @required String email,
+    @required String url,
+    @required bool handleCodeInApp,
+    @required String iOSBundleId,
+    @required String androidPackageName,
+    @required bool androidInstallApp,
+    @required String androidMinimumVersion,
   }) async {}
 
   @override
@@ -104,7 +104,7 @@ class MockAuthService implements AuthService {
     _add(null);
   }
 
-  void _add(MyAppUser? user) {
+  void _add(MyAppUser user) {
     _currentUser = user;
     _onAuthStateChangedController.add(user);
   }
@@ -134,7 +134,7 @@ class MockAuthService implements AuthService {
   }
 
   @override
-  Future<MyAppUser> signInWithApple({List<Scope>? scopes}) async {
+  Future<MyAppUser> signInWithApple({List<Scope> scopes}) async {
     await Future<void>.delayed(responseTime);
     final MyAppUser user = MyAppUser(uid: random.randomAlphaNumeric(32));
     _add(user);
@@ -148,7 +148,7 @@ class MockAuthService implements AuthService {
 }
 
 class _UserData {
-  _UserData({required this.password, required this.user});
+  _UserData({@required this.password, @required this.user});
   final String password;
   final MyAppUser user;
 }

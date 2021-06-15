@@ -18,11 +18,11 @@ enum EmailLinkErrorType {
 }
 
 class EmailLinkError {
-  EmailLinkError({required this.error, this.description});
+  EmailLinkError({@required this.error, this.description});
   final EmailLinkErrorType error;
-  final String? description;
+  final String description;
 
-  Map<EmailLinkErrorType, String?> get _messages => {
+  Map<EmailLinkErrorType, String> get _messages => {
         EmailLinkErrorType.linkError: description,
         EmailLinkErrorType.isNotSignInWithEmailLink:
             Strings.isNotSignInWithEmailLinkMessage,
@@ -31,7 +31,7 @@ class EmailLinkError {
         EmailLinkErrorType.userAlreadySignedIn: Strings.userAlreadySignedIn,
       };
 
-  String? get message => _messages[error];
+  String get message => _messages[error];
 
   @override
   String toString() => '$error: ${_messages[error]}';
@@ -50,9 +50,9 @@ class EmailLinkError {
 /// Checks incoming dynamic links and uses them to sign in the user with Firebase
 class FirebaseEmailLinkHandler {
   FirebaseEmailLinkHandler({
-    required this.auth,
-    required this.emailStore,
-    required this.firebaseDynamicLinks,
+    @required this.auth,
+    @required this.emailStore,
+    @required this.firebaseDynamicLinks,
   });
   final AuthService auth;
   final EmailSecureStore emailStore;
@@ -107,7 +107,7 @@ class FirebaseEmailLinkHandler {
     isLoading.dispose();
   }
 
-  Future<void> _processDynamicLink(Uri? deepLink) async {
+  Future<void> _processDynamicLink(Uri deepLink) async {
     if (deepLink != null) {
       await _signInWithEmail(deepLink.toString());
     }
@@ -117,7 +117,7 @@ class FirebaseEmailLinkHandler {
     try {
       isLoading.value = true;
       // check that user is not signed in
-      final MyAppUser? user = await auth.currentUser();
+      final MyAppUser user = await auth.currentUser();
       if (user != null) {
         _errorController.add(EmailLinkError(
           error: EmailLinkErrorType.userAlreadySignedIn,
@@ -152,12 +152,12 @@ class FirebaseEmailLinkHandler {
 
   // sign in
   Future<void> sendSignInWithEmailLink({
-    required String email,
-    required String url,
-    required bool handleCodeInApp,
-    required String packageName,
-    required bool androidInstallApp,
-    required String androidMinimumVersion,
+    @required String email,
+    @required String url,
+    @required bool handleCodeInApp,
+    @required String packageName,
+    @required bool androidInstallApp,
+    @required String androidMinimumVersion,
   }) async {
     try {
       isLoading.value = true;

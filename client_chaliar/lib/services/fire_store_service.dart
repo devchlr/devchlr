@@ -17,7 +17,7 @@ class FirestoreService {
   Future getUser(String uid) async {
     try {
       var userData = await _usersCollectionReference.doc(uid).get();
-      return UserChaliar.fromData(userData.data()!);
+      return UserChaliar.fromData(userData.data());
     } catch (e) {
       return e.toString();
     }

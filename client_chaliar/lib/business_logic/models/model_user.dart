@@ -1,14 +1,14 @@
 class UserChaliar {
-  final String? id;
-  final String? name;
-  final String? surname;
-  final String? email;
-  final String? userRole;
-  final String? phone;
-  final String? street;
-  final String? facturationAdresse;
-  final String? codePostal;
-  final String? city;
+  final String id;
+  final String name;
+  final String surname;
+  final String email;
+  final String userRole;
+  final String phone;
+  final String street;
+  final String facturationAdresse;
+  final String codePostal;
+  final String city;
 
   UserChaliar(
       {this.id,
