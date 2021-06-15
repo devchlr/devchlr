@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "164133182006",
+    "project_id": "chaliar-e7516",
+    "storage_bucket": "chaliar-e7516.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:164133182006:android:3b8b21edc4e5166c57d697",
+        "android_client_info": {
+          "package_name": "com.example.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "164133182006-s91bvihfecn2nulcl9oa8ibbj1oq33nl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.app",
+            "certificate_hash": "9df49123406e57feb347758c014d83d0788ce938"
+          }
+        },
+        {
+          "client_id": "164133182006-nstaiqpk9tn1qtadigvc6b3oqt6urhe1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB52UXckXWq1GV84Tx_ca4NLf1CO9C1aso"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "164133182006-nstaiqpk9tn1qtadigvc6b3oqt6urhe1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

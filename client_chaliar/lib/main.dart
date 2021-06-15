@@ -8,8 +8,11 @@ import 'package:client_chaliar/ui/views/inscription_screen.dart';
 import 'package:client_chaliar/ui/views/singin_screen.dart';
 import 'package:client_chaliar/ui/views/condition_generale_screen.dart';
 import 'package:client_chaliar/ui/views/phone_opt/phone_number_validate.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
