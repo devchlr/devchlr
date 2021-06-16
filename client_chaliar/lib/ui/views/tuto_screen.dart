@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:client_chaliar/ui/styles/chaliar_color.dart';
 import 'package:client_chaliar/ui/widgets/onboarding_page.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
+import 'package:client_chaliar/business_logic/view_model/tuto_view_model.dart';
 
 class OnboardingScreen extends StatefulWidget {
   @override
@@ -40,7 +42,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ChangeNotifierProvider<TutoViewModel>(
+      create: (context) => TutoViewModel(),
+      child: Consumer<TutoViewModel>(
+          builder: (context, model, child) =>
+
+      Scaffold(
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: ChaliarColors.whiteGreyColor,
@@ -80,7 +87,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       buttonText: 'Suivant',
                       buildPageIndicator: _buildPageIndicator(),
                       onTap: () {
-                        Navigator.pushReplacementNamed(context, '/connexion');
+                        model.PushPage(context);
                       },
                     ),
                     OnboardingPageWidget(
@@ -91,7 +98,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       buttonText: 'Suivant',
                       buildPageIndicator: _buildPageIndicator(),
                       onTap: () {
-                        Navigator.pushReplacementNamed(context, '/connexion');
+                        model.PushPage(context);
                       },
                     ),
                     OnboardingPageWidget(
@@ -102,7 +109,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       buttonText: 'Suivant',
                       buildPageIndicator: _buildPageIndicator(),
                       onTap: () {
-                        Navigator.pushReplacementNamed(context, '/connexion');
+                        model.PushPage(context);
                       },
                     ),
                   ],
@@ -112,6 +119,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
         ),
       ),
-    );
+    ),),);
   }
 }

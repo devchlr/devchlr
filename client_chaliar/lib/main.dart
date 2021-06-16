@@ -1,13 +1,13 @@
-import 'package:client_chaliar/ui/views/phone_opt/phone_number_input.dart';
+import 'package:client_chaliar/ui/views/auth/phone_opt/phone_number_input.dart';
 import 'package:flutter/material.dart';
 import 'package:client_chaliar/ui/views/splash_screen.dart';
 import 'package:client_chaliar/ui/views/tuto_screen.dart';
-import 'package:client_chaliar/ui/views/connexion_screen.dart';
-import 'package:client_chaliar/ui/views/pro_particulier_screen.dart';
-import 'package:client_chaliar/ui/views/inscription_screen.dart';
-import 'package:client_chaliar/ui/views/singin_screen.dart';
-import 'package:client_chaliar/ui/views/condition_generale_screen.dart';
-import 'package:client_chaliar/ui/views/phone_opt/phone_number_validate.dart';
+import 'package:client_chaliar/ui/views/auth/connexion_screen.dart';
+import 'package:client_chaliar/ui/views/auth/pro_particulier_screen.dart';
+import 'package:client_chaliar/ui/views/auth/inscription_screen.dart';
+import 'package:client_chaliar/ui/views/auth/singin_screen.dart';
+import 'package:client_chaliar/ui/views/auth/condition_generale_screen.dart';
+import 'package:client_chaliar/ui/views/auth/phone_opt/phone_number_validate.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async{

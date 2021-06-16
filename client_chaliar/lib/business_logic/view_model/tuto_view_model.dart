@@ -3,6 +3,6 @@ import 'package:flutter/material.dart';
 
 class TutoViewModel extends BaseModel {
   void PushPage(BuildContext context) {
-    Navigator.pushReplacementNamed(context, '/connexion');
+    Navigator.pushNamed(context, '/connexion');
   }
 }

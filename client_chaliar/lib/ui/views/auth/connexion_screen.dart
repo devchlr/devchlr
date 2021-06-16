@@ -5,11 +5,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:client_chaliar/ui/widgets/button.dart';
+import 'package:provider/provider.dart';
+import 'package:client_chaliar/business_logic/view_model/auth/connexion_view_model.dart';
 
 class ConnexionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ChangeNotifierProvider<ConnexionViewModel>(
+      create: (context) => ConnexionViewModel(),
+      child: Consumer<ConnexionViewModel>(
+          builder: (context, model, child) =>
+      Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(
         fit: StackFit.expand,
@@ -106,8 +112,8 @@ class ConnexionScreen extends StatelessWidget {
                     Center(
                       child: ButtonChaliar(
                           onTap: () {
-                            Navigator.pushReplacementNamed(
-                                context, '/pro_particulier');
+                            model.pushPage(
+                                context, 'pro_particulier');
                           },
                           buttonText: 'Inscription',
                           height: MediaQuery.of(context).size.height * 0.07,
@@ -123,7 +129,9 @@ class ConnexionScreen extends StatelessWidget {
                     ),
                     Center(
                       child: ButtonChaliar(
-                          onTap: () {},
+                          onTap: () {
+                            model.pushPage(context, 'singin');
+                          },
                           buttonText: 'Connexion',
                           height: MediaQuery.of(context).size.height * 0.07,
                           mediaQueryWidth: 0.48,
@@ -151,6 +159,6 @@ class ConnexionScreen extends StatelessWidget {
           )
         ],
       ),
-    );
+    ),),);
   }
 }

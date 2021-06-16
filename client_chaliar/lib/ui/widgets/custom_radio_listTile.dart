@@ -11,6 +11,7 @@ class CustomRadioListTile extends StatelessWidget {
   final String subtile;
   final String value;
   final String group;
+  final VoidCallback onClick;
   // Declare this variable
   int selectedRadio;
   final Function(String) onChange;
@@ -23,7 +24,9 @@ class CustomRadioListTile extends StatelessWidget {
       this.subtile,
       this.group,
       this.value,
-      this.onChange});
+      this.onChange,
+        this.onClick
+      });
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -32,33 +35,36 @@ class CustomRadioListTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(raduis),
       ),
       elevation: 2,
-      child: Container(
-        // width: MediaQuery.of(context).size.width * width,
-        height: MediaQuery.of(context).size.height * 0.1,
-        decoration: BoxDecoration(
-            border: Border.all(
-                color: group == value
-                    ? ChaliarColors.secondaryColors
-                    : ChaliarColors.whiteGreyColor)),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            ListTile(
-              title: Text(
-                title,
-                style: AppTextStyle.header4(color: ChaliarColors.blackColor),
+      child: GestureDetector(
+        onTap: onClick,
+        child: Container(
+          // width: MediaQuery.of(context).size.width * width,
+          height: MediaQuery.of(context).size.height * 0.1,
+          decoration: BoxDecoration(
+              border: Border.all(
+                  color: group == value
+                      ? ChaliarColors.secondaryColors
+                      : ChaliarColors.whiteGreyColor)),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              ListTile(
+                title: Text(
+                  title,
+                  style: AppTextStyle.header4(color: ChaliarColors.blackColor),
+                ),
+                subtitle: Text(
+                  subtile,
+                  style: AppTextStyle.caption(color: ChaliarColors.blackColor),
+                ),
+                trailing: new Radio(
+                  value: value,
+                  groupValue: group,
+                  activeColor: ChaliarColors.secondaryColors,
+                ),
               ),
-              subtitle: Text(
-                subtile,
-                style: AppTextStyle.caption(color: ChaliarColors.blackColor),
-              ),
-              trailing: new Radio(
-                value: value,
-                groupValue: group,
-                activeColor: ChaliarColors.secondaryColors,
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

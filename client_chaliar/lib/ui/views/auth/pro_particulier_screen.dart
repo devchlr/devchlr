@@ -5,11 +5,17 @@ import 'package:client_chaliar/ui/styles/chaliar_icon_size.dart';
 import 'package:client_chaliar/ui/styles/text_style.dart';
 import 'package:client_chaliar/ui/widgets/custom_radio_listTile.dart';
 import 'package:client_chaliar/ui/widgets/button.dart';
+import 'package:provider/provider.dart';
+import 'package:client_chaliar/business_logic/view_model/auth/connexion_view_model.dart';
 
 class ProParticulierScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ChangeNotifierProvider<ConnexionViewModel>(
+      create: (context) => ConnexionViewModel(),
+      child: Consumer<ConnexionViewModel>(
+        builder: (context, model, child) =>
+      Scaffold(
       body: Stack(
         fit: StackFit.expand,
         children: [
@@ -90,21 +96,26 @@ class ProParticulierScreen extends StatelessWidget {
                       ),
                       CustomRadioListTile(
                           radioColor: ChaliarColors.secondaryColors,
+                          onClick: (){
+                            model.setRadioGroup('particulier');
+                          },
                           width: 0.55,
                           heigth: 0.13,
                           raduis: 5.0,
                           title: 'Je suis un particuier',
                           subtile:
                               'je veux me faire livrer des colis personnellement',
-                          group: 'professionnel',
+                          group: model.group,
                           value: 'particulier',
                           onChange: (value) {
-                            print(value);
                           }),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.01,
                       ),
                       CustomRadioListTile(
+                          onClick: (){
+                            model.setRadioGroup('professionnel');
+                          },
                           radioColor: ChaliarColors.secondaryColors,
                           width: 0.55,
                           heigth: 0.13,
@@ -112,10 +123,9 @@ class ProParticulierScreen extends StatelessWidget {
                           title: 'Je suis un profesionnel',
                           subtile:
                               'je veux me faire livrer des colis pour ma société',
-                          group: 'professionnel',
+                          group: model.group,
                           value: 'professionnel',
                           onChange: (value) {
-                            print(value);
                           }),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.05,
@@ -137,6 +147,6 @@ class ProParticulierScreen extends StatelessWidget {
           )
         ],
       ),
-    );
+    ),),);
   }
 }
