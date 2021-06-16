@@ -10,6 +10,8 @@ import 'package:client_chaliar/ui/widgets/input_field.dart';
 import 'package:client_chaliar/ui/widgets/svg_button.dart';
 import 'package:client_chaliar/constants/iconList.dart';
 import 'package:client_chaliar/ui/widgets/button.dart';
+import 'package:provider/provider.dart';
+import 'package:client_chaliar/business_logic/view_model/auth/singin_view_model.dart';
 
 class SingInScreen extends StatefulWidget {
   @override
@@ -19,7 +21,11 @@ class SingInScreen extends StatefulWidget {
 class _SingInScreenState extends State<SingInScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ChangeNotifierProvider<SingInViewModel>(
+      create: (context) => SingInViewModel(),
+      child: Consumer<SingInViewModel>(
+          builder: (context, model, child) =>
+      Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(
         fit: StackFit.expand,
@@ -78,6 +84,7 @@ class _SingInScreenState extends State<SingInScreen> {
                       fieldSize: 20,
                       label: "Email,Telephone",
                       placeholder: "Prénom",
+                      controller: model.email,
                       textFillColor: ChaliarColors.whiteColor,
                       borderColor: ChaliarColors.whiteColor,
                       isBorder: true,
@@ -93,10 +100,12 @@ class _SingInScreenState extends State<SingInScreen> {
                         left: MediaQuery.of(context).size.width * 0.1,
                         right: MediaQuery.of(context).size.width * 0.1),
                     child: InputField(
+                      obscureText: model.obscureText,
+                      controller: model.password,
                       prefixIcon: SvgIconButton(
                           iconAsset: SvgIcons.padlock,
                           onPressed: () {
-                            Navigator.pop(context);
+
                           }),
                       suffixIcon: SvgIconButton(
                           iconAsset: SvgIcons.eye_close,
@@ -105,7 +114,6 @@ class _SingInScreenState extends State<SingInScreen> {
                           }),
                       fieldSize: 20,
                       label: "Mot de passe",
-                      placeholder: "Prénom",
                       textFillColor: ChaliarColors.whiteColor,
                       borderColor: ChaliarColors.whiteColor,
                       isBorder: true,
@@ -140,8 +148,9 @@ class _SingInScreenState extends State<SingInScreen> {
                         left: MediaQuery.of(context).size.width * 0.25,
                         right: MediaQuery.of(context).size.width * 0.25),
                     child: ButtonChaliar(
-                      onTap: () => Navigator.pushReplacementNamed(
-                          context, '/condition_generale'),
+                      onTap: ()async{
+                       await model.singInUser(context);
+                      },
                       buttonText: 'Suivant',
                       height: MediaQuery.of(context).size.height * 0.065,
                       mediaQueryWidth: 0.25,
@@ -184,6 +193,6 @@ class _SingInScreenState extends State<SingInScreen> {
           )
         ],
       ),
-    );
+    ),),);
   }
 }

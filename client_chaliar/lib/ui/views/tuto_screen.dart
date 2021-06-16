@@ -24,6 +24,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     }
     return list;
   }
+  void onChangedPade(int page) {
+  setState(() {
+    _pageController.animateToPage(
+      page,
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.easeInOut,
+    );
+    _currentPage=page;
+  });
+  }
 
   Widget _indicator(bool isActive) {
     return AnimatedContainer(
@@ -87,7 +97,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       buttonText: 'Suivant',
                       buildPageIndicator: _buildPageIndicator(),
                       onTap: () {
-                        model.PushPage(context);
+                        onChangedPade(1);
                       },
                     ),
                     OnboardingPageWidget(
@@ -98,7 +108,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       buttonText: 'Suivant',
                       buildPageIndicator: _buildPageIndicator(),
                       onTap: () {
-                        model.PushPage(context);
+                        onChangedPade(2);
                       },
                     ),
                     OnboardingPageWidget(

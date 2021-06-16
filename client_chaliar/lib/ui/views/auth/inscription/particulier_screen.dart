@@ -5,48 +5,56 @@ import 'package:client_chaliar/constants/iconList.dart';
 import 'package:client_chaliar/ui/styles/chaliar_color.dart';
 import 'package:client_chaliar/ui/styles/text_style.dart';
 import 'package:client_chaliar/ui/widgets/button.dart';
+import 'package:provider/provider.dart';
+import 'package:client_chaliar/business_logic/view_model/auth/register_view_model.dart';
 
 class InscriptionParticulierScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return ChangeNotifierProvider<RegisterViewModel>(
+        create: (context) => RegisterViewModel(),
+        child: Consumer<RegisterViewModel>(
+            builder: (context, model, child) =>
+      ListView(
       children: [
         Padding(
-          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.1, right: MediaQuery.of(context).size.width * 0.1),
+          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.15, right: MediaQuery.of(context).size.width * 0.13),
           child: InputField(
             fieldSize: MediaQuery.of(context).size.height * 0.03,
             label: "Prénom",
             placeholder: "Prénom",
             textFillColor: ChaliarColors.blackColor,
             isBorder: true,
-            // controller: model.email,
+            controller: model.surname,
           ),
         ),
         SizedBox(
           height: 8,
         ),
         Padding(
-          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.1, right: MediaQuery.of(context).size.width * 0.1),
+          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.15, right: MediaQuery.of(context).size.width * 0.13),
           child: InputField(
             fieldSize: MediaQuery.of(context).size.height * 0.03,
             label: "Nom",
             placeholder: "Nom",
             textFillColor: ChaliarColors.blackColor,
             isBorder: true,
-            // controller: model.email,
+            controller: model.name,
           ),
         ),
         SizedBox(
           height: 8,
         ),
         Padding(
-    padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.1, right: MediaQuery.of(context).size.width * 0.1),
+    padding:EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.15, right: MediaQuery.of(context).size.width * 0.13),
           child: InputField(
             fieldSize: MediaQuery.of(context).size.height * 0.03,
             label: "Email",
+            typeInput: TextInputType.emailAddress,
             placeholder: "Email",
             textFillColor: ChaliarColors.blackColor,
             isBorder: true,
+            controller: model.email,
             // controller: model.email,
           ),
         ),
@@ -54,16 +62,19 @@ class InscriptionParticulierScreen extends StatelessWidget {
           height: 8,
         ),
         Padding(
-          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.1, right: MediaQuery.of(context).size.width * 0.1),
+          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.15, right: MediaQuery.of(context).size.width * 0.13),
           child: InputField(
             fieldSize: MediaQuery.of(context).size.height * 0.03,
             label: "Mot de passe",
             placeholder: "Mot de passe",
+            controller: model.password,
+            obscureText: model.obscureText,
             textFillColor: Colors.grey,
             suffixIcon: SvgIconButton(
-                iconAsset: SvgIcons.eye_close,
+                iconColor: model.isSamePassword() ? Colors.green : null,
+                iconAsset: model.iconAsset,
                 onPressed: () {
-                  Navigator.pop(context);
+                  model.showPasswor(model.obscureText);
                 }),
             isBorder: true,
             // controller: model.password,
@@ -73,16 +84,19 @@ class InscriptionParticulierScreen extends StatelessWidget {
           height: 8,
         ),
         Padding(
-          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.1, right: MediaQuery.of(context).size.width * 0.1),
+          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.15, right: MediaQuery.of(context).size.width * 0.13),
           child: InputField(
             fieldSize: MediaQuery.of(context).size.height * 0.03,
             label: "Confirmation de mot de passe",
             placeholder: "Confirmation de mot de passe",
             textFillColor: ChaliarColors.blackColor,
+            obscureText: model.obscureText,
+            controller: model.passwordBis,
             suffixIcon: SvgIconButton(
-                iconAsset: SvgIcons.eye_close,
+                iconColor: model.isSamePassword() ? Colors.green : null,
+                iconAsset: model.iconAsset,
                 onPressed: () {
-                  Navigator.pop(context);
+                  model.showPasswor(model.obscureText);
                 }),
             isBorder: true,
             // controller: model.password,
@@ -93,12 +107,13 @@ class InscriptionParticulierScreen extends StatelessWidget {
         ),
         Center(
           child: ButtonChaliar(
-              onTap: () {
-                Navigator.pushReplacementNamed(context, '/singin');
+              onTap: () async{
+                await model.singUp(context);
+                // Navigator.pushReplacementNamed(context, '/singin');
               },
               buttonText: 'Connexion',
               height: MediaQuery.of(context).size.height * 0.075,
-              mediaQueryWidth: 0.4,
+              mediaQueryWidth: 0.34,
               borderRaduis: 6,
               backgroundcolor: ChaliarColors.primaryColors,
               bordercolor: ChaliarColors.primaryColors,
@@ -172,6 +187,8 @@ class InscriptionParticulierScreen extends StatelessWidget {
           ],
         )
       ],
-    );
+    ),
+        )
+      ,);
   }
 }

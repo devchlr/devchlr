@@ -6,11 +6,14 @@ import 'package:client_chaliar/ui/views/auth/inscription/pro_screen.dart';
 import 'package:client_chaliar/ui/widgets/appBar.dart';
 
 class InscriptionHomeScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
         appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backwardsCompatibility: false,
           elevation: 0.0,
           backgroundColor: ChaliarColors.whiteColor,
           flexibleSpace: Image(
@@ -47,7 +50,7 @@ class InscriptionHomeScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         TabBar(
-                          isScrollable: false,
+                          // isScrollable: false,
                       // indicator: CircleTabIndicator(color: ChaliarColors.primaryColors, radius: 3),
                       indicatorSize: TabBarIndicatorSize.label,
                           labelStyle: AppTextStyle.tabHeader(

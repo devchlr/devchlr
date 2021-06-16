@@ -21,9 +21,13 @@ class InputField extends StatelessWidget {
   final double fieldSize;
   final double raduis;
   final Color backgroundColor;
+  final bool obscureText;
+  final TextInputType typeInput;
 
   InputField(
-      {this.placeholder,
+      {this.obscureText=false,
+        this.typeInput,
+        this.placeholder,
       this.label,
       this.suffixIcon,
       this.prefixIcon,
@@ -46,6 +50,8 @@ class InputField extends StatelessWidget {
     return Container(
       width: 45.0,
       child: TextField(
+        keyboardType: typeInput,
+        obscureText: obscureText,
         cursorColor: ChaliarColors.whiteColor,
         onTap: onTap,
         onChanged: onChanged,

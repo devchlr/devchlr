@@ -57,7 +57,7 @@ class ConnexionScreen extends StatelessWidget {
 
                 children: [
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.05,
+                    height: MediaQuery.of(context).size.height * 0.06,
                   ),
                   Padding(
                     padding: EdgeInsets.only(
@@ -95,14 +95,14 @@ class ConnexionScreen extends StatelessWidget {
                   child: Center(
                 child: SvgPicture.asset(
                   "assets/images/courier.svg",
-                  height: MediaQuery.of(context).size.height * 0.4,
+                  height: MediaQuery.of(context).size.height * 0.38,
                   width: MediaQuery.of(context).size.height * 0.38,
                 ),
               )),
               Expanded(
                   child: Container(
                 padding: EdgeInsets.only(
-                  top:MediaQuery.of(context).size.height * 0.02,
+                  top:MediaQuery.of(context).size.height * 0.0,
                     left: MediaQuery.of(context).size.height * 0.05,
                     right: MediaQuery.of(context).size.height * 0.05),
                 child: Column(
@@ -150,7 +150,7 @@ class ConnexionScreen extends StatelessWidget {
                       style: AppTextStyle.bodyfooter(color: ChaliarColors.blackColor),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.004,
+                      height: MediaQuery.of(context).size.height * 0.005,
                     ),
                   ],
                 ),
