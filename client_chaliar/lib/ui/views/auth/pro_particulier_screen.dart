@@ -108,6 +108,7 @@ class ProParticulierScreen extends StatelessWidget {
                           group: model.group,
                           value: 'particulier',
                           onChange: (value) {
+                            model.setRadioGroup('particulier');
                           }),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.01,
@@ -126,6 +127,7 @@ class ProParticulierScreen extends StatelessWidget {
                           group: model.group,
                           value: 'professionnel',
                           onChange: (value) {
+                            model.setRadioGroup('professionnel');
                           }),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.05,

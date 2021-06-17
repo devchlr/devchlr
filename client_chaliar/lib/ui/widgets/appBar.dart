@@ -2,23 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:client_chaliar/ui/styles/chaliar_color.dart';
 import 'package:client_chaliar/ui/styles/text_style.dart';
 
-class CustomAppBar extends StatelessWidget {
-  final String title;
-  CustomAppBar({this.title});
+class ChaliarMenu{
 
-  @override
-  Widget build(BuildContext context) {
+  static AppBar topBar({String imageBackground,String title,Color bgColor}) {
     return AppBar(
-      backgroundColor: Colors.transparent,
+      automaticallyImplyLeading: false,
+      backwardsCompatibility: false,
+      elevation: 0.0,
+      backgroundColor: ChaliarColors.whiteGreyColor,
       flexibleSpace: Image(
-        image: AssetImage('assets/images/header.png'),
+        image: AssetImage(imageBackground),
         fit: BoxFit.fill,
       ),
       title: Text(
-        'Inscription',
-        style: AppTextStyle.header2(color: ChaliarColors.whiteColor),
+        title,
+        style: AppTextStyle.appBarHeader(color: bgColor),
       ),
       centerTitle: true,
     );
   }
+
 }

@@ -77,7 +77,7 @@ class InputField extends StatelessWidget {
                   : textLabelColor),
           filled: true,
           fillColor: backgroundColor == null
-              ? ChaliarColors.whiteGreyColor
+              ? ChaliarColors.whiteColor
               : backgroundColor,
           hintStyle: AppTextStyle.body(
               color: textFillColor == null
@@ -91,12 +91,6 @@ class InputField extends StatelessWidget {
                   borderSide: BorderSide(
                       color: borderColor, width: 2.0, style: BorderStyle.solid))
               : null,
-          // focusedBorder: OutlineInputBorder(
-          //     borderRadius: BorderRadius.circular(4.0),
-          //     borderSide: BorderSide(
-          //         color: borderColor, width: 1.0, style: BorderStyle.solid)
-          // ),
-          // hintText: placeholder,
           // isDense: true, // Added this
           contentPadding: EdgeInsets.only(
               top: fieldSize == null ? 10 : fieldSize,

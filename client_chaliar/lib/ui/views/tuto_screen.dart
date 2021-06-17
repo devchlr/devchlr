@@ -1,4 +1,5 @@
 import 'package:client_chaliar/ui/styles/text_style.dart';
+import 'package:client_chaliar/ui/widgets/appBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:client_chaliar/ui/styles/chaliar_color.dart';
@@ -58,19 +59,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           builder: (context, model, child) =>
 
       Scaffold(
-      appBar: AppBar(
-        elevation: 0.0,
-        backgroundColor: ChaliarColors.whiteGreyColor,
-        flexibleSpace: Image(
-          image: AssetImage('assets/images/header.png'),
-          fit: BoxFit.fill,
-        ),
-        title: Text(
-          'DÉMARRER',
-          style: AppTextStyle.appBarHeader(color: ChaliarColors.whiteColor),
-        ),
-        centerTitle: true,
-      ),
+        appBar: ChaliarMenu.topBar(imageBackground:'assets/images/header.png',title: 'DÉMARRER',bgColor:ChaliarColors.whiteColor),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
         child: Container(

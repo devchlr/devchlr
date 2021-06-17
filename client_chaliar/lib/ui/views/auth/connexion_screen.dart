@@ -56,12 +56,10 @@ class ConnexionScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
 
                 children: [
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.06,
-                  ),
+
                   Padding(
                     padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.06,
+                      top: MediaQuery.of(context).size.height * 0.08,
                     ),
                     child: Center(
                       child: SvgPicture.asset(

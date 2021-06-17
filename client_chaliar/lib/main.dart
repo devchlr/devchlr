@@ -1,3 +1,4 @@
+import 'package:client_chaliar/ui/views/auth/inscription/register_screen.dart';
 import 'package:client_chaliar/ui/views/auth/phone_opt/phone_number_input.dart';
 import 'package:flutter/material.dart';
 import 'package:client_chaliar/ui/views/splash_screen.dart';
