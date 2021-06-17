@@ -210,7 +210,7 @@ class InscriptionProScreen extends StatelessWidget {
                     margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.12, right: MediaQuery.of(context).size.width * 0.12),
                     child: Center(
                       child: Text(
-                        'Vous acceptez nos conditions générales d’utilisations',
+                        'Vous acceptez nos conditions générales ',
                         textAlign: TextAlign.center,
                         style: AppTextStyle.caption(color: ChaliarColors.blackColor),
                       ),
