@@ -1,3 +1,4 @@
+import 'package:client_chaliar/constants/type_user.dart';
 import 'package:client_chaliar/ui/styles/chaliar_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -97,7 +98,7 @@ class ProParticulierScreen extends StatelessWidget {
                       CustomRadioListTile(
                           radioColor: ChaliarColors.secondaryColors,
                           onClick: (){
-                            model.setRadioGroup('particulier');
+                            model.setRadioGroup(TypeUser.particulier);
                           },
                           width: 0.55,
                           heigth: 0.13,
@@ -106,16 +107,16 @@ class ProParticulierScreen extends StatelessWidget {
                           subtile:
                               'je veux me faire livrer des colis personnellement',
                           group: model.group,
-                          value: 'particulier',
+                          value: TypeUser.particulier,
                           onChange: (value) {
-                            model.setRadioGroup('particulier');
+                            model.setRadioGroup(TypeUser.particulier);
                           }),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.01,
                       ),
                       CustomRadioListTile(
                           onClick: (){
-                            model.setRadioGroup('professionnel');
+                            model.setRadioGroup(TypeUser.professionnel);
                           },
                           radioColor: ChaliarColors.secondaryColors,
                           width: 0.55,
@@ -125,16 +126,17 @@ class ProParticulierScreen extends StatelessWidget {
                           subtile:
                               'je veux me faire livrer des colis pour ma société',
                           group: model.group,
-                          value: 'professionnel',
+                          value: TypeUser.professionnel,
                           onChange: (value) {
-                            model.setRadioGroup('professionnel');
+                            model.setRadioGroup(TypeUser.professionnel);
                           }),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.05,
                       ),
                       ButtonChaliar(
-                          onTap: () => Navigator.pushReplacementNamed(
-                              context, '/inscription'),
+                          onTap: (){
+                            model.pushUserRegisterPagePreference(context);
+                          },
                           buttonText: 'Suivant',
                           height: MediaQuery.of(context).size.height * 0.07,
                           mediaQueryWidth: 0.25,

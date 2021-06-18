@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:client_chaliar/business_logic/models/model_user.dart';
 import 'package:client_chaliar/business_logic/view_model/auth/condition_term_view_model.dart';
 import 'package:client_chaliar/business_logic/view_model/auth/singin_view_model.dart';
 import 'package:client_chaliar/services/auth_service.dart';
@@ -17,8 +18,9 @@ import 'package:client_chaliar/ui/widgets/button.dart';
 import 'package:provider/provider.dart';
 
 class ConditionGeneraleScreen extends StatelessWidget {
-  final MyAppUser user;
-   ConditionGeneraleScreen({this.user = null});
+  final UserChaliar user;
+  final String surname;
+   ConditionGeneraleScreen({this.user= null,this.surname=null});
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<ConditionnalTermViewModel>(
@@ -82,7 +84,7 @@ class ConditionGeneraleScreen extends StatelessWidget {
                           ),
                           Text.rich(
                             TextSpan(
-                              text: "Bienvenue ${model.surname},",
+                              text: "Bienvenue ${surname},",
                               style: AppTextStyle.headerApp1(color: ChaliarColors.whiteColor),
                             ),
                           ),

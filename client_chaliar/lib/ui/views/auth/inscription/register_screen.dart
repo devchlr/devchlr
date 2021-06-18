@@ -1,3 +1,4 @@
+import 'package:client_chaliar/business_logic/view_model/auth/register_view_model.dart';
 import 'package:client_chaliar/constants/iconList.dart';
 import 'package:client_chaliar/ui/styles/chaliar_color.dart';
 import 'package:client_chaliar/ui/styles/text_style.dart';
@@ -6,6 +7,8 @@ import 'package:client_chaliar/ui/widgets/button.dart';
 import 'package:client_chaliar/ui/widgets/input_field.dart';
 import 'package:client_chaliar/ui/widgets/svg_button.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 
 
 
@@ -14,7 +17,12 @@ class UserRegisterScreen extends StatelessWidget {
   UserRegisterScreen({this.typeUSer='particulier'});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ChangeNotifierProvider<RegisterViewModel>(
+        create: (context) => RegisterViewModel(),
+        child: Consumer<RegisterViewModel>(
+            builder: (context, model, child) =>
+
+      Scaffold(
       appBar: ChaliarMenu.topBar(imageBackground:'assets/images/blueGrad.png',title: 'DÉMARRER',bgColor:ChaliarColors.whiteColor),
       body: Stack(
         children: [
@@ -43,9 +51,11 @@ class UserRegisterScreen extends StatelessWidget {
                     padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.07, right: MediaQuery.of(context).size.width * 0.07),
                     child: InputField(
                       fieldSize: MediaQuery.of(context).size.height * 0.02,
+                      controller: model.surname,
                       label: "Prénom",
                       placeholder: "Prénom",
                       textFillColor: ChaliarColors.blackColor,
+                      maxlenght: 250,
 
                       // controller: model.surname,
                     ),
@@ -58,8 +68,10 @@ class UserRegisterScreen extends StatelessWidget {
                     child: InputField(
                       fieldSize: MediaQuery.of(context).size.height * 0.02,
                       label: "Nom",
+                      controller: model.name,
                       placeholder: "Nom",
                       textFillColor: ChaliarColors.blackColor,
+                      maxlenght: 250,
                       // controller: model.name,
                     ),
                   ),
@@ -71,9 +83,11 @@ class UserRegisterScreen extends StatelessWidget {
                     child: InputField(
                       fieldSize: MediaQuery.of(context).size.height * 0.02,
                       label: "Email",
+                      controller: model.email,
                       typeInput: TextInputType.emailAddress,
                       placeholder: "Email",
                       textFillColor: ChaliarColors.blackColor,
+                      maxlenght: 300,
                       // controller: model.email,
                       // controller: model.email,
                     ),
@@ -83,14 +97,23 @@ class UserRegisterScreen extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.07, right: MediaQuery.of(context).size.width * 0.07),
-                    child: InputField(
-                      fieldSize: MediaQuery.of(context).size.height * 0.02,
-                      label: "Numéro de téléphone",
-                      typeInput: TextInputType.emailAddress,
-                      placeholder: "Email",
-                      textFillColor: ChaliarColors.blackColor,
-                      // controller: model.email,
-                      // controller: model.email,
+                    child: IntlPhoneField(
+                      decoration: InputDecoration(
+                        labelText: 'Téléphone',
+                        labelStyle:
+                        AppTextStyle.header4(color: ChaliarColors.blackColor),
+                        filled: true,
+                        fillColor: ChaliarColors.whiteColor,
+                        hintStyle:
+                        AppTextStyle.header4(color: ChaliarColors.blackColor),
+                        contentPadding: EdgeInsets.only(
+                            top: 10, bottom: 10, left: 20, right: 20),
+
+                      ),
+                      initialCountryCode: 'FR',
+                      onChanged: (phone) {
+                        model.phone= phone.completeNumber;
+                      },
                     ),
                   ),
                   typeUSer == 'particulier'?SizedBox(
@@ -107,10 +130,9 @@ class UserRegisterScreen extends StatelessWidget {
                     child: InputField(
                       fieldSize: MediaQuery.of(context).size.height * 0.02,
                       label: "Nom société",
-                      typeInput: TextInputType.emailAddress,
+                      maxlenght: 250,
                       textFillColor: ChaliarColors.blackColor,
-                      // controller: model.email,
-                      // controller: model.email,
+                        controller: model.societe
                     ),
                   ),
                   typeUSer == 'particulier'?SizedBox(
@@ -126,11 +148,26 @@ class UserRegisterScreen extends StatelessWidget {
                     padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.07, right: MediaQuery.of(context).size.width * 0.07),
                     child: InputField(
                       fieldSize: MediaQuery.of(context).size.height * 0.02,
-                      label: "Adresse de facturation",
-                      typeInput: TextInputType.emailAddress,
+                      label: "Siret (facultatif)",
+                      maxlenght: 250,
                       textFillColor: ChaliarColors.blackColor,
-                      // controller: model.email,
-                      // controller: model.email,
+                        controller: model.siret
+                    ),
+                  ),
+                  typeUSer == 'particulier'?SizedBox(
+                    height: 0,
+                  )
+                      :SizedBox(
+                    height: 8,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.07, right: MediaQuery.of(context).size.width * 0.07),
+                    child: InputField(
+                      fieldSize: MediaQuery.of(context).size.height * 0.02,
+                      label: "Adresse de facturation",
+                      maxlenght: 250,
+                      textFillColor: ChaliarColors.blackColor,
+                        controller: model.facturationAdress
                     ),
                   ),
                   SizedBox(
@@ -141,10 +178,9 @@ class UserRegisterScreen extends StatelessWidget {
                     child: InputField(
                       fieldSize: MediaQuery.of(context).size.height * 0.02,
                       label: "Code Postal",
-                      typeInput: TextInputType.emailAddress,
+                      maxlenght: 20,
                       textFillColor: ChaliarColors.blackColor,
-                      // controller: model.email,
-                      // controller: model.email,
+                        controller: model.codePostal
                     ),
                   ),
                   SizedBox(
@@ -155,10 +191,9 @@ class UserRegisterScreen extends StatelessWidget {
                     child: InputField(
                       fieldSize: MediaQuery.of(context).size.height * 0.02,
                       label: "Ville",
-                      typeInput: TextInputType.emailAddress,
+                      maxlenght: 250,
                       textFillColor: ChaliarColors.blackColor,
-                      // controller: model.email,
-                      // controller: model.email,
+                        controller: model.city
                     ),
                   ),
                   SizedBox(
@@ -167,8 +202,7 @@ class UserRegisterScreen extends StatelessWidget {
                   Center(
                     child: ButtonChaliar(
                         onTap: () async{
-                          // await model.singUp(context);
-                          // Navigator.pushReplacementNamed(context, '/singin');
+                          model.createUser(context,typeUSer);
                         },
                         buttonText: 'Connexion',
                         height: MediaQuery.of(context).size.height * 0.08,
@@ -244,7 +278,9 @@ class UserRegisterScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(context, '/term_condition');
+                        },
                         child: Container(
                           margin: EdgeInsets.only(left: 20, right: 20),
                           child: Center(
@@ -264,6 +300,6 @@ class UserRegisterScreen extends StatelessWidget {
           )
         ],
       ),
-    );
+    ),),);
   }
 }

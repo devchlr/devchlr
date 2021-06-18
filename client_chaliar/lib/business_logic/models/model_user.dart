@@ -9,6 +9,8 @@ class UserChaliar {
   final String facturationAdresse;
   final String codePostal;
   final String city;
+  final String siret;
+  final String societe;
 
   UserChaliar(
       {this.id,
@@ -17,10 +19,13 @@ class UserChaliar {
       this.userRole,
       this.surname,
       this.phone,
+        this.siret,
       this.facturationAdresse,
       this.codePostal,
       this.city,
-      this.street});
+      this.street,
+        this.societe
+      });
 
   UserChaliar.fromData(Map<String, dynamic> data)
       : id = data['id'],
@@ -32,6 +37,8 @@ class UserChaliar {
         facturationAdresse = data['facturationAdresse'],
         codePostal = data['codePostal'],
         city = data['city'],
+  siret=data['siret'],
+        societe=data['societe'],
         userRole = data['userRole'];
 
   Map<String, dynamic> toJson() {
@@ -45,7 +52,9 @@ class UserChaliar {
       'street': street,
       'facturation_adresse': facturationAdresse,
       'code_postal': codePostal,
-      'city': city
+      'city': city,
+      'siret':siret,
+      'societe':societe,
     };
   }
 }

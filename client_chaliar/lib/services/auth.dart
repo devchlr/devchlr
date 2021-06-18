@@ -16,6 +16,18 @@ class AuthenticationService {
   UserChaliar _currentUser;
   UserChaliar get currentUser => _currentUser;
 
+  Future<String> verifyPhoneNumber({String phoneNumber,VoidCallback codeSent,VoidCallback codeAutoRetrievalTimout,
+    VoidCallback verificationCompleted,VoidCallback verificationFailed,})async{
+   var credential= await _firebaseAuth.verifyPhoneNumber(
+      phoneNumber: phoneNumber,
+      verificationCompleted: (PhoneAuthCredential credential) {},
+      verificationFailed: (FirebaseAuthException e) {},
+      codeSent: (String verificationId, int resendToken) {},
+      codeAutoRetrievalTimeout: (String verificationId) {},
+    );
+  }
+
+
   Future<bool> isUserLoggedIn() async {
     var user = await _firebaseAuth.currentUser;
     return user != null;

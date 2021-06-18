@@ -1,13 +1,19 @@
+import 'package:client_chaliar/business_logic/view_model/auth/singin_view_model.dart';
 import 'package:client_chaliar/ui/styles/chaliar_color.dart';
 import 'package:client_chaliar/ui/styles/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:client_chaliar/ui/widgets/button.dart';
+import 'package:provider/provider.dart';
 
 class PhoneOptMainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ChangeNotifierProvider<SingInViewModel>(
+      create: (context) => SingInViewModel(),
+      child: Consumer<SingInViewModel>(
+          builder: (context, model, child) =>
+      Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
@@ -74,9 +80,8 @@ class PhoneOptMainScreen extends StatelessWidget {
                 ),
                 Center(
                   child: ButtonChaliar(
-                      onTap: () {
-                        Navigator.pushReplacementNamed(
-                            context, '/pro_particulier');
+                      onTap: () async{
+                       await model.verifyUserAccount();
                       },
                       buttonText: 'Envoyer le code',
                       height: 60.0,
@@ -92,6 +97,6 @@ class PhoneOptMainScreen extends StatelessWidget {
           )
         ],
       ),
-    );
+    ),),);
   }
 }

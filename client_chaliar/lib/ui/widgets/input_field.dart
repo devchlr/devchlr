@@ -17,12 +17,14 @@ class InputField extends StatelessWidget {
   final Color fillColor;
   final Color textFillColor;
   final Color textLabelColor;
+  final int maxlenght;
   final bool isBorder;
   final double fieldSize;
   final double raduis;
   final Color backgroundColor;
   final bool obscureText;
   final TextInputType typeInput;
+  final int minlent;
 
   InputField(
       {this.obscureText=false,
@@ -43,13 +45,17 @@ class InputField extends StatelessWidget {
       this.isBorder = false,
       this.fieldSize,
       this.raduis = 6.0,
-      this.backgroundColor});
+      this.backgroundColor,
+      this.maxlenght,
+        this.minlent
+      });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 45.0,
       child: TextField(
+        maxLengthEnforced: false,
         keyboardType: typeInput,
         obscureText: obscureText,
         cursorColor: ChaliarColors.whiteColor,

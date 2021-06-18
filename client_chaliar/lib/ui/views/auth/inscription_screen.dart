@@ -1,8 +1,6 @@
 import 'package:client_chaliar/ui/styles/chaliar_color.dart';
 import 'package:client_chaliar/ui/styles/text_style.dart';
 import 'package:flutter/material.dart';
-import 'package:client_chaliar/ui/views/auth/inscription/particulier_screen.dart';
-import 'package:client_chaliar/ui/views/auth/inscription/pro_screen.dart';
 import 'package:client_chaliar/ui/widgets/appBar.dart';
 
 class InscriptionHomeScreen extends StatelessWidget {
@@ -82,8 +80,7 @@ class InscriptionHomeScreen extends StatelessWidget {
                           flex: 2,
                           child: TabBarView(
                             children: <Widget>[
-                              InscriptionParticulierScreen(),
-                              InscriptionProScreen()
+
                             ],
                           ),
                         )

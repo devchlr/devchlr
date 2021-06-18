@@ -1,10 +1,11 @@
 import 'package:client_chaliar/business_logic/view_model/base_model.dart';
+import 'package:client_chaliar/ui/views/auth/inscription/register_screen.dart';
 import 'package:client_chaliar/ui/views/auth/inscription_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ConnexionViewModel extends BaseModel {
-  var group = 'particulier';
+  var group = 'professionel';
   void pushPage(BuildContext context, String page) {
     Navigator.pushNamed(context, '/$page');
   }
@@ -15,11 +16,10 @@ class ConnexionViewModel extends BaseModel {
     notifyListeners();
   }
 
-  void pushUserRegisterPagePreference(BuildContext context, String page) {
-    print(group);
+  void pushUserRegisterPagePreference(BuildContext context) {
     Navigator.push (context,
         new MaterialPageRoute(
             builder: (BuildContext context) =>
-            new InscriptionHomeScreen()));
+            new UserRegisterScreen(typeUSer: group,)));
   }
 }

@@ -11,6 +11,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:client_chaliar/services/dialog_service.dart';
 import 'package:client_chaliar/services/fire_store_service.dart';
+import 'package:flutter/material.dart';
 
 class ProfessionalRegisterViewModel extends BaseModel {
   // initialisation global variable
@@ -34,6 +35,7 @@ class ProfessionalRegisterViewModel extends BaseModel {
   TextEditingController codePostal = TextEditingController();
   TextEditingController city = TextEditingController();
   String phone;
+  String typeUser;
 
   //function to show password
   void showPasswor(value) {
@@ -51,32 +53,71 @@ class ProfessionalRegisterViewModel extends BaseModel {
     return password.text == passwordBis.text &&
         (password.text != '' && passwordBis.text != '');
   }
-
+  bool isProfessionnelInformation(){
+    if(societe.text.isEmpty && facturationAdress.text.isEmpty && surname.text.isEmpty && name.text.isEmpty && phoneNumber.value==''&&codePostal.text.isEmpty && city.text.isEmpty){
+      return false;
+    }else{
+      return true;
+    }
+  }
+  bool isParticulierInformation(){
+    if(surname.text.isEmpty && name.text.isEmpty && phoneNumber.value==''&&codePostal.text.isEmpty && city.text.isEmpty){
+      return false;
+    }else{
+      return true;
+    }
+  }
+  bool validateInput(){
+    if(typeUser=='professionnel'){
+      if(isProfessionnelInformation()){
+        return true;
+      }else{
+       return false;
+      }
+    }else{
+      if(isParticulierInformation()){
+        return true;
+      }else{
+        return false;
+      }
+    }
+  }
   //singup funtion
   Future singUp(BuildContext context)async{
-    bool isSingUp=false;
-    var user=await auth.createUserWithEmailAndPassword(email.text, password.text);
-    if(user != null){
-      _currentUser = UserChaliar(
-          id: user.uid,
-          email: email.text,
-          userRole: 'professionnel',
-          name: name.text,
-          surname: surname.text,
-        city: city.text,
-        codePostal: codePostal.text,
-        street: street.text,
-        phone: phoneNumber.text,
-        facturationAdresse: facturationAdress.text
-      );
-      await _firestoreService.createUser(_currentUser);
-      isSingUp=true;
+    if(validateInput()){
+      bool isSingUp=false;
+      var user=await auth.createUserWithEmailAndPassword(email.text, password.text);
+      if(user != null){
+        _currentUser = UserChaliar(
+            id: user.uid,
+            email: email.text,
+            userRole: 'professionnel',
+            name: name.text,
+            surname: surname.text,
+            city: city.text,
+            codePostal: codePostal.text,
+            street: street.text,
+            phone: phoneNumber.text,
+            facturationAdresse: facturationAdress.text
+        );
+        await _firestoreService.createUser(_currentUser);
+        isSingUp=true;
+      }else{
+        print('user not registered');
+      }
+      if(isSingUp){
+        Navigator.pushReplacementNamed(context, '/singin');
+      }
     }else{
-      print('user not registered');
+      showDialog(context: context,
+          builder:(_)=>
+      new AlertDialog(
+        title: new Text("Error"),
+        content: new Text("All User information are not correct "),
+      )
+      );
     }
-    if(isSingUp){
-      Navigator.pushReplacementNamed(context, '/singin');
-    }
+
   }
 
 

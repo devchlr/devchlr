@@ -22,4 +22,10 @@ class FirestoreService {
       return e.toString();
     }
   }
+  // Future getUserByEmail(String email) async{
+  //   await _usersCollectionReference.where('email', isEqualTo: email).get().then((users){
+  //     return UserChaliar.fromData(users.data());
+  //   }).catchError((onError)=>onError);
+  //
+  // }
 }

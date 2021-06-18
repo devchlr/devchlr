@@ -1,22 +1,43 @@
+import 'package:client_chaliar/business_logic/models/model_user.dart';
+import 'package:client_chaliar/business_logic/view_model/auth/opt_view_model.dart';
 import 'package:client_chaliar/ui/styles/chaliar_color.dart';
 import 'package:client_chaliar/ui/styles/text_style.dart';
+import 'package:client_chaliar/ui/views/auth/condition_generale_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:client_chaliar/ui/widgets/button.dart';
-import 'package:client_chaliar/ui/widgets/pinbox.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:pin_input_text_field/pin_input_text_field.dart';
 import 'package:flutter/gestures.dart';
+import 'dart:async';
+import 'package:provider/provider.dart';
 
-class PhoneOptValidateScreen extends StatelessWidget {
-  List<TextEditingController> controllers = <TextEditingController>[
-    new TextEditingController(),
-    TextEditingController(),
-    TextEditingController(),
-    TextEditingController()
-  ];
+class PhoneOptValidateScreen extends StatefulWidget {
+  String phone;
+  PhoneOptValidateScreen({this.phone});
+  @override
+  _PhoneOptValidateScreenState createState() => _PhoneOptValidateScreenState();
+}
+
+  class _PhoneOptValidateScreenState extends State<PhoneOptValidateScreen>{
+  OPTValidationViewModel _validator=OPTValidationViewModel();
+  void initState(){
+    super.initState();
+    // getUserData();
+    sendSmsOpt();
+  }
+  void getUserData()async{
+    await _validator.getUserData(widget.phone);
+  }
+  void sendSmsOpt()async{
+    await _validator.sendSmsOpt(widget.phone);
+  }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ChangeNotifierProvider<OPTValidationViewModel>(
+      create: (context) => OPTValidationViewModel(),
+      child: Consumer<OPTValidationViewModel>(
+          builder: (context, model, child) =>
+      Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
@@ -50,7 +71,7 @@ class PhoneOptValidateScreen extends StatelessWidget {
                     textAlign: TextAlign.center,
                     text: TextSpan(
                       text:
-                          "Entrez les 4 chiffres du code que vous avez reçu par SMS au ",
+                          "Entrez les 6 chiffres du code que vous avez reçu par SMS au ",
                       style: AppTextStyle.header3_light(
                           color: ChaliarColors.blackColor),
                       children: [
@@ -59,7 +80,7 @@ class PhoneOptValidateScreen extends StatelessWidget {
                             ..onTap = () {
                               print('phone call');
                             },
-                          text: " +336 03 02 36 99",
+                          text: "${widget.phone}",
                           style: AppTextStyle.header3_light(
                               color: ChaliarColors.primaryColors,
                               isUnderlined: true),
@@ -71,7 +92,7 @@ class PhoneOptValidateScreen extends StatelessWidget {
                 ),
                 Center(
                   child: PinInputTextField(
-                    pinLength: 4,
+                    pinLength: 6,
                     decoration: UnderlineDecoration(
                       colorBuilder: PinListenColorBuilder(
                           ChaliarColors.primaryColors,
@@ -91,7 +112,7 @@ class PhoneOptValidateScreen extends StatelessWidget {
                       debugPrint('submit pin:$pin');
                     },
                     onChanged: (pin) {
-                      debugPrint('onChanged execute. pin:$pin');
+                      model.pin=pin;
                     },
                     enableInteractiveSelection: false,
                     cursor: Cursor(
@@ -117,7 +138,7 @@ class PhoneOptValidateScreen extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    print('Resend OPT Code');
+                    model.sendSmsOpt(widget.phone);
                   },
                   child: Text(
                     'Me renvoyer un code',
@@ -134,8 +155,8 @@ class PhoneOptValidateScreen extends StatelessWidget {
                 Center(
                   child: ButtonChaliar(
                       onTap: () {
-                        Navigator.pushReplacementNamed(
-                            context, '/pro_particulier');
+                        model.context=context;
+                        model.confirmOPT();
                       },
                       buttonText: 'Envoyer le code',
                       height: 60.0,
@@ -160,7 +181,7 @@ class PhoneOptValidateScreen extends StatelessWidget {
                         TextSpan(
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              print('show condition term screen');
+                              Navigator.pushNamed(context, '/term_condition');
                             },
                           text: " Conditions générales d’utilisatios",
                           style: AppTextStyle.header3_light(
@@ -174,6 +195,6 @@ class PhoneOptValidateScreen extends StatelessWidget {
           )
         ],
       ),
-    );
+    ),),);
   }
 }
