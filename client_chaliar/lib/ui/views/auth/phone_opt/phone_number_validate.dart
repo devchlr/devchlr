@@ -26,16 +26,9 @@ class PhoneOptValidateScreen extends StatefulWidget {
     getUser();
   }
   void getUser()async{
-    widget.user= await FirebaseAuth.instance.currentUser;
-    if(widget.user!=null){
-      Navigator.push(context,
-          new MaterialPageRoute(
-              builder: (BuildContext context) =>
-              new ConditionGeneraleScreen()));
-    }else{
+    await FirebaseAuth.instance.signOut();
       sendSmsOpt();
       getUserData();
-    }
   }
   void getUserData()async{
     await _validator.getUserData(widget.phone);
@@ -49,7 +42,7 @@ class PhoneOptValidateScreen extends StatefulWidget {
       create: (context) => OPTValidationViewModel(),
       child: Consumer<OPTValidationViewModel>(
           builder: (context, model, child) =>
-          widget.user==null?
+
       Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(
@@ -208,8 +201,7 @@ class PhoneOptValidateScreen extends StatefulWidget {
           )
         ],
       ),
-    ):Center(
-            child: CircularProgressIndicator(),
-          ),),);
+    )
+          ),);
   }
 }

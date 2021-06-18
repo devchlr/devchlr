@@ -18,7 +18,6 @@ class UserRegisterScreen extends StatelessWidget {
   UserRegisterScreen({this.typeUSer='particulier'});
   @override
   Widget build(BuildContext context) {
-    final AuthService auth = Provider.of<AuthService>(context, listen: false);
     return ChangeNotifierProvider<RegisterViewModel>(
         create: (context) => RegisterViewModel(),
         child: Consumer<RegisterViewModel>(
