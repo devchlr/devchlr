@@ -49,25 +49,28 @@ class CustomRadioListTile extends StatelessWidget {
                   color: group == value
                       ? ChaliarColors.secondaryColors
                       : ChaliarColors.whiteGreyColor)),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              ListTile(
-                title: Text(
-                  title,
-                  style: AppTextStyle.header4(color: ChaliarColors.blackColor),
+          child: Expanded(
+            flex: 1,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                ListTile(
+                  title: Text(
+                    title,
+                    style: AppTextStyle.header4(color: ChaliarColors.blackColor),
+                  ),
+                  subtitle: Text(
+                    subtile,
+                    style: AppTextStyle.caption(color: ChaliarColors.blackColor),
+                  ),
+                  trailing: new Radio(
+                    value: value,
+                    groupValue: group,
+                    activeColor: ChaliarColors.secondaryColors,
+                  ),
                 ),
-                subtitle: Text(
-                  subtile,
-                  style: AppTextStyle.caption(color: ChaliarColors.blackColor),
-                ),
-                trailing: new Radio(
-                  value: value,
-                  groupValue: group,
-                  activeColor: ChaliarColors.secondaryColors,
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
