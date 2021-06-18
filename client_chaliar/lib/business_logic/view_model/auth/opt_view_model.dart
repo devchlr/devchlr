@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 class OPTValidationViewModel extends BaseModel{
   FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final FirebaseAuthService auth = FirebaseAuthService();
-  FirestoreService _firestoreService = FirestoreService();
+  FirestoreService _storeService = FirestoreService();
   UserChaliar currentUser;
   String phone;
   String pin;
@@ -25,7 +25,6 @@ class OPTValidationViewModel extends BaseModel{
       await _firebaseAuth.signInWithCredential(phoneAuthCredential);
         showLoading = false;
       if(authCredential?.user != null){
-       await getUserData(phone);
         goToNextSCreen(context);
       }
 
@@ -36,7 +35,8 @@ class OPTValidationViewModel extends BaseModel{
   }
   //function function qui recupere le numero du user
   void getUserData(String number)async{
-    currentUser = await _firestoreService.getUser(phone);
+    currentUser = await _storeService.getUser(number);
+    print(currentUser.name);
     notifyListeners();
   }
   //verifier le code pin

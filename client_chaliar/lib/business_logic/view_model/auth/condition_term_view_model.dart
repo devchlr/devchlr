@@ -17,47 +17,27 @@ import 'package:firebase_core/firebase_core.dart';
 // import 'package:session/session.dart';
 
 class ConditionnalTermViewModel extends BaseModel{
-  UserChaliar user;
+  UserChaliar currentUser;
   final _auth = FirebaseAuth.instance;
-  FirestoreService _firestoreService = FirestoreService();
+  FirestoreService _storeService = FirestoreService();
   final FirebaseAuthService auth = FirebaseAuthService();
-  String surname;
-  bool isOkay=false;
   //function to show password
    Future<bool> isSingInUser()async{
-    var result = await auth.currentUser();
-    var user= await _firestoreService.getUser(result.uid);
+     bool result=false;
+    var user = await FirebaseAuth.instance.currentUser;
    print(user);
     if(result != null){
-      surname = user.surname;
+      result= true;
     }
-    return true;
+    return result;
   }
 
   //function qui retourne les information du users;
-void getUser()async{
-  // _firebaseAuth.authStateChanges()
-  //     .listen((User user) {
-  // if (user == null) {
-  // print('User is currently signed out!');
-  // } else {
-  // print('User is signed in!');
-  // }
-  // });
-  // print('userResult');
-  //    var userResult = await _firebaseAuth.idTokenChanges()
-  //        .listen((User user) {
-  //      if (user == null) {
-  //        print('User is currently signed out!');
-  //      } else {
-  //        print('User is signed in!');
-  //      }
-  //    });
-  //    print(userResult);
-  //    notifyListeners();
-     isOkay=true;
-     notifyListeners();
-}
+  void getUserData(String number)async{
+    currentUser = await _storeService.getUser(number);
+    print(currentUser.name);
+    notifyListeners();
+  }
 
 
 }

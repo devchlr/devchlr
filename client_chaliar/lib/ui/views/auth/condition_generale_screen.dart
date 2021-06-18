@@ -23,9 +23,10 @@ import 'dart:async';
 
 class ConditionGeneraleScreen extends StatefulWidget {
   ConditionnalTermViewModel conditionnalTermViewModel = ConditionnalTermViewModel();
-  User user;
-  bool isOkay=false;
-  ConditionGeneraleScreen();
+  String phone;
+  var isLoanded;
+
+  ConditionGeneraleScreen({this.phone});
   @override
   _ConditionGeneraleScreenState createState() => _ConditionGeneraleScreenState();
 }
@@ -36,14 +37,9 @@ class _ConditionGeneraleScreenState extends State<ConditionGeneraleScreen> {
     super.initState();
     getUser();
   }
-
   void getUser()async{
-    widget.user= await FirebaseAuth.instance.currentUser;
-    if(widget.user!=null){
-
-    }else{
-
-    }
+    print(widget.phone);
+   await widget.conditionnalTermViewModel.getUserData(widget.phone);
   }
   @override
   Widget build(BuildContext context) {
@@ -51,27 +47,6 @@ class _ConditionGeneraleScreenState extends State<ConditionGeneraleScreen> {
       create: (context) => ConditionnalTermViewModel(),
       child: Consumer<ConditionnalTermViewModel>(
         builder: (context, model, child) =>
-        widget.user!=null?
-        Scaffold(
-            body:Stack(
-                children:[
-                  Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage("assets/images/blueGrad.png"),
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  ),
-                  Center(
-                    child: SpinKitCubeGrid(
-                        color:ChaliarColors.whiteColor,
-                        size:100.0
-                    ),
-                  )
-                ]
-            )
-        ):
             Scaffold(
               resizeToAvoidBottomInset: false,
               body: Stack(
@@ -126,7 +101,7 @@ class _ConditionGeneraleScreenState extends State<ConditionGeneraleScreen> {
                             ),
                             Text.rich(
                               TextSpan(
-                                text: "Bienvenue ${widget.user.phoneNumber} ,",
+                                text: "Bienvenue ${model.currentUser.surname} ,",
                                 style: AppTextStyle.headerApp1(color: ChaliarColors.whiteColor),
                               ),
                             ),

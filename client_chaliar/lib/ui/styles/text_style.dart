@@ -29,7 +29,7 @@ class AppTextStyle {
     return TextStyle(
       color: color,
       fontSize: 18.0,
-      fontFamily: AppFontFamilly.montserrat,
+      fontFamily: AppFontFamilly.varelaRegular,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     );

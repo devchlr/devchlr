@@ -3,11 +3,13 @@ import 'package:client_chaliar/ui/styles/chaliar_color.dart';
 import 'package:client_chaliar/ui/styles/chaliar_font.dart';
 import 'package:client_chaliar/ui/styles/chaliar_font_size.dart';
 import 'package:client_chaliar/ui/styles/chaliar_icon_size.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:async';
 
 class SplashScreen extends StatefulWidget {
+  FirebaseAuth _auth =FirebaseAuth.instance;
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -15,8 +17,18 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 6),
-        () => Navigator.pushReplacementNamed(context, '/tuto'));
+    nextScreen();
+  }
+  void nextScreen()async{
+    if(await widget._auth.currentUser==null){
+      Timer(Duration(seconds: 6),
+              () => Navigator.pushReplacementNamed(context, '/tuto'));
+    }else{
+      print('toujours actif');
+      widget._auth.signOut();
+      Timer(Duration(seconds: 6),
+              () => Navigator.pushReplacementNamed(context, '/singin'));
+    }
   }
 
   @override

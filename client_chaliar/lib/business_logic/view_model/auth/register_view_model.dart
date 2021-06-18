@@ -232,7 +232,7 @@ class RegisterViewModel extends BaseModel {
         );
         bool isSingUp = false;
         _currentUser = UserChaliar(
-            id: email.text,
+            id: phone,
             email: email.text,
             userRole: TypeUser.particulier,
             name: name.text,

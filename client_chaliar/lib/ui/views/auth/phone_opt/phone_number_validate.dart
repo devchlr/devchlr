@@ -26,12 +26,7 @@ class PhoneOptValidateScreen extends StatefulWidget {
     getUser();
   }
   void getUser()async{
-    await FirebaseAuth.instance.signOut();
       sendSmsOpt();
-      getUserData();
-  }
-  void getUserData()async{
-    await _validator.getUserData(widget.phone);
   }
   void sendSmsOpt()async{
     await _validator.sendSmsOpt(widget.phone);
