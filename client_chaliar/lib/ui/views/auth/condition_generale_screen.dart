@@ -8,6 +8,7 @@ import 'package:client_chaliar/ui/styles/chaliar_font.dart';
 import 'package:client_chaliar/ui/styles/chaliar_font_size.dart';
 import 'package:client_chaliar/ui/styles/chaliar_icon_size.dart';
 import 'package:client_chaliar/ui/styles/text_style.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -17,11 +18,14 @@ import 'package:client_chaliar/constants/iconList.dart';
 import 'package:client_chaliar/ui/widgets/button.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'dart:async';
 
 
 class ConditionGeneraleScreen extends StatefulWidget {
-  ConditionnalTermViewModel _conditionnalTermViewModel = ConditionnalTermViewModel();
-
+  ConditionnalTermViewModel conditionnalTermViewModel = ConditionnalTermViewModel();
+  User user;
+  bool isOkay=false;
+  ConditionGeneraleScreen();
   @override
   _ConditionGeneraleScreenState createState() => _ConditionGeneraleScreenState();
 }
@@ -29,21 +33,26 @@ class ConditionGeneraleScreen extends StatefulWidget {
 class _ConditionGeneraleScreenState extends State<ConditionGeneraleScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-
+    getUser();
   }
+
   void getUser()async{
-    var user= await widget._conditionnalTermViewModel.getUser();
-  }
+    widget.user= await FirebaseAuth.instance.currentUser;
+    if(widget.user!=null){
 
+    }else{
+
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<ConditionnalTermViewModel>(
       create: (context) => ConditionnalTermViewModel(),
       child: Consumer<ConditionnalTermViewModel>(
         builder: (context, model, child) =>
-        model.user==null?Scaffold(
+        widget.user!=null?
+        Scaffold(
             body:Stack(
                 children:[
                   Container(
@@ -117,7 +126,7 @@ class _ConditionGeneraleScreenState extends State<ConditionGeneraleScreen> {
                             ),
                             Text.rich(
                               TextSpan(
-                                text: "Bienvenue ,",
+                                text: "Bienvenue ${widget.user.phoneNumber} ,",
                                 style: AppTextStyle.headerApp1(color: ChaliarColors.whiteColor),
                               ),
                             ),

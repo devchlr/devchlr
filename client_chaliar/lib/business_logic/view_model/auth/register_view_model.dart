@@ -17,7 +17,7 @@ import 'package:client_chaliar/services/dialog_service.dart';
 import 'package:client_chaliar/services/fire_store_service.dart';
 import 'package:flutter/material.dart';
 import 'package:widget_circular_animator/widget_circular_animator.dart';
-import 'package:email_validator/email_validator.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:uuid/uuid.dart';
 
 class RegisterViewModel extends BaseModel {
@@ -43,6 +43,32 @@ class RegisterViewModel extends BaseModel {
   TextEditingController codePostal = TextEditingController();
   TextEditingController city = TextEditingController();
   String phone;
+
+
+
+  Future<UserCredential> signInWithGoogle() async {
+    var user= await auth.signInWithGoogle();
+    print(user.displayName);
+    // // Trigger the authentication flow
+    // final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+    //
+    // // Obtain the auth details from the request
+    // final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+    //
+    // // Create a new credential
+    // final credential = GoogleAuthProvider.credential(
+    //   accessToken: googleAuth.accessToken,
+    //   idToken: googleAuth.idToken,
+    // );
+    //
+    // // Once signed in, return the UserCredential
+    // var cred= await FirebaseAuth.instance.signInWithCredential(credential);
+    // print(cred.user.displayName);
+  }
+
+
+
+
 
   Future<String> validatorPartInformation() async {
     if (email.text == null || email.text.isEmpty) {

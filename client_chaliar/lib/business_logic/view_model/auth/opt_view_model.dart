@@ -14,24 +14,22 @@ class OPTValidationViewModel extends BaseModel{
   String phone;
   String pin;
   String _verificationId;
-  bool showLoading;
+  bool showLoading=false;
   bool isGetOpt;
   BuildContext context;
 
   void signInWithPhoneAuthCredential(
       PhoneAuthCredential phoneAuthCredential) async {
-      showLoading = true;
     try {
       final authCredential =
       await _firebaseAuth.signInWithCredential(phoneAuthCredential);
         showLoading = false;
       if(authCredential?.user != null){
-        print('user Connected');
+       await getUserData(phone);
         goToNextSCreen(context);
       }
 
     } on FirebaseAuthException catch (e) {
-        showLoading = false;
         print(e.message);
     }
     notifyListeners();
@@ -43,19 +41,19 @@ class OPTValidationViewModel extends BaseModel{
   }
   //verifier le code pin
   void sendSmsOpt(String phoneNumber)async{
-         showLoading = true;
+
     await _firebaseAuth.verifyPhoneNumber(
       phoneNumber: phoneNumber,
       verificationCompleted: (phoneAuthCredential) async {
-          showLoading = false;
+
         //signInWithPhoneAuthCredential(phoneAuthCredential);
       },
       verificationFailed: (verificationFailed) async {
-          showLoading = false;
+
           print(verificationFailed.message);
       },
       codeSent: (verificationId, resendingToken) async {
-          showLoading = false;
+
           _verificationId = verificationId;
       },
       codeAutoRetrievalTimeout: (verificationId) async {},
@@ -70,27 +68,11 @@ class OPTValidationViewModel extends BaseModel{
 
 //function qui redirige vers la page OPT
 void goToNextSCreen(BuildContext context){
-  Navigator.of(context).pushNamedAndRemoveUntil('/condition_generale', (Route<dynamic> route) => false);
+  Navigator.push(context,
+      new MaterialPageRoute(
+          builder: (BuildContext context) =>
+          new ConditionGeneraleScreen()));
+  // Navigator.of(context).pushNamedAndRemoveUntil('/condition_generale', (Route<dynamic> route) => false);
+
   }
 }
-//
-// model.isGetOpt==null?Scaffold(
-// body:Stack(
-// children:[
-// Container(
-// decoration: BoxDecoration(
-// image: DecorationImage(
-// image: AssetImage("assets/images/blueGrad.png"),
-// fit: BoxFit.fill,
-// ),
-// ),
-// ),
-// Center(
-// child: SpinKitCubeGrid(
-// color:ChaliarColors.whiteColor,
-// size:100.0
-// ),
-// )
-// ]
-// )
-// ):

@@ -27,32 +27,31 @@ class AuthenticationService {
     );
   }
 
-
   Future<bool> isUserLoggedIn() async {
     var user = await _firebaseAuth.currentUser;
     return user != null;
   }
 
-  Future signUpWithEmail({
-    @required String email,
-    @required String password,
-    String name,
-    String surname,
-    String role,
-  }) async {
-    try {
-      var authResult =
-          await (auth.createUserWithEmailAndPassword(email, password) as Future<MyAppUser>);
-      _currentUser = UserChaliar(
-          id: authResult.uid,
-          email: email,
-          userRole: role,
-          name: name,
-          surname: surname);
-      await _firestoreService.createUser(_currentUser);
-      return authResult != null;
-    } catch (e) {
-      return e.toString();
-    }
-  }
+  // Future signUpWithEmail({
+  //   @required String email,
+  //   @required String password,
+  //   String name,
+  //   String surname,
+  //   String role,
+  // }) async {
+  //   try {
+  //     var authResult =
+  //         await (auth.createUserWithEmailAndPassword(email, password) as Future<MyAppUser>);
+  //     _currentUser = UserChaliar(
+  //         id: authResult.uid,
+  //         email: email,
+  //         userRole: role,
+  //         name: name,
+  //         surname: surname);
+  //     await _firestoreService.createUser(_currentUser);
+  //     return authResult != null;
+  //   } catch (e) {
+  //     return e.toString();
+  //   }
+  // }
 }

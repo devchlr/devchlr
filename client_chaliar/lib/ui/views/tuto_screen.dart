@@ -29,7 +29,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   setState(() {
     _pageController.animateToPage(
       page,
-      duration: const Duration(milliseconds: 400),
+      duration: const Duration(milliseconds: 1000),
       curve: Curves.easeInOut,
     );
     _currentPage=page;

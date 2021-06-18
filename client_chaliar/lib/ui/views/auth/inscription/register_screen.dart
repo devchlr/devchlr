@@ -1,5 +1,6 @@
 import 'package:client_chaliar/business_logic/view_model/auth/register_view_model.dart';
 import 'package:client_chaliar/constants/iconList.dart';
+import 'package:client_chaliar/services/auth_service.dart';
 import 'package:client_chaliar/ui/styles/chaliar_color.dart';
 import 'package:client_chaliar/ui/styles/text_style.dart';
 import 'package:client_chaliar/ui/widgets/appBar.dart';
@@ -17,11 +18,11 @@ class UserRegisterScreen extends StatelessWidget {
   UserRegisterScreen({this.typeUSer='particulier'});
   @override
   Widget build(BuildContext context) {
+    final AuthService auth = Provider.of<AuthService>(context, listen: false);
     return ChangeNotifierProvider<RegisterViewModel>(
         create: (context) => RegisterViewModel(),
         child: Consumer<RegisterViewModel>(
             builder: (context, model, child) =>
-
       Scaffold(
       appBar: ChaliarMenu.topBar(imageBackground:'assets/images/blueGrad.png',title: 'DÉMARRER',bgColor:ChaliarColors.whiteColor),
       body: Stack(
@@ -257,8 +258,16 @@ class UserRegisterScreen extends StatelessWidget {
                                   width: 80,
                                   iconSvg: SvgIconButton(
                                       iconAsset: SvgIcons.google_account,
-                                      onPressed: () {
-                                        Navigator.pop(context);
+                                      onPressed: ()async {
+                                        showDialog(context: context,
+                                            builder: (_) =>
+                                            new AlertDialog(
+                                              content: Text('google singIng',
+                                                textAlign: TextAlign.center,
+                                                style: AppTextStyle.bodyApp1(color: Colors.red),),
+                                            )
+                                        );
+                                        var cred=await model.signInWithGoogle();
                                       })),
                               ContainerButton(
                                   height: 60,

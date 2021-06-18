@@ -13,14 +13,16 @@ import 'package:client_chaliar/services/firebase_auth_service.dart';
 // import 'package:client_chaliar/services/dialog_service.dart';
 import 'package:client_chaliar/services/fire_store_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 // import 'package:session/session.dart';
 
 class ConditionnalTermViewModel extends BaseModel{
   UserChaliar user;
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final _auth = FirebaseAuth.instance;
   FirestoreService _firestoreService = FirestoreService();
   final FirebaseAuthService auth = FirebaseAuthService();
   String surname;
+  bool isOkay=false;
   //function to show password
    Future<bool> isSingInUser()async{
     var result = await auth.currentUser();
@@ -34,8 +36,27 @@ class ConditionnalTermViewModel extends BaseModel{
 
   //function qui retourne les information du users;
 void getUser()async{
-     var userResult = await _firebaseAuth.currentUser;
-     print(userResult);
+  // _firebaseAuth.authStateChanges()
+  //     .listen((User user) {
+  // if (user == null) {
+  // print('User is currently signed out!');
+  // } else {
+  // print('User is signed in!');
+  // }
+  // });
+  // print('userResult');
+  //    var userResult = await _firebaseAuth.idTokenChanges()
+  //        .listen((User user) {
+  //      if (user == null) {
+  //        print('User is currently signed out!');
+  //      } else {
+  //        print('User is signed in!');
+  //      }
+  //    });
+  //    print(userResult);
+  //    notifyListeners();
+     isOkay=true;
+     notifyListeners();
 }
 
 

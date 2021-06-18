@@ -3,6 +3,7 @@ import 'package:client_chaliar/business_logic/view_model/auth/opt_view_model.dar
 import 'package:client_chaliar/ui/styles/chaliar_color.dart';
 import 'package:client_chaliar/ui/styles/text_style.dart';
 import 'package:client_chaliar/ui/views/auth/condition_generale_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:client_chaliar/ui/widgets/button.dart';
 import 'package:pin_input_text_field/pin_input_text_field.dart';
@@ -12,6 +13,7 @@ import 'package:provider/provider.dart';
 
 class PhoneOptValidateScreen extends StatefulWidget {
   String phone;
+  User user;
   PhoneOptValidateScreen({this.phone});
   @override
   _PhoneOptValidateScreenState createState() => _PhoneOptValidateScreenState();
@@ -21,8 +23,19 @@ class PhoneOptValidateScreen extends StatefulWidget {
   OPTValidationViewModel _validator=OPTValidationViewModel();
   void initState(){
     super.initState();
-    // getUserData();
-    sendSmsOpt();
+    getUser();
+  }
+  void getUser()async{
+    widget.user= await FirebaseAuth.instance.currentUser;
+    if(widget.user!=null){
+      Navigator.push(context,
+          new MaterialPageRoute(
+              builder: (BuildContext context) =>
+              new ConditionGeneraleScreen()));
+    }else{
+      sendSmsOpt();
+      getUserData();
+    }
   }
   void getUserData()async{
     await _validator.getUserData(widget.phone);
@@ -36,6 +49,7 @@ class PhoneOptValidateScreen extends StatefulWidget {
       create: (context) => OPTValidationViewModel(),
       child: Consumer<OPTValidationViewModel>(
           builder: (context, model, child) =>
+          widget.user==null?
       Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(
@@ -194,6 +208,8 @@ class PhoneOptValidateScreen extends StatefulWidget {
           )
         ],
       ),
-    ),),);
+    ):Center(
+            child: CircularProgressIndicator(),
+          ),),);
   }
 }
