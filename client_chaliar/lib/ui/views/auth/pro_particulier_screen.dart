@@ -101,7 +101,7 @@ class ProParticulierScreen extends StatelessWidget {
                             model.setRadioGroup(TypeUser.particulier);
                           },
                           width: 0.55,
-                          heigth: 0.15,
+                          heigth: 0.17,
                           raduis: 5.0,
                           title: 'Je suis un particuier',
                           subtile:
@@ -120,7 +120,7 @@ class ProParticulierScreen extends StatelessWidget {
                           },
                           radioColor: ChaliarColors.secondaryColors,
                           width: 0.55,
-                          heigth: 0.15,
+                          heigth: 0.17,
                           raduis: 5.0,
                           title: 'Je suis un profesionnel',
                           subtile:

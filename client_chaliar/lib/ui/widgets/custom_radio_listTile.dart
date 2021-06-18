@@ -38,6 +38,10 @@ class CustomRadioListTile extends StatelessWidget {
       child: GestureDetector(
         onTap: onClick,
         child: Container(
+          padding: EdgeInsets.only(
+          top:5.0,
+            bottom: 5.0
+          ),
           // width: MediaQuery.of(context).size.width * width,
           height: MediaQuery.of(context).size.height * 0.1,
           decoration: BoxDecoration(
