@@ -5,7 +5,6 @@ import 'package:client_chaliar/ui/styles/text_style.dart';
 import 'package:client_chaliar/ui/views/auth/condition_generale_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:client_chaliar/ui/widgets/button.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:pin_input_text_field/pin_input_text_field.dart';
 import 'package:flutter/gestures.dart';
 import 'dart:async';

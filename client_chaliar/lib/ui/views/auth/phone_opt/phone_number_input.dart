@@ -58,6 +58,7 @@ class PhoneOptMainScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(2.0),
                   ),
                   child: IntlPhoneField(
+
                     decoration: InputDecoration(
                       labelText: 'Numéro de téléphone',
                       labelStyle:
@@ -71,7 +72,7 @@ class PhoneOptMainScreen extends StatelessWidget {
                     ),
                     initialCountryCode: 'FR',
                     onChanged: (phone) {
-                      print(phone.completeNumber);
+                      model.phone=phone.completeNumber;
                     },
                   ),
                 ),
@@ -81,6 +82,7 @@ class PhoneOptMainScreen extends StatelessWidget {
                 Center(
                   child: ButtonChaliar(
                       onTap: () async{
+                        model.context=context;
                        await model.verifyUserAccount();
                       },
                       buttonText: 'Envoyer le code',

@@ -34,8 +34,8 @@ class ConditionnalTermViewModel extends BaseModel{
 
   //function qui retourne les information du users;
 void getUser()async{
-     var user = await _firebaseAuth.currentUser;
-     print(user);
+     var userResult = await _firebaseAuth.currentUser;
+     print(userResult);
 }
 
 

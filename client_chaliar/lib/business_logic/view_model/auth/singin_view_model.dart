@@ -3,22 +3,37 @@ import 'package:client_chaliar/business_logic/view_model/base_model.dart';
 import 'package:client_chaliar/services/fire_store_service.dart';
 import 'package:client_chaliar/services/firebase_auth_service.dart';
 import 'package:client_chaliar/ui/views/auth/condition_generale_screen.dart';
+import 'package:client_chaliar/ui/views/auth/phone_opt/phone_number_validate.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:client_chaliar/constants/iconList.dart';
 import 'package:flutter/material.dart';
 
 class SingInViewModel extends BaseModel{
   FirestoreService _firestoreService = FirestoreService();
+  BuildContext context;
   UserChaliar user;
   String phone;
   void verifyUserAccount()async{
-    var userResult = await _firestoreService.getUser(phone);
+    var userResult;
+    if(phone!=null)userResult = await _firestoreService.getUser(phone);
     if(userResult==null){
       print('user not exist create user account please');
     }else{
-      print('user : $userResult');
-    }
+      if(userResult=='404'){
+        print('user not exist create user account please');
+      }else{
+        user=userResult;
+        getOPTScreen(context);
+      }
 
+    }
+  }
+
+  void getOPTScreen(context) {
+    Navigator.push(context,
+        new MaterialPageRoute(
+            builder: (BuildContext context) =>
+            new PhoneOptValidateScreen(phone:user.phone)));
   }
 
 

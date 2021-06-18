@@ -19,7 +19,7 @@ class FirestoreService {
       var userData = await _usersCollectionReference.doc(uid).get();
       return UserChaliar.fromData(userData.data());
     } catch (e) {
-      return e.toString();
+      return '404';
     }
   }
   // Future getUserByEmail(String email) async{

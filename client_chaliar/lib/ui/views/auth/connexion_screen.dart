@@ -70,7 +70,7 @@ class ConnexionScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.03,
+                    height: MediaQuery.of(context).size.height * 0.01,
                   ),
                   Text(
                     "Commandez un \ntransporteur",
@@ -79,7 +79,7 @@ class ConnexionScreen extends StatelessWidget {
                         AppTextStyle.headerApp1(color: ChaliarColors.whiteColor),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.03,
+                    height: MediaQuery.of(context).size.height * 0.015,
                   ),
                   Text(
                     "Ouvert entre 06h00 et 23h00",
