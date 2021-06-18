@@ -74,7 +74,7 @@ class ProParticulierScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.04,
+                        height: MediaQuery.of(context).size.height * 0.03,
                       ),
                       Text.rich(
                         TextSpan(
@@ -101,7 +101,7 @@ class ProParticulierScreen extends StatelessWidget {
                             model.setRadioGroup(TypeUser.particulier);
                           },
                           width: 0.55,
-                          heigth: 0.17,
+                          heigth: 0.19,
                           raduis: 5.0,
                           title: 'Je suis un particuier',
                           subtile:
@@ -120,7 +120,7 @@ class ProParticulierScreen extends StatelessWidget {
                           },
                           radioColor: ChaliarColors.secondaryColors,
                           width: 0.55,
-                          heigth: 0.17,
+                          heigth: 0.19,
                           raduis: 5.0,
                           title: 'Je suis un profesionnel',
                           subtile:
