@@ -4,8 +4,9 @@ import 'package:client_chaliar/ui/styles/text_style.dart';
 
 class ChaliarMenu{
 
-  static AppBar topBar({Color textColor=ChaliarColors.whiteColor , String imageBackground,String title,Color bgColor,String description=''}) {
+  static AppBar topBar({Widget leading=null,Color textColor=ChaliarColors.whiteColor , String imageBackground,String title,Color bgColor,String description=''}) {
     return AppBar(
+      leading: leading,
       automaticallyImplyLeading: false,
       backwardsCompatibility: false,
       elevation: 0.0,

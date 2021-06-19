@@ -38,7 +38,7 @@ class InputField extends StatelessWidget {
       this.onSubmitted,
       this.fillColor = ChaliarColors.primaryColors,
       this.autofocus = false,
-      this.borderColor = ChaliarColors.primaryColors,
+      this.borderColor = ChaliarColors.whiteGreyColor,
       this.textFillColor,
       this.textLabelColor,
       this.controller,
