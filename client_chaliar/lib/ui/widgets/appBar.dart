@@ -4,12 +4,12 @@ import 'package:client_chaliar/ui/styles/text_style.dart';
 
 class ChaliarMenu{
 
-  static AppBar topBar({String imageBackground,String title,Color bgColor,String description=''}) {
+  static AppBar topBar({Color textColor=ChaliarColors.whiteColor , String imageBackground,String title,Color bgColor,String description=''}) {
     return AppBar(
       automaticallyImplyLeading: false,
       backwardsCompatibility: false,
       elevation: 0.0,
-      backgroundColor: ChaliarColors.whiteGreyColor,
+      backgroundColor:bgColor,
       flexibleSpace: Image(
         image: AssetImage(imageBackground),
         fit: BoxFit.fill,
@@ -19,11 +19,11 @@ class ChaliarMenu{
         children: [
           Text(
             title,
-            style: AppTextStyle.appBarHeader(color: bgColor),
+            style: AppTextStyle.appBarHeader(color: textColor),
           ),
           Text(
             description,
-            style: AppTextStyle.caption(color: bgColor),
+            style: AppTextStyle.caption(color: textColor),
           ),
           description!=''?Container(
             height: 20.0,
