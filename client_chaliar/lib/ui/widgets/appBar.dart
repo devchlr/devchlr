@@ -4,7 +4,7 @@ import 'package:client_chaliar/ui/styles/text_style.dart';
 
 class ChaliarMenu{
 
-  static AppBar topBar({String imageBackground,String title,Color bgColor}) {
+  static AppBar topBar({String imageBackground,String title,Color bgColor,String description=''}) {
     return AppBar(
       automaticallyImplyLeading: false,
       backwardsCompatibility: false,
@@ -14,9 +14,18 @@ class ChaliarMenu{
         image: AssetImage(imageBackground),
         fit: BoxFit.fill,
       ),
-      title: Text(
-        title,
-        style: AppTextStyle.appBarHeader(color: bgColor),
+      title: Column(
+
+        children: [
+          Text(
+            title,
+            style: AppTextStyle.appBarHeader(color: bgColor),
+          ),
+          Text(
+            description,
+            style: AppTextStyle.caption(color: bgColor),
+          ),
+        ],
       ),
       centerTitle: true,
     );

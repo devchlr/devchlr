@@ -17,4 +17,7 @@ class SvgIcons {
   static const String google_account = assets + "google_account.svg";
   static const String apple = assets + "apple.svg";
   static const String padlock = assets + "padlock.svg";
+  static const String scooter = assets + "noun_Scooter.svg";
+  static const String commande = assets + "commande.svg";
+  static const String chaliar = assets + "chaliar.svg";
 }

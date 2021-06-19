@@ -190,12 +190,16 @@ class RegisterViewModel extends BaseModel {
         showDialog(context: context,
             builder: (_) =>
             new AlertDialog(
-              title: Text('Error validate Form ',
+              title: Text(
+                'Error validate Form ',
                 textAlign: TextAlign.center,
-                style: AppTextStyle.header3(color: Colors.red),),
-              content: Text('Tous les champs doivent être renseignés',
+                style: AppTextStyle.header3(color: Colors.red),
+              ),
+              content: Text(
+                'Tous les champs doivent être renseignés',
                 textAlign: TextAlign.center,
-                style: AppTextStyle.bodyApp1(color: Colors.red),),
+                style: AppTextStyle.bodyApp1(color: Colors.red),
+              ),
             )
         );
       } else if (await validatorPartInformation() == '200') {

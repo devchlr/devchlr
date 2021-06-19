@@ -2,6 +2,7 @@ import 'package:client_chaliar/business_logic/models/model_user.dart';
 import 'package:client_chaliar/business_logic/view_model/base_model.dart';
 import 'package:client_chaliar/services/fire_store_service.dart';
 import 'package:client_chaliar/services/firebase_auth_service.dart';
+import 'package:client_chaliar/ui/styles/text_style.dart';
 import 'package:client_chaliar/ui/views/auth/condition_generale_screen.dart';
 import 'package:client_chaliar/ui/views/auth/phone_opt/phone_number_validate.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,6 +17,8 @@ class SingInViewModel extends BaseModel{
     var userResult;
     if(phone!=null) userResult = await _storeService.getUser(phone);
     if(userResult==null){
+
+
       print('user not exist create user account please');
     }else{
       if(userResult=='404'){

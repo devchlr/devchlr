@@ -1,6 +1,8 @@
 import 'package:client_chaliar/ui/views/auth/inscription/register_screen.dart';
 import 'package:client_chaliar/ui/views/auth/phone_opt/phone_number_input.dart';
 import 'package:client_chaliar/ui/views/commande/pre_commande_screen.dart';
+import 'package:client_chaliar/ui/views/commande/taille_colli_screen.dart';
+import 'package:client_chaliar/ui/views/commande1.dart';
 import 'package:flutter/material.dart';
 import 'package:client_chaliar/ui/views/splash_screen.dart';
 import 'package:client_chaliar/ui/views/tuto_screen.dart';
@@ -34,7 +36,7 @@ class MyApp extends StatelessWidget {
           unselectedWidgetColor: Colors.grey,
           disabledColor: Colors.blueAccent),
       routes: <String, WidgetBuilder>{
-        "/splash": (BuildContext context) => new SplashScreen(),
+        "/splash": (BuildContext context) => new TailleColisScreen(),
         "/tuto": (BuildContext context) => new OnboardingScreen(),
         "/connexion": (BuildContext context) => new ConnexionScreen(),
         "/pro_particulier": (BuildContext context) =>
@@ -46,6 +48,7 @@ class MyApp extends StatelessWidget {
         "/phone_verification": (BuildContext context) => new PhoneOptValidateScreen(),
         "/term_condition": (BuildContext context) => new TermConditionScreen(),
         "/pre_commande": (BuildContext context) => new PreCommandeScreen(),
+        "/taille_colli": (BuildContext context) => new TailleColisScreen(),
       },
     );
   }
