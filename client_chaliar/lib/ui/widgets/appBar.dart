@@ -25,6 +25,11 @@ class ChaliarMenu{
             description,
             style: AppTextStyle.caption(color: bgColor),
           ),
+          description!=''?Container(
+            height: 20.0,
+          ):SizedBox(
+            height: 0.0,
+          )
         ],
       ),
       centerTitle: true,

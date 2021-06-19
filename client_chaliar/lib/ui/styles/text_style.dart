@@ -161,7 +161,7 @@ class AppTextStyle {
       color: color,
       fontSize: 14,
       fontFamily: AppFontFamilly.montserrat,
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.bold,
       fontStyle: FontStyle.normal,
     );
   }

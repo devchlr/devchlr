@@ -6,10 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class ReusableCard extends StatelessWidget {
-  ReusableCard({@required this.title,@required this.price,@required this.description, @required this.colour,@required this.inconAsset, this.onPress,@required this.bgColour});
+  ReusableCard({
+   this.assetColour=null, @required this.title,@required this.price,@required this.description, @required this.colour,@required this.inconAsset, this.onPress,@required this.bgColour});
 
   final Color colour;
   final Color bgColour;
+  final Color assetColour;
   final String inconAsset;
   final String title;
   final String description;
@@ -33,7 +35,7 @@ class ReusableCard extends StatelessWidget {
             SizedBox(
               height: 5,
             ),
-            Text('$price\$',style: AppTextStyle.cardbodyApp1(color:colour),),
+            Text('$price \$',style: AppTextStyle.cardbodyApp1(color:colour),),
             SizedBox(
               height: 10,
             ),
@@ -42,7 +44,7 @@ class ReusableCard extends StatelessWidget {
                 SvgIcons.scooter,
                 height: 80,
                 width: 50,
-                color: colour,
+                color: assetColour==null?ChaliarColors.whiteGreyColor:assetColour,
               ),
             ),
             SizedBox(
@@ -62,7 +64,7 @@ class ReusableCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: bgColour,
           borderRadius: BorderRadius.circular(10.0),
-          border: Border.all(color: ChaliarColors.primaryColors,width: 2.0)
+          border: Border.all(color: ChaliarColors.primaryColors,width: 0.5)
         ),
       ),
     );
