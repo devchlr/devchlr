@@ -155,6 +155,17 @@ class AppTextStyle {
     );
   }
 
+  static TextStyle cardbodyApp1({Color color,bool isUnderlined=false}) {
+    return TextStyle(
+      decoration: isUnderlined?TextDecoration.underline:null,
+      color: color,
+      fontSize: 14,
+      fontFamily: AppFontFamilly.montserrat,
+      fontWeight: FontWeight.w500,
+      fontStyle: FontStyle.normal,
+    );
+  }
+
   static TextStyle button({Color color}) {
     return TextStyle(
       color: color,
