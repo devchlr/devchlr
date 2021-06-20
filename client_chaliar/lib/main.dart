@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
           unselectedWidgetColor: Colors.grey,
           disabledColor: Colors.blueAccent),
       routes: <String, WidgetBuilder>{
-        "/splash": (BuildContext context) => new ArriveeFormScreen(),
+        "/splash": (BuildContext context) => new DepartFormScreen(),
         "/tuto": (BuildContext context) => new OnboardingScreen(),
         "/connexion": (BuildContext context) => new ConnexionScreen(),
         "/pro_particulier": (BuildContext context) =>

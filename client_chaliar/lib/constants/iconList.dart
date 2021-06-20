@@ -20,4 +20,10 @@ class SvgIcons {
   static const String scooter = assets + "noun_Scooter.svg";
   static const String commande = assets + "commande.svg";
   static const String chaliar = assets + "chaliar.svg";
+  static const String truck = assets + "truck.svg";
+  static const String mini_cooper = assets + "mini_cooper.svg";
+  static const String bike = assets + "bike.svg";
+
+
+
 }

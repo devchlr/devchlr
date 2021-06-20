@@ -74,7 +74,7 @@ class InputField extends StatelessWidget {
               ? OutlineInputBorder(
                   borderRadius: BorderRadius.circular(raduis),
                   borderSide: BorderSide(
-                      color: borderColor, width: 2.0, style: BorderStyle.solid))
+                      color: borderColor, width: 0.5, style: BorderStyle.solid))
               : null,
           labelText: label == null ? 'label' : label,
           labelStyle: AppTextStyle.bodyfooterField(
@@ -95,7 +95,7 @@ class InputField extends StatelessWidget {
               ? OutlineInputBorder(
                   borderRadius: BorderRadius.circular(raduis),
                   borderSide: BorderSide(
-                      color: borderColor, width: 2.0, style: BorderStyle.solid))
+                      color: borderColor, width: 0.5, style: BorderStyle.solid))
               : null,
           // isDense: true, // Added this
           contentPadding: EdgeInsets.only(

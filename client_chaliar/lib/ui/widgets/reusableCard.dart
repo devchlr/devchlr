@@ -23,7 +23,8 @@ class ReusableCard extends StatelessWidget {
     return GestureDetector(
       onTap: onPress,
       child: Container(
-        width: 170.0,
+        width: 138.0,
+        height: 200,
         padding: EdgeInsets.all(10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -31,19 +32,19 @@ class ReusableCard extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Text(title,style: AppTextStyle.appBarHeader(color:colour),),
+            Text(title,style: AppTextStyle.cardTailleHeader(color:colour),),
             SizedBox(
               height: 5,
             ),
-            Text('$price \$',style: AppTextStyle.cardbodyApp1(color:colour),),
+            Text('$price\€',style: AppTextStyle.cardTaillePrice(color:colour),),
             SizedBox(
               height: 10,
             ),
             Center(
               child: SvgPicture.asset(
-                SvgIcons.scooter,
-                height: 80,
-                width: 50,
+                inconAsset,
+                height: 37,
+                width: 61,
                 color: assetColour==null?ChaliarColors.whiteGreyColor:assetColour,
               ),
             ),
@@ -55,7 +56,7 @@ class ReusableCard extends StatelessWidget {
               child: Text(
                 description,
                 textAlign: TextAlign.center,
-                style: AppTextStyle.caption(color: colour),
+                style: AppTextStyle.cardTailleDescription(color: colour),
               ),
             )
           ],

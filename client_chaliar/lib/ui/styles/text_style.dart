@@ -35,6 +35,35 @@ class AppTextStyle {
     );
   }
 
+  static TextStyle cardTailleHeader({Color color}) {
+    return TextStyle(
+      color: color,
+      fontSize: 15.0,
+      fontFamily: AppFontFamilly.montserrat,
+      fontWeight: FontWeight.w400,
+      fontStyle: FontStyle.normal,
+    );
+  }
+
+  static TextStyle cardTaillePrice({Color color}) {
+    return TextStyle(
+      color: color,
+      fontSize: 15.0,
+      fontFamily: AppFontFamilly.montserrat,
+      fontWeight: FontWeight.bold,
+      fontStyle: FontStyle.normal,
+    );
+  }
+
+  static TextStyle cardTailleDescription({Color color}) {
+    return TextStyle(
+      color: color,
+      fontSize: 09.0,
+      fontFamily: AppFontFamilly.avenirNext,
+      fontWeight: FontWeight.w400,
+      fontStyle: FontStyle.normal,
+    );
+  }
   static TextStyle tutorialHeader({Color color}) {
     return TextStyle(
       color: Color(0XFF042C5C),
@@ -105,6 +134,36 @@ class AppTextStyle {
         decoration: isUnderlined ? TextDecoration.underline : null);
   }
 
+  static TextStyle addPhotodesc({Color color, bool isUnderlined = false}) {
+    return TextStyle(
+        color: color,
+        fontSize: 16,
+        fontFamily: AppFontFamilly.avenirNext,
+        fontWeight: FontWeight.w400,
+        fontStyle: FontStyle.normal,
+        decoration: isUnderlined ? TextDecoration.underline : null);
+  }
+
+  static TextStyle addPhotoBtn({Color color, bool isUnderlined = false}) {
+    return TextStyle(
+        color: color,
+        fontSize: 14,
+        fontFamily: AppFontFamilly.montserrat,
+        fontWeight: FontWeight.w400,
+        fontStyle: FontStyle.normal,
+        decoration: isUnderlined ? TextDecoration.underline : null);
+  }
+
+  static TextStyle addPhotoCaption({Color color, bool isUnderlined = false}) {
+    return TextStyle(
+        color: color,
+        fontSize: 13,
+        fontFamily: AppFontFamilly.montserrat,
+        fontWeight: FontWeight.w400,
+        fontStyle: FontStyle.normal,
+        decoration: isUnderlined ? TextDecoration.underline : null);
+  }
+
   static TextStyle header4({Color color}) {
     return TextStyle(
       color: Color(0xff2F3547),
@@ -138,7 +197,7 @@ class AppTextStyle {
   static TextStyle bodyfooterField({Color color}) {
     return TextStyle(
       color: color,
-      fontSize: 14,
+      fontSize: 10.56,
       fontFamily: AppFontFamilly.montserrat,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
@@ -149,6 +208,27 @@ class AppTextStyle {
       decoration: isUnderlined?TextDecoration.underline:null,
       color: color,
       fontSize: 13,
+      fontFamily: AppFontFamilly.montserrat,
+      fontWeight: FontWeight.w400,
+      fontStyle: FontStyle.normal,
+    );
+  }
+  static TextStyle formComDesc({Color color,bool isUnderlined=false}) {
+    return TextStyle(
+      decoration: isUnderlined?TextDecoration.underline:null,
+      color: color,
+      fontSize: 10.56,
+      fontFamily: AppFontFamilly.montserrat,
+      fontWeight: FontWeight.w400,
+      fontStyle: FontStyle.normal,
+    );
+  }
+
+  static TextStyle tailleCaption({Color color,bool isUnderlined=false}) {
+    return TextStyle(
+      decoration: isUnderlined?TextDecoration.underline:null,
+      color: color,
+      fontSize: 10.56,
       fontFamily: AppFontFamilly.montserrat,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
