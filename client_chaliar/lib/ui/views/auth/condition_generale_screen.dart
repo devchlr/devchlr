@@ -158,7 +158,7 @@ class _ConditionGeneraleScreenState extends State<ConditionGeneraleScreen> {
                             Center(
                               child: ButtonChaliar(
                                 onTap: () => Navigator.pushReplacementNamed(
-                                    context, '/condition_generale'),
+                                    context, '/pre_commande'),
                                 buttonText: 'C\'est parti',
                                 height: MediaQuery.of(context).size.height * 0.06,
                                 mediaQueryWidth: 0.25,

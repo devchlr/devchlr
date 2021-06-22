@@ -181,7 +181,7 @@ class RegisterViewModel extends BaseModel {
           phone: phone,
           facturationAdresse: facturationAdress.text,
           codePostal: codePostal.text,
-          city: city.text
+          city: city.text,
       );
       await _firestoreService.createUser(_currentUser);
         getOPTScreen(context);}
@@ -238,7 +238,7 @@ class RegisterViewModel extends BaseModel {
         _currentUser = UserChaliar(
             id: phone,
             email: email.text,
-            userRole: TypeUser.particulier,
+            userRole: TypeUser.professionnel,
             name: name.text,
             surname: surname.text,
             phone: phone,
