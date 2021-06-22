@@ -26,11 +26,6 @@ class _PreCommandeScreenState extends State<PreCommandeScreen> {
         bgColor: ChaliarColors.whiteColor,
         imageBackground: 'assets/images/header.png'
       ),
-
-      drawer: Drawer(
-        child:Container()
-      ),
-
       bottomNavigationBar: Container(
         height: 100,
         decoration: BoxDecoration(
@@ -87,13 +82,56 @@ class _PreCommandeScreenState extends State<PreCommandeScreen> {
       body: Stack(
         children: [
           Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Container(
-                height: MediaQuery.of(context).size.height * 0.13,
+                margin: EdgeInsets.only(
+                  left: 10.0,
+                  right: 10.0,
+                  top: 10.0
+                ),
+                height: MediaQuery.of(context).size.height * 0.17,
                 decoration: BoxDecoration(
                   color: ChaliarColors.whiteColor,
                 ),
+                child: Column(
+                  children: [
+                    TimelineTile(
+                      nodeAlign: TimelineNodeAlign.start,
+                      contents: Card(
+                        child: Container(
 
+                          height: 50.0,
+                          width: MediaQuery.of(context).size.width,
+                          padding: EdgeInsets.all(10.0),
+                          child: Text('Position de depart du colis'),
+                        ),
+                      ),
+                      node: TimelineNode(
+                        indicator: DotIndicator(),
+                        // endConnector: SolidLineConnector(),
+                      ),
+                    ),
+                    TimelineTile(
+                      nodeAlign: TimelineNodeAlign.start,
+                      contents: Card(
+                        child: Container(
+                          color: ChaliarColors.whiteGreyColor,
+                          height: 50.0,
+                          width: MediaQuery.of(context).size.width,
+                          padding: EdgeInsets.all(10.0),
+                          child: Text('Position de d\'arrive du colis'),
+                        ),
+                      ),
+                      node: TimelineNode(
+                        indicator: DotIndicator(
+                          color: Colors.transparent,
+                        ),
+
+                      ),
+                    )
+                  ],
+                ),
               ),
               Expanded(
                 flex: 1,
@@ -108,65 +146,6 @@ class _PreCommandeScreenState extends State<PreCommandeScreen> {
             child: Center(
               child: ButtonChaliar(
                   onTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            content: Stack(
-                              overflow: Overflow.visible,
-                              children: <Widget>[
-                                Form(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: <Widget>[
-                                      Padding(
-                                        padding: EdgeInsets.all(8.0),
-                                        child: TextFormField(),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.all(8.0),
-                                        child: TextFormField(),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.all(8.0),
-                                        child: TextFormField(),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.all(8.0),
-                                        child: TextFormField(),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.all(8.0),
-                                        child: TextFormField(),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.all(8.0),
-                                        child: TextFormField(),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.all(8.0),
-                                        child: TextFormField(),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.all(8.0),
-                                        child: TextFormField(),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: RaisedButton(
-                                          child: Text("Submitß"),
-                                          onPressed: () {
-
-                                          },
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        });
                   },
                   buttonText: 'Commander',
                   height: MediaQuery.of(context).size.height * 0.07,
