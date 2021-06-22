@@ -33,10 +33,12 @@ class ConditionnalTermViewModel extends BaseModel{
   }
 
   //function qui retourne les information du users;
-  void getUserData(String number)async{
-    currentUser = await _storeService.getUser(number);
-    print(currentUser.name);
-    notifyListeners();
+  Future<dynamic> getUserData(String number)async{
+    var userResult;
+    if(number!=null) userResult = await _storeService.getUser(number);
+    userResult= await _storeService.getUser(number);
+    print(userResult);
+    return userResult;
   }
 
 

@@ -74,9 +74,9 @@ class RegisterViewModel extends BaseModel {
     if (email.text == null || email.text.isEmpty) {
       return '404';
     } else {
-      var user = await _firestoreService.getUser(email.text);
+      var user = await _firestoreService.getUser(phone);
       if (user == null) {
-        return '404';
+        return '200';
       }
     }
     if (surname.text == null || surname.text.isEmpty) {
@@ -100,9 +100,9 @@ class RegisterViewModel extends BaseModel {
     if (email.text == null || email.text.isEmpty) {
       return '404';
     } else {
-      var user = await _firestoreService.getUser(email.text);
-      if (user != null) {
-        return '404';
+      var user = await _firestoreService.getUser(phone);
+      if (user == null) {
+        return '200';
       }
     }
     if (surname.text == null || surname.text.isEmpty) {

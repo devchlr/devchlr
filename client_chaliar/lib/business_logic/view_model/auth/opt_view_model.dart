@@ -3,6 +3,7 @@ import 'package:client_chaliar/business_logic/view_model/base_model.dart';
 import 'package:client_chaliar/services/fire_store_service.dart';
 import 'package:client_chaliar/services/firebase_auth_service.dart';
 import 'package:client_chaliar/ui/views/auth/condition_generale_screen.dart';
+import 'package:client_chaliar/ui/views/auth/preCondition_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -41,9 +42,10 @@ class OPTValidationViewModel extends BaseModel{
   }
   //verifier le code pin
   void sendSmsOpt(String phoneNumber)async{
-
+    phone=phoneNumber;
     await _firebaseAuth.verifyPhoneNumber(
       phoneNumber: phoneNumber,
+      timeout: const Duration(seconds: 60),
       verificationCompleted: (phoneAuthCredential) async {
 
         //signInWithPhoneAuthCredential(phoneAuthCredential);
@@ -71,7 +73,7 @@ void goToNextSCreen(BuildContext context){
   Navigator.push(context,
       new MaterialPageRoute(
           builder: (BuildContext context) =>
-          new ConditionGeneraleScreen()));
+          new PreOnboardingScreen(phone: phone)));
   // Navigator.of(context).pushNamedAndRemoveUntil('/condition_generale', (Route<dynamic> route) => false);
 
   }

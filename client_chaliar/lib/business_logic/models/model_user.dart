@@ -27,19 +27,22 @@ class UserChaliar {
         this.societe
       });
 
-  UserChaliar.fromData(Map<String, dynamic> data)
-      : id = data['id'],
-        name = data['name'],
-        surname = data['surname'],
-        email = data['email'],
-        phone = data['phone'],
-        street = data['street'],
-        facturationAdresse = data['facturationAdresse'],
-        codePostal = data['codePostal'],
-        city = data['city'],
-  siret=data['siret'],
-        societe=data['societe'],
-        userRole = data['userRole'];
+  factory UserChaliar.fromData(Map<String, dynamic> data){
+    return UserChaliar(
+        id : data['id'],
+        name : data['name'],
+        surname : data['surname'],
+        email : data['email'],
+        phone : data['phone'],
+        street : data['street'],
+        facturationAdresse : data['facturationAdresse'],
+        codePostal : data['codePostal'],
+        city : data['city'],
+        siret:data['siret'],
+        societe:data['societe'],
+        userRole : data['userRole']
+    );
+  }
 
   Map<String, dynamic> toJson() {
     return {

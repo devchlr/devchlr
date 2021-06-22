@@ -22,11 +22,8 @@ import 'dart:async';
 
 
 class ConditionGeneraleScreen extends StatefulWidget {
-  ConditionnalTermViewModel conditionnalTermViewModel = ConditionnalTermViewModel();
-  String phone;
-  var isLoanded;
-
-  ConditionGeneraleScreen({this.phone});
+  UserChaliar user;
+  ConditionGeneraleScreen({this.user});
   @override
   _ConditionGeneraleScreenState createState() => _ConditionGeneraleScreenState();
 }
@@ -35,11 +32,7 @@ class _ConditionGeneraleScreenState extends State<ConditionGeneraleScreen> {
   @override
   void initState() {
     super.initState();
-    getUser();
-  }
-  void getUser()async{
-    print(widget.phone);
-   await widget.conditionnalTermViewModel.getUserData(widget.phone);
+    print(widget.user.phone);
   }
   @override
   Widget build(BuildContext context) {
@@ -101,7 +94,7 @@ class _ConditionGeneraleScreenState extends State<ConditionGeneraleScreen> {
                             ),
                             Text.rich(
                               TextSpan(
-                                text: "Bienvenue ${model.currentUser.surname} ,",
+                                text: "Bienvenue ${widget.user.surname} ,",
                                 style: AppTextStyle.headerApp1(color: ChaliarColors.whiteColor),
                               ),
                             ),

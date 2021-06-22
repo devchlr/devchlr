@@ -15,11 +15,16 @@ class FirestoreService {
   }
 
   Future getUser(String uid) async {
-    try {
-      var userData = await _usersCollectionReference.doc(uid).get();
-      return UserChaliar.fromData(userData.data());
-    } catch (e) {
-      return '404';
-    }
+      // var userData = await _usersCollectionReference.doc(uid).get();
+      // var  docSnap =userData;
+      // // var user= UserChaliar.fromData(docSnap.data());
+      // print('user : ${docSnap.data()}');
+      // return docSnap.data();
+      DocumentSnapshot doc = await _usersCollectionReference.doc(uid).get();
+      if(doc.exists) { // this will check availability of document
+       return doc.data();
+      }else{
+        return null;
+      }
   }
 }

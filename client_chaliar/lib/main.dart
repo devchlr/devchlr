@@ -1,5 +1,6 @@
 import 'package:client_chaliar/ui/views/auth/inscription/register_screen.dart';
 import 'package:client_chaliar/ui/views/auth/phone_opt/phone_number_input.dart';
+import 'package:client_chaliar/ui/views/auth/preCondition_screen.dart';
 import 'package:client_chaliar/ui/views/commande/add_photo_screen.dart';
 import 'package:client_chaliar/ui/views/commande/formulaire/arrive_form_screen.dart';
 import 'package:client_chaliar/ui/views/commande/formulaire/depart_form_screen.dart';
@@ -57,6 +58,7 @@ class MyApp extends StatelessWidget {
         "/commande_depart_form": (BuildContext context) => new DepartFormScreen(),
         "/commande_arrivee_form": (BuildContext context) => new ArriveeFormScreen(),
         "/faq": (BuildContext context) => new FaqScreen(),
+        "/pre-condition": (BuildContext context) => new PreOnboardingScreen(),
       },
     );
   }
