@@ -22,7 +22,12 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: ChaliarMenu.topBar(
-          leading: Icon(Icons.arrow_back_ios),
+          leading: GestureDetector(
+            onTap: (){
+              Navigator.pop(context);
+            },
+            child: Icon(Icons.arrow_back_ios),
+          ),
           title: 'Commande',
           bgColor: ChaliarColors.whiteColor,
           imageBackground: 'assets/images/header.png'
@@ -98,7 +103,7 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
                       children: [
                         ListTile(
                           title: Text('Position d\'arrivée du colis',
-                            style: AppTextStyle.bodyApp1(color: ChaliarColors.primaryColors,),
+                            style: AppTextStyle.formComDesc(color: ChaliarColors.secondaryColors,),
                           ),
                         ),
                         SizedBox(
@@ -118,7 +123,7 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: 8.0,
+                          height: 13.0,
                         ),
                         Padding(
                           padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.07, right: MediaQuery.of(context).size.width * 0.07),
@@ -134,7 +139,7 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: 8.0,
+                          height: 13.0,
                         ),
                         Padding(
                           padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.07, right: MediaQuery.of(context).size.width * 0.07),
@@ -150,7 +155,7 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: 8.0,
+                          height: 13.0,
                         ),
                         Padding(
                           padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.07, right: MediaQuery.of(context).size.width * 0.07),
@@ -166,7 +171,7 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: 8.0,
+                          height: 13.0,
                         ),
                         Padding(
                           padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.07, right: MediaQuery.of(context).size.width * 0.07),
@@ -182,7 +187,7 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: 8.0,
+                          height: 13.0,
                         ),
                         Padding(
                           padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.07, right: MediaQuery.of(context).size.width * 0.07),
@@ -198,7 +203,7 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: 8.0,
+                          height: 13.0,
                         ),
                         Padding(
                           padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.07, right: MediaQuery.of(context).size.width * 0.07),
@@ -214,7 +219,29 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: 100.0,
+                          height: 20.0,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+
+                          ),
+                          child: Center(
+                            child: ButtonChaliar(
+                                onTap: () {
+                                  Navigator.pushNamed(context, '/taille_colli');
+                                },
+                                buttonText: 'Valider',
+                                height: MediaQuery.of(context).size.height * 0.07,
+                                mediaQueryWidth: 0.30,
+                                borderRaduis: 50,
+                                backgroundcolor: ChaliarColors.primaryColors,
+                                bordercolor: ChaliarColors.primaryColors,
+                                textStyle: AppTextStyle.button(
+                                    color: ChaliarColors.whiteColor)),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20.0,
                         ),
                       ],
                     ),
@@ -223,24 +250,7 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
               ),
             ],
           ),
-          Padding(
-            padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 0.65,
-            ),
-            child: Center(
-              child: ButtonChaliar(
-                  onTap: () {
-                  },
-                  buttonText: 'Valider',
-                  height: MediaQuery.of(context).size.height * 0.07,
-                  mediaQueryWidth: 0.30,
-                  borderRaduis: 50,
-                  backgroundcolor: ChaliarColors.primaryColors,
-                  bordercolor: ChaliarColors.primaryColors,
-                  textStyle: AppTextStyle.button(
-                      color: ChaliarColors.whiteColor)),
-            ),
-          )
+
         ],
       ),
     );

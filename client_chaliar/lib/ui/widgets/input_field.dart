@@ -53,7 +53,7 @@ class InputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 45.0,
+      width: 48.0,
       child: TextField(
         maxLengthEnforced: false,
         keyboardType: typeInput,

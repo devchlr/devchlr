@@ -265,4 +265,14 @@ class AppTextStyle {
       fontStyle: FontStyle.normal,
     );
   }
+
+  static TextStyle captionPreCommande({Color color}) {
+    return TextStyle(
+      color: Color(0xff98A2C0)==ChaliarColors.blackColor?Color(0xff98A2C0):color,
+      fontSize: 10.1,
+      fontFamily: AppFontFamilly.montserrat,
+      fontWeight: FontWeight.w400,
+      fontStyle: FontStyle.normal,
+    );
+  }
 }

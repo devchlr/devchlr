@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:timelines/timelines.dart';
 
+
+
 class PreCommandeScreen extends StatefulWidget {
 
 
@@ -90,7 +92,7 @@ class _PreCommandeScreenState extends State<PreCommandeScreen> {
                   right: 10.0,
                   top: 10.0
                 ),
-                height: MediaQuery.of(context).size.height * 0.17,
+                height: MediaQuery.of(context).size.height * 0.15,
                 decoration: BoxDecoration(
                   color: ChaliarColors.whiteColor,
                 ),
@@ -100,34 +102,42 @@ class _PreCommandeScreenState extends State<PreCommandeScreen> {
                       nodeAlign: TimelineNodeAlign.start,
                       contents: Card(
                         child: Container(
-
-                          height: 50.0,
+                          height: 44.1,
                           width: MediaQuery.of(context).size.width,
                           padding: EdgeInsets.all(10.0),
-                          child: Text('Position de depart du colis'),
+                          child: Text('Position de départ du colis',style: AppTextStyle.captionPreCommande(color:ChaliarColors.secondaryColors),),
                         ),
                       ),
                       node: TimelineNode(
                         indicator: DotIndicator(),
-                        // endConnector: SolidLineConnector(),
+                        endConnector: DashedLineConnector(),
                       ),
                     ),
-                    TimelineTile(
-                      nodeAlign: TimelineNodeAlign.start,
-                      contents: Card(
-                        child: Container(
-                          color: ChaliarColors.whiteGreyColor,
-                          height: 50.0,
-                          width: MediaQuery.of(context).size.width,
-                          padding: EdgeInsets.all(10.0),
-                          child: Text('Position de d\'arrive du colis'),
-                        ),
+                    Container(
+                      margin: EdgeInsets.only(
+                        left: 3.0
                       ),
-                      node: TimelineNode(
-                        indicator: DotIndicator(
-                          color: Colors.transparent,
+                      child: TimelineTile(
+                        nodeAlign: TimelineNodeAlign.start,
+                        contents: Card(
+                          child: Container(
+                            color: ChaliarColors.whiteGreyColor,
+                            height: 44.10,
+                            width: MediaQuery.of(context).size.width,
+                            padding: EdgeInsets.all(10.0),
+                            child: Text('Position de d\'arrive du colis',style: AppTextStyle.captionPreCommande(color:ChaliarColors.secondaryColors),),
+                          ),
                         ),
-
+                        node: TimelineNode(
+                          indicator: ContainerIndicator(
+                            child: Container(
+                              height: 9.0,
+                              width: 9.0,
+                              color: Color(0xff3885DA),
+                            ),
+                          ),
+                          startConnector: DashedLineConnector(),
+                        ),
                       ),
                     )
                   ],
@@ -136,6 +146,13 @@ class _PreCommandeScreenState extends State<PreCommandeScreen> {
               Expanded(
                 flex: 1,
                 child: Container(
+                  // child: GoogleMap(
+                  //   onMapCreated: _onMapCreated,
+                  //   initialCameraPosition: CameraPosition(
+                  //     target: _center,
+                  //     zoom: 11.0,
+                  //   ),
+                  // ),
                 ),),
             ],
           ),
@@ -146,6 +163,7 @@ class _PreCommandeScreenState extends State<PreCommandeScreen> {
             child: Center(
               child: ButtonChaliar(
                   onTap: () {
+                    Navigator.pushNamed(context, '/commande_depart_form');
                   },
                   buttonText: 'Commander',
                   height: MediaQuery.of(context).size.height * 0.07,

@@ -30,7 +30,12 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
       //     imageBackground: 'assets/images/blueGrad.png'
       // ),
       appBar:AppBar(
-        leading: Icon(Icons.arrow_back_ios),
+        leading: GestureDetector(
+          onTap: (){
+            Navigator.pop(context);
+          },
+          child: Icon(Icons.arrow_back_ios),
+        ),
         elevation: 0.0,
         flexibleSpace: Image(
           image: AssetImage('assets/images/bgPageBohomme.png'),
@@ -155,7 +160,7 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
                     right:MediaQuery.of(context).size.width * 0.43,
                   ),
                   child:CircleAvatar(
-                    radius: 47.0,
+                    radius: 27.0,
                     backgroundColor: ChaliarColors.whiteColor,
                     child: Icon(Icons.close_outlined,color: ChaliarColors.primaryColors,),
                   )

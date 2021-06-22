@@ -74,7 +74,12 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: ChaliarMenu.topBar(
-          leading: Icon(Icons.arrow_back_ios),
+          leading: GestureDetector(
+            onTap: (){
+              Navigator.pop(context);
+            },
+            child: Icon(Icons.arrow_back_ios),
+          ),
           title: 'Commande',
           bgColor: ChaliarColors.whiteColor,
           imageBackground: 'assets/images/header.png'
@@ -144,7 +149,8 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                     right: 20.0
                   ),
                   color: ChaliarColors.whiteColor,
-                  child: Card(
+                  child:
+                  Card(
                     elevation: 0.5,
                     child: ListView(
                       children: [
@@ -175,12 +181,12 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                         ),
                         Padding(
                           padding: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width * 0.07, 
+                            left: MediaQuery.of(context).size.width * 0.07,
                             right: MediaQuery.of(context).size.width * 0.07,
                             ),
                           child: InputField(
                             fieldSize: MediaQuery.of(context).size.height * 0.025,
-                            label: "Prénom",
+                            label: "Adresse de départ",
                             isBorder: true,
                             textLabelColor: ChaliarColors.secondaryColors,
                             maxlenght: 250,
@@ -194,7 +200,7 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                         ),
                        Padding(
                          padding: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width * 0.07, 
+                            left: MediaQuery.of(context).size.width * 0.07,
                             right: MediaQuery.of(context).size.width * 0.07,
                             ),
                          child: Container(
@@ -203,37 +209,14 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
           borderRadius: BorderRadius.circular(6.0),
           border: Border.all(color: ChaliarColors.primaryColors,width: 0.5)
         ),
-                          child: ExpansionTile(
+                          child: ListTile(
                             trailing: Radio(
                               value: '1',
-                              groupValue: '1',
+                              groupValue: '2',
                               onChanged: (value){},
                             ),
-                            title: Text("Livraison programme",style:AppTextStyle.bodyfooterField(color: ChaliarColors.secondaryColors)
+                            title: Text("Livraison express",style:AppTextStyle.bodyfooterField(color: ChaliarColors.secondaryColors)
                               ,),
-                            children: <Widget>[
-                              Container(
-                                margin:EdgeInsets.only(
-                                  left: 20.0,right: 20.0
-                                ),
-                                child:Positioned(
-                  left: 0,
-                  top: 80,
-                  right: 0,
-                  bottom: 0,
-                  child:  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                       SfDateRangePicker(
-                         showNavigationArrow: true,
-                          // onSelectionChanged: _onSelectionChanged,
-                          selectionMode: DateRangePickerSelectionMode.single,
-                        ),
-                    ],
-                  ))
-                              )
-
-                            ],
                           ),
                         )
                        ),
@@ -252,8 +235,56 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                                   border: Border.all(color: ChaliarColors.primaryColors,width: 0.5)
                               ),
                               child: ExpansionTile(
+                                trailing: Radio(
+                                  value: '1',
+                                  groupValue: '1',
+                                  onChanged: (value){},
+                                ),
+                                title: Text("Livraison programmé",style:AppTextStyle.bodyfooterField(color: ChaliarColors.secondaryColors)
+                                  ,),
+                                children: <Widget>[
+                                  Container(
+                                      margin:EdgeInsets.only(
+                                          left: 20.0,right: 20.0
+                                      ),
+                                      child:Positioned(
+                                          left: 0,
+                                          top: 80,
+                                          right: 0,
+                                          bottom: 0,
+                                          child:  Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              SfDateRangePicker(
+                                                showNavigationArrow: true,
+                                                // onSelectionChanged: _onSelectionChanged,
+                                                selectionMode: DateRangePickerSelectionMode.single,
+                                              ),
+                                            ],
+                                          ))
+                                  )
+
+                                ],
+                              ),
+                            )
+                        ),
+                        SizedBox(
+                          height: 13.0,
+                        ),
+                        Padding(
+                            padding: EdgeInsets.only(
+                              left: MediaQuery.of(context).size.width * 0.07,
+                              right: MediaQuery.of(context).size.width * 0.07,
+                            ),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: ChaliarColors.whiteGreyColor,
+                                  borderRadius: BorderRadius.circular(6.0),
+                                  border: Border.all(color: ChaliarColors.primaryColors,width: 0.5)
+                              ),
+                              child: ExpansionTile(
                                 trailing: Text(''),
-                                title: Text("Definir horaire de livraison",style:AppTextStyle.bodyfooterField(color: ChaliarColors.secondaryColors)
+                                title: Text("Définir l’horaire de livraison",style:AppTextStyle.bodyfooterField(color: ChaliarColors.secondaryColors)
                                   ,),
                                 children: <Widget>[
                                   Container(
@@ -326,6 +357,22 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                           padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.07, right: MediaQuery.of(context).size.width * 0.07),
                           child: InputField(
                             fieldSize: MediaQuery.of(context).size.height * 0.025,
+                            label: "Prénom ",
+                            isBorder: true,
+                            textLabelColor: ChaliarColors.secondaryColors,
+                            maxlenght: 250,
+                            backgroundColor: ChaliarColors.whiteGreyColor,
+                            borderColor: ChaliarColors.primaryColors,
+                            // controller: model.surname,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 13.0,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.07, right: MediaQuery.of(context).size.width * 0.07),
+                          child: InputField(
+                            fieldSize: MediaQuery.of(context).size.height * 0.025,
                             label: "Nom",
                             isBorder: true,
                             textLabelColor: ChaliarColors.secondaryColors,
@@ -342,7 +389,7 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                           padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.07, right: MediaQuery.of(context).size.width * 0.07),
                           child: InputField(
                             fieldSize: MediaQuery.of(context).size.height * 0.025,
-                            label: "Numéro de déléphone",
+                            label: "Numéro de téléphone ",
                             isBorder: true,
                             textLabelColor: ChaliarColors.secondaryColors,
                             maxlenght: 250,
@@ -374,60 +421,12 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                           padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.07, right: MediaQuery.of(context).size.width * 0.07),
                           child: InputField(
                             fieldSize: MediaQuery.of(context).size.height * 0.025,
-                            label: "Email",
+                            label: "Société (facultatif)",
                             isBorder: true,
                             textLabelColor: ChaliarColors.secondaryColors,
                             maxlenght: 250,
                             backgroundColor: ChaliarColors.whiteGreyColor,
                             borderColor: ChaliarColors.primaryColors,
-                            // controller: model.surname,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 13.0,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.07, right: MediaQuery.of(context).size.width * 0.07),
-                          child: InputField(
-                            fieldSize: MediaQuery.of(context).size.height * 0.025,
-                            label: "Email",
-                            isBorder: true,
-                            textLabelColor: ChaliarColors.secondaryColors,
-                            maxlenght: 250,
-                            backgroundColor: ChaliarColors.whiteGreyColor,
-                            borderColor: ChaliarColors.primaryColors,
-                            // controller: model.surname,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 13.0,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.07, right: MediaQuery.of(context).size.width * 0.07),
-                          child: InputField(
-                            fieldSize: MediaQuery.of(context).size.height * 0.025,
-                            label: "Email",
-                            isBorder: true,
-                            textLabelColor: ChaliarColors.secondaryColors,
-                            maxlenght: 250,
-                            backgroundColor: ChaliarColors.whiteGreyColor,
-                            borderColor: ChaliarColors.primaryColors,
-                            // controller: model.surname,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 13.0,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.07, right: MediaQuery.of(context).size.width * 0.07),
-                          child: InputField(
-                            fieldSize: MediaQuery.of(context).size.height * 0.025,
-                            label: "Societé (facultatif)",
-                            isBorder: true,
-                            textLabelColor: ChaliarColors.secondaryColors,
-                            backgroundColor: ChaliarColors.whiteGreyColor,
-                            borderColor: ChaliarColors.primaryColors,
-                            maxlenght: 250,
                             // controller: model.surname,
                           ),
                         ),
@@ -436,13 +435,13 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                         ),
                         Padding(
             padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 0.65,
             ),
             child: Center(
               child: ButtonChaliar(
                   onTap: () {
+                    Navigator.pushNamed(context, '/commande_arrivee_form');
                   },
-                  buttonText: 'Commander',
+                  buttonText: 'Suivant',
                   height: MediaQuery.of(context).size.height * 0.07,
                   mediaQueryWidth: 0.30,
                   borderRaduis: 50,
@@ -451,13 +450,23 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                   textStyle: AppTextStyle.button(
                       color: ChaliarColors.whiteColor)),
             ),
-          )
+          ),
+                        SizedBox(
+                          height: 20.0,
+                        ),
                       ],
                     ),
                   ),
                 ),
               ),
             ],
+          ),
+          Positioned(
+            left: 10.0,
+              top: 30.0,
+              child: CircleAvatar(
+            radius: 5.0,
+          ),
           ),
         ],
       ),

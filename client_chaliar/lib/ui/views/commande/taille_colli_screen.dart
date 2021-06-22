@@ -75,11 +75,12 @@ class _TailleColisScreenState extends State<TailleColisScreen> {
                   ),
                   color: ChaliarColors.whiteColor,
                   child:Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children:[
                       Expanded(
                         flex:1,
                         child:Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             ReusableCard(
                               title: 'Taille S',
@@ -106,7 +107,7 @@ class _TailleColisScreenState extends State<TailleColisScreen> {
                       Expanded(
                           flex:1,
                           child:Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               ReusableCard(
                                 title: 'Taille L',
@@ -141,6 +142,7 @@ class _TailleColisScreenState extends State<TailleColisScreen> {
                 child:Center(
                   child: ButtonChaliar(
                       onTap: () {
+                        Navigator.pushNamed(context, '/add_photo');
                       },
                       buttonText: 'Suivant',
                       height: MediaQuery.of(context).size.height * 0.07,
@@ -164,7 +166,7 @@ class _TailleColisScreenState extends State<TailleColisScreen> {
                     right:MediaQuery.of(context).size.width * 0.4,
                   ),
                   child:CircleAvatar(
-                    radius: 47.0,
+                    radius: 27.0,
                     backgroundColor: ChaliarColors.whiteColor,
                     child: Icon(Icons.close_outlined,color: ChaliarColors.primaryColors,),
                   )
