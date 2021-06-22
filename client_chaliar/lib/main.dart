@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
           unselectedWidgetColor: Colors.grey,
           disabledColor: Colors.blueAccent),
       routes: <String, WidgetBuilder>{
-        "/splash": (BuildContext context) => new PreCommandeScreen(),
+        "/splash": (BuildContext context) => new SplashScreen(),
         "/tuto": (BuildContext context) => new OnboardingScreen(),
         "/connexion": (BuildContext context) => new ConnexionScreen(),
         "/pro_particulier": (BuildContext context) =>

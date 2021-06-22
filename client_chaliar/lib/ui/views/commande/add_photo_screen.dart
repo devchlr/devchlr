@@ -101,7 +101,7 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
                   onTap:(){} ,
                   child:Container(
                     height: 60,
-                    width: MediaQuery.of(context).size.height * 0.35,
+                    width: MediaQuery.of(context).size.height * 0.3,
                     decoration:BoxDecoration(
                       color: ChaliarColors.secondaryColors,
                       borderRadius: BorderRadius.circular(100.0),
