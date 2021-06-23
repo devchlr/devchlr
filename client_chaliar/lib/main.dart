@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           unselectedWidgetColor: Colors.grey,
-          disabledColor: Colors.blueAccent),
+          disabledColor: Colors.grey),
       routes: <String, WidgetBuilder>{
         "/splash": (BuildContext context) => new SplashScreen(),
         "/tuto": (BuildContext context) => new OnboardingScreen(),

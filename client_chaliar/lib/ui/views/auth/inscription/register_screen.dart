@@ -2,11 +2,13 @@ import 'package:client_chaliar/business_logic/view_model/auth/register_view_mode
 import 'package:client_chaliar/constants/iconList.dart';
 import 'package:client_chaliar/services/auth_service.dart';
 import 'package:client_chaliar/ui/styles/chaliar_color.dart';
+import 'package:client_chaliar/ui/styles/chaliar_font.dart';
 import 'package:client_chaliar/ui/styles/text_style.dart';
 import 'package:client_chaliar/ui/widgets/appBar.dart';
 import 'package:client_chaliar/ui/widgets/button.dart';
 import 'package:client_chaliar/ui/widgets/input_field.dart';
 import 'package:client_chaliar/ui/widgets/svg_button.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -23,7 +25,7 @@ class UserRegisterScreen extends StatelessWidget {
         child: Consumer<RegisterViewModel>(
             builder: (context, model, child) =>
       Scaffold(
-      appBar: ChaliarMenu.topBar(imageBackground:'assets/images/blueGrad.png',title: 'DÉMARRER',bgColor:ChaliarColors.whiteColor),
+      //appBar: ChaliarMenu.topBar(size: 19.8, imageBackground:'assets/images/blueGrad.png',title: 'Inscription',bgColor:ChaliarColors.whiteColor,),
       body: Stack(
         children: [
           Container(
@@ -34,15 +36,28 @@ class UserRegisterScreen extends StatelessWidget {
               ),
             ),
           ),
-          Padding(padding: EdgeInsets.only(
-            top: 0.0,
+          Padding(
+            padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height*0.05,
+                left: MediaQuery.of(context).size.width * 0.36,
+                right: MediaQuery.of(context).size.width * 0.36
+            ),
+            child: Text(
+              'Inscription',
+              textAlign: TextAlign.center,
+              style: AppTextStyle.appBarHeader(size: 19.8,color: ChaliarColors.whiteColor),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+            top: MediaQuery.of(context).size.height*0.1,
             bottom: MediaQuery.of(context).size.height * 0.01,
-            left: MediaQuery.of(context).size.width * 0.05,
-            right: MediaQuery.of(context).size.width * 0.05
+            left: MediaQuery.of(context).size.width * 0.08,
+            right: MediaQuery.of(context).size.width * 0.08
           ),
             child: Card(
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0),
+                borderRadius: BorderRadius.circular(10.08),
               ),
               elevation: 0,
               child: ListView(
@@ -50,7 +65,7 @@ class UserRegisterScreen extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.07, right: MediaQuery.of(context).size.width * 0.07),
                     child: InputField(
-                      fieldSize: MediaQuery.of(context).size.height * 0.02,
+                      // fieldSize: MediaQuery.of(context).size.height * 0.02,
                       controller: model.surname,
                       label: "Prénom",
                       placeholder: "Prénom",
@@ -97,25 +112,38 @@ class UserRegisterScreen extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.07, right: MediaQuery.of(context).size.width * 0.07),
-                    child: IntlPhoneField(
-                      decoration: InputDecoration(
-                        labelText: 'Téléphone',
-                        labelStyle:
-                        AppTextStyle.header4(color: ChaliarColors.blackColor),
-                        filled: true,
-                        fillColor: ChaliarColors.whiteColor,
-                        hintStyle:
-                        AppTextStyle.header4(color: ChaliarColors.blackColor),
-                        contentPadding: EdgeInsets.only(
-                            top: 10, bottom: 10, left: 20, right: 20),
-
-                      ),
-                      initialCountryCode: 'FR',
-                      onChanged: (phone) {
-                        model.phone= phone.completeNumber;
-                      },
+                    child: InputField(
+                      fieldSize: MediaQuery.of(context).size.height * 0.02,
+                      label: "Numéro de téléphone",
+                      controller: model.email,
+                      placeholder: "Email",
+                      textFillColor: ChaliarColors.blackColor,
+                      maxlenght: 300,
+                      // controller: model.email,
+                      // controller: model.email,
                     ),
                   ),
+                  // Padding(
+                  //   padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.07, right: MediaQuery.of(context).size.width * 0.07),
+                  //   child: IntlPhoneField(
+                  //     decoration: InputDecoration(
+                  //       labelText: 'Téléphone',
+                  //       labelStyle:
+                  //       AppTextStyle.header4(color: ChaliarColors.blackColor),
+                  //       filled: true,
+                  //       fillColor: ChaliarColors.whiteColor,
+                  //       hintStyle:
+                  //       AppTextStyle.header4(color: ChaliarColors.blackColor),
+                  //       contentPadding: EdgeInsets.only(
+                  //           top: 10, bottom: 10, left: 20, right: 20),
+                  //
+                  //     ),
+                  //     initialCountryCode: 'FR',
+                  //     onChanged: (phone) {
+                  //       model.phone= phone.completeNumber;
+                  //     },
+                  //   ),
+                  // ),
                   typeUSer == 'particulier'?SizedBox(
                     height: 0,
                   )
@@ -197,7 +225,7 @@ class UserRegisterScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.02,
+                    height: 61,
                   ),
                   Center(
                     child: ButtonChaliar(
@@ -205,9 +233,9 @@ class UserRegisterScreen extends StatelessWidget {
                           model.createUser(context,typeUSer);
                         },
                         buttonText: 'Connexion',
-                        height: MediaQuery.of(context).size.height * 0.08,
+                        height: 54,
                         mediaQueryWidth: 0.35,
-                        borderRaduis: 70,
+                        borderRaduis: 27,
                         backgroundcolor: ChaliarColors.primaryColors,
                         bordercolor: ChaliarColors.primaryColors,
                         textStyle: AppTextStyle.button(
@@ -217,7 +245,7 @@ class UserRegisterScreen extends StatelessWidget {
                     height: 0,
                   )
                       :SizedBox(
-                    height: 15,
+                    height: 19,
                   ),
                   typeUSer != 'particulier'?SizedBox(
                     height: 0,
@@ -226,14 +254,14 @@ class UserRegisterScreen extends StatelessWidget {
                     child: Text(
                       "Ou",
                       textAlign: TextAlign.center,
-                      style: AppTextStyle.appBarHeader(color: ChaliarColors.blackColor),
+                      style: AppTextStyle.appBarHeader(size:14.4,fontFamily:AppFontFamilly.avenirNext,color: Color(0xff838391)),
                     ),
                   ),
                   typeUSer != 'particulier'?SizedBox(
                     height: 0,
                   )
                       :SizedBox(
-                    height: 15,
+                    height: 16,
                   ),
                   typeUSer != 'particulier'?SizedBox(
                     height: 0,
@@ -279,7 +307,7 @@ class UserRegisterScreen extends StatelessWidget {
                             ]),
                       )),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.06,
+                    height: 41.0
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -295,13 +323,16 @@ class UserRegisterScreen extends StatelessWidget {
                             child: Text(
                               'Vous acceptez nos conditions générales d’utilisations',
                               textAlign: TextAlign.center,
-                              style: AppTextStyle.caption(color: ChaliarColors.blackColor),
+                              style: AppTextStyle.appBarHeader(size:7.2,color: Color(0xff838391)),
                             ),
                           ),
                         ),
                       ),
                     ],
-                  )
+                  ),
+                  SizedBox(
+                      height: 10.0
+                  ),
                 ],
               ),
             ),

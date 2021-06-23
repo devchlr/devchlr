@@ -130,7 +130,7 @@ class PhoneOptValidateScreen extends StatefulWidget {
                 RichText(
                     textAlign: TextAlign.center,
                     text: TextSpan(
-                      text: "Je n’ai pas reçu de code?",
+                      text: "Je n\'ai pas reçu de code ?",
                       style: AppTextStyle.header3_light(
                           color: ChaliarColors.blackColor),
                     )),

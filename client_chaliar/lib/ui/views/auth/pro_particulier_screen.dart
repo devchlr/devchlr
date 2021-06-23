@@ -1,5 +1,6 @@
 import 'package:client_chaliar/constants/type_user.dart';
 import 'package:client_chaliar/ui/styles/chaliar_color.dart';
+import 'package:client_chaliar/ui/styles/chaliar_font.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:client_chaliar/ui/styles/chaliar_icon_size.dart';
@@ -80,7 +81,7 @@ class ProParticulierScreen extends StatelessWidget {
                         TextSpan(
                           text: "Bienvenue sur Chaliar",
                           style: AppTextStyle.headerApp1(
-                              color: ChaliarColors.blackColor),
+                              color: Color(0xff2F3547),fontFamilly: AppFontFamilly.avenirHeavy,fontWeight: FontWeight.w400),
                         ),
                       ),
                       SizedBox(
@@ -88,7 +89,7 @@ class ProParticulierScreen extends StatelessWidget {
                       ),
                       Container(
                         height: 3,
-                        width: MediaQuery.of(context).size.height * 0.1,
+                        width: 57.68,
                         decoration:
                             BoxDecoration(color: ChaliarColors.whiteGreyColor),
                       ),
@@ -138,9 +139,9 @@ class ProParticulierScreen extends StatelessWidget {
                             model.pushUserRegisterPagePreference(context);
                           },
                           buttonText: 'Suivant',
-                          height: MediaQuery.of(context).size.height * 0.07,
+                          height: 48,
                           mediaQueryWidth: 0.25,
-                          borderRaduis: 50,
+                          borderRaduis: 100,
                           backgroundcolor: ChaliarColors.primaryColors,
                           bordercolor: ChaliarColors.primaryColors,
                           textStyle: AppTextStyle.button(

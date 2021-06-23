@@ -114,16 +114,16 @@ class ConnexionScreen extends StatelessWidget {
                                 context, 'pro_particulier');
                           },
                           buttonText: 'Inscription',
-                          height: MediaQuery.of(context).size.height * 0.07,
+                          height: 59,
                           mediaQueryWidth: 0.48,
-                          borderRaduis: 70,
+                          borderRaduis: 100,
                           backgroundcolor: ChaliarColors.primaryColors,
                           bordercolor: ChaliarColors.primaryColors,
                           textStyle: AppTextStyle.button(
                               color: ChaliarColors.whiteColor)),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.006,
+                      height: 8,
                     ),
                     Center(
                       child: ButtonChaliar(
@@ -131,21 +131,21 @@ class ConnexionScreen extends StatelessWidget {
                             model.pushPage(context, 'singin');
                           },
                           buttonText: 'Connexion',
-                          height: MediaQuery.of(context).size.height * 0.07,
+                          height: 59,
                           mediaQueryWidth: 0.48,
-                          borderRaduis: 50,
+                          borderRaduis: 100,
                           backgroundcolor: ChaliarColors.whiteColor,
                           bordercolor: ChaliarColors.primaryColors,
                           textStyle: AppTextStyle.button(
-                              color: ChaliarColors.primaryColors)),
+                              color: Color(0xff34B3E8),size: 11)),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.009,
+                      height: MediaQuery.of(context).size.height * 0.001,
                     ),
                     Text(
                       "Devenir Chaliar",
                       textAlign: TextAlign.center,
-                      style: AppTextStyle.bodyfooter(color: ChaliarColors.blackColor),
+                      style: AppTextStyle.bodyfooter(color: Color(0xffBBD3EB)),
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.005,

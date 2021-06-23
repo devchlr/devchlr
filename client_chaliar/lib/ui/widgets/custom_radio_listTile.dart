@@ -53,14 +53,19 @@ class CustomRadioListTile extends StatelessWidget {
                 ListTile(
                   title: Text(
                     title,
-                    style: AppTextStyle.header4(color: ChaliarColors.blackColor),
+                    style: AppTextStyle.header4(color: Color(0xff2F3547)),
                   ),
                   subtitle: Text(
                     subtile,
-                    style: AppTextStyle.caption(color: ChaliarColors.blackColor),
+                    style: AppTextStyle.caption(color: Color(0xff98A2C0)),
                   ),
-                  trailing: new Radio(
+                  trailing: value==group?new CircleAvatar(
+                    child: Icon(Icons.check,color: Colors.white,),
+                    radius: 15.0,
+                    backgroundColor: Color(0xff042C5C),
+                  ): new Radio(
                     value: value,
+                    splashRadius: 15,
                     groupValue: group,
                     activeColor: ChaliarColors.secondaryColors,
                   ),

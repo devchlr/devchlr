@@ -14,23 +14,23 @@ class AppTextStyle {
     );
   }
 
-  static TextStyle headerApp1({Color color}) {
+  static TextStyle headerApp1({Color color,String fontFamilly=AppFontFamilly.montserrat,FontWeight fontWeight=FontWeight.bold}) {
     return TextStyle(
       color: color,
       fontSize: 27,
-      fontFamily: AppFontFamilly.montserrat,
-      fontWeight: FontWeight.bold,
+      fontFamily: fontFamilly,
+      fontWeight: fontWeight,
       fontStyle: FontStyle.normal,
 
     );
   }
 
-  static TextStyle appBarHeader({Color color}) {
+  static TextStyle appBarHeader({FontWeight fontWeight=FontWeight.w500,double size=18.0, Color color,String fontFamily=AppFontFamilly.montserrat}) {
     return TextStyle(
       color: color,
-      fontSize: 18.0,
-      fontFamily: AppFontFamilly.montserrat,
-      fontWeight: FontWeight.w500,
+      fontSize: size,
+      fontFamily: fontFamily,
+      fontWeight: fontWeight,
       fontStyle: FontStyle.normal,
     );
   }
@@ -77,9 +77,9 @@ class AppTextStyle {
   static TextStyle tutorialDescription({Color color}) {
     return TextStyle(
       color: Color(0xFF77869E),
-      fontSize: 14.0,
+      fontSize: 13.0,
       fontFamily: AppFontFamilly.avenirLight,
-      fontWeight: FontWeight.w300,
+      fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     );
   }
@@ -176,10 +176,10 @@ class AppTextStyle {
 
   static TextStyle body({Color color}) {
     return TextStyle(
-      color: color,
-      fontSize: AppFontSize.meduim,
-      fontFamily: AppFontFamilly.avenirLight,
-      fontWeight: FontWeight.w300,
+      color: Color(0xffBCB8B1),
+      fontSize: 16.2,
+      fontFamily: AppFontFamilly.avenirNext,
+      fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     );
   }
@@ -246,12 +246,12 @@ class AppTextStyle {
     );
   }
 
-  static TextStyle button({Color color}) {
+  static TextStyle button({Color color,double size=14}) {
     return TextStyle(
       color: color,
-      fontSize: 14,
+      fontSize: size,
       fontFamily: AppFontFamilly.montserrat,
-      fontWeight: FontWeight.w400,
+      fontWeight: FontWeight.w500,
       fontStyle: FontStyle.normal,
     );
   }

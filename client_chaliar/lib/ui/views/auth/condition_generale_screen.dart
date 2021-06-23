@@ -137,7 +137,7 @@ class _ConditionGeneraleScreenState extends State<ConditionGeneraleScreen> {
                                           print('Condition text typed');
                                         },
                                         child: Text(
-                                          'Vous acceptez nos conditions générales\nd’utilisations',
+                                          'Vous acceptez nos conditions générales\nd\'utilisations',
                                           textAlign: TextAlign.left,
                                           style: AppTextStyle.bodyApp1(
                                               color: ChaliarColors.blackColor,isUnderlined:true),

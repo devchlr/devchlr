@@ -66,14 +66,14 @@ class OnboardingPageWidget extends StatelessWidget {
                     title,
                     textAlign: TextAlign.center,
                     style:
-                        AppTextStyle.tutorialHeader(color: ChaliarColors.blackColor),
+                        AppTextStyle.tutorialHeader(color: Color(0xff042C5C)),
                   )),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                   Center(
                     child: Text(subTitle,
                         textAlign: TextAlign.center,
                         style:
-                            AppTextStyle.tutorialDescription(color: ChaliarColors.blackColor)),
+                            AppTextStyle.tutorialDescription(color: Color(0xff77869E))),
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.015),
                   Row(

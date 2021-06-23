@@ -40,11 +40,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return AnimatedContainer(
       duration: Duration(milliseconds: 10),
       margin: EdgeInsets.symmetric(horizontal: 8.0),
-      height: isActive ? 12.0 : 7.0,
-      width: isActive ? 12.0 : 7.0,
+      height: isActive ? 10.0 : 6.0,
+      width: isActive ? 10.0 : 6.0,
       decoration: BoxDecoration(
         color: isActive
-            ? Color(0xff74c6f0)
+            ? Color(0xff29A7E8)
             : ChaliarColors.whiteGreyColor,
         borderRadius: BorderRadius.all(Radius.circular(100)),
       ),
@@ -59,16 +59,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           builder: (context, model, child) =>
 
       Scaffold(
-        backgroundColor: ChaliarColors.whiteGreyColor,
-        appBar: ChaliarMenu.topBar(imageBackground:'assets/images/header.png',title: 'DÉMARRER',bgColor:ChaliarColors.whiteGreyColor),
+        appBar: ChaliarMenu.topBar(imageBackground:'assets/images/header.png',title: 'Démarrer',bgColor:Colors.white),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
         child: Container(
-          color: ChaliarColors.whiteGreyColor,
+          color: Colors.transparent,
           child: Stack(
             children: <Widget>[
               Container(
-                color: ChaliarColors.whiteGreyColor,
+                color: Color(0xffefeff1),
                 height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
                 child: PageView(

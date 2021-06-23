@@ -1,5 +1,6 @@
 import 'package:client_chaliar/business_logic/view_model/auth/singin_view_model.dart';
 import 'package:client_chaliar/ui/styles/chaliar_color.dart';
+import 'package:client_chaliar/ui/styles/chaliar_font.dart';
 import 'package:client_chaliar/ui/styles/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -36,7 +37,7 @@ class PhoneOptMainScreen extends StatelessWidget {
                     TextSpan(
                       text: "Numéro de téléphone",
                       style:
-                          AppTextStyle.header1(color: ChaliarColors.blackColor),
+                          AppTextStyle.appBarHeader(fontWeight: FontWeight.w400,size: 27,color: Color(0xff1C1939),fontFamily: AppFontFamilly.avenirNext,),
                     ),
                   ),
                 ),
@@ -46,19 +47,21 @@ class PhoneOptMainScreen extends StatelessWidget {
                 Text(
                   "Entrez votre numéro de téléphone, vous allez recevoir un code par SMS pour valider votre compte",
                   textAlign: TextAlign.center,
-                  style: AppTextStyle.header3_light(
-                      color: ChaliarColors.blackColor),
+                  style: AppTextStyle.appBarHeader( fontWeight: FontWeight.w400,
+                      color: Color(0xff1C1939),size: 15,fontFamily: AppFontFamilly.avenirNext),
                 ),
                 SizedBox(
                   height: 30.0,
                 ),
                 Card(
                   elevation: 6,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(2.0),
-                  ),
                   child: IntlPhoneField(
-
+                    showDropdownIcon: false,
+                    dropdownDecoration: BoxDecoration(
+                      border: Border(
+                      ),
+                      borderRadius: BorderRadius.circular(1),
+                    ),
                     decoration: InputDecoration(
                       labelText: 'Numéro de téléphone',
                       labelStyle:
@@ -68,7 +71,7 @@ class PhoneOptMainScreen extends StatelessWidget {
                       hintStyle:
                           AppTextStyle.header4(color: ChaliarColors.blackColor),
                       contentPadding: EdgeInsets.only(
-                          top: 10, bottom: 10, left: 20, right: 20),
+                          top: 10, bottom: 10, left: 10, right: 10),
                     ),
                     initialCountryCode: 'FR',
                     onChanged: (phone) {
@@ -85,10 +88,10 @@ class PhoneOptMainScreen extends StatelessWidget {
                         model.context=context;
                        await model.verifyUserAccount();
                       },
-                      buttonText: 'Envoyer le code',
+                      buttonText: 'Valider le code',
                       height: 60.0,
                       mediaQueryWidth: 0.5,
-                      borderRaduis: 50,
+                      borderRaduis: 30,
                       backgroundcolor: ChaliarColors.primaryColors,
                       bordercolor: ChaliarColors.primaryColors,
                       textStyle:
