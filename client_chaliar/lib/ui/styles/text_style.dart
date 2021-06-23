@@ -30,7 +30,7 @@ class AppTextStyle {
       color: color,
       fontSize: 18.0,
       fontFamily: AppFontFamilly.varelaRegular,
-      fontWeight: FontWeight.w400,
+      fontWeight: FontWeight.w500,
       fontStyle: FontStyle.normal,
     );
   }
@@ -261,6 +261,16 @@ class AppTextStyle {
       color: Color(0xff98A2C0)==ChaliarColors.blackColor?Color(0xff98A2C0):color,
       fontSize: 12,
       fontFamily: AppFontFamilly.avenirLight,
+      fontWeight: FontWeight.w400,
+      fontStyle: FontStyle.normal,
+    );
+  }
+
+  static TextStyle headerCaption({Color color,double size,String assetFont}) {
+    return TextStyle(
+      color: Color(0xff98A2C0)==ChaliarColors.blackColor?Color(0xff98A2C0):color,
+      fontSize: size,
+      fontFamily: assetFont,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     );

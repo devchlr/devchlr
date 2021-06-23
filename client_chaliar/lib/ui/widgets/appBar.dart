@@ -36,5 +36,5 @@ class ChaliarMenu{
       centerTitle: true,
     );
   }
-
 }
+

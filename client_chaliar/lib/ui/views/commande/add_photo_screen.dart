@@ -23,12 +23,6 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      // appBar: ChaliarMenu.topBar(
-      //     title: 'Votre commande',
-      //     description: '7 avenue de la grande Armée/75003 Paris',
-      //     bgColor: ChaliarColors.primaryColors,
-      //     imageBackground: 'assets/images/blueGrad.png'
-      // ),
       appBar:AppBar(
         leading: GestureDetector(
           onTap: (){
@@ -58,7 +52,8 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
         ),
         centerTitle: true,
       ),
-      body: Stack(
+      body:
+      Stack(
         children: [
           Column(
             children: [
@@ -66,6 +61,7 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
                 flex: 1,
                 child: Container(
                   decoration: BoxDecoration(
+                    color: ChaliarColors.whiteColor,
                     image: DecorationImage(
                       image: AssetImage("assets/images/bgPageBohomme.png"),
                       fit: BoxFit.fill,

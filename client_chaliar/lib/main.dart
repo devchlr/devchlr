@@ -4,6 +4,7 @@ import 'package:client_chaliar/ui/views/auth/preCondition_screen.dart';
 import 'package:client_chaliar/ui/views/commande/add_photo_screen.dart';
 import 'package:client_chaliar/ui/views/commande/formulaire/arrive_form_screen.dart';
 import 'package:client_chaliar/ui/views/commande/formulaire/depart_form_screen.dart';
+import 'package:client_chaliar/ui/views/commande/formulaire/take_picture.dart';
 import 'package:client_chaliar/ui/views/commande/pre_commande_screen.dart';
 import 'package:client_chaliar/ui/views/commande/taille_colli_screen.dart';
 import 'package:client_chaliar/ui/views/commande1.dart';
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
           unselectedWidgetColor: Colors.grey,
           disabledColor: Colors.blueAccent),
       routes: <String, WidgetBuilder>{
-        "/splash": (BuildContext context) => new SplashScreen(),
+        "/splash": (BuildContext context) => new TestShape(),
         "/tuto": (BuildContext context) => new OnboardingScreen(),
         "/connexion": (BuildContext context) => new ConnexionScreen(),
         "/pro_particulier": (BuildContext context) =>

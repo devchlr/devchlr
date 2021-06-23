@@ -26,10 +26,6 @@ class _TailleColisScreenState extends State<TailleColisScreen> {
           bgColor: ChaliarColors.whiteColor,
           imageBackground: 'assets/images/header.png'
       ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterTop,
-      // floatingActionButton: FloatingActionButton(
-      //   child: Icon(Icons.icecream),
-      // ),
       body: Stack(
         children: [
           Column(

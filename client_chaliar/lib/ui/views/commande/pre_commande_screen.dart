@@ -98,24 +98,27 @@ class _PreCommandeScreenState extends State<PreCommandeScreen> {
                 ),
                 child: Column(
                   children: [
-                    TimelineTile(
-                      nodeAlign: TimelineNodeAlign.start,
-                      contents: Card(
-                        child: Container(
-                          height: 44.1,
-                          width: MediaQuery.of(context).size.width,
-                          padding: EdgeInsets.all(10.0),
-                          child: Text('Position de départ du colis',style: AppTextStyle.captionPreCommande(color:ChaliarColors.secondaryColors),),
+                    GestureDetector(
+                      onTap:()=>Navigator.pushNamed(context, '/commande_depart_form'),
+                      child: TimelineTile(
+                        nodeAlign: TimelineNodeAlign.start,
+                        contents: Card(
+                          child: Container(
+                            height: 44.1,
+                            width: MediaQuery.of(context).size.width,
+                            padding: EdgeInsets.all(10.0),
+                            child: Text('Position de départ du colis',style: AppTextStyle.captionPreCommande(color:ChaliarColors.secondaryColors),),
+                          ),
+                        ),
+                        node: TimelineNode(
+                          indicator: DotIndicator(),
+                          endConnector: DashedLineConnector(),
                         ),
                       ),
-                      node: TimelineNode(
-                        indicator: DotIndicator(),
-                        endConnector: DashedLineConnector(),
-                      ),
                     ),
-                    Container(
+                    GestureDetector(onTap:()=>Navigator.pushNamed(context, '/commande_depart_form'),child: Container(
                       margin: EdgeInsets.only(
-                        left: 3.0
+                          left: 3.0
                       ),
                       child: TimelineTile(
                         nodeAlign: TimelineNodeAlign.start,
@@ -139,7 +142,7 @@ class _PreCommandeScreenState extends State<PreCommandeScreen> {
                           startConnector: DashedLineConnector(),
                         ),
                       ),
-                    )
+                    ),)
                   ],
                 ),
               ),

@@ -94,7 +94,7 @@ class _ConditionGeneraleScreenState extends State<ConditionGeneraleScreen> {
                             ),
                             Text.rich(
                               TextSpan(
-                                text: "Bienvenue ${widget.user.surname} ,",
+                                text: "Bienvenue ${widget.user.surname},",
                                 style: AppTextStyle.headerApp1(color: ChaliarColors.whiteColor),
                               ),
                             ),
@@ -106,7 +106,7 @@ class _ConditionGeneraleScreenState extends State<ConditionGeneraleScreen> {
                                   left: MediaQuery.of(context).size.width * 0.132,
                                   right: MediaQuery.of(context).size.width * 0.132),
                               child: Text(
-                                "Faites vous livrer vos colis dans toute la France en temps réel, ou sur rdv",
+                                "Faites-vous livrer vos colis dans toute la France en temps réel, ou sur rdv",
                                 textAlign: TextAlign.center,
                                 style: AppTextStyle.bodyApp1(
                                     color: ChaliarColors.whiteColor),
