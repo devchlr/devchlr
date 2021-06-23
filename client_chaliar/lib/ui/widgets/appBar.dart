@@ -6,6 +6,9 @@ class ChaliarMenu{
 
   static AppBar topBar({Widget leading=null,Color textColor=ChaliarColors.whiteColor , String imageBackground,String title,Color bgColor,String description=''}) {
     return AppBar(
+      shadowColor: Colors.transparent,
+      foregroundColor: Colors.transparent,
+
       leading: leading,
       automaticallyImplyLeading: false,
       backwardsCompatibility: false,
@@ -13,7 +16,8 @@ class ChaliarMenu{
       backgroundColor:bgColor,
       flexibleSpace: Image(
         image: AssetImage(imageBackground),
-        fit: BoxFit.fill,
+        filterQuality: FilterQuality.high,
+        fit: BoxFit.fitWidth,
       ),
       title: Column(
 

@@ -59,10 +59,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           builder: (context, model, child) =>
 
       Scaffold(
-        appBar: ChaliarMenu.topBar(imageBackground:'assets/images/header.png',title: 'DÉMARRER',bgColor:ChaliarColors.whiteColor),
+        backgroundColor: ChaliarColors.whiteGreyColor,
+        appBar: ChaliarMenu.topBar(imageBackground:'assets/images/header.png',title: 'DÉMARRER',bgColor:ChaliarColors.whiteGreyColor),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
         child: Container(
+          color: ChaliarColors.whiteGreyColor,
           child: Stack(
             children: <Widget>[
               Container(
