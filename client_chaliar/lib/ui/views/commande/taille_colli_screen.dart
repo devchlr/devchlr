@@ -3,6 +3,7 @@ import 'package:client_chaliar/ui/styles/chaliar_color.dart';
 import 'package:client_chaliar/ui/styles/text_style.dart';
 import 'package:client_chaliar/ui/widgets/appBar.dart';
 import 'package:client_chaliar/ui/widgets/button.dart';
+import 'package:client_chaliar/ui/widgets/input_field.dart';
 import 'package:client_chaliar/ui/widgets/reusableCard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,13 +32,7 @@ class _TailleColisScreenState extends State<TailleColisScreen> {
           Column(
             children: [
               Container(
-                height: MediaQuery.of(context).size.height * 0.1,
-                padding: EdgeInsets.only(
-                  top: 15.0,
-                  bottom: 10.0,
-                  left: 15.0,
-                  right: 15.0
-                ),
+                height: 48,
                 margin: EdgeInsets.only(
                     top: 20.0,
                 ),
@@ -55,23 +50,28 @@ class _TailleColisScreenState extends State<TailleColisScreen> {
                         border: Border.all(color: ChaliarColors.blackColor,width: 0.5)
                     ),
                     child: Center(
-                      child: Text(
-                        'Nom de l\'objet à transporter',
-                        style: AppTextStyle.tailleCaption(color: ChaliarColors.blackColor),
+                      child:InputField(
+                          label: "Prénom",
+                          placeholder: "Prénom",
+                          textFillColor: ChaliarColors.blackColor,
+                          maxlenght: 250,
                       ),
                     ),
                   )
                 ),
               ),
+              // Text(
+              //   'Nom de l\'objet à transporter',
+              //   style: AppTextStyle.tailleCaption(color: ChaliarColors.blackColor),
+              // )
               Expanded(
                 flex: 1,
                 child: Container(
                   padding: EdgeInsets.only(
-                    left: 10.0,right: 10.0,bottom: 10.0,top: 10.0
+                    left: 30.0,right: 30.0,bottom: 10.0,top: 10.0
                   ),
                   color: ChaliarColors.whiteColor,
-                  child:Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  child:ListView(
                     children:[
                       Expanded(
                         flex:1,

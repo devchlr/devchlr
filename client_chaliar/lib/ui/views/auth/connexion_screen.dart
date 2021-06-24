@@ -16,7 +16,7 @@ class ConnexionScreen extends StatelessWidget {
       child: Consumer<ConnexionViewModel>(
           builder: (context, model, child) =>
       Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       body: Stack(
         fit: StackFit.expand,
         children: [
@@ -46,12 +46,10 @@ class ConnexionScreen extends StatelessWidget {
               ),
             ],
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+          ListView(
             children: [
               Expanded(
-                flex: 2,
+                flex: 3,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
 
@@ -93,14 +91,15 @@ class ConnexionScreen extends StatelessWidget {
                   child: Center(
                 child: SvgPicture.asset(
                   "assets/images/courier.svg",
-                  height: MediaQuery.of(context).size.height * 0.38,
-                  width: MediaQuery.of(context).size.height * 0.38,
+                  height: MediaQuery.of(context).size.height * 0.5,
+                  width: MediaQuery.of(context).size.height * 0.5,
                 ),
               )),
               Expanded(
+                flex: 1,
                   child: Container(
                 padding: EdgeInsets.only(
-                  top:MediaQuery.of(context).size.height * 0.0,
+                  top:15,
                     left: MediaQuery.of(context).size.height * 0.05,
                     right: MediaQuery.of(context).size.height * 0.05),
                 child: Column(
@@ -123,7 +122,7 @@ class ConnexionScreen extends StatelessWidget {
                               color: ChaliarColors.whiteColor)),
                     ),
                     SizedBox(
-                      height: 8,
+                      height: 13,
                     ),
                     Center(
                       child: ButtonChaliar(
@@ -140,7 +139,7 @@ class ConnexionScreen extends StatelessWidget {
                               color: Color(0xff34B3E8),size: 11)),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.001,
+                      height: 19,
                     ),
                     Text(
                       "Devenir Chaliar",
@@ -148,7 +147,7 @@ class ConnexionScreen extends StatelessWidget {
                       style: AppTextStyle.bodyfooter(color: Color(0xffBBD3EB)),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.005,
+                      height:27,
                     ),
                   ],
                 ),

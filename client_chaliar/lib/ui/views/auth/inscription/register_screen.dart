@@ -267,7 +267,7 @@ class UserRegisterScreen extends StatelessWidget {
                     height: 0,
                   )
                       :Container(
-                      margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.1, right: MediaQuery.of(context).size.width * 0.1),
+                      margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.05, right: MediaQuery.of(context).size.width * 0.05),
                       child: Center(
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,

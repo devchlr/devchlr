@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+
 //command Object class
 
 class Order{
@@ -13,15 +15,14 @@ class Order{
   final OrderPackageInformation packageInformation;
 
   Order(
-      this.order_price,
+      {this.order_price,
       this.order_status,
       this.order_id,
       this.user_id,
       this.delivery_id,
       this.deliveryInformation,
       this.recipientInformation,
-      this.packageInformation
-      );
+      this.packageInformation});
   Order.fromJson(Map<String,dynamic>json):
         order_price=json['order_price'],
         order_status=json['order_status'],
@@ -55,18 +56,24 @@ class OrderDeliveryInformation{
   final String phone_number;
   final String delivery_email;
   final String delivery_group;
-  final String command_order;
+  final String delivery_name;
+  final String delivery_type;
 
   OrderDeliveryInformation(
-    this.departure_address,
-    this.delivery_date,
-    this.delivery_schedule,
-    this.delivery_firt_name,
-    this.delivery_email,
-    this.delivery_group,
-    this.command_order,
-      this.phone_number
-);
+      {
+        @required this.departure_address,
+        @required this.delivery_date,
+        @required this.delivery_schedule,
+        @required  this.delivery_firt_name,
+        @required   this.delivery_email,
+        this.delivery_group,
+        @required  this.delivery_name,
+        @required this.phone_number,
+        @required this.delivery_type
+      }
+      );
+
+
   OrderDeliveryInformation.fromJson(Map<String, dynamic> json)
      :  departure_address=json['departure_address'],
         delivery_date=json['delivery_date'],
@@ -75,7 +82,10 @@ class OrderDeliveryInformation{
         delivery_email=json['delivery_email'],
         delivery_group=json['delivery_group'],
         phone_number=json['phone_number'],
-        command_order=json['delivery_order'];
+        delivery_type=json['delivery_type'],
+        delivery_name=json['delivery_name'];
+
+
 
   Map<String, dynamic> toJson() =>{
   departure_address:'departure_address',
@@ -83,9 +93,9 @@ class OrderDeliveryInformation{
   delivery_schedule:'delivery_schedule',
   delivery_firt_name:'delivery_firt_name',
   delivery_email:'delivery_email',
-  delivery_group:'delivery_group',
-  command_order:'delivery_order',
+  delivery_group:'delivery_group', delivery_name:'delivery_name',
     phone_number:'phone_number',
+    delivery_type:'delivery_type',
   };
 }
 
@@ -99,18 +109,17 @@ class OrderRecipientInformation{
   final String recipient_email;
   final String recipient_group;
   final String recipient_note;
-  final String command_order;
 
   OrderRecipientInformation(
-  this.arrival_address,
-  this.recipient_phone_number,
-  this.firt_name_recipient,
-  this.name_recipient,
-  this.recipient_email,
-  this.recipient_group,
-  this.recipient_note,
-  this.command_order
-      );
+      {
+       @required this.arrival_address,
+        @required this.recipient_phone_number,
+  @required this.firt_name_recipient,
+        @required  this.name_recipient,
+        @required this.recipient_email,
+      this.recipient_group,
+        @required this.recipient_note,
+      });
   OrderRecipientInformation.fromJson(Map<String, dynamic> json)
       :  arrival_address=json['arrival_address'],
         recipient_phone_number=json['recipient_phone_number'],
@@ -118,8 +127,8 @@ class OrderRecipientInformation{
         name_recipient=json['name_recipient'],
         recipient_email=json['recipient_email'],
         recipient_group=json['recipient_group'],
-        recipient_note=json['recipient_note'],
-        command_order=json['command_order'];
+        recipient_note=json['recipient_note'];
+
 
   Map<String, dynamic> toJson() =>{
   arrival_address:'arrival_address',
@@ -128,8 +137,7 @@ class OrderRecipientInformation{
   name_recipient:'name_recipient',
   recipient_email:'recipient_email',
   recipient_group:'recipient_group',
-  recipient_note:'recipient_note',
-    command_order:'command_order'
+  recipient_note:'recipient_note'
   };
 }
 //package Order nature
@@ -137,22 +145,18 @@ class OrderPackageInformation{
   final String package_nature;
   final String package_size;
   final String package_image;
-  final String command_order;
-  OrderPackageInformation(
-      this.package_nature,
-      this.package_size,
-      this.package_image,
-  this.command_order
-      );
+  OrderPackageInformation({
+    this.package_nature,
+    this.package_size,
+    this.package_image,
+  });
   OrderPackageInformation.fromJson(Map<String, dynamic>json):
       package_nature=json['package_nature'],
   package_size=json['package_size'],
-        command_order=json['command_order'],
   package_image=json['package_image'];
   Map<String,dynamic>toJson()=>{
     'package_nature':package_nature,
     'package_size':package_size,
     'package_image':package_image,
-    'command_order':command_order
   };
 }

@@ -42,15 +42,15 @@ class MyApp extends StatelessWidget {
           unselectedWidgetColor: Colors.grey,
           disabledColor: Colors.grey),
       routes: <String, WidgetBuilder>{
-        "/splash": (BuildContext context) => new SplashScreen(),
+        "/splash": (BuildContext context) => new PreCommandeScreen(),
         "/tuto": (BuildContext context) => new OnboardingScreen(),
         "/connexion": (BuildContext context) => new ConnexionScreen(),
         "/pro_particulier": (BuildContext context) =>
-            new ProParticulierScreen(),
+        new ProParticulierScreen(),
         "/inscription": (BuildContext context) => new InscriptionHomeScreen(),
         "/singin": (BuildContext context) => new PhoneOptMainScreen(),
         "/condition_generale": (BuildContext context) =>
-            new ConditionGeneraleScreen(),
+        new ConditionGeneraleScreen(),
         "/phone_verification": (BuildContext context) => new PhoneOptValidateScreen(),
         "/term_condition": (BuildContext context) => new TermConditionScreen(),
         "/pre_commande": (BuildContext context) => new PreCommandeScreen(),

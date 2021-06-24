@@ -48,9 +48,7 @@ class ProParticulierScreen extends StatelessWidget {
           ),
           Container(
             padding: EdgeInsets.only(left: 15, right: 15),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
+            child: ListView(
                 children: [
 
               Expanded(
@@ -132,7 +130,7 @@ class ProParticulierScreen extends StatelessWidget {
                             model.setRadioGroup(TypeUser.professionnel);
                           }),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.05,
+                        height:55,
                       ),
                       ButtonChaliar(
                           onTap: (){
@@ -145,7 +143,10 @@ class ProParticulierScreen extends StatelessWidget {
                           backgroundcolor: ChaliarColors.primaryColors,
                           bordercolor: ChaliarColors.primaryColors,
                           textStyle: AppTextStyle.button(
-                              color: ChaliarColors.whiteColor))
+                              color: ChaliarColors.whiteColor)),
+                      SizedBox(
+                        height:55,
+                      ),
                     ],
                   ))
             ]),

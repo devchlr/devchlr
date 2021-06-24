@@ -70,9 +70,7 @@ class _ConditionGeneraleScreenState extends State<ConditionGeneraleScreen> {
                         ),),
                     ],
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                  ListView(
                     children: [
                       Expanded(
                         child: Column(
