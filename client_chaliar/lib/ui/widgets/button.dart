@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-
-import 'package:client_chaliar/constants/iconList.dart';
-import 'package:client_chaliar/ui/styles/chaliar_color.dart';
-import 'package:client_chaliar/ui/widgets/svg_button.dart';
+import 'package:flutter_app/constants/iconList.dart';
+import 'package:flutter_app/ui/styles/chaliar_color.dart';
+import 'package:flutter_app/ui/widgets/svg_button.dart';
 
 class ButtonChaliar extends StatelessWidget {
-  final VoidCallback onTap;
-  final String buttonText;
-  final double height;
-  final double mediaQueryWidth;
-  final double borderRaduis;
-  final Color backgroundcolor;
-  final Color bordercolor;
-  final TextStyle textStyle;
+  final VoidCallback? onTap;
+  final String? buttonText;
+  final double? height;
+  final double? mediaQueryWidth;
+  final double? borderRaduis;
+  final Color? backgroundcolor;
+  final Color? bordercolor;
+  final TextStyle? textStyle;
 
   ButtonChaliar(
       {this.onTap,
@@ -29,22 +28,22 @@ class ButtonChaliar extends StatelessWidget {
       onTap: onTap,
       child: Container(
         height: height,
-        width: MediaQuery.of(context).size.height * mediaQueryWidth,
+        width: MediaQuery.of(context).size.height * mediaQueryWidth!,
         decoration: backgroundcolor==ChaliarColors.primaryColors?BoxDecoration(
           color: Colors.transparent,
-            borderRadius: BorderRadius.circular(borderRaduis),
+            borderRadius: BorderRadius.circular(borderRaduis!),
             image: DecorationImage(
               image: AssetImage("assets/images/blueGrad.png"),
               fit: BoxFit.cover,
             )):BoxDecoration(
-            borderRadius: BorderRadius.circular(borderRaduis),
+            borderRadius: BorderRadius.circular(borderRaduis!),
             color: backgroundcolor,
-            border: Border.all(color: bordercolor,width: 2.0)),
+            border: Border.all(color: bordercolor!,width: 2.0)),
         child: Center(
           child: Padding(
             padding: EdgeInsets.only(bottom: 0.0),
             child: Text(
-              buttonText,
+              buttonText!,
               style: textStyle,
             ),
           ),
@@ -55,9 +54,9 @@ class ButtonChaliar extends StatelessWidget {
 }
 
 class ContainerButton extends StatelessWidget {
-  final double height;
-  final double width;
-  final SvgIconButton iconSvg;
+  final double? height;
+  final double? width;
+  final SvgIconButton? iconSvg;
   ContainerButton({this.height, this.width, this.iconSvg});
 
   @override

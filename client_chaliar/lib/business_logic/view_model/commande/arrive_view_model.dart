@@ -45,6 +45,7 @@ class ArriveScreenViewModel extends BaseModel{
         recipient_note: recipient_note.text,
         recipient_group: recipient_group.text
     );
+    print(recipientInformation.toJson());
   }else{
     print('donne du formulaire non conforme');
   }

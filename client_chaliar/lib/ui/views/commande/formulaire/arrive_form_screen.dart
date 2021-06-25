@@ -1,3 +1,5 @@
+import 'package:client_chaliar/business_logic/models/commande.dart';
+import 'package:client_chaliar/business_logic/view_model/commande/arrive_view_model.dart';
 import 'package:client_chaliar/constants/iconList.dart';
 import 'package:client_chaliar/ui/styles/chaliar_color.dart';
 import 'package:client_chaliar/ui/styles/text_style.dart';
@@ -6,10 +8,13 @@ import 'package:client_chaliar/ui/widgets/button.dart';
 import 'package:client_chaliar/ui/widgets/input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'package:timelines/timelines.dart';
 
-class ArriveeFormScreen extends StatefulWidget {
 
+class ArriveeFormScreen extends StatefulWidget {
+OrderDeliveryInformation deliveryInformation;
+ArriveeFormScreen({this.deliveryInformation});
 
   @override
   _ArriveeFormScreenState createState() => _ArriveeFormScreenState();
@@ -19,7 +24,11 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ChangeNotifierProvider<ArriveScreenViewModel>(
+      create: (context) => ArriveScreenViewModel(),
+      child: Consumer<ArriveScreenViewModel>(
+          builder: (context, model, child) =>
+      Scaffold(
       key: _scaffoldKey,
       appBar: ChaliarMenu.topBar(
           leading: GestureDetector(
@@ -119,7 +128,7 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
                             maxlenght: 250,
                             backgroundColor: ChaliarColors.whiteGreyColor,
                             borderColor: ChaliarColors.primaryColors,
-                            // controller: model.surname,
+                            controller: model.arrival_address,
                           ),
                         ),
                         SizedBox(
@@ -135,7 +144,7 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
                             maxlenght: 250,
                             backgroundColor: ChaliarColors.whiteGreyColor,
                             borderColor: ChaliarColors.primaryColors,
-                            // controller: model.surname,
+                            controller: model.firt_name_recipient,
                           ),
                         ),
                         SizedBox(
@@ -151,7 +160,7 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
                             maxlenght: 250,
                             backgroundColor: ChaliarColors.whiteGreyColor,
                             borderColor: ChaliarColors.primaryColors,
-                            // controller: model.surname,
+                            controller: model.name_recipient,
                           ),
                         ),
                         SizedBox(
@@ -167,7 +176,7 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
                             maxlenght: 250,
                             backgroundColor: ChaliarColors.whiteGreyColor,
                             borderColor: ChaliarColors.primaryColors,
-                            // controller: model.surname,
+                            controller: model.recipient_phone_number,
                           ),
                         ),
                         SizedBox(
@@ -183,7 +192,7 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
                             maxlenght: 250,
                             backgroundColor: ChaliarColors.whiteGreyColor,
                             borderColor: ChaliarColors.primaryColors,
-                            // controller: model.surname,
+                            controller: model.recipient_email,
                           ),
                         ),
                         SizedBox(
@@ -199,7 +208,7 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
                             maxlenght: 250,
                             backgroundColor: ChaliarColors.whiteGreyColor,
                             borderColor: ChaliarColors.primaryColors,
-                            // controller: model.surname,
+                            controller: model.recipient_group,
                           ),
                         ),
                         SizedBox(
@@ -215,7 +224,7 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
                             maxlenght: 250,
                             backgroundColor: ChaliarColors.whiteGreyColor,
                             borderColor: ChaliarColors.primaryColors,
-                            // controller: model.surname,
+                            controller: model.recipient_note,
                           ),
                         ),
                         SizedBox(
@@ -228,7 +237,8 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
                           child: Center(
                             child: ButtonChaliar(
                                 onTap: () {
-                                  Navigator.pushNamed(context, '/taille_colli');
+                                  model.orderDeliveryInformation=widget.deliveryInformation;
+                                  model.formEditingController(context);
                                 },
                                 buttonText: 'Valider',
                                 height: MediaQuery.of(context).size.height * 0.07,
@@ -253,7 +263,7 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
 
         ],
       ),
-    );
+    )));
   }
 }
 

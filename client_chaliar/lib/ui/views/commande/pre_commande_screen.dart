@@ -13,28 +13,28 @@ import 'dart:async';
 
 
 class PreCommandeScreen extends StatefulWidget {
-
+  final Key _mapKey = UniqueKey();
   @override
   _PreCommandeScreenState createState() => _PreCommandeScreenState();
 }
 
 class _PreCommandeScreenState extends State<PreCommandeScreen> {
-
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
   Completer<GoogleMapController> _controller = Completer();
 
-  GoogleMapController mapController;
-  final LatLng _center = const LatLng(45.521563, -122.677433);
-  void _onMapCreated(GoogleMapController controller) {
-    mapController = controller;
-  }
+  static final CameraPosition _kGooglePlex = CameraPosition(
+    target: LatLng(37.42796133580664, -122.085749655962),
+    zoom: 14.4746,
+  );
 
+  static final CameraPosition _kLake = CameraPosition(
+      bearing: 192.8334901395799,
+      target: LatLng(37.43296265331129, -122.08832357078792),
+      tilt: 59.440717697143555,
+      zoom: 19.151926040649414);
   @override
   Widget build(BuildContext context) {
     return
       Scaffold(
-      key: _scaffoldKey,
       appBar: ChaliarMenu.topBar(
         title: 'Commande',
         bgColor: ChaliarColors.whiteColor,
@@ -59,7 +59,7 @@ class _PreCommandeScreenState extends State<PreCommandeScreen> {
             children: [
               GestureDetector(
                 onTap:(){
-                  _scaffoldKey.currentState.openDrawer();
+
         },
                 child: Center(
                   child: SvgPicture.asset(
@@ -93,12 +93,107 @@ class _PreCommandeScreenState extends State<PreCommandeScreen> {
           ),
         ),
       ),
-      body: GoogleMap(
-        onMapCreated: _onMapCreated,
-        initialCameraPosition: CameraPosition(
-          target: _center,
-          zoom: 11.0,
-        ),
+      body: Stack(
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Container(
+                margin: EdgeInsets.only(
+                    left: 10.0,
+                    right: 10.0,
+                    top: 10.0
+                ),
+                height: MediaQuery.of(context).size.height * 0.15,
+                decoration: BoxDecoration(
+                  color: ChaliarColors.whiteColor,
+                ),
+                child: ListView(
+                  children: [
+                    GestureDetector(
+                      onTap:()=>Navigator.pushNamed(context, '/commande_depart_form'),
+                      child: TimelineTile(
+                        nodeAlign: TimelineNodeAlign.start,
+                        contents: Card(
+                          child: Container(
+                            height: 44.1,
+                            width: MediaQuery.of(context).size.width,
+                            padding: EdgeInsets.all(10.0),
+                            child: Text('Position de départ du colis',style: AppTextStyle.captionPreCommande(color:ChaliarColors.secondaryColors),),
+                          ),
+                        ),
+                        node: TimelineNode(
+                          indicator: DotIndicator(
+                            size: 9.0,
+                          ),
+                          endConnector: DashedLineConnector(),
+                        ),
+                      ),
+                    ),
+                    GestureDetector(onTap:()=>Navigator.pushNamed(context, '/commande_depart_form'),child: Container(
+                      margin: EdgeInsets.only(
+                          left: 3.0
+                      ),
+                      child: TimelineTile(
+                        nodeAlign: TimelineNodeAlign.start,
+                        contents: Card(
+                          child: Container(
+                            color: ChaliarColors.whiteGreyColor,
+                            height: 44.10,
+                            width: MediaQuery.of(context).size.width,
+                            padding: EdgeInsets.all(10.0),
+                            child: Text('Position de d\'arrive du colis',style: AppTextStyle.captionPreCommande(color:ChaliarColors.secondaryColors),),
+                          ),
+                        ),
+                        node: TimelineNode(
+                          indicator: ContainerIndicator(
+                            child: Container(
+                              height: 9.0,
+                              width: 9.0,
+                              color: Color(0xff3885DA),
+                            ),
+                          ),
+                          startConnector: DashedLineConnector(),
+                        ),
+                      ),
+                    ),)
+                  ],
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child:  Container(
+                  child:  GoogleMap(
+                    mapType: MapType.hybrid,
+                    initialCameraPosition: _kGooglePlex,
+                    onMapCreated: (GoogleMapController controller) {
+                      _controller.complete(controller);
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+              top: MediaQuery.of(context).size.height * 0.6,
+            ),
+            child: Center(
+              child: ButtonChaliar(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/commande_depart_form');
+                  },
+                  buttonText: 'Commander',
+                  height:49,
+                  mediaQueryWidth: 0.30,
+                  borderRaduis: 30,
+                  backgroundcolor: ChaliarColors.primaryColors,
+                  bordercolor: ChaliarColors.primaryColors,
+                  textStyle: AppTextStyle.button(
+                      color: ChaliarColors.whiteColor)),
+            ),
+          ),
+        ],
       ),
     );
   }

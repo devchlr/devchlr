@@ -1,16 +1,16 @@
-import 'package:client_chaliar/ui/styles/text_style.dart';
+import 'package:flutter_app/ui/styles/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:client_chaliar/ui/styles/chaliar_color.dart';
-import 'package:client_chaliar/ui/widgets/button.dart';
+import 'package:flutter_app/ui/styles/chaliar_color.dart';
+import 'package:flutter_app/ui/widgets/button.dart';
 
 class OnboardingPageWidget extends StatelessWidget {
-  final String imageAsset;
-  final String title;
-  final String subTitle;
-  final String buttonText;
-  final List<Widget> buildPageIndicator;
-  final VoidCallback onTap;
+  final String? imageAsset;
+  final String? title;
+  final String? subTitle;
+  final String? buttonText;
+  final List<Widget>? buildPageIndicator;
+  final VoidCallback? onTap;
   OnboardingPageWidget(
       {this.imageAsset,
       this.title,
@@ -33,7 +33,7 @@ class OnboardingPageWidget extends StatelessWidget {
               ),
               decoration:BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(imageAsset),
+                  image: AssetImage(imageAsset!),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -63,14 +63,14 @@ class OnboardingPageWidget extends StatelessWidget {
 
                   Center(
                       child: Text(
-                    title,
+                    title!,
                     textAlign: TextAlign.center,
                     style:
                         AppTextStyle.tutorialHeader(color: Color(0xff042C5C)),
                   )),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                   Center(
-                    child: Text(subTitle,
+                    child: Text(subTitle!,
                         textAlign: TextAlign.center,
                         style:
                             AppTextStyle.tutorialDescription(color: Color(0xff77869E))),
@@ -78,7 +78,7 @@ class OnboardingPageWidget extends StatelessWidget {
                   SizedBox(height: MediaQuery.of(context).size.height * 0.015),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: buildPageIndicator,
+                    children: buildPageIndicator!,
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.03),
                   Center(

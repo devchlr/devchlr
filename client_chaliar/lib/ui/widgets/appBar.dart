@@ -1,11 +1,11 @@
-import 'package:client_chaliar/ui/styles/chaliar_font.dart';
 import 'package:flutter/material.dart';
-import 'package:client_chaliar/ui/styles/chaliar_color.dart';
-import 'package:client_chaliar/ui/styles/text_style.dart';
+import 'package:flutter_app/ui/styles/chaliar_color.dart';
+import 'package:flutter_app/ui/styles/text_style.dart';
+import 'package:flutter_app/ui/styles/chaliar_font.dart';
 
 class ChaliarMenu{
 
-  static AppBar topBar({double size=18.0,String fontFamily=AppFontFamilly.montserrat,Widget leading=null,Color textColor=ChaliarColors.whiteColor , String imageBackground,String title,Color bgColor,String description=''}) {
+  static AppBar topBar({double size=18.0,String fontFamily=AppFontFamilly.montserrat,Widget? leading,Color textColor=ChaliarColors.whiteColor , String? imageBackground,String? title,Color? bgColor,String description=''}) {
     return AppBar(
       shadowColor: Colors.transparent,
       foregroundColor: Colors.transparent,
@@ -15,14 +15,14 @@ class ChaliarMenu{
       elevation: 0.0,
       backgroundColor:Colors.transparent,
       flexibleSpace: Image(
-        image: AssetImage(imageBackground),
+        image: AssetImage(imageBackground!),
         filterQuality: FilterQuality.high,
         fit: BoxFit.fitWidth,
       ),
       title: Column(
         children: [
           Text(
-            title,
+            title!,
             style: AppTextStyle.appBarHeader(size: size, color: textColor,fontFamily: fontFamily),
           ),
           Text(

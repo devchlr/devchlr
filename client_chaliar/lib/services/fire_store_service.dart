@@ -1,5 +1,5 @@
-import 'package:client_chaliar/business_logic/models/model_user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_app/models/user.dart';
 class FirestoreService {
   final CollectionReference _usersCollectionReference =
       FirebaseFirestore.instance.collection("users");

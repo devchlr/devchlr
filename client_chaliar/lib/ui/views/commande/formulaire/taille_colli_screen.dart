@@ -1,3 +1,4 @@
+import 'package:client_chaliar/business_logic/view_model/commande/taille_view_model.dart';
 import 'package:client_chaliar/constants/iconList.dart';
 import 'package:client_chaliar/ui/styles/chaliar_color.dart';
 import 'package:client_chaliar/ui/styles/text_style.dart';
@@ -7,6 +8,7 @@ import 'package:client_chaliar/ui/widgets/input_field.dart';
 import 'package:client_chaliar/ui/widgets/reusableCard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class TailleColisScreen extends StatefulWidget {
 
@@ -19,7 +21,11 @@ class _TailleColisScreenState extends State<TailleColisScreen> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ChangeNotifierProvider<TailleScreeenViewmodel>(
+      create: (context) => TailleScreeenViewmodel(),
+      child: Consumer<TailleScreeenViewmodel>(
+          builder: (context, model, child) =>
+      Scaffold(
       key: _scaffoldKey,
       appBar: ChaliarMenu.topBar(
           title: 'Votre commande',
@@ -51,9 +57,9 @@ class _TailleColisScreenState extends State<TailleColisScreen> {
                     ),
                     child: Center(
                       child:InputField(
-                          label: "Prénom",
-                          placeholder: "Prénom",
+                          label: "Nom de l\'objet à transporter",
                           textFillColor: ChaliarColors.blackColor,
+                          controller: model.package_nature,
                           maxlenght: 250,
                       ),
                     ),
@@ -95,7 +101,9 @@ class _TailleColisScreenState extends State<TailleColisScreen> {
                               bgColour: ChaliarColors.primaryColors,
                               inconAsset:SvgIcons.scooter,
                               assetColour: ChaliarColors.whiteColor,
-                              onPress: (){},
+                              onPress: (){
+
+                              },
                             ),
                           ],
                         )
@@ -171,7 +179,7 @@ class _TailleColisScreenState extends State<TailleColisScreen> {
           )
         ],
       ),
-    );
+    )));
   }
 }
 

@@ -1,10 +1,11 @@
-import 'package:client_chaliar/ui/styles/chaliar_color.dart';
+import 'package:flutter_app/ui/styles/chaliar_color.dart';
 import 'package:flutter/material.dart';
-import 'package:client_chaliar/ui/styles/chaliar_font_size.dart';
-import 'package:client_chaliar/ui/styles/chaliar_font.dart';
+import 'package:flutter_app/ui/styles/chaliar_font_size.dart';
+import 'package:flutter_app/ui/styles/chaliar_font.dart';
+import 'package:flutter_app/ui/styles/chaliar_font_size.dart';
 
 class AppTextStyle {
-  static TextStyle header1({Color color}) {
+  static TextStyle header1({Color? color}) {
     return TextStyle(
       color: color,
       fontSize: AppFontSize.largest,
@@ -14,7 +15,7 @@ class AppTextStyle {
     );
   }
 
-  static TextStyle headerApp1({Color color,String fontFamilly=AppFontFamilly.montserrat,FontWeight fontWeight=FontWeight.bold}) {
+  static TextStyle headerApp1({Color? color,String fontFamilly=AppFontFamilly.montserrat,FontWeight fontWeight=FontWeight.bold}) {
     return TextStyle(
       color: color,
       fontSize: 27,
@@ -25,7 +26,7 @@ class AppTextStyle {
     );
   }
 
-  static TextStyle appBarHeader({FontWeight fontWeight=FontWeight.w500,double size=18.0, Color color,String fontFamily=AppFontFamilly.montserrat}) {
+  static TextStyle appBarHeader({FontWeight fontWeight=FontWeight.w500,double size=18.0, Color? color,String fontFamily=AppFontFamilly.montserrat}) {
     return TextStyle(
       color: color,
       fontSize: size,
@@ -35,7 +36,7 @@ class AppTextStyle {
     );
   }
 
-  static TextStyle cardTailleHeader({Color color}) {
+  static TextStyle cardTailleHeader({Color? color}) {
     return TextStyle(
       color: color,
       fontSize: 15.0,
@@ -45,7 +46,7 @@ class AppTextStyle {
     );
   }
 
-  static TextStyle cardTaillePrice({Color color}) {
+  static TextStyle cardTaillePrice({Color? color}) {
     return TextStyle(
       color: color,
       fontSize: 15.0,
@@ -55,7 +56,7 @@ class AppTextStyle {
     );
   }
 
-  static TextStyle cardTailleDescription({Color color}) {
+  static TextStyle cardTailleDescription({Color? color}) {
     return TextStyle(
       color: color,
       fontSize: 09.0,
@@ -64,7 +65,7 @@ class AppTextStyle {
       fontStyle: FontStyle.normal,
     );
   }
-  static TextStyle tutorialHeader({Color color}) {
+  static TextStyle tutorialHeader({Color? color}) {
     return TextStyle(
       color: Color(0XFF042C5C),
       fontSize: 18.0,
@@ -74,7 +75,7 @@ class AppTextStyle {
     );
   }
 
-  static TextStyle tutorialDescription({Color color}) {
+  static TextStyle tutorialDescription({Color? color}) {
     return TextStyle(
       color: Color(0xFF77869E),
       fontSize: 13.0,
@@ -84,7 +85,7 @@ class AppTextStyle {
     );
   }
 
-  static TextStyle header1_title({Color color}) {
+  static TextStyle header1_title({Color? color}) {
     return TextStyle(
       color: color,
       fontSize: AppFontSize.large2_1_1,
@@ -94,7 +95,7 @@ class AppTextStyle {
     );
   }
 
-  static TextStyle tabHeader({Color color}) {
+  static TextStyle tabHeader({Color? color}) {
     return TextStyle(
       color: Color(0xffB0B0C3),
       fontSize: 16,
@@ -104,7 +105,7 @@ class AppTextStyle {
     );
   }
 
-  static TextStyle header2({Color color}) {
+  static TextStyle header2({Color? color}) {
     return TextStyle(
       color: color,
       fontSize: AppFontSize.larger,
@@ -114,7 +115,7 @@ class AppTextStyle {
     );
   }
 
-  static TextStyle header3({Color color}) {
+  static TextStyle header3({Color? color}) {
     return TextStyle(
       color: color,
       fontSize: AppFontSize.large2_1,
@@ -124,7 +125,7 @@ class AppTextStyle {
     );
   }
 
-  static TextStyle header3_light({Color color, bool isUnderlined = false}) {
+  static TextStyle header3_light({Color? color, bool isUnderlined = false}) {
     return TextStyle(
         color: color,
         fontSize: AppFontSize.large2_1_1,
@@ -134,7 +135,7 @@ class AppTextStyle {
         decoration: isUnderlined ? TextDecoration.underline : null);
   }
 
-  static TextStyle addPhotodesc({Color color, bool isUnderlined = false}) {
+  static TextStyle addPhotodesc({Color? color, bool isUnderlined = false}) {
     return TextStyle(
         color: color,
         fontSize: 16,
@@ -144,7 +145,7 @@ class AppTextStyle {
         decoration: isUnderlined ? TextDecoration.underline : null);
   }
 
-  static TextStyle addPhotoBtn({Color color, bool isUnderlined = false}) {
+  static TextStyle addPhotoBtn({Color? color, bool isUnderlined = false}) {
     return TextStyle(
         color: color,
         fontSize: 14,
@@ -154,7 +155,7 @@ class AppTextStyle {
         decoration: isUnderlined ? TextDecoration.underline : null);
   }
 
-  static TextStyle addPhotoCaption({Color color, bool isUnderlined = false}) {
+  static TextStyle addPhotoCaption({Color? color, bool isUnderlined = false}) {
     return TextStyle(
         color: color,
         fontSize: 13,
@@ -164,7 +165,7 @@ class AppTextStyle {
         decoration: isUnderlined ? TextDecoration.underline : null);
   }
 
-  static TextStyle header4({Color color}) {
+  static TextStyle header4({Color? color}) {
     return TextStyle(
       color: Color(0xff2F3547),
       fontSize: 17,
@@ -174,7 +175,7 @@ class AppTextStyle {
     );
   }
 
-  static TextStyle body({Color color}) {
+  static TextStyle body({Color? color}) {
     return TextStyle(
       color: Color(0xffBCB8B1),
       fontSize: 16.2,
@@ -184,7 +185,7 @@ class AppTextStyle {
     );
   }
 
-  static TextStyle bodyfooter({Color color}) {
+  static TextStyle bodyfooter({Color? color}) {
     return TextStyle(
       color: Color(0xffBBD3EB),
       fontSize: 14,
@@ -194,7 +195,7 @@ class AppTextStyle {
     );
   }
 
-  static TextStyle bodyfooterField({Color color}) {
+  static TextStyle bodyfooterField({Color? color}) {
     return TextStyle(
       color: color,
       fontSize: 10.56,
@@ -203,7 +204,7 @@ class AppTextStyle {
       fontStyle: FontStyle.normal,
     );
   }
-  static TextStyle bodyApp1({Color color,bool isUnderlined=false}) {
+  static TextStyle bodyApp1({Color? color,bool isUnderlined=false}) {
     return TextStyle(
       decoration: isUnderlined?TextDecoration.underline:null,
       color: color,
@@ -213,7 +214,7 @@ class AppTextStyle {
       fontStyle: FontStyle.normal,
     );
   }
-  static TextStyle formComDesc({Color color,bool isUnderlined=false}) {
+  static TextStyle formComDesc({Color? color,bool isUnderlined=false}) {
     return TextStyle(
       decoration: isUnderlined?TextDecoration.underline:null,
       color: color,
@@ -224,7 +225,7 @@ class AppTextStyle {
     );
   }
 
-  static TextStyle tailleCaption({Color color,bool isUnderlined=false}) {
+  static TextStyle tailleCaption({Color? color,bool isUnderlined=false}) {
     return TextStyle(
       decoration: isUnderlined?TextDecoration.underline:null,
       color: color,
@@ -235,7 +236,7 @@ class AppTextStyle {
     );
   }
 
-  static TextStyle cardbodyApp1({Color color,bool isUnderlined=false}) {
+  static TextStyle cardbodyApp1({Color? color,bool isUnderlined=false}) {
     return TextStyle(
       decoration: isUnderlined?TextDecoration.underline:null,
       color: color,
@@ -246,7 +247,7 @@ class AppTextStyle {
     );
   }
 
-  static TextStyle button({Color color,double size=14}) {
+  static TextStyle button({Color? color,double size=14}) {
     return TextStyle(
       color: color,
       fontSize: size,
@@ -256,7 +257,7 @@ class AppTextStyle {
     );
   }
 
-  static TextStyle caption({Color color}) {
+  static TextStyle caption({Color? color}) {
     return TextStyle(
       color: Color(0xff98A2C0)==ChaliarColors.blackColor?Color(0xff98A2C0):color,
       fontSize: 12,
@@ -266,7 +267,7 @@ class AppTextStyle {
     );
   }
 
-  static TextStyle headerCaption({Color color,double size,String assetFont}) {
+  static TextStyle headerCaption({Color? color,double? size,String? assetFont}) {
     return TextStyle(
       color: Color(0xff98A2C0)==ChaliarColors.blackColor?Color(0xff98A2C0):color,
       fontSize: size,
@@ -276,7 +277,7 @@ class AppTextStyle {
     );
   }
 
-  static TextStyle captionPreCommande({Color color}) {
+  static TextStyle captionPreCommande({Color? color}) {
     return TextStyle(
       color: Color(0xff98A2C0)==ChaliarColors.blackColor?Color(0xff98A2C0):color,
       fontSize: 10.1,

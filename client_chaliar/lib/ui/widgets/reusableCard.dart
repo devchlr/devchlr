@@ -1,22 +1,22 @@
-import 'package:client_chaliar/constants/iconList.dart';
-import 'package:client_chaliar/ui/styles/chaliar_color.dart';
-import 'package:client_chaliar/ui/styles/text_style.dart';
+import 'package:flutter_app/constants/iconList.dart';
+import 'package:flutter_app/ui/styles/chaliar_color.dart';
+import 'package:flutter_app/ui/styles/text_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class ReusableCard extends StatelessWidget {
   ReusableCard({
-   this.assetColour=null, @required this.title,@required this.price,@required this.description, @required this.colour,@required this.inconAsset, this.onPress,@required this.bgColour});
+   this.assetColour, @required this.title,@required this.price,@required this.description, @required this.colour,@required this.inconAsset, this.onPress,@required this.bgColour});
 
-  final Color colour;
-  final Color bgColour;
-  final Color assetColour;
-  final String inconAsset;
-  final String title;
-  final String description;
-  final String price;
-  final Function onPress;
+  final Color? colour;
+  final Color? bgColour;
+  final Color? assetColour;
+  final String? inconAsset;
+  final String? title;
+  final String? description;
+  final String? price;
+  final void Function()? onPress;
 
   @override
   Widget build(BuildContext context) {
@@ -32,17 +32,17 @@ class ReusableCard extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Text(title,style: AppTextStyle.cardTailleHeader(color:colour),),
+            Text(title!,style: AppTextStyle.cardTailleHeader(color:colour!),),
             SizedBox(
               height: 5,
             ),
-            Text('$price\€',style: AppTextStyle.cardTaillePrice(color:colour),),
+            Text('$price\€',style: AppTextStyle.cardTaillePrice(color:colour!),),
             SizedBox(
               height: 10,
             ),
             Center(
               child: SvgPicture.asset(
-                inconAsset,
+                inconAsset!,
                 height: 37,
                 width: 61,
                 color: assetColour==null?ChaliarColors.whiteGreyColor:assetColour,
@@ -54,9 +54,9 @@ class ReusableCard extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(5.0),
               child: Text(
-                description,
+                description!,
                 textAlign: TextAlign.center,
-                style: AppTextStyle.cardTailleDescription(color: colour),
+                style: AppTextStyle.cardTailleDescription(color: colour!),
               ),
             )
           ],

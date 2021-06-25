@@ -17,6 +17,14 @@ class TailleScreeenViewmodel extends BaseModel{
     return true;
   }
 
+  void selectedCard(bool val){
+    if(val){
+      val=false;
+    }else{
+      val=true;
+    }
+  }
+
   void formEditingController(BuildContext context){
     if(validator()){
       OrderPackageInformation packageInformation=new OrderPackageInformation(package_nature:package_nature.text,package_size: package_size);

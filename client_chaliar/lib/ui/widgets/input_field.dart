@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:client_chaliar/ui/styles/text_style.dart';
-import 'package:client_chaliar/ui/styles/chaliar_color.dart';
+import 'package:flutter_app/ui/styles/text_style.dart';
+import 'package:flutter_app/ui/styles/chaliar_color.dart';
 import 'dart:ui';
 
 class InputField extends StatelessWidget {
-  final String placeholder;
-  final String label;
-  final Widget suffixIcon;
-  final Widget prefixIcon;
-  final Function onTap;
-  final Function onChanged;
-  final Function onSubmitted;
-  final TextEditingController controller;
-  final bool autofocus;
-  final Color borderColor;
-  final Color fillColor;
-  final Color textFillColor;
-  final Color textLabelColor;
-  final int maxlenght;
-  final bool isBorder;
-  final double fieldSize;
-  final double raduis;
-  final Color backgroundColor;
-  final bool obscureText;
-  final TextInputType typeInput;
-  final int minlent;
+  final String? placeholder;
+  final String? label;
+  final Widget? suffixIcon;
+  final Widget? prefixIcon;
+  final void Function()? onTap;
+  final void Function(String val)? onChanged;
+  final void Function(String val)? onSubmitted;
+  final TextEditingController? controller;
+  final bool? autofocus;
+  final Color? borderColor;
+  final Color? fillColor;
+  final Color? textFillColor;
+  final Color? textLabelColor;
+  final int? maxlenght;
+  final bool? isBorder;
+  final double? fieldSize;
+  final double? raduis;
+  final Color? backgroundColor;
+  final bool? obscureText;
+  final TextInputType? typeInput;
+  final int? minlent;
 
   InputField(
       {this.obscureText=false,
@@ -57,30 +57,30 @@ class InputField extends StatelessWidget {
       child: TextField(
         maxLengthEnforced: false,
         keyboardType: typeInput,
-        obscureText: obscureText,
+        obscureText: obscureText!,
         cursorColor: ChaliarColors.whiteColor,
         onTap: onTap,
         onChanged: onChanged,
         onSubmitted: onSubmitted,
         controller: controller,
-        autofocus: autofocus,
+        autofocus: autofocus!,
         style: AppTextStyle.header2(
-            color: textFillColor == null
+            color: textFillColor==null
                 ? ChaliarColors.blackColor
-                : textFillColor),
+                : textFillColor!),
         textAlignVertical: TextAlignVertical(y: 0.6),
         decoration: InputDecoration(
-          border: isBorder
+          border: isBorder!
               ? OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(raduis),
+                  borderRadius: BorderRadius.circular(raduis!),
                   borderSide: BorderSide(
-                      color: borderColor, width: 0.5, style: BorderStyle.solid))
+                      color: borderColor!, width: 0.5, style: BorderStyle.solid))
               : null,
           labelText: label == null ? 'label' : label,
           labelStyle: AppTextStyle.bodyfooterField(
               color: textLabelColor == null
                   ? ChaliarColors.blackColor
-                  : textLabelColor),
+                  : textLabelColor!),
           filled: true,
           fillColor: backgroundColor == null
               ? ChaliarColors.whiteColor
@@ -88,19 +88,19 @@ class InputField extends StatelessWidget {
           hintStyle: AppTextStyle.body(
               color: textFillColor == null
                   ? ChaliarColors.blackColor
-                  : textFillColor),
+                  : textFillColor!),
           suffixIcon: suffixIcon,
           prefixIcon: prefixIcon,
-          enabledBorder: isBorder
+          enabledBorder: isBorder!
               ? OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(raduis),
+                  borderRadius: BorderRadius.circular(raduis!),
                   borderSide: BorderSide(
-                      color: borderColor, width: 0.5, style: BorderStyle.solid))
+                      color: borderColor!, width: 0.5, style: BorderStyle.solid))
               : null,
           // isDense: true, // Added this
           contentPadding: EdgeInsets.only(
-              top: fieldSize == null ? 10 : fieldSize,
-              bottom: fieldSize == null ? 10 : fieldSize,
+              top: fieldSize == null ? 10 : fieldSize!,
+              bottom: fieldSize == null ? 10 : fieldSize!,
               left: 20,
               right: 20),
         ),

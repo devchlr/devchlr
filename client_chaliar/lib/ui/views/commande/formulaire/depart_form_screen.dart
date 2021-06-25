@@ -1,3 +1,4 @@
+import 'package:client_chaliar/business_logic/view_model/commande/depart_view_model.dart';
 import 'package:client_chaliar/constants/iconList.dart';
 import 'package:client_chaliar/ui/styles/chaliar_color.dart';
 import 'package:client_chaliar/ui/styles/text_style.dart';
@@ -6,6 +7,7 @@ import 'package:client_chaliar/ui/widgets/button.dart';
 import 'package:client_chaliar/ui/widgets/input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'package:timelines/timelines.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart'
     show CalendarCarousel;
@@ -13,43 +15,21 @@ import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_calendar_carousel/classes/event_list.dart';
 import 'package:intl/intl.dart' show DateFormat;
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 
 class DepartFormScreen extends StatefulWidget {
-
-
   @override
   _DepartFormScreenState createState() => _DepartFormScreenState();
 }
 
 class _DepartFormScreenState extends State<DepartFormScreen> {
-
-//date picker
   final DateRangePickerController _controller = DateRangePickerController();
   String headerString = '';
-
-
-
-//end date picker
-
-
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   DateTime _currentDate = DateTime(2019, 2, 3);
   DateTime _currentDate2 = DateTime(2019, 2, 3);
   String _currentMonth = DateFormat.yMMM().format(DateTime(2019, 2, 3));
   DateTime _targetDateTime = DateTime(2019, 2, 3);
-  // void viewChanged(DateRangePickerViewChangedArgs args) {
-  //   final DateTime visibleStartDate = args.visibleDateRange.startDate!;
-  //   final DateTime visibleEndDate = args.visibleDateRange. endDate!;
-  //   final int totalVisibleDays = (visibleStartDate.difference(visibleEndDate).inDays);
-  //   final DateTime midDate =
-  //   visibleStartDate.add(Duration(days: totalVisibleDays ~/ 2));
-  //   headerString = DateFormat('MMMM yyyy').format(midDate).toString();
-  //   SchedulerBinding.instance!.addPostFrameCallback((duration) {
-  //     setState(() {});
-  //   });
-  // }
   void viewChanged(DateRangePickerViewChangedArgs args) {
     final DateTime visibleStartDate = args.visibleDateRange.startDate;
     final DateTime visibleEndDate = args.visibleDateRange.endDate;
@@ -58,20 +38,19 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
     final DateTime midDate =
     visibleStartDate.add(Duration(days: totalVisibleDays ~/ 2));
     headerString = DateFormat('MMMM yyyy').format(midDate).toString();
-    // SchedulerBinding.instance.addPostFrameCallback((duration) {
-    //   setState(() {});
-    // });
   }
-
   @override
-
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
     final double cellWidth = width / 9;
     DateTime h = DateTime.now();
     String formattedHour = DateFormat('kk').format(h);
     String formattedMinute = DateFormat('mm').format(h);
-    return Scaffold(
+    return ChangeNotifierProvider<DepartFormViewModel>(
+      create: (context) => DepartFormViewModel(),
+      child: Consumer<DepartFormViewModel>(
+          builder: (context, model, child) =>
+      Scaffold(
       key: _scaffoldKey,
       appBar: ChaliarMenu.topBar(
           leading: GestureDetector(
@@ -164,22 +143,6 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                           height: 13.0,
                         ),
                         Padding(
-                          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.07, right: MediaQuery.of(context).size.width * 0.07),
-                          child: InputField(
-                            fieldSize: MediaQuery.of(context).size.height * 0.025,
-                            label: "Adresse de départ",
-                            isBorder: true,
-                            textLabelColor: ChaliarColors.secondaryColors,
-                            maxlenght: 250,
-                            backgroundColor: ChaliarColors.whiteGreyColor,
-                            borderColor: ChaliarColors.primaryColors,
-                            // controller: model.surname,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 13.0,
-                        ),
-                        Padding(
                           padding: EdgeInsets.only(
                             left: MediaQuery.of(context).size.width * 0.07,
                             right: MediaQuery.of(context).size.width * 0.07,
@@ -192,7 +155,7 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                             maxlenght: 250,
                             backgroundColor: ChaliarColors.whiteGreyColor,
                             borderColor: ChaliarColors.primaryColors,
-                            // controller: model.surname,
+                            controller: model.departure_address,
                           ),
                         ),
                         SizedBox(
@@ -256,6 +219,7 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                                             mainAxisAlignment: MainAxisAlignment.center,
                                             children: <Widget>[
                                               SfDateRangePicker(
+                                                controller: model.delivery_date,
                                                 showNavigationArrow: true,
                                                 // onSelectionChanged: _onSelectionChanged,
                                                 selectionMode: DateRangePickerSelectionMode.single,
@@ -363,7 +327,7 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                             maxlenght: 250,
                             backgroundColor: ChaliarColors.whiteGreyColor,
                             borderColor: ChaliarColors.primaryColors,
-                            // controller: model.surname,
+                            controller: model.delivery_firt_name,
                           ),
                         ),
                         SizedBox(
@@ -379,7 +343,7 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                             maxlenght: 250,
                             backgroundColor: ChaliarColors.whiteGreyColor,
                             borderColor: ChaliarColors.primaryColors,
-                            // controller: model.surname,
+                            controller: model.delivery_name,
                           ),
                         ),
                         SizedBox(
@@ -395,7 +359,7 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                             maxlenght: 250,
                             backgroundColor: ChaliarColors.whiteGreyColor,
                             borderColor: ChaliarColors.primaryColors,
-                            // controller: model.surname,
+                            controller: model.phone_number,
                           ),
                         ),
                         SizedBox(
@@ -411,7 +375,7 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                             maxlenght: 250,
                             backgroundColor: ChaliarColors.whiteGreyColor,
                             borderColor: ChaliarColors.primaryColors,
-                            // controller: model.surname,
+                            controller: model.delivery_email,
                           ),
                         ),
                         SizedBox(
@@ -427,7 +391,7 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                             maxlenght: 250,
                             backgroundColor: ChaliarColors.whiteGreyColor,
                             borderColor: ChaliarColors.primaryColors,
-                            // controller: model.surname,
+                            controller: model.delivery_group,
                           ),
                         ),
                         SizedBox(
@@ -439,7 +403,8 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
             child: Center(
               child: ButtonChaliar(
                   onTap: () {
-                    Navigator.pushNamed(context, '/commande_arrivee_form');
+                    CircularProgressIndicator();
+                    model.formEditingController(context);
                   },
                   buttonText: 'Suivant',
                   height: MediaQuery.of(context).size.height * 0.07,
@@ -470,7 +435,7 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
           ),
         ],
       ),
-    );
+    )));
   }
 }
 

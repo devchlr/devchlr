@@ -37,8 +37,8 @@ class Order{
   'order_price':order_price,
   'order_status':order_status,
   'order_id':order_id,
-  user_id:user_id,
-  delivery_id:delivery_id,
+  'user_id':user_id,
+  'delivery_id':delivery_id,
   'deliveryInformation':deliveryInformation,
   'recipientInformation':recipientInformation,
   'packageInformation':packageInformation
@@ -50,7 +50,7 @@ class Order{
 //delivery Order information command
 class OrderDeliveryInformation{
   final String departure_address;
-  final String delivery_date;
+  final DateTime delivery_date;
   final String delivery_schedule;
   final String delivery_firt_name;
   final String phone_number;
@@ -88,14 +88,14 @@ class OrderDeliveryInformation{
 
 
   Map<String, dynamic> toJson() =>{
-  departure_address:'departure_address',
-  delivery_date:'delivery_date',
-  delivery_schedule:'delivery_schedule',
-  delivery_firt_name:'delivery_firt_name',
-  delivery_email:'delivery_email',
-  delivery_group:'delivery_group', delivery_name:'delivery_name',
-    phone_number:'phone_number',
-    delivery_type:'delivery_type',
+  'departure_address':departure_address,
+  'delivery_date':delivery_date,
+  'delivery_schedule':delivery_schedule,
+  'delivery_firt_name':delivery_firt_name,
+  'delivery_email':delivery_email,
+  'delivery_group':delivery_group, 'delivery_name':delivery_name,
+    'phone_number':phone_number,
+    'delivery_type':delivery_type,
   };
 }
 
@@ -131,13 +131,13 @@ class OrderRecipientInformation{
 
 
   Map<String, dynamic> toJson() =>{
-  arrival_address:'arrival_address',
-  recipient_phone_number:'recipient_phone_number',
-  firt_name_recipient:'firt_name_recipient',
-  name_recipient:'name_recipient',
-  recipient_email:'recipient_email',
-  recipient_group:'recipient_group',
-  recipient_note:'recipient_note'
+  'arrival_address':arrival_address,
+  'recipient_phone_number':recipient_phone_number,
+  'firt_name_recipient':firt_name_recipient,
+  'name_recipient':name_recipient,
+  'recipient_email':recipient_email,
+  'recipient_group':recipient_group,
+  'recipient_note':recipient_note
   };
 }
 //package Order nature
