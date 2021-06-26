@@ -1,0 +1,32 @@
+const String assets = "assets/icons/";
+
+class SvgIcons {
+  static const String change_camera = assets + "assets/icons/change_camera.svg";
+  static const String camera_take = assets + "assets/icons/camera_take.svg";
+  static const String flash_on = assets + "assets/icons/flash_on.svg";
+  static const String profile = assets + "profil.svg";
+  static const String home = assets + "home.svg";
+  static const String deal = assets + "deal.svg";
+  static const String shop = assets + "shop.svg";
+  static const String service = assets + "service.svg";
+  static const String help = assets + "help.svg";
+  static const String about = assets + "about.svg";
+  static const String back_arrow = assets + "back_arrow.svg";
+  static const String notification = assets + "notification.svg";
+  static const String close = assets + "close.svg";
+  static const String check_ok = assets + "check_ok.svg";
+  static const String eye_close = assets + "eye_close.svg";
+  static const String facebook_blue = assets + "facebook_blue.svg";
+  static const String google_account = assets + "google_account.svg";
+  static const String apple = assets + "apple.svg";
+  static const String padlock = assets + "padlock.svg";
+  static const String scooter = assets + "noun_Scooter.svg";
+  static const String commande = assets + "commande.svg";
+  static const String chaliar = assets + "chaliar.svg";
+  static const String truck = assets + "truck.svg";
+  static const String mini_cooper = assets + "mini_cooper.svg";
+  static const String bike = assets + "bike.svg";
+
+
+
+}
