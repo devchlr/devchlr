@@ -11,14 +11,14 @@ class SvgIconButton extends StatelessWidget {
       {this.iconAsset, this.iconColor, this.onPressed, this.iconSize});
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      icon: SvgPicture.asset(
+    return GestureDetector(
+      child: SvgPicture.asset(
         iconAsset!,
         color: iconColor == null ? null : iconColor,
         height: iconSize,
         width: iconSize,
       ),
-      onPressed: onPressed,
+      onTap: onPressed,
     );
   }
 }

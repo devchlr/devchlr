@@ -86,7 +86,10 @@ class TakePictureScreenState extends State<TakePictureScreen> {
                             ),
                             child:Row(
                                 crossAxisAlignment:CrossAxisAlignment.end,
-                                children:[ Icon(Icons.flash_on_sharp,size: 50,color: Colors.white,),]
+                                children:[ SvgIconButton(
+              iconSize: 50,
+              iconAsset: SvgIcons.flash_on,
+              iconColor: Colors.white,),]
                             )
                         ),
                         Padding(
@@ -125,9 +128,18 @@ class TakePictureScreenState extends State<TakePictureScreen> {
                                         print(e);
                                       }
                                     },
-                                    child:  Icon(Icons.camera,size: 100,color: Colors.white,),
+                                    child:  SvgIconButton(
+                                      iconSize: 100,
+                                      iconAsset: SvgIcons.camera_take,
+                                      iconColor: Colors.white,
+                                    ),
                                   ),
-                                  Icon(Icons.switch_camera_outlined,size: 50,color: Colors.white,),
+                            SvgIconButton(
+                                iconSize: 50,
+                                iconAsset: SvgIcons.change_camera,
+                                iconColor: Colors.white,),
+
+
                                 ]
                             )
                         ),

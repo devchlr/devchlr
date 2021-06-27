@@ -10,6 +10,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_app/services/fire_store_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/ui/views/authentifications/authentification_screen.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:widget_circular_animator/widget_circular_animator.dart';
 import 'package:uuid/uuid.dart';
 
@@ -95,52 +96,51 @@ class RegisterScreenVM extends BaseModel{
     return '200';
   }
   void createUser(BuildContext context, String typeUser) async {
+    // ScaffoldMessenger.of(context).showSnackBar(
+    //   SnackBar(
+    //     backgroundColor: Colors.transparent,
+    //     elevation: 50,
+    //     content:  Column(
+    //       mainAxisAlignment: MainAxisAlignment.center,
+    //       crossAxisAlignment: CrossAxisAlignment.center,
+    //       children: [
+    //         Text('Creation de l\'utilisateur en cours...',style: AppTextStyle.appBarHeader(
+    //           color: ChaliarColors.whiteColor,
+    //         ),),
+    //         SizedBox(height: 20,),
+    //         CircularProgressIndicator(
+    //           backgroundColor: ChaliarColors.primaryColors,
+    //           color: ChaliarColors.whiteColor,
+    //         )
+    //       ],
+    //     ),
+    //   ),
+    // );
+
+    initUserRequestAnimation(context);
     if (typeUser == TypeUser.particulier) {
       if (await validatorPartInformation() == '404') {
-        showDialog(context: context,
-            builder: (_) =>
-            new AlertDialog(
-              title: Text('Error validate Form ',
-                textAlign: TextAlign.center,
-                style: AppTextStyle.header3(color: Colors.red),),
-              content: Text('Tous les champs doivent être renseignés',
-                textAlign: TextAlign.center,
-                style: AppTextStyle.bodyApp1(color: Colors.red),),
-            )
-        );
+        initUserRequestAnimationError(context, 'Tous les champs doivent être renseignés');
       } else if (await validatorPartInformation() == '200') {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-              backgroundColor: ChaliarColors.primaryColors,
-              content: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  WidgetCircularAnimator(
-                    child:
-                    Container(
-                      height: 100,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle, color: Colors.grey[200]),
-                      child: Icon(
-                        Icons.person_outline,
-                        color: Colors.deepOrange[200],
-                        size: 60,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text('Creation de l\'utilisateur...',
-                    textAlign: TextAlign.center,
-                    style: AppTextStyle.headerApp1(
-                        color: ChaliarColors.whiteColor),)
-                ],
-              )
+            backgroundColor: Colors.transparent,
+            elevation: 50,
+            content:  Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text('Création du compte en cours...',style: AppTextStyle.appBarHeader(
+                  color: ChaliarColors.whiteColor,
+                ),),
+                SpinKitCubeGrid(
+                  color: Colors.blueAccent,
+                  size: 50.0,
+                )
+              ],
+            ),
           ),
         );
-        bool isSingUp = false;
         _currentUser =  UserChaliar(
           id: phoneNumber.text,
           email: email.text,
@@ -153,57 +153,48 @@ class RegisterScreenVM extends BaseModel{
           city: city.text,
         );
         await _firestoreService.createUser(_currentUser!);
-        getOPTScreen(context,phoneNumber.text);}
-    } else if (typeUser == TypeUser.professionnel) {
-      if (await validatorPartInformation() == '404') {
-        showDialog(context: context,
-            builder: (_) =>
-            new AlertDialog(
-              title: Text(
-                'Error validate Form ',
-                textAlign: TextAlign.center,
-                style: AppTextStyle.header3(color: Colors.red),
-              ),
-              content: Text(
-                'Tous les champs doivent être renseignés',
-                textAlign: TextAlign.center,
-                style: AppTextStyle.bodyApp1(color: Colors.red),
-              ),
-            )
-        );
-      } else if (await validatorPartInformation() == '200') {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-              backgroundColor: ChaliarColors.primaryColors,
-              content: Column(
+              backgroundColor: Colors.transparent,
+              elevation: 50,
+              content:Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  WidgetCircularAnimator(
-                    child:
-                    Container(
-                      height: 100,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle, color: Colors.grey[200]),
-                      child: Icon(
-                        Icons.person_outline,
-                        color: Colors.deepOrange[200],
-                        size: 60,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text('Creation de l\'utilisateur...',
-                    textAlign: TextAlign.center,
-                    style: AppTextStyle.headerApp1(
-                        color: ChaliarColors.whiteColor),)
+                  Icon(Icons.check,size: 40,color: Colors.green,),
+                  Text('Utilisateur crée avec sucess',style: AppTextStyle.appBarHeader(
+                      color: Colors.white,
+                      size: 14.0
+                  ),),
                 ],
               )
           ),
         );
-        bool isSingUp = false;
+        getOPTScreen(context,phoneNumber.text);
+      }
+    } else if (typeUser == TypeUser.professionnel) {
+      if (await validatorPartInformation() == '404') {
+        initUserRequestAnimationError(context, 'Tous les champs doivent être renseignés');
+      } else if (await validatorPartInformation() == '200') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.transparent,
+            elevation: 50,
+            content:  Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text('Création du compte en cours...',style: AppTextStyle.appBarHeader(
+                  color: ChaliarColors.whiteColor,
+                ),),
+                SpinKitCubeGrid(
+                  color: Colors.blueAccent,
+                  size: 50.0,
+                )
+              ],
+            ),
+          ),
+        );
         _currentUser = UserChaliar(
             id: phoneNumber.text,
             email: email.text,
@@ -218,6 +209,23 @@ class RegisterScreenVM extends BaseModel{
             societe: societe.text
         );
         await _firestoreService.createUser(_currentUser!);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              backgroundColor: Colors.transparent,
+              elevation: 50,
+              content:Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(Icons.check,size: 40,color: Colors.green,),
+                  Text('Utilisateur crée avec sucess',style: AppTextStyle.appBarHeader(
+                      color: Colors.white,
+                      size: 14.0
+                  ),),
+                ],
+              )
+          ),
+        );
         getOPTScreen(context,phoneNumber.text);
       }
     }
@@ -228,6 +236,64 @@ class RegisterScreenVM extends BaseModel{
         new MaterialPageRoute(
             builder: (BuildContext context) =>
             new PhoneOptValidateScreen(phone: phoneNumber)));
+  }
+
+  void googleRegister(BuildContext context){
+    initUserRequestAnimation(context);
+    initUserRequestAnimationError(context, 'connexion google server lost');
+  }
+
+  void facebookRegister(BuildContext context){
+    initUserRequestAnimation(context);
+    initUserRequestAnimationError(context, 'connexion facebook server lost');
+  }
+  void appleRegister(BuildContext context){
+    initUserRequestAnimation(context);
+    initUserRequestAnimationError(context, 'connexion apple server lost');
+  }
+
+  void initUserRequestAnimationError(BuildContext context, String errorLabel){
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+          backgroundColor: Colors.transparent,
+          elevation: 50,
+          content:Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(Icons.cancel,size: 40,color: Colors.red,),
+              SizedBox(height: 20,),
+              Text(errorLabel,style: AppTextStyle.appBarHeader(
+                  color: Colors.white,
+                  size: 14.0
+              ),),
+            ],
+          )
+      ),
+    );
+  }
+
+  void initUserRequestAnimation(BuildContext context){
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.transparent,
+        elevation: 50,
+        content:  Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text('Patienter...',style: AppTextStyle.appBarHeader(
+              color: ChaliarColors.whiteColor,
+            ),),
+            SizedBox(height: 20,),
+            SpinKitCubeGrid(
+              color: Colors.blueAccent,
+              size: 50.0,
+            )
+          ],
+        ),
+      ),
+    );
   }
 
 }

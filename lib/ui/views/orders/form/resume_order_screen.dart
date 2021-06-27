@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/constants/iconList.dart';
+import 'package:flutter_app/ui/styles/chaliar_color.dart';
 import 'package:flutter_app/ui/styles/chaliar_font.dart';
 import 'package:flutter_app/ui/styles/text_style.dart';
+import 'package:flutter_app/ui/widgets/button.dart';
+import 'package:flutter_app/ui/widgets/svg_button.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:timeline_tile/timeline_tile.dart';
-import 'package:timelines/timelines.dart';
 
 
 class ResumeOrderScreen extends StatefulWidget {
@@ -111,56 +114,190 @@ class _ResumeOrderScreenState extends State<ResumeOrderScreen> {
                   ),
                 ),
               ),
+              SizedBox(
+                height: 22.0,
+              ),
+              Center(
+                child: Text('7.2 KM',
+                  style: AppTextStyle.appBarHeader(
+                      size: 9.0,
+                      fontFamily: AppFontFamilly.montserrat,
+                      color: Color(0xff042C5C),
+                      fontWeight: FontWeight.w400
+                  ),
+                ),
+              ),
+              Padding(
+                  padding: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width*0.15,
+                    right: MediaQuery.of(context).size.width*0.15,
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CircleAvatar(
+                            radius: 15,
+                            child: SvgIconButton(
+                              iconSize: 10,
+                              iconAsset: SvgIcons.bike,
+                              iconColor: Color(0xffffffff),
+                            ),
+                          ),
+                          Container(
+                            width: 140.0,
+                            color: Colors.blue,
+                            height: 5,
+                          ),
+                          CircleAvatar(
+                            radius: 15,
+                            child: SvgIconButton(
+                              iconSize: 10,
+                              iconAsset: SvgIcons.apple_emoji,
+                            ),
+                          )
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width:120,
+                            padding: EdgeInsets.only(
+                              left: 0.0,
+                              right: 0.0
+                            ),
+                            child:RichText(
+                                textAlign: TextAlign.center,
+                                text: TextSpan(
+                                  text:
+                                  "\n14:30",
+                                  style: AppTextStyle.appBarHeader(
+                                      color: Color(0xff3885DA),
+                                    size: 12,
+                                    fontFamily: AppFontFamilly.avenirNext
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                      // recognizer: TapGestureRecognizer()
+                                      //   ..onTap = () {
+                                      //     print('phone call');
+                                      //   },
+                                      text: "\ndsdsdsdsdsdsdsdsdsdsd",
+                                      style: AppTextStyle.appBarHeader(
+                                          color: Color(0xff042C5C),
+                                          size: 9.0,
+                                          fontFamily: AppFontFamilly.avenirNext
+                                      ),
+                                    )
+                                  ],
+                                )),
+                          ),
+                          Container(
+                            width:120,
+                            padding: EdgeInsets.only(
+                                left: 0.0,
+                                right: 0.0
+                            ),
+                            child:RichText(
+                                textAlign: TextAlign.center,
+                                text: TextSpan(
+                                  text:
+                                  "\n17:30",
+                                  style: AppTextStyle.appBarHeader(
+                                      color: Color(0xff3885DA),
+                                      size: 12,
+                                      fontFamily: AppFontFamilly.avenirNext
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                      // recognizer: TapGestureRecognizer()
+                                      //   ..onTap = () {
+                                      //     print('phone call');
+                                      //   },
+                                      text: "\ndsdsdsdsdsdsdsdsdsdsd",
+                                      style: AppTextStyle.appBarHeader(
+                                          color: Color(0xff042C5C),
+                                          size: 9.0,
+                                          fontFamily: AppFontFamilly.avenirNext
+                                      ),
+                                    )
+                                  ],
+                                )),
+                          ),
+                        ],
+                      )
+                    ],
+    ),),
+              SizedBox(
+                height: 12.0,
+              ),
+                Padding(
+                padding: EdgeInsets.only(
+    left: MediaQuery.of(context).size.width*0.1,
+    right: MediaQuery.of(context).size.width*0.1,
+    ),
+    child: Card(
+                child: ListTile(
+                  leading: SvgIconButton(
+                iconSize: 50,
+    iconAsset: SvgIcons.package_box,
+    ),
+                  title: Text('Colis à livrer: « ordinateur portable »',style: AppTextStyle.appBarHeader(
+    color: Color(0xff042C5C),
+    size: 12,
+    fontFamily: AppFontFamilly.avenirNext,
+    fontWeight: FontWeight.w400
+    )),
+                ),
+              )),
+
+              SizedBox(
+                height: 27.0,
+              ),
+              Padding(
+                  padding: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width*0.1,
+                    right: MediaQuery.of(context).size.width*0.1,
+                  ),
+                  child: Card(
+                    child: ListTile(
+                      leading: Text('Total TTC',style: AppTextStyle.appBarHeader(
+                        color: Color(0xff3885DA),
+                        size: 15,
+                        fontFamily: AppFontFamilly.montserrat,
+                        fontWeight: FontWeight.w400
+                      ),),
+                      trailing: Text('109€',style: AppTextStyle.appBarHeader(
+                          color: Color(0xff042C5C),
+                          size: 18,
+                          fontFamily: AppFontFamilly.avenirNext,
+                          fontWeight: FontWeight.w500
+                      )),
+                    ),
+                  )),
+              SizedBox(
+                height: 50.0,
+              ),
+              Center(
+                child: ButtonChaliar(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/resume_order_screen');
+                    },
+                    buttonText: 'Valider ma commande',
+                    height: MediaQuery.of(context).size.height * 0.07,
+                    mediaQueryWidth: 0.35,
+                    borderRaduis: 41,
+                    backgroundcolor: ChaliarColors.primaryColors,
+                    bordercolor: ChaliarColors.primaryColors,
+                    textStyle: AppTextStyle.button(
+                        color: ChaliarColors.whiteColor)),
+              )
             ],
           ),
-          SizedBox(
-            height: 22.0,
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-              left: MediaQuery.of(context).size.width*0.15,
-              right: MediaQuery.of(context).size.width*0.15,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-            Expanded(
-            child: CustomScrollView(
-            slivers: <Widget>[
-            SliverPadding(padding: EdgeInsets.only(top: 20)),
-          SliverToBoxAdapter(
-          ),
-          SliverPadding(padding: EdgeInsets.only(top: 20)),
-          SliverToBoxAdapter(
-          ),
-          SliverPadding(padding: EdgeInsets.only(top: 20)),
-          SliverToBoxAdapter(
-          ),
-          SliverPadding(padding: EdgeInsets.only(top: 20)),
-          SliverPadding(padding: EdgeInsets.only(top: 60)),
-        ],
-      ),),
-                // FixedTimeline.tileBuilder(
-                //   theme: TimelineThemeData(
-                //     direction: Axis.horizontal,
-                //     connectorTheme: ConnectorThemeData(
-                //       space: 30.0,
-                //       thickness: 5.0,
-                //     ),
-                //   ),
-                //   builder: TimelineTileBuilder.connectedFromStyle(
-                //     connectionDirection: ConnectionDirection.before,
-                //     connectorStyleBuilder: (context, index) {
-                //       return (index == 1) ? ConnectorStyle.dashedLine : ConnectorStyle.solidLine;
-                //     },
-                //     indicatorStyleBuilder: (context, index) => IndicatorStyle.dot,
-                //     itemExtent: 130.0,
-                //     itemCount: 2,
-                //   ),
-                // ),
-              ],
-            )
-          )
+
+
         ],
       ),
     );

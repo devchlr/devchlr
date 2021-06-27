@@ -1,9 +1,28 @@
 const String assets = "assets/icons/";
 
 class SvgIcons {
-  static const String change_camera = assets + "assets/icons/change_camera.svg";
-  static const String camera_take = assets + "assets/icons/camera_take.svg";
-  static const String flash_on = assets + "assets/icons/flash_on.svg";
+static const String pencil = assets + "pencil.svg";
+static const String white_visa = assets + "white_visa.svg";
+static const String calendar = assets + "calendar.svg";
+static const String icon_card_banck = assets + "icon-CB.svg";
+static const String icon_crypto = assets + "icon-crypto.svg";
+static const String paypal = assets + "paypal.svg";
+static const String mastercard = assets + "mastercard.svg";
+static const String maestro = assets + "maestro.svg";
+static const String add_rounded = assets + "add_rounded.svg";
+static const String ticket = assets + "ticket.svg";
+static const String logout = assets + "logout.svg";
+static const String camera_icon = assets + "camera_icon.svg";
+static const String share = assets + "share.svg";
+static const String question = assets + "question.svg";
+static const String smartphone = assets + "smartphone.svg";
+static const String invoice = assets + "invoice.svg";
+  static const String apple_emoji = assets + "apple_emoji.svg";
+static const String credit_card = assets + "credit-card.svg";
+  static const String package_box = assets + "package_box.svg";
+  static const String change_camera = assets + "change_camera.svg";
+  static const String camera_take = assets + "camera_take.svg";
+  static const String flash_on = assets + "flash_on.svg";
   static const String profile = assets + "profil.svg";
   static const String home = assets + "home.svg";
   static const String deal = assets + "deal.svg";

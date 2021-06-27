@@ -33,6 +33,10 @@ import 'package:flutter_app/ui/views/orders/form/depart_order_form.dart';
 import 'package:flutter_app/ui/views/orders/form/package_information_screen.dart';
 import 'package:flutter_app/ui/views/orders/form/resume_order_screen.dart';
 import 'package:flutter_app/ui/views/orders/home_order_screen.dart';
+import 'package:flutter_app/ui/views/profile/annexe/add_payment_method_screen.dart';
+import 'package:flutter_app/ui/views/profile/annexe/edit_profile_screen.dart';
+import 'package:flutter_app/ui/views/profile/annexe/payment_method_screen.dart';
+import 'package:flutter_app/ui/views/profile/home_profile_screen.dart';
 import 'package:flutter_app/ui/views/splash_screen.dart';
 import 'package:flutter_app/ui/views/tutorial_screen.dart';
 // import 'package:client_chaliar/ui/views/faq/term_screen.dart';
@@ -72,7 +76,7 @@ class MyApp extends StatelessWidget {
           unselectedWidgetColor: Colors.grey,
           disabledColor: Colors.grey),
       routes: <String, WidgetBuilder>{
-        "/splash": (BuildContext context) => new PreCommandeScreen(),
+        "/splash": (BuildContext context) => new SplashScreen(),
         "/tuto": (BuildContext context) => new OnboardingScreen(),
         "/connexion": (BuildContext context) => new ConnexionScreen(),
         "/pro_particulier": (BuildContext context) =>

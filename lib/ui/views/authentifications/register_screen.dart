@@ -112,31 +112,8 @@ class UserRegisterScreen extends StatelessWidget {
                               controller: model.phoneNumber,
                               textFillColor: ChaliarColors.blackColor,
                               maxlenght: 300,
-                              // controller: model.email,
-                              // controller: model.email,
                             ),
                           ),
-                          // Padding(
-                          //   padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.07, right: MediaQuery.of(context).size.width * 0.07),
-                          //   child: IntlPhoneField(
-                          //     decoration: InputDecoration(
-                          //       labelText: 'Téléphone',
-                          //       labelStyle:
-                          //       AppTextStyle.header4(color: ChaliarColors.blackColor),
-                          //       filled: true,
-                          //       fillColor: ChaliarColors.whiteColor,
-                          //       hintStyle:
-                          //       AppTextStyle.header4(color: ChaliarColors.blackColor),
-                          //       contentPadding: EdgeInsets.only(
-                          //           top: 10, bottom: 10, left: 20, right: 20),
-                          //
-                          //     ),
-                          //     initialCountryCode: 'FR',
-                          //     onChanged: (phone) {
-                          //       model.phone= phone.completeNumber;
-                          //     },
-                          //   ),
-                          // ),
                           typeUSer == 'particulier'?SizedBox(
                             height: 0,
                           )
@@ -270,8 +247,8 @@ class UserRegisterScreen extends StatelessWidget {
                                           width: 80,
                                           iconSvg: SvgIconButton(
                                               iconAsset: SvgIcons.facebook_blue,
-                                              onPressed: () {
-                                                Navigator.pop(context);
+                                              onPressed: () async{
+                                                model.facebookRegister(context);
                                               })),
                                       ContainerButton(
                                           height: 60,
@@ -279,14 +256,7 @@ class UserRegisterScreen extends StatelessWidget {
                                           iconSvg: SvgIconButton(
                                               iconAsset: SvgIcons.google_account,
                                               onPressed: ()async {
-                                                showDialog(context: context,
-                                                    builder: (_) =>
-                                                    new AlertDialog(
-                                                      content: Text('google singIng',
-                                                        textAlign: TextAlign.center,
-                                                        style: AppTextStyle.bodyApp1(color: Colors.red),),
-                                                    )
-                                                );
+                                                model.googleRegister(context);
 
                                               })),
                                       ContainerButton(
@@ -294,8 +264,8 @@ class UserRegisterScreen extends StatelessWidget {
                                           width: 80,
                                           iconSvg: SvgIconButton(
                                               iconAsset: SvgIcons.apple,
-                                              onPressed: () {
-                                                Navigator.pop(context);
+                                              onPressed: () async{
+                                                model.appleRegister(context);
                                               })),
                                     ]),
                               )),

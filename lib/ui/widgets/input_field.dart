@@ -76,8 +76,8 @@ class InputField extends StatelessWidget {
                   borderSide: BorderSide(
                       color: borderColor!, width: 0.5, style: BorderStyle.solid))
               : null,
-          labelText: label == null ? 'label' : label,
-          labelStyle: AppTextStyle.bodyfooterField(
+          hintText: label == null ? 'label' : label,
+          hintStyle: AppTextStyle.bodyfooterField(
               color: textLabelColor == null
                   ? ChaliarColors.blackColor
                   : textLabelColor!),
@@ -85,10 +85,10 @@ class InputField extends StatelessWidget {
           fillColor: backgroundColor == null
               ? ChaliarColors.whiteColor
               : backgroundColor,
-          hintStyle: AppTextStyle.body(
-              color: textFillColor == null
-                  ? ChaliarColors.blackColor
-                  : textFillColor!),
+          // hintStyle: AppTextStyle.body(
+          //     color: textFillColor == null
+          //         ? ChaliarColors.blackColor
+          //         : textFillColor!),
           suffixIcon: suffixIcon,
           prefixIcon: prefixIcon,
           enabledBorder: isBorder!
