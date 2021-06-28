@@ -10,6 +10,10 @@ import 'package:flutter_app/ui/widgets/input_field.dart';
 import 'package:flutter_app/ui/widgets/svg_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+
+
 class SingInScreen extends StatefulWidget {
   @override
   _SingInScreenState createState() => _SingInScreenState();
@@ -68,21 +72,75 @@ class _SingInScreenState extends State<SingInScreen> {
                       Expanded(
                         flex: 3,
                         child: ListView(children: [
-                          Padding(
+
+                         Padding(
                             padding: EdgeInsets.only(
-                                left: MediaQuery.of(context).size.width * 0.1,
-                                right: MediaQuery.of(context).size.width * 0.1),
-                            child: CustomTextFieldCard(
-                              card_raduis: 50,
-                              card_size: 60,
-                              leading: SvgIconButton(
-                                  iconAsset: SvgIcons.profile,
-                                  onPressed: () {
-                                  }),
-                              placeholder: 'Telephone',
-                              controller: model.phoneNumber,
-                            ),
-                          ),
+                            left: MediaQuery.of(context).size.width * 0.1,
+                            right: MediaQuery.of(context).size.width * 0.1),
+                           child: Card(
+                             shape: RoundedRectangleBorder(
+                               borderRadius: BorderRadius.all(
+                                 Radius.circular(50),
+                               ),),
+                             child: Container(
+                               height: 60,
+                               child: ListTile(
+                                 title:
+                                 InternationalPhoneNumberInput(
+                                   onInputChanged: (PhoneNumber number) {
+                                     model.phone=number.phoneNumber;
+                                     print(number.phoneNumber);
+                                   },
+                                   onInputValidated: (bool value) {
+                                     print(value);
+                                   },
+                                   selectorConfig: SelectorConfig(
+                                     selectorType: PhoneInputSelectorType.DROPDOWN,
+                                   ),
+                                   ignoreBlank: false,
+                                   inputDecoration: new InputDecoration(
+                                     border: InputBorder.none,
+                                     focusedBorder: InputBorder.none,
+                                     enabledBorder: InputBorder.none,
+                                     errorBorder: InputBorder.none,
+                                     disabledBorder: InputBorder.none,
+                                     contentPadding:
+                                     EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
+                                     hintText: 'Telephone',
+                                     // hintStyle:placeholderStyle,
+                                   ),
+                                   autoValidateMode: AutovalidateMode.disabled,
+                                   selectorTextStyle: TextStyle(color: Colors.black),
+                                   // initialValue: number,
+                                   textFieldController: model.phoneNumber,
+                                   formatInput: false,
+                                   keyboardType:
+                                   TextInputType.numberWithOptions(signed: true, decimal: true),
+                                   // inputBorder: OutlineInputBorder(),
+                                   onSaved: (PhoneNumber number) {
+                                     print('On Saved: $number');
+                                   },
+                                 ),
+                               ),
+                             ),
+                           ),
+                         ),
+
+                          // Padding(
+                          //   padding: EdgeInsets.only(
+                          //       left: MediaQuery.of(context).size.width * 0.1,
+                          //       right: MediaQuery.of(context).size.width * 0.1),
+                          //   child: CustomTextFieldCard(
+                          //     card_raduis: 50,
+                          //     card_size: 60,
+                          //     leading: SvgIconButton(
+                          //         iconAsset: SvgIcons.profile,
+                          //         onPressed: () {
+                          //         }),
+                          //     placeholder: 'Telephone',
+                          //     controller: model.phoneNumber,
+                          //   ),
+                          // ),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.02,
                           ),

@@ -25,15 +25,14 @@ class AuthentificationConnexionVM extends BaseModel{
     if(password.text==null || password.text.isEmpty){
       return false;
     }
-
     return true;
   }
 
   void singIn(BuildContext context)async{
     customShowSnackBar.initUserRequestAnimation(context);
     if(inputVerification()){
-      var userResult = await _storeService.getUser(phoneNumber.text);
-      if(userResult==null){
+      var userResult;
+      if(await _storeService.getUserByPhoneNumber(phone!)==null){
         customShowSnackBar.initUserRequestAnimationError(context, 'user not exist create user account please');
         print('erro 1');
       }else{
@@ -41,6 +40,7 @@ class AuthentificationConnexionVM extends BaseModel{
           customShowSnackBar.initUserRequestAnimationError(context, 'user not exist create user account please');
           print('erro 2');
         }else{
+          userResult=await _storeService.getUserByPhoneNumber(phone!);
           print(userResult['email']);
           _fireAuthService.signInWithEmailAndPassword(userResult['email'], password.text);
           getOPTScreen(context);

@@ -20,6 +20,17 @@ class FirestoreService {
         return null;
       }
   }
+  Future getUserByPhoneNumber(String email)async{
+    var doc =await _usersCollectionReference
+        .where('phone',isEqualTo: email)
+        .limit(1)
+        .get();
+    if(doc==null){
+      return null;
+    }else{
+      return doc.docs.first.data();
+    }
+  }
 }
 
 

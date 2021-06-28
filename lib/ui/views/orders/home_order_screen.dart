@@ -34,10 +34,10 @@ class _PreCommandeScreenState extends State<PreCommandeScreen> {
     mapController = controller;
   }
   void isSingIn()async{
-    if(await widget._auth.currentUser==null){
-      Timer(Duration(seconds: 0),
-              () => Navigator.pushReplacementNamed(context, '/singin'));
-    }
+    // if(await widget._auth.currentUser==null){
+    //   Timer(Duration(seconds: 10),
+    //           () => Navigator.pushReplacementNamed(context, '/singin'));
+    // }
   }
 
   @override

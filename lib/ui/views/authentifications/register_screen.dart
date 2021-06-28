@@ -9,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/model_views/authentification/register_screenVM.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:provider/provider.dart';
 
 class UserRegisterScreen extends StatelessWidget {
@@ -153,13 +154,49 @@ class UserRegisterScreen extends StatelessWidget {
                           ),
                           Padding(
                             padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.07, right: MediaQuery.of(context).size.width * 0.07),
-                            child: InputField(
-                              fieldSize: MediaQuery.of(context).size.height * 0.02,
-                              label: "Numéro de téléphone",
-                              controller: model.phoneNumber,
-                              textFillColor: ChaliarColors.blackColor,
-                              maxlenght: 300,
+                            child:
+                            InternationalPhoneNumberInput(
+                              onInputChanged: (PhoneNumber number) {
+                                model.phone=number.phoneNumber;
+                                print(number.phoneNumber);
+                              },
+                              onInputValidated: (bool value) {
+                                print(value);
+                              },
+                              selectorConfig: SelectorConfig(
+                                selectorType: PhoneInputSelectorType.DROPDOWN,
+                              ),
+                              ignoreBlank: false,
+                              inputDecoration: new InputDecoration(
+                                border: InputBorder.none,
+                                focusedBorder: InputBorder.none,
+                                enabledBorder: InputBorder.none,
+                                errorBorder: InputBorder.none,
+                                disabledBorder: InputBorder.none,
+                                contentPadding:
+                                EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
+                                hintText: 'Telephone',
+                                // hintStyle:placeholderStyle,
+                              ),
+                              autoValidateMode: AutovalidateMode.disabled,
+                              selectorTextStyle: TextStyle(color: Colors.black),
+                              // initialValue: number,
+                              textFieldController: model.phoneNumber,
+                              formatInput: false,
+                              keyboardType:
+                              TextInputType.numberWithOptions(signed: true, decimal: true),
+                              // inputBorder: OutlineInputBorder(),
+                              onSaved: (PhoneNumber number) {
+                                print('On Saved: $number');
+                              },
                             ),
+                            // InputField(
+                            //   fieldSize: MediaQuery.of(context).size.height * 0.02,
+                            //   label: "Numéro de téléphone",
+                            //   controller: model.phoneNumber,
+                            //   textFillColor: ChaliarColors.blackColor,
+                            //   maxlenght: 300,
+                            // ),
                           ),
                           typeUSer == 'particulier'?SizedBox(
                             height: 0,

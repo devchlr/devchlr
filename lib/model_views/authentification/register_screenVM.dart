@@ -24,6 +24,7 @@ class RegisterScreenVM extends BaseModel{
 
   UserChaliar? _currentUser;
   bool obscureText = true;
+  String? phone;
   String iconAsset = SvgIcons.eye_close;
   TextEditingController surname = TextEditingController();
   TextEditingController name = TextEditingController();
@@ -131,7 +132,7 @@ class RegisterScreenVM extends BaseModel{
           userRole: TypeUser.particulier,
           name: name.text,
           surname: surname.text,
-          phone: phoneNumber.text,
+          phone: phone,
           facturationAdresse: facturationAdress.text,
           codePostal: codePostal.text,
           city: city.text,
@@ -157,7 +158,7 @@ class RegisterScreenVM extends BaseModel{
             userRole: TypeUser.professionnel,
             name: name.text,
             surname: surname.text,
-            phone: phoneNumber.text,
+            phone: phone,
             facturationAdresse: facturationAdress.text,
             codePostal: codePostal.text,
             city: city.text,

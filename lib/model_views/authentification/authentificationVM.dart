@@ -44,6 +44,7 @@ class AuthentificationVM extends BaseModel{
     print(currentUser?.name);
     notifyListeners();
   }
+
   //verifier le code pin
   sendSmsOpt(String phoneNumber,BuildContext context)async{
     customShowSnackBar.initUserRequestAnimation(context);

@@ -5,6 +5,7 @@ import 'package:flutter_app/ui/styles/chaliar_color.dart';
 import 'package:flutter_app/ui/styles/chaliar_font.dart';
 import 'package:flutter_app/ui/styles/text_style.dart';
 import 'package:flutter_app/ui/widgets/custom_botom_navigation_bar.dart';
+import 'package:flutter_app/ui/widgets/custom_showSnackBar.dart';
 import 'package:flutter_app/ui/widgets/profile_listTile.dart';
 import 'package:flutter_app/ui/widgets/svg_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -20,6 +21,7 @@ class HomeProfileScreen extends StatefulWidget {
 }
 
 class _HomeProfileScreenState extends State<HomeProfileScreen> {
+  CustomShowSnackBar customShowSnackBar=CustomShowSnackBar();
   String? user_surname;
   void initState() {
     super.initState();
@@ -172,7 +174,9 @@ class _HomeProfileScreenState extends State<HomeProfileScreen> {
                                 child: Center(
                                   child: GestureDetector(
                                     onTap: (){
+                                      customShowSnackBar.initUserRequestAnimation(context);
                                       widget._auth.signOut();
+                                      Navigator.pushNamed(context, '/singin');
                                     },
                                     child: SvgIconButton(
                                       iconSize: 25,
