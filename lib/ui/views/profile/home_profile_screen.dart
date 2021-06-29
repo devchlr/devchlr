@@ -1,53 +1,40 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/constants/iconList.dart';
+import 'package:flutter_app/model_views/profile/home_profileMV.dart';
 import 'package:flutter_app/ui/styles/chaliar_color.dart';
 import 'package:flutter_app/ui/styles/chaliar_font.dart';
 import 'package:flutter_app/ui/styles/text_style.dart';
 import 'package:flutter_app/ui/widgets/custom_botom_navigation_bar.dart';
-import 'package:flutter_app/ui/widgets/custom_showSnackBar.dart';
 import 'package:flutter_app/ui/widgets/profile_listTile.dart';
 import 'package:flutter_app/ui/widgets/svg_button.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:share/share.dart';
+import 'package:provider/provider.dart';
 
 class HomeProfileScreen extends StatefulWidget {
-  FirebaseAuth _auth =FirebaseAuth.instance;
-  HomeProfileScreen({Key? key}) : super(key: key);
 
+  HomeProfileScreen({Key? key}) : super(key: key);
   @override
   _HomeProfileScreenState createState() => _HomeProfileScreenState();
 }
 
 class _HomeProfileScreenState extends State<HomeProfileScreen> {
-  CustomShowSnackBar customShowSnackBar=CustomShowSnackBar();
-  String? user_surname;
+  HomeProfileMV homeProfileMV=HomeProfileMV();
+
   void initState() {
     super.initState();
-    nextScreen();
+    getU();
   }
-  void nextScreen()async{
-    print(await widget._auth.currentUser);
-    // setState(() async{
-    //   user_surname=await widget._auth.currentUser?.phoneNumber;
-    // });
-    // print(user_surname);
-
-    // if(await widget._auth.currentUser==null){
-    //   Timer(Duration(seconds: 6),
-    //           () => Navigator.pushReplacementNamed(context, '/tuto'));
-    // }else{
-    //   print('toujours actif');
-    //   // widget._auth.signOut();
-    //   Timer(Duration(seconds: 6),
-    //           () => Navigator.pushReplacementNamed(context, '/pre_commande'));
-    // }
+  void getU(){
+     homeProfileMV.getUser();
   }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ChangeNotifierProvider<HomeProfileMV>(
+        create: (context) => HomeProfileMV(),
+        child: Consumer<HomeProfileMV>(
+            builder: (context, model, child) =>
+                Scaffold(
       bottomNavigationBar: CustomBottomNavigationBar(),
       body: Stack(
         children: [
@@ -93,7 +80,7 @@ class _HomeProfileScreenState extends State<HomeProfileScreen> {
                     ),
                     child: Center(
                       child: Text(
-                        '$user_surname\nWilliams',
+                        '${model.currentUser?.surname}\n${model.currentUser?.name}',
                         textAlign: TextAlign.left,
                         style: AppTextStyle.appBarHeader(
                             size: 19,
@@ -123,15 +110,13 @@ class _HomeProfileScreenState extends State<HomeProfileScreen> {
                           height: 15.0,
                         ),
                         CustomProfileListTile(title:'Mes informations',iconAsset:SvgIcons.ticket,onTap:(){
-                          customShowSnackBar.initUserRequestAnimation(context);
-                          Navigator.pushNamed(context, '/edit_profile');
+                          model.getPageByName(context, '/edit_profile');
                         },),
                         SizedBox(
                           height: 10.0,
                         ),
                         CustomProfileListTile(title:'Méthode de paiement',iconAsset:SvgIcons.credit_card,onTap:(){
-                          customShowSnackBar.initUserRequestAnimation(context);
-                          Navigator.pushNamed(context, '/payment_method');
+                         model.getPageByName(context, '/payment_method');
                         },),
                         SizedBox(
                           height: 10.0,
@@ -149,30 +134,26 @@ class _HomeProfileScreenState extends State<HomeProfileScreen> {
                           height: 10.0,
                         ),
                         CustomProfileListTile(title:'Aide',iconAsset:SvgIcons.question,onTap:(){
-                          customShowSnackBar.initUserRequestAnimation(context);
-                          Navigator.pushNamed(context, '/faq');
+                          model.getPageByName(context, '/faq');
                         },),
                         SizedBox(
                           height: 10.0,
                         ),
                         CustomProfileListTile(title:'À propos',iconAsset:SvgIcons.smartphone,onTap:(){
-                          customShowSnackBar.initUserRequestAnimation(context);
-                          Navigator.pushNamed(context, '/about');
+                          model.getPageByName(context, '/about');
                         },),
                         SizedBox(
                           height: 10.0,
                         ),
                         CustomProfileListTile(title:'Partager l’application',iconAsset:SvgIcons.share,onTap:(){
-                          Share.share('check out my website https://example.com', subject: 'Inviter un ami sur Chaliar!');
+                          model.sharedApp();
                         },),
                         SizedBox(
                           height: 50.0,
                         ),
                         GestureDetector(
                           onTap: (){
-                            customShowSnackBar.initUserRequestAnimation(context);
-                            widget._auth.signOut();
-                            Navigator.pushNamed(context, '/singin');
+                            model.singoutUser(context);
                           },
                           child: Card(
                             color: Color(0xffDFE7F5),
@@ -189,9 +170,7 @@ class _HomeProfileScreenState extends State<HomeProfileScreen> {
                                 child: Center(
                                   child: GestureDetector(
                                     onTap: (){
-                                      customShowSnackBar.initUserRequestAnimation(context);
-                                      widget._auth.signOut();
-                                      Navigator.pushNamed(context, '/singin');
+                                      model.singoutUser(context);
                                     },
                                     child: SvgIconButton(
                                       iconSize: 25,
@@ -224,6 +203,8 @@ class _HomeProfileScreenState extends State<HomeProfileScreen> {
 
         ],
       ),
+    ),
+        ),
     );
   }
 }

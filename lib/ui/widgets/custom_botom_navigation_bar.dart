@@ -10,7 +10,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
     return Container(
       height: 80,
       decoration: BoxDecoration(
-        color: Color(0xffF3F3F3),
+        color: Color(0xfff3f3f3),
         image: DecorationImage(
           image: AssetImage("assets/images/menuFooter.png"),
           fit: BoxFit.fill,
@@ -33,7 +33,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                   SvgIcons.chaliar,
                   height: 30,
                   width: 20,
-                  color: Colors.white,
+                  color: Colors.grey,
                 ),
               ),
             ),
@@ -58,7 +58,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                   SvgIcons.scooter,
                   height: 30,
                   width: 20,
-                  color: ChaliarColors.whiteGreyColor,
+                  color: Colors.grey,
                 ),
               ),
             ),

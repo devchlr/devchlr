@@ -14,7 +14,8 @@ class FirestoreService {
 
   Future getUser(String uid) async {
       DocumentSnapshot doc = await _usersCollectionReference.doc(uid).get();
-      if(doc.exists) { // this will check availability of document
+      if(doc.exists) {
+        print(doc.data());
        return doc.data();
       }else{
         return null;

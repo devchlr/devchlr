@@ -21,9 +21,9 @@ class TermConditionScreen extends StatelessWidget {
                 left: 20,
                 right: 20
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
+            child: ListView(
+              // mainAxisAlignment: MainAxisAlignment.center,
+              // crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text('Condition générale',textAlign: TextAlign.center,style: AppTextStyle.headerApp1(color: ChaliarColors.blackColor,)),
                 SizedBox(

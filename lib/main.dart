@@ -10,14 +10,6 @@
 // import 'package:client_chaliar/ui/views/commande1.dart';
 // import 'package:client_chaliar/ui/views/faq/faq_screen.dart';
 import 'package:flutter/material.dart';
-// import 'package:client_chaliar/ui/views/splash_screen.dart';
-// import 'package:client_chaliar/ui/views/tuto_screen.dart';
-// import 'package:client_chaliar/ui/views/auth/connexion_screen.dart';
-// import 'package:client_chaliar/ui/views/auth/pro_particulier_screen.dart';
-// import 'package:client_chaliar/ui/views/auth/inscription_screen.dart';
-// import 'package:client_chaliar/ui/views/auth/singin_screen.dart';
-// import 'package:client_chaliar/ui/views/auth/condition_generale_screen.dart';
-// import 'package:client_chaliar/ui/views/auth/phone_opt/phone_number_validate.dart';
 import 'dart:async';
 import 'dart:io';
 import 'package:camera/camera.dart';
@@ -78,7 +70,7 @@ class MyApp extends StatelessWidget {
           unselectedWidgetColor: Colors.grey,
           disabledColor: Colors.grey),
       routes: <String, WidgetBuilder>{
-        "/splash": (BuildContext context) => new PaymentMethodScreen(),
+        "/splash": (BuildContext context) => new FaqScreen(),
         "/tuto": (BuildContext context) => new OnboardingScreen(),
         "/connexion": (BuildContext context) => new ConnexionScreen(),
         "/pro_particulier": (BuildContext context) =>
