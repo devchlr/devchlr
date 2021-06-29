@@ -67,7 +67,7 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                         child: Icon(Icons.arrow_back_ios),
                       ),
                       title: 'Commande',
-                      bgColor: ChaliarColors.whiteColor,
+                      bgColor: Colors.white,
                       imageBackground: 'assets/images/header.png'
                   ),
                   bottomNavigationBar: CustomBottomNavigationBar(),
@@ -85,30 +85,13 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                               color: ChaliarColors.whiteColor,
                               child:
                               Card(
-                                elevation: 0.5,
+                                elevation: 0.0,
                                 child: ListView(
                                   children: [
                                     ListTile(
                                       title: Text('Position de départ du colis',
                                         style: AppTextStyle.formComDesc(color: ChaliarColors.secondaryColors,)
                                         ,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 13.0,
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.07, right: MediaQuery.of(context).size.width * 0.07),
-                                      child: InputField(
-                                        controller: model.departure_address,
-                                        fieldSize: MediaQuery.of(context).size.height * 0.025,
-                                        label: "Adresse de départ",
-                                        isBorder: true,
-                                        textLabelColor: ChaliarColors.secondaryColors,
-                                        maxlenght: 250,
-                                        backgroundColor: ChaliarColors.whiteGreyColor,
-                                        borderColor: ChaliarColors.primaryColors,
-                                        // controller: model.surname,
                                       ),
                                     ),
                                     SizedBox(
@@ -138,22 +121,27 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                                           left: MediaQuery.of(context).size.width * 0.07,
                                           right: MediaQuery.of(context).size.width * 0.07,
                                         ),
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              color: ChaliarColors.whiteGreyColor,
-                                              borderRadius: BorderRadius.circular(6.0),
-                                              border: Border.all(color: ChaliarColors.primaryColors,width: 0.5)
-                                          ),
-                                          child: ListTile(
-                                            trailing: Radio(
-                                              value: TypeLivraison.express,
-                                              groupValue: model.group,
-                                              onChanged: (value){
-                                                model.selectTypeLivraison(TypeLivraison.express);
-                                              },
+                                        child: GestureDetector(
+                                          onTap: (){
+                                            model.selectTypeLivraison(TypeLivraison.express);
+                                          },
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                color: ChaliarColors.whiteGreyColor,
+                                                borderRadius: BorderRadius.circular(6.0),
+                                                border: Border.all(color: ChaliarColors.primaryColors,width: 0.5)
                                             ),
-                                            title: Text("Livraison express",style:AppTextStyle.bodyfooterField(color: ChaliarColors.secondaryColors)
-                                              ,),
+                                            child: ListTile(
+                                              trailing: Radio(
+                                                value: TypeLivraison.express,
+                                                groupValue: model.group,
+                                                onChanged: (value){
+                                                  model.selectTypeLivraison(TypeLivraison.express);
+                                                },
+                                              ),
+                                              title: Text("Livraison express",style:AppTextStyle.bodyfooterField(color: ChaliarColors.secondaryColors)
+                                                ,),
+                                            ),
                                           ),
                                         )
                                     ),
@@ -165,46 +153,51 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                                           left: MediaQuery.of(context).size.width * 0.07,
                                           right: MediaQuery.of(context).size.width * 0.07,
                                         ),
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              color: ChaliarColors.whiteGreyColor,
-                                              borderRadius: BorderRadius.circular(6.0),
-                                              border: Border.all(color: ChaliarColors.primaryColors,width: 0.5)
-                                          ),
-                                          child: ExpansionTile(
-                                            trailing: Radio(
-                                              value: TypeLivraison.programme,
-                                              groupValue: model.group,
-                                              onChanged: (value){
-                                                model.selectTypeLivraison(TypeLivraison.programme);
-                                              },
+                                        child: GestureDetector(
+                                          onTap: (){
+                                            model.selectTypeLivraison(TypeLivraison.programme);
+                                          },
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                color: ChaliarColors.whiteGreyColor,
+                                                borderRadius: BorderRadius.circular(6.0),
+                                                border: Border.all(color: ChaliarColors.primaryColors,width: 0.5)
                                             ),
-                                            title: Text("Livraison programmé",style:AppTextStyle.bodyfooterField(color: ChaliarColors.secondaryColors)
-                                              ,),
-                                            children: <Widget>[
-                                              Container(
-                                                  margin:EdgeInsets.only(
-                                                      left: 20.0,right: 20.0
-                                                  ),
-                                                  child:Positioned(
-                                                      left: 0,
-                                                      top: 80,
-                                                      right: 0,
-                                                      bottom: 0,
-                                                      child:  Column(
-                                                        mainAxisAlignment: MainAxisAlignment.center,
-                                                        children: <Widget>[
-                                                          SfDateRangePicker(
-                                                            controller: model.delivery_date,
-                                                            showNavigationArrow: true,
-                                                            // onSelectionChanged: _onSelectionChanged,
-                                                            selectionMode: DateRangePickerSelectionMode.single,
-                                                          ),
-                                                        ],
-                                                      ))
-                                              )
+                                            child: ExpansionTile(
+                                              trailing: Radio(
+                                                value: TypeLivraison.programme,
+                                                groupValue: model.group,
+                                                onChanged: (value){
+                                                  model.selectTypeLivraison(TypeLivraison.programme);
+                                                },
+                                              ),
+                                              title: Text("Livraison programmé",style:AppTextStyle.bodyfooterField(color: ChaliarColors.secondaryColors)
+                                                ,),
+                                              children: <Widget>[
+                                                Container(
+                                                    margin:EdgeInsets.only(
+                                                        left: 20.0,right: 20.0
+                                                    ),
+                                                    child:Positioned(
+                                                        left: 0,
+                                                        top: 80,
+                                                        right: 0,
+                                                        bottom: 0,
+                                                        child:  Column(
+                                                          mainAxisAlignment: MainAxisAlignment.center,
+                                                          children: <Widget>[
+                                                            SfDateRangePicker(
+                                                              controller: model.delivery_date,
+                                                              showNavigationArrow: true,
+                                                              // onSelectionChanged: _onSelectionChanged,
+                                                              selectionMode: DateRangePickerSelectionMode.single,
+                                                            ),
+                                                          ],
+                                                        ))
+                                                )
 
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         )
                                     ),

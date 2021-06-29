@@ -26,11 +26,11 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
             onTap: (){
               Navigator.pop(context);
             },
-            child: Icon(Icons.arrow_back_ios,color: Color(0xffd8d8d8),),
+            child: Icon(Icons.arrow_back_ios,color: Color(0xffd8d8d8)),
           ),
           description: '',
           title: 'Méthode de paiement',
-          bgColor: Color(0xffd8d8d8),
+          bgColor: Color(0xffF3F3F3),
           imageBackground: 'assets/images/header.png'
       ),
       backgroundColor: Color(0xffF3F3F3),
@@ -156,11 +156,11 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                         ),
                       ),
                       trailing: CircleAvatar(
-                        radius: 25,
+                        radius: 15,
                         backgroundImage: AssetImage('assets/images/add_photo_profile.png'),
                         backgroundColor: Colors.transparent,
                         child: CircleAvatar(
-                          radius: 11,
+                          radius: 5,
                           backgroundColor: Color(0xff042C5C),
                         ),
                       ),
@@ -193,7 +193,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                         ),
                       ),
                       trailing: CircleAvatar(
-                        radius: 25,
+                        radius: 15,
                         backgroundImage: AssetImage('assets/images/add_photo_profile.png'),
                         backgroundColor: Colors.transparent,
                         // child: CircleAvatar(

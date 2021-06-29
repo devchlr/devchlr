@@ -47,7 +47,6 @@ class UserRegisterScreen extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(
                         top: MediaQuery.of(context).size.height*0.1,
-                        bottom: MediaQuery.of(context).size.height * 0.01,
                         left: MediaQuery.of(context).size.width * 0.08,
                         right: MediaQuery.of(context).size.width * 0.08
                     ),
@@ -176,7 +175,8 @@ class UserRegisterScreen extends StatelessWidget {
                                 contentPadding:
                                 EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
                                 hintText: 'Telephone',
-                                // hintStyle:placeholderStyle,
+                                hintStyle:AppTextStyle.bodyfooterField(
+                                ),
                               ),
                               autoValidateMode: AutovalidateMode.disabled,
                               selectorTextStyle: TextStyle(color: Colors.black),

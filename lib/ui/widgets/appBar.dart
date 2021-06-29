@@ -13,9 +13,9 @@ class ChaliarMenu{
       automaticallyImplyLeading: false,
       backwardsCompatibility: false,
       elevation: 0.0,
-      backgroundColor:Colors.transparent,
+      backgroundColor:bgColor,
       flexibleSpace: Image(
-        image: AssetImage(imageBackground!),
+        image: AssetImage(imageBackground!,),
         filterQuality: FilterQuality.high,
         fit: BoxFit.fitWidth,
       ),

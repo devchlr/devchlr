@@ -46,7 +46,7 @@ class _PreCommandeScreenState extends State<PreCommandeScreen> {
       Scaffold(
         appBar: ChaliarMenu.topBar(
             title: 'Commande',
-            bgColor: ChaliarColors.whiteColor,
+            bgColor: Colors.white,
             imageBackground: 'assets/images/header.png'
         ),
         bottomNavigationBar:CustomBottomNavigationBar(),
@@ -63,7 +63,7 @@ class _PreCommandeScreenState extends State<PreCommandeScreen> {
                   ),
                   height: MediaQuery.of(context).size.height * 0.15,
                   decoration: BoxDecoration(
-                    color: ChaliarColors.whiteColor,
+                    color: Colors.white,
                   ),
                   child: ListView(
                     children: [

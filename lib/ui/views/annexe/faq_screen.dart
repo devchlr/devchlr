@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/ui/styles/chaliar_color.dart';
 import 'package:flutter_app/ui/styles/text_style.dart';
@@ -7,7 +8,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:timelines/timelines.dart';
 
 class FaqScreen extends StatefulWidget {
-
 
   @override
   _FaqScreenState createState() => _FaqScreenState();
@@ -25,8 +25,6 @@ class _FaqScreenState extends State<FaqScreen> {
           bgColor: ChaliarColors.whiteColor,
           imageBackground: 'assets/images/header.png'
       ),
-
-
       body: Stack(
         children: [
           Column(
@@ -55,6 +53,12 @@ class _FaqScreenState extends State<FaqScreen> {
                           trailing: Text(''),
                           title: Text("Livraison programme",style:AppTextStyle.bodyfooterField(color: ChaliarColors.secondaryColors),),
                           children: [
+                           Padding(padding: EdgeInsets.all(5),
+                             child:  Text("Après nous avoir transmis toutes les informations demandées lors de l'inscription, vous serez convié(e) à une session d'information (physique ou en ligne) durant laquelle votre compte sera activé. ",textAlign:TextAlign.left,style:AppTextStyle.bodyfooterField(color: ChaliarColors.secondaryColors),),
+                           ),
+                            Padding(padding: EdgeInsets.all(5),
+                              child:  Text("Afin d'optimiser les revenus des coursiers actifs sur la plateforme, la fréquence des sessions d'information peut varier selon les villes et les périodes de l'année.",textAlign:TextAlign.left,style:AppTextStyle.bodyfooterField(color: ChaliarColors.secondaryColors),),
+                            )
                           ],
                         ),
                       ),
@@ -63,7 +67,7 @@ class _FaqScreenState extends State<FaqScreen> {
                         elevation: 2.0,
                         child: ExpansionTile(
                           trailing: Text(''),
-                          title: Text("Livraison programme",style:AppTextStyle.bodyfooterField(color: ChaliarColors.secondaryColors),),
+                          title: Text("Quelles sont les différentes étapes de ma candidature ?",style:AppTextStyle.bodyfooterField(color: ChaliarColors.secondaryColors),),
                           children: [
                           ],
                         ),
@@ -73,7 +77,7 @@ class _FaqScreenState extends State<FaqScreen> {
                         elevation: 2.0,
                         child: ExpansionTile(
                           trailing: Text(''),
-                          title: Text("Livraison programme",style:AppTextStyle.bodyfooterField(color: ChaliarColors.secondaryColors),),
+                          title: Text("Comment fonctionne le contrôle d'identité ?",style:AppTextStyle.bodyfooterField(color: ChaliarColors.secondaryColors),),
                           children: [
                           ],
                         ),

@@ -8,9 +8,9 @@ class CustomBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
+      height: 80,
       decoration: BoxDecoration(
-        color: Colors.transparent,
+        color: Color(0xffF3F3F3),
         image: DecorationImage(
           image: AssetImage("assets/images/menuFooter.png"),
           fit: BoxFit.fill,
@@ -33,7 +33,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                   SvgIcons.chaliar,
                   height: 30,
                   width: 20,
-                  color: ChaliarColors.whiteGreyColor,
+                  color: Colors.white,
                 ),
               ),
             ),

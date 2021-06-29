@@ -28,7 +28,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           ),
           description: '',
           title: 'Profil',
-          bgColor: Color(0xffd8d8d8),
+          bgColor: Color(0xffF3F3F3),
           imageBackground: 'assets/images/header.png'
       ),
       backgroundColor: Color(0xffF3F3F3),
@@ -49,7 +49,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 // left: 30
               ),
                 child: Text(
-                  'Modifier votre profi'
+                  'Modifier votre profil'
                   ,style: AppTextStyle.appBarHeader(
                     color: Color(0xff042C5C),
                     size: 26,

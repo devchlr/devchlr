@@ -10,7 +10,7 @@ import 'package:flutter_app/ui/widgets/profile_listTile.dart';
 import 'package:flutter_app/ui/widgets/svg_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:share/share.dart';
 
 class HomeProfileScreen extends StatefulWidget {
   FirebaseAuth _auth =FirebaseAuth.instance;
@@ -56,6 +56,7 @@ class _HomeProfileScreenState extends State<HomeProfileScreen> {
               Container(
                 height: MediaQuery.of(context).size.height * 0.45,
                 decoration: BoxDecoration(
+                  color: Color(0xffF3F3F3),
                   image: DecorationImage(
                     image: AssetImage("assets/images/profileBg.png"),
                     fit: BoxFit.fill,
@@ -122,12 +123,16 @@ class _HomeProfileScreenState extends State<HomeProfileScreen> {
                           height: 15.0,
                         ),
                         CustomProfileListTile(title:'Mes informations',iconAsset:SvgIcons.ticket,onTap:(){
+                          customShowSnackBar.initUserRequestAnimation(context);
                           Navigator.pushNamed(context, '/edit_profile');
                         },),
                         SizedBox(
                           height: 10.0,
                         ),
-                        CustomProfileListTile(title:'Méthode de paiement',iconAsset:SvgIcons.credit_card,onTap:(){},),
+                        CustomProfileListTile(title:'Méthode de paiement',iconAsset:SvgIcons.credit_card,onTap:(){
+                          customShowSnackBar.initUserRequestAnimation(context);
+                          Navigator.pushNamed(context, '/payment_method');
+                        },),
                         SizedBox(
                           height: 10.0,
                         ),
@@ -143,21 +148,31 @@ class _HomeProfileScreenState extends State<HomeProfileScreen> {
                         SizedBox(
                           height: 10.0,
                         ),
-                        CustomProfileListTile(title:'Aide',iconAsset:SvgIcons.question,onTap:(){},),
+                        CustomProfileListTile(title:'Aide',iconAsset:SvgIcons.question,onTap:(){
+                          customShowSnackBar.initUserRequestAnimation(context);
+                          Navigator.pushNamed(context, '/faq');
+                        },),
                         SizedBox(
                           height: 10.0,
                         ),
-                        CustomProfileListTile(title:'À propos',iconAsset:SvgIcons.smartphone,onTap:(){},),
+                        CustomProfileListTile(title:'À propos',iconAsset:SvgIcons.smartphone,onTap:(){
+                          customShowSnackBar.initUserRequestAnimation(context);
+                          Navigator.pushNamed(context, '/about');
+                        },),
                         SizedBox(
                           height: 10.0,
                         ),
-                        CustomProfileListTile(title:'Partager l’applicati',iconAsset:SvgIcons.share,onTap:(){},),
+                        CustomProfileListTile(title:'Partager l’application',iconAsset:SvgIcons.share,onTap:(){
+                          Share.share('check out my website https://example.com', subject: 'Inviter un ami sur Chaliar!');
+                        },),
                         SizedBox(
                           height: 50.0,
                         ),
                         GestureDetector(
                           onTap: (){
+                            customShowSnackBar.initUserRequestAnimation(context);
                             widget._auth.signOut();
+                            Navigator.pushNamed(context, '/singin');
                           },
                           child: Card(
                             color: Color(0xffDFE7F5),

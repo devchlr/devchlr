@@ -22,6 +22,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_app/ui/views/annexe/about.dart';
 import 'package:flutter_app/ui/views/annexe/faq_screen.dart';
 import 'package:flutter_app/ui/views/authentifications/connexion_screen.dart';
 import 'package:flutter_app/ui/views/authentifications/home_screen.dart';
@@ -72,12 +73,12 @@ class MyApp extends StatelessWidget {
       initialRoute: "/splash",
       title: 'Chaliar',
       theme: ThemeData(
-          primarySwatch: Colors.blue,
+          // primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           unselectedWidgetColor: Colors.grey,
           disabledColor: Colors.grey),
       routes: <String, WidgetBuilder>{
-        "/splash": (BuildContext context) => new SplashScreen(),
+        "/splash": (BuildContext context) => new PaymentMethodScreen(),
         "/tuto": (BuildContext context) => new OnboardingScreen(),
         "/connexion": (BuildContext context) => new ConnexionScreen(),
         "/pro_particulier": (BuildContext context) =>
@@ -93,8 +94,10 @@ class MyApp extends StatelessWidget {
         '/resume_order_screen':(BuildContext context)=>new ResumeOrderScreen(),
         '/home_profile':(BuildContext context)=>new HomeProfileScreen(),
         '/edit_profile':(BuildContext context)=>new EditProfileScreen(),
+        '/payment_method':(BuildContext context)=>new PaymentMethodScreen(),
 
          "/faq": (BuildContext context) => new FaqScreen(),
+        "/about": (BuildContext context) => new AboutScreen(),
         // "/pre-condition": (BuildContext context) => new PreOnboardingScreen(),
       },
     );

@@ -20,7 +20,7 @@ class _AddPaymentMethodScreenState extends State<AddPaymentMethodScreen> {
             onTap: (){
               Navigator.pop(context);
             },
-            child: Icon(Icons.arrow_back_ios,color: Color(0xffd8d8d8),),
+            child: Icon(Icons.arrow_back_ios,color: Color(0xffF3F3F3),),
           ),
           description: '',
           title: 'Méthode de paiement',

@@ -75,15 +75,11 @@ class _TailleColisScreenState extends State<TailleColisScreen> {
                       ),
                     ),
                 ),
-              // Text(
-              //   'Nom de l\'objet à transporter',
-              //   style: AppTextStyle.tailleCaption(color: ChaliarColors.blackColor),
-              // )
               Expanded(
                 flex: 1,
                 child: Container(
                     padding: EdgeInsets.only(
-                        left: 30.0,right: 30.0,bottom: 10.0,top: 10.0
+                        left: 45.0,right: 45.0,bottom: 10.0,top: 10.0
                     ),
                     color: ChaliarColors.whiteColor,
                     child:ListView(

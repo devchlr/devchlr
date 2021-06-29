@@ -44,6 +44,7 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
           ],
         ),
         centerTitle: true,
+        backgroundColor: ChaliarColors.primaryColors,
       ),
       body:
       Stack(
@@ -70,7 +71,7 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
               ),
             ],
           ),
-          Column(
+          ListView(
             children: [
               SizedBox(
                 height: MediaQuery.of(context).size.height *0.15,
@@ -83,7 +84,7 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
                 ),
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height *0.03,
+                height: 57,
               ),
               Center(
                 child:GestureDetector(
@@ -122,7 +123,7 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
                 ,
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height *0.02,
+                height:30,
               ),
               Center(
                 child: Text(
@@ -131,17 +132,23 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
                   textAlign: TextAlign.center,
                 ),
               ),
+               SizedBox(height:50 ,),
+               SvgPicture.asset(
+                "assets/images/bonhomme.svg",
+                height: 325,
+                width: 297,
+              )
             ],
           ),
-          Positioned(
-            bottom: 10.0,
-            right: 20.0,
-            child: SvgPicture.asset(
-              "assets/images/bonhomme.svg",
-              height: 325,
-              width: 297,
-            ),
-          ),
+          // Positioned(
+          //   bottom: 10.0,
+          //   right: 20.0,
+          //   child: SvgPicture.asset(
+          //     "assets/images/bonhomme.svg",
+          //     height: 325,
+          //     width: 297,
+          //   ),
+          // ),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [

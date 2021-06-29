@@ -23,7 +23,7 @@ class OnboardingPageWidget extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          color: ChaliarColors.whiteGreyColor,
+          color: ChaliarColors.whiteColor,
         ),
         Flexible(
             flex: 1,
@@ -56,11 +56,13 @@ class OnboardingPageWidget extends StatelessWidget {
               padding: EdgeInsets.only(
                   left: MediaQuery.of(context).size.height * 0.05,
                   right: MediaQuery.of(context).size.height * 0.05),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
+              child: ListView(
+                // crossAxisAlignment: CrossAxisAlignment.start,
+                // mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-
+                  SizedBox(
+                    height: 26,
+                  ),
                   Center(
                       child: Text(
                     title!,
