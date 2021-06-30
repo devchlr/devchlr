@@ -27,9 +27,9 @@ class Order{
         order_id=json['order_id'],
         user_id=json['user_id'],
         delivery_id=json['delivery_id'],
-        deliveryInformation=json['deliveryInformation'],
-        recipientInformation=json['recipientInformation'],
-        packageInformation=json['packageInformation'];
+        deliveryInformation=OrderDeliveryInformation.fromJson(json['deliveryInformation']),
+        recipientInformation=OrderRecipientInformation.fromJson(json['recipientInformation']),
+        packageInformation=OrderPackageInformation.fromJson(json['packageInformation']);
 
   Map<String,dynamic>toJson()=>{
   'order_price':order_price,

@@ -35,7 +35,10 @@ class _HomeProfileScreenState extends State<HomeProfileScreen> {
         child: Consumer<HomeProfileMV>(
             builder: (context, model, child) =>
                 Scaffold(
-      bottomNavigationBar: CustomBottomNavigationBar(),
+                  backgroundColor: Color(0xffF3F3F3),
+      bottomNavigationBar: CustomBottomNavigationBar(
+        bgColor: Color(0xffF3F3F3),
+      ),
       body: Stack(
         children: [
           Column(
@@ -80,7 +83,7 @@ class _HomeProfileScreenState extends State<HomeProfileScreen> {
                     ),
                     child: Center(
                       child: Text(
-                        '${model.currentUser?.surname}\n${model.currentUser?.name}',
+                        '${model.currentUser?.surname==null?'Victor ':model.currentUser?.surname}\n${model.currentUser?.name==null?'Williams':model.currentUser?.name}',
                         textAlign: TextAlign.left,
                         style: AppTextStyle.appBarHeader(
                             size: 19,

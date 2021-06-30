@@ -29,165 +29,170 @@ class _TailleColisScreenState extends State<TailleColisScreen> {
       create: (context) => TailleScreeenViewmodel(),
       child: Consumer<TailleScreeenViewmodel>(
           builder: (context, model, child) =>
-      Scaffold(
-      key: _scaffoldKey,
-      appBar: ChaliarMenu.topBar(
-          title: 'Votre commande',
-          description: '7 avenue de la grande Armée/75003 Paris',
-          bgColor: ChaliarColors.whiteColor,
-          imageBackground: 'assets/images/header.png'
-      ),
-      body: Stack(
+      Stack(
         children: [
-          Column(
-            children: [
-              Container(
-                height: 48,
-                width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.only(
-                  top: 20.0,
-                    left: 20.0,right: 20.0
-                ),
-                decoration: BoxDecoration(
-                  color: ChaliarColors.whiteColor,
-                ),
-                child:  Padding(
-                      padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.07, right: MediaQuery.of(context).size.width * 0.07),
-                      child: TextField(
-                        controller: model.package_nature,
-                        textAlign: TextAlign.center,
-                          decoration: new InputDecoration(
-                            border: InputBorder.none,
-                            focusedBorder: InputBorder.none,
-                            enabledBorder: InputBorder.none,
-                            errorBorder: InputBorder.none,
-                            disabledBorder: InputBorder.none,
-                            contentPadding:
-                            EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
-                            hintText: 'Nom de l’objet à transporter',
-                            hintStyle:AppTextStyle.appBarHeader(
-                              color: Color(0xff042C5C),
-                              size: 10.56,
-                              fontWeight: FontWeight.w400
-                            ),
-                          )
-                        // controller: model.name,
+          Scaffold(
+            key: _scaffoldKey,
+            appBar: ChaliarMenu.topBar(
+                title: 'Votre commande',
+                description: '7 avenue de la grande Armée/75003 Paris',
+                bgColor: ChaliarColors.whiteColor,
+                imageBackground: 'assets/images/header.png'
+            ),
+            body: Stack(
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      height: 48,
+                      width: MediaQuery.of(context).size.width,
+                      margin: EdgeInsets.only(
+                          top: 20.0,
+                          left: 20.0,right: 20.0
+                      ),
+                      decoration: BoxDecoration(
+                        color: ChaliarColors.whiteColor,
+                      ),
+                      child:  Padding(
+                        padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.07, right: MediaQuery.of(context).size.width * 0.07),
+                        child: TextField(
+                            controller: model.package_nature,
+                            textAlign: TextAlign.center,
+                            decoration: new InputDecoration(
+                              border: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                              enabledBorder: InputBorder.none,
+                              errorBorder: InputBorder.none,
+                              disabledBorder: InputBorder.none,
+                              contentPadding:
+                              EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
+                              hintText: 'Nom de l’objet à transporter',
+                              hintStyle:AppTextStyle.appBarHeader(
+                                  color: Color(0xff042C5C),
+                                  size: 10.56,
+                                  fontWeight: FontWeight.w400
+                              ),
+                            )
+                          // controller: model.name,
+                        ),
                       ),
                     ),
-                ),
-              Expanded(
-                flex: 1,
-                child: Container(
-                    padding: EdgeInsets.only(
-                        left: 45.0,right: 45.0,bottom: 10.0,top: 10.0
-                    ),
-                    color: ChaliarColors.whiteColor,
-                    child:ListView(
-                        children:[
-                          Expanded(
-                              flex:1,
-                              child:Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  ReusableCard(
-                                    size: 's',
-                                    title: 'Taille S',
-                                    price: '39',
-                                    description: 'Tiens dans une boite à chaussure (téléphone, clé, …)',
-                                    colour: model.package_size==PackageSize.small?ChaliarColors.whiteColor:ChaliarColors.primaryColors,
-                                    bgColour: model.package_size==PackageSize.small?ChaliarColors.primaryColors:ChaliarColors.whiteColor,
-                                    inconAsset:SvgIcons.bike,
-                                    onPress: (){
-                                      model.selectedCard(PackageSize.small);
-                                  },
-                                  ),
-                                  ReusableCard(
-                                    size: 'm',
-                                    title: 'Taille M',
-                                    price: '69',
-                                    description: 'Tiens dans une valise cabine(ordinateur, platine …)',
-                                    colour: model.package_size==PackageSize.medium?ChaliarColors.whiteColor:ChaliarColors.primaryColors,
-                                    bgColour: model.package_size==PackageSize.medium?ChaliarColors.primaryColors:ChaliarColors.whiteColor,
-                                    inconAsset:SvgIcons.scooter,
-                                    assetColour: ChaliarColors.whiteColor,
-                                    onPress: (){
-                                      model.selectedCard(PackageSize.medium);
-                                    },
-                                  ),
-                                ],
-                              )
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                          padding: EdgeInsets.only(
+                              left: 15.0,right: 15.0,bottom: 10.0,top: 10.0
                           ),
-                          Expanded(
-                              flex:1,
-                              child:Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  ReusableCard(
-                                    size: 'l',
-                                    title: 'Taille L',
-                                    price: '89',
-                                    description: 'Tiens dans le coffre d’une voiture(tv, valise …)',
-                                    colour: model.package_size==PackageSize.large?ChaliarColors.whiteColor:ChaliarColors.primaryColors,
-                                    bgColour: model.package_size==PackageSize.large?ChaliarColors.primaryColors:ChaliarColors.whiteColor,
-                                    inconAsset:SvgIcons.mini_cooper,
-                                    onPress: (){
-                                      model.selectedCard(PackageSize.large);
-                                    },
-                                  ),
+                          color: ChaliarColors.whiteColor,
+                          child:ListView(
+                              children:[
+                                Expanded(
+                                    flex:1,
+                                    child:Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        ReusableCard(
+                                          size: 's',
+                                          title: 'Taille S',
+                                          price: '39',
+                                          description: 'Tiens dans une boite à chaussure (téléphone, clé, …)',
+                                          colour: model.package_size==PackageSize.small?ChaliarColors.whiteColor:ChaliarColors.primaryColors,
+                                          bgColour: model.package_size==PackageSize.small?ChaliarColors.primaryColors:ChaliarColors.whiteColor,
+                                          inconAsset:SvgIcons.bike,
+                                          onPress: (){
+                                            model.selectedCard(PackageSize.small);
+                                          },
+                                        ),
+                                        ReusableCard(
+                                          size: 'm',
+                                          title: 'Taille M',
+                                          price: '69',
+                                          description: 'Tiens dans une valise cabine(ordinateur, platine …)',
+                                          colour: model.package_size==PackageSize.medium?ChaliarColors.whiteColor:ChaliarColors.primaryColors,
+                                          bgColour: model.package_size==PackageSize.medium?ChaliarColors.primaryColors:ChaliarColors.whiteColor,
+                                          inconAsset:SvgIcons.scooter,
+                                          assetColour: ChaliarColors.whiteColor,
+                                          onPress: (){
+                                            model.selectedCard(PackageSize.medium);
+                                          },
+                                        ),
+                                      ],
+                                    )
+                                ),
+                                Expanded(
+                                    flex:1,
+                                    child:Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        ReusableCard(
+                                          size: 'l',
+                                          title: 'Taille L',
+                                          price: '89',
+                                          description: 'Tiens dans le coffre d’une voiture(tv, valise …)',
+                                          colour: model.package_size==PackageSize.large?ChaliarColors.whiteColor:ChaliarColors.primaryColors,
+                                          bgColour: model.package_size==PackageSize.large?ChaliarColors.primaryColors:ChaliarColors.whiteColor,
+                                          inconAsset:SvgIcons.mini_cooper,
+                                          onPress: (){
+                                            model.selectedCard(PackageSize.large);
+                                          },
+                                        ),
 
-                                  ReusableCard(
-                                    size: 'xl',
-                                    title: 'Taille XL',
-                                    price: '129',
-                                    description: 'Nécessite un petit utilitaire(canapé, armoire…)',
-                                    colour: model.package_size==PackageSize.extralarge?ChaliarColors.whiteColor:ChaliarColors.primaryColors,
-                                    bgColour: model.package_size==PackageSize.extralarge?ChaliarColors.primaryColors:ChaliarColors.whiteColor,
-                                    inconAsset:SvgIcons.truck,
-                                    onPress: (){
-                                      model.selectedCard(PackageSize.extralarge);
-                                    }
-                                    ,
-                                  )
-                                ],
-                              )
+                                        ReusableCard(
+                                          size: 'xl',
+                                          title: 'Taille XL',
+                                          price: '129',
+                                          description: 'Nécessite un petit utilitaire(canapé, armoire…)',
+                                          colour: model.package_size==PackageSize.extralarge?ChaliarColors.whiteColor:ChaliarColors.primaryColors,
+                                          bgColour: model.package_size==PackageSize.extralarge?ChaliarColors.primaryColors:ChaliarColors.whiteColor,
+                                          inconAsset:SvgIcons.truck,
+                                          onPress: (){
+                                            model.selectedCard(PackageSize.extralarge);
+                                          }
+                                          ,
+                                        )
+                                      ],
+                                    )
+                                )
+                              ]
                           )
-                        ]
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(
+                          bottom: 10.0
+                      ),
+                      child:Center(
+                        child: ButtonChaliar(
+                            onTap: () {
+                              model.formEditingController(context);
+                              // Navigator.pushNamed(context, '/add_photo');
+                            },
+                            buttonText: 'Suivant',
+                            height: MediaQuery.of(context).size.height * 0.07,
+                            mediaQueryWidth: 0.30,
+                            borderRaduis: 50,
+                            backgroundcolor: ChaliarColors.primaryColors,
+                            bordercolor: ChaliarColors.primaryColors,
+                            textStyle: AppTextStyle.button(
+                                color: ChaliarColors.whiteColor)),
+                      ),
                     )
+                  ],
                 ),
-              ),
-              Container(
-                padding: EdgeInsets.only(
-                    bottom: 10.0
-                ),
-                child:Center(
-                  child: ButtonChaliar(
-                      onTap: () {
-                        model.formEditingController(context);
-                        // Navigator.pushNamed(context, '/add_photo');
-                      },
-                      buttonText: 'Suivant',
-                      height: MediaQuery.of(context).size.height * 0.07,
-                      mediaQueryWidth: 0.30,
-                      borderRaduis: 50,
-                      backgroundcolor: ChaliarColors.primaryColors,
-                      bordercolor: ChaliarColors.primaryColors,
-                      textStyle: AppTextStyle.button(
-                          color: ChaliarColors.whiteColor)),
-                ),
-              )
-            ],
+              ],
+            ),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
                   padding: EdgeInsets.only(
-                    top:MediaQuery.of(context).size.height * 0,
+                    top:MediaQuery.of(context).size.height * 0.1,
                     left:MediaQuery.of(context).size.width * 0.42,
                     right:MediaQuery.of(context).size.width * 0.42,
                   ),
                   child:CircleAvatar(
-                    radius: 20.0,
+                    radius: 25.0,
                     backgroundColor: ChaliarColors.whiteColor,
                     child: Icon(Icons.close_outlined,color: ChaliarColors.primaryColors,),
                   )
@@ -195,8 +200,7 @@ class _TailleColisScreenState extends State<TailleColisScreen> {
             ],
           )
         ],
-      ),
-    )));
+      )));
   }
 }
 

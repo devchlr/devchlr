@@ -4,13 +4,14 @@ import 'package:flutter_app/ui/styles/chaliar_color.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
- CustomBottomNavigationBar({Key? key}) : super(key: key);
+  final Color? bgColor;
+ CustomBottomNavigationBar({Key? key,this.bgColor}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80,
+      height: 87,
       decoration: BoxDecoration(
-        color: Color(0xfff3f3f3),
+        color: bgColor==null?Color(0xffffffff):bgColor,
         image: DecorationImage(
           image: AssetImage("assets/images/menuFooter.png"),
           fit: BoxFit.fill,
@@ -18,11 +19,11 @@ class CustomBottomNavigationBar extends StatelessWidget {
       ),
       child: Padding(
         padding: EdgeInsets.only(
-            top: MediaQuery.of(context).size.height*0.02
+
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             GestureDetector(
               onTap:(){
@@ -31,8 +32,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
               child: Center(
                 child: SvgPicture.asset(
                   SvgIcons.chaliar,
-                  height: 30,
-                  width: 20,
+                  height: 21,
+                  width: 22,
                   color: Colors.grey,
                 ),
               ),
@@ -44,8 +45,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
               child: Center(
                 child: SvgPicture.asset(
                   SvgIcons.commande,
-                  height: 70,
-                  width: 50,
+                  height: 51,
+                  width: 51,
                 ),
               ),
             ),
@@ -56,8 +57,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
               child: Center(
                 child: SvgPicture.asset(
                   SvgIcons.scooter,
-                  height: 30,
-                  width: 20,
+                  height: 23,
+                  width: 28,
                   color: Colors.grey,
                 ),
               ),

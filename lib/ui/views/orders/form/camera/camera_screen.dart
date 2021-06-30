@@ -9,6 +9,7 @@ import 'package:flutter_app/ui/styles/chaliar_font.dart';
 import 'package:flutter_app/ui/styles/text_style.dart';
 import 'package:flutter_app/ui/widgets/button.dart';
 import 'package:flutter_app/ui/widgets/svg_button.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 // A screen that allows users to take a picture using a given camera.
@@ -27,8 +28,25 @@ class TakePictureScreen extends StatefulWidget {
 class TakePictureScreenState extends State<TakePictureScreen> {
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
+  //image picker
+  File? _image;
+  final _picker = ImagePicker();
+
+  Future getImage()async{
+    final PickedFile? pickedFile = await _picker.getImage(source: ImageSource.gallery);
+    final File file = File(pickedFile!.path);
+    print("file:${file.path}");
+    MaterialPageRoute(
+      builder: (context) => DisplayPictureScreen(
+        // Pass the automatically generated path to
+        // the DisplayPictureScreen widget.
+        imagePath: file.toString(),
+      ),
+    );
+  }
 
   @override
+
   void initState() {
     super.initState();
     // To display the current output from the Camera,
@@ -65,47 +83,43 @@ class TakePictureScreenState extends State<TakePictureScreen> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 final size = MediaQuery.of(context).size;
-                final deviceRatio = size.width / size.height;
-                return  Stack(
-                  children: [
-                    Transform.scale(
-                      scale: _controller.value.aspectRatio / deviceRatio,
-                      child: Center(
-                        child:CameraPreview(_controller),
-                        // AspectRatio(
-                        //   aspectRatio: _controller.value.aspectRatio,
-                        //   child:
-                        // ),
-                      ),
-                    ),
-                    Column(
+                final deviceRatio =size.width / size.height;
+                final scale = 1 / (_controller.value.aspectRatio * MediaQuery.of(context).size.aspectRatio);
+                return Transform.scale(
+                  scale: scale,
+                  alignment: Alignment.topCenter,
+                  child:new CameraPreview(
+                    _controller,
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
                             padding: EdgeInsets.only(
-                              top: 50,
-                              left: MediaQuery.of(context).size.width*0.8
+                                top: 50,
+                                left: MediaQuery.of(context).size.width*0.8
                             ),
                             child:Row(
                                 crossAxisAlignment:CrossAxisAlignment.end,
                                 children:[ SvgIconButton(
-              iconSize: 50,
-              iconAsset: SvgIcons.flash_on,
-              iconColor: Colors.white,),]
+                                  iconSize: 50,
+                                  iconAsset: SvgIcons.flash_on,
+                                  iconColor: Colors.white,),]
                             )
                         ),
                         Padding(
                             padding: EdgeInsets.only(
-                                bottom: MediaQuery.of(context).size.height*0.1,
+                              bottom: MediaQuery.of(context).size.height*0.05,
                             ),
                             child:Row(
                                 mainAxisAlignment:MainAxisAlignment.spaceEvenly,
                                 children:[
-
-                                  Icon(Icons.panorama,size: 50,color: Colors.white,),
+                                  GestureDetector(
+                                    onTap:getImage,
+                                    child: Icon(Icons.panorama,size: 50,color: Colors.white,),
+                                  ),
                                   GestureDetector(
                                     onTap: () async {
-                                     await model.takePhoto(context, _initializeControllerFuture, _controller);
+                                      await model.takePhoto(context, _initializeControllerFuture, _controller);
                                       // try {
                                       //   // Ensure that the camera is initialized.
                                       //   await _initializeControllerFuture;
@@ -135,20 +149,31 @@ class TakePictureScreenState extends State<TakePictureScreen> {
                                       iconColor: Colors.white,
                                     ),
                                   ),
-                            SvgIconButton(
-                                iconSize: 50,
-                                iconAsset: SvgIcons.change_camera,
-                                iconColor: Colors.white,),
-
-
+                                  SvgIconButton(
+                                    iconSize: 50,
+                                    iconAsset: SvgIcons.change_camera,
+                                    iconColor: Colors.white,),
                                 ]
                             )
                         ),
                       ],
-                    )
-
-                                     ],
+                    ),
+                  ),
                 );
+                //   Stack(
+                //   children: [
+                //
+                //     // Center(
+                //     //   child:Transform.scale(
+                //     //     scale: _controller.value.aspectRatio/deviceRatio,
+                //     //     child: new AspectRatio(
+                //     //       aspectRatio: _controller.value.aspectRatio,
+                //     //       child: ,
+                //     //     ),
+                //     //   ),),
+                //
+                //                      ],
+                // );
               } else {
                 // Otherwise, display a loading indicator.
                 return const Center(child: CircularProgressIndicator());

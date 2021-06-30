@@ -15,6 +15,7 @@ class CameraMV extends BaseModel{
       // where it was saved.
       final image = await cameraController.takePicture();
       // If the picture was taken, display it on a new screen.
+      print(image.path);
       await Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => DisplayPictureScreen(

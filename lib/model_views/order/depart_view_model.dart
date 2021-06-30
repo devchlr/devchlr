@@ -52,26 +52,26 @@ class DepartFormViewModel extends BaseModel{
 
   void formEditingController(BuildContext context){
     customShowSnackBar.initUserRequestAnimation(context);
-    if(validatorForm()){
-      OrderDeliveryInformation deliveryInformation = new OrderDeliveryInformation(
-          delivery_schedule: delivery_schedule.text,
-          departure_address: departure_address.text,
-          delivery_date: delivery_date.selectedDate,
-          delivery_firt_name: delivery_firt_name.text,
-          delivery_group: delivery_group.text,
-          delivery_email: delivery_email.text,
-          delivery_name: delivery_name.text,
-          delivery_type: delivery_type.text,
-          phone_number: phone_number.text
-      );
-      print(deliveryInformation.toJson());
-      Navigator.push(context,
-          new MaterialPageRoute(
-              builder: (BuildContext context) =>
-              new ArriveeFormScreen(deliveryInformation:deliveryInformation)));
-    }else{
-      customShowSnackBar.initUserRequestAnimationError(context, 'Tous les champs doivent etres renseignes');
-     print('form falidator fails');
-    }
+    // if(validatorForm()){
+    //   OrderDeliveryInformation deliveryInformation = new OrderDeliveryInformation(
+    //       delivery_schedule: delivery_schedule.text,
+    //       departure_address: departure_address.text,
+    //       delivery_date: delivery_date.selectedDate,
+    //       delivery_firt_name: delivery_firt_name.text,
+    //       delivery_group: delivery_group.text,
+    //       delivery_email: delivery_email.text,
+    //       delivery_name: delivery_name.text,
+    //       delivery_type: delivery_type.text,
+    //       phone_number: phone_number.text
+    //   );
+    //   print(deliveryInformation.toJson());
+    //   Navigator.push(context,
+    //       new MaterialPageRoute(
+    //           builder: (BuildContext context) =>
+    //           new ArriveeFormScreen(deliveryInformation:deliveryInformation)));
+    // }else{
+    //   customShowSnackBar.initUserRequestAnimationError(context, 'Tous les champs doivent etres renseignes');
+    //  print('form falidator fails');
+    // }
   }
 }

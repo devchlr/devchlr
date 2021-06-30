@@ -46,6 +46,7 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
   }
   @override
   Widget build(BuildContext context) {
+    bool isCollapsed=false;
     final double width = MediaQuery.of(context).size.width;
     final double cellWidth = width / 9;
     DateTime h = DateTime.now();
@@ -70,7 +71,9 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                       bgColor: Colors.white,
                       imageBackground: 'assets/images/header.png'
                   ),
-                  bottomNavigationBar: CustomBottomNavigationBar(),
+                  // bottomNavigationBar: CustomBottomNavigationBar(
+                  //   bgColor:Colors.transparent,
+                  // ),
                   body: Stack(
                     children: [
                       Column(
@@ -85,7 +88,7 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                               color: ChaliarColors.whiteColor,
                               child:
                               Card(
-                                elevation: 0.0,
+                                elevation: 1.5,
                                 child: ListView(
                                   children: [
                                     ListTile(
@@ -148,22 +151,23 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                                     SizedBox(
                                       height: 13.0,
                                     ),
+                                    GestureDetector(
+                                        onTap: (){
+                                          model.selectTypeLivraison(TypeLivraison.programme);
+                                        },child:
                                     Padding(
                                         padding: EdgeInsets.only(
                                           left: MediaQuery.of(context).size.width * 0.07,
                                           right: MediaQuery.of(context).size.width * 0.07,
                                         ),
-                                        child: GestureDetector(
-                                          onTap: (){
-                                            model.selectTypeLivraison(TypeLivraison.programme);
-                                          },
-                                          child: Container(
+                                        child: Container(
                                             decoration: BoxDecoration(
                                                 color: ChaliarColors.whiteGreyColor,
                                                 borderRadius: BorderRadius.circular(6.0),
                                                 border: Border.all(color: ChaliarColors.primaryColors,width: 0.5)
                                             ),
                                             child: ExpansionTile(
+                                              initiallyExpanded: model.group==TypeLivraison.programme?true:false,
                                               trailing: Radio(
                                                 value: TypeLivraison.programme,
                                                 groupValue: model.group,
@@ -220,60 +224,60 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                                             title: Text("Définir l’horaire de livraison",style:AppTextStyle.bodyfooterField(color: ChaliarColors.secondaryColors)
                                               ,),
                                             children: <Widget>[
-                                              Container(
-                                                margin:EdgeInsets.only(
-                                                    left: 20.0,right: 20.0,bottom: 10.0
-                                                ),
-                                                child:DateTimePicker(
-                                                  type: DateTimePickerType.time,
-                                                  controller: model.delivery_schedule,
-                                                  //initialValue: lsHour,
-                                                  // icon: Icon(Icons.access_time),
-                                                  timeLabelText: "",
-                                                  use24HourFormat: true,
-                                                  //locale: Locale('en', 'US'),
-                                                  // onChanged: (val) => setState(() => _valueChanged4 = val),
-                                                  // validator: (val) {
-                                                  //   setState(() => _valueToValidate4 = val ?? '');
-                                                  //   return null;
-                                                  // },
-                                                  // onSaved: (val) => setState(() => _valueSaved4 = val ?? ''),
-                                                ),
-                                                // GestureDetector(
-                                                //   onTap: (){},
-                                                //   child: Row(
-                                                //     mainAxisAlignment: MainAxisAlignment.center,
-                                                //     crossAxisAlignment: CrossAxisAlignment.center,
-                                                //     children: [
-                                                //       Container(
-                                                //         height: 80,
-                                                //         width: 80,
-                                                //         padding: EdgeInsets.all(10.0),
-                                                //         decoration: BoxDecoration(
-                                                //             borderRadius: BorderRadius.circular(0.0),
-                                                //             border: Border.all(color: ChaliarColors.primaryColors,width: 0.5)
-                                                //         ),
-                                                //         child: Center(
-                                                //           child: Text('$formattedHour'),
-                                                //         ),
-                                                //       ),
-                                                //       SizedBox(width: 10.0,),
-                                                //       Container(
-                                                //           height: 80,
-                                                //           width: 80,
-                                                //           padding: EdgeInsets.all(10.0),
-                                                //           decoration: BoxDecoration(
-                                                //               borderRadius: BorderRadius.circular(0.0),
-                                                //               border: Border.all(color: ChaliarColors.primaryColors,width: 0.5)
-                                                //           ),
-                                                //           child: Center(
-                                                //             child: Text('$formattedMinute'),
-                                                //           )
-                                                //       )
-                                                //     ],
-                                                //   ),
-                                                // ),
-                                              )
+                                              // Container(
+                                              //   margin:EdgeInsets.only(
+                                              //       left: 20.0,right: 20.0,bottom: 10.0
+                                              //   ),
+                                              //   child:DateTimePicker(
+                                              //     type: DateTimePickerType.time,
+                                              //     controller: model.delivery_schedule,
+                                              //     //initialValue: lsHour,
+                                              //     // icon: Icon(Icons.access_time),
+                                              //     timeLabelText: "",
+                                              //     use24HourFormat: true,
+                                              //     //locale: Locale('en', 'US'),
+                                              //     // onChanged: (val) => setState(() => _valueChanged4 = val),
+                                              //     // validator: (val) {
+                                              //     //   setState(() => _valueToValidate4 = val ?? '');
+                                              //     //   return null;
+                                              //     // },
+                                              //     // onSaved: (val) => setState(() => _valueSaved4 = val ?? ''),
+                                              //   ),
+                                              //   // GestureDetector(
+                                              //   //   onTap: (){},
+                                              //   //   child: Row(
+                                              //   //     mainAxisAlignment: MainAxisAlignment.center,
+                                              //   //     crossAxisAlignment: CrossAxisAlignment.center,
+                                              //   //     children: [
+                                              //   //       Container(
+                                              //   //         height: 80,
+                                              //   //         width: 80,
+                                              //   //         padding: EdgeInsets.all(10.0),
+                                              //   //         decoration: BoxDecoration(
+                                              //   //             borderRadius: BorderRadius.circular(0.0),
+                                              //   //             border: Border.all(color: ChaliarColors.primaryColors,width: 0.5)
+                                              //   //         ),
+                                              //   //         child: Center(
+                                              //   //           child: Text('$formattedHour'),
+                                              //   //         ),
+                                              //   //       ),
+                                              //   //       SizedBox(width: 10.0,),
+                                              //   //       Container(
+                                              //   //           height: 80,
+                                              //   //           width: 80,
+                                              //   //           padding: EdgeInsets.all(10.0),
+                                              //   //           decoration: BoxDecoration(
+                                              //   //               borderRadius: BorderRadius.circular(0.0),
+                                              //   //               border: Border.all(color: ChaliarColors.primaryColors,width: 0.5)
+                                              //   //           ),
+                                              //   //           child: Center(
+                                              //   //             child: Text('$formattedMinute'),
+                                              //   //           )
+                                              //   //       )
+                                              //   //     ],
+                                              //   //   ),
+                                              //   // ),
+                                              // )
 
                                             ],
                                           ),
@@ -369,7 +373,7 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                                         child: ButtonChaliar(
                                             onTap: () {
                                               model.formEditingController(context);
-                                              // Navigator.pushNamed(context, '/commande_arrivee_form');
+                                               Navigator.pushNamed(context, '/commande_arrivee_form');
                                             },
                                             buttonText: 'Suivant',
                                             height: MediaQuery.of(context).size.height * 0.07,
@@ -382,13 +386,19 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                                       ),
                                     ),
                                     SizedBox(
-                                      height: 20.0,
+                                      height: 60.0,
                                     ),
                                   ],
                                 ),
                               ),
                             ),
                           ),
+                          Container(
+                            padding: EdgeInsets.only(
+                              bottom:MediaQuery.of(context).size.height*0.06,
+                            ),
+                            color:Colors.transparent,
+                          )
                         ],
                       ),
                       Positioned(
@@ -398,6 +408,14 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                           radius: 5.0,
                         ),
                       ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                        top:MediaQuery.of(context).size.height*0.81,
+                      ),
+                        child:  CustomBottomNavigationBar(
+                          bgColor: Colors.transparent,
+                        ),
+                      )
                     ],
                   ),
                 )

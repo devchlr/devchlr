@@ -10,8 +10,10 @@ class AboutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: ChaliarMenu.topBar(title: 'À propos',bgColor: ChaliarColors.whiteColor,imageBackground: 'assets/images/header.png'),
-      bottomNavigationBar: CustomBottomNavigationBar(),
+      // bottomNavigationBar: CustomBottomNavigationBar(
+      // ),
       body: Stack(
         children: [
           Container(
@@ -27,6 +29,9 @@ class AboutScreen extends StatelessWidget {
               // mainAxisAlignment: MainAxisAlignment.center,
               // crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                SizedBox(
+                  height: 20,
+                ),
                 Text('À propos de Chaliar',textAlign: TextAlign.center,style: AppTextStyle.headerApp1(color: ChaliarColors.blackColor,)),
                 SizedBox(
                   height: 20,
@@ -39,6 +44,14 @@ class AboutScreen extends StatelessWidget {
                   textAlign:TextAlign.justify,
                 )
               ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+              top:MediaQuery.of(context).size.height*0.81,
+            ),
+            child:  CustomBottomNavigationBar(
+              bgColor: Colors.transparent,
             ),
           )
         ],

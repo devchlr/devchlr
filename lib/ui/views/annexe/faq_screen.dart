@@ -26,10 +26,16 @@ class _FaqScreenState extends State<FaqScreen> {
           bgColor: ChaliarColors.whiteColor,
           imageBackground: 'assets/images/header.png'
       ),
-      body: StreamBuilder(
+      body:
+      StreamBuilder(
         stream: FirebaseFirestore.instance.collection('faq').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
           if(snapshot.hasError){
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if(snapshot.data==null){
             return Center(
               child: CircularProgressIndicator(),
             );

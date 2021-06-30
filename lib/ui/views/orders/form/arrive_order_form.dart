@@ -41,7 +41,7 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
           bgColor: ChaliarColors.whiteColor,
           imageBackground: 'assets/images/header.png'
       ),
-      bottomNavigationBar: CustomBottomNavigationBar(),
+      // bottomNavigationBar: CustomBottomNavigationBar(),
       body: Stack(
         children: [
           Column(
@@ -55,7 +55,7 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
                   ),
                   color: ChaliarColors.whiteColor,
                   child: Card(
-                    elevation: 0.5,
+                    elevation: 1.5,
                     child: ListView(
                       children: [
                         ListTile(
@@ -200,7 +200,7 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: 20.0,
+                          height: 60.0,
                         ),
                       ],
                     ),
@@ -209,7 +209,21 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
               ),
             ],
           ),
-
+          Positioned(
+            left: 10.0,
+            top: 30.0,
+            child: CircleAvatar(
+              radius: 5.0,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+              top:MediaQuery.of(context).size.height*0.81,
+            ),
+            child:  CustomBottomNavigationBar(
+              bgColor: Colors.transparent,
+            ),
+          )
         ],
       ),
     )));

@@ -20,6 +20,8 @@ class SingInScreen extends StatefulWidget {
 }
 
 class _SingInScreenState extends State<SingInScreen> {
+  String initialCountry = 'fR';
+  PhoneNumber number = PhoneNumber(isoCode: 'FR');
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<AuthentificationConnexionVM>(
@@ -91,6 +93,7 @@ class _SingInScreenState extends State<SingInScreen> {
                                      model.phone=number.phoneNumber;
                                      print(number.phoneNumber);
                                    },
+                                   initialValue: number,
                                    onInputValidated: (bool value) {
                                      print(value);
                                    },

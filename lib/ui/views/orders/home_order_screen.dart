@@ -44,12 +44,14 @@ class _PreCommandeScreenState extends State<PreCommandeScreen> {
   Widget build(BuildContext context) {
     return
       Scaffold(
+        backgroundColor: Color(0xffF3F3F3),
         appBar: ChaliarMenu.topBar(
             title: 'Commande',
-            bgColor: Colors.white,
+            bgColor: Color(0xffF3F3F3),
             imageBackground: 'assets/images/header.png'
         ),
-        bottomNavigationBar:CustomBottomNavigationBar(),
+       //  bottomNavigationBar:
+       // ,
         body: Stack(
           children: [
             Column(
@@ -63,7 +65,7 @@ class _PreCommandeScreenState extends State<PreCommandeScreen> {
                   ),
                   height: MediaQuery.of(context).size.height * 0.15,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Color(0xffF3F3F3),
                   ),
                   child: ListView(
                     children: [
@@ -129,6 +131,10 @@ class _PreCommandeScreenState extends State<PreCommandeScreen> {
                     ),
                   ),
                 ),
+                Container(
+                  height: MediaQuery.of(context).size.height*0.045,
+                  color: Colors.transparent,
+                )
               ],
             ),
             Padding(
@@ -142,7 +148,7 @@ class _PreCommandeScreenState extends State<PreCommandeScreen> {
                     },
                     buttonText: 'Commander',
                     height:49,
-                    mediaQueryWidth: 0.30,
+                    mediaQueryWidth: 0.25,
                     borderRaduis: 30,
                     backgroundcolor: ChaliarColors.primaryColors,
                     bordercolor: ChaliarColors.primaryColors,
@@ -150,6 +156,13 @@ class _PreCommandeScreenState extends State<PreCommandeScreen> {
                         color: ChaliarColors.whiteColor)),
               ),
             ),
+            Padding(padding: EdgeInsets.only(
+              top:MediaQuery.of(context).size.height*0.81,
+            ),
+              child:  CustomBottomNavigationBar(
+                bgColor: Colors.transparent,
+              ),
+            )
           ],
         ),
       );
