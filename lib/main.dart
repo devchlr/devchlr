@@ -43,14 +43,14 @@ Future<void> main() async{
   // Obtain a list of the available cameras on the device.
   final cameras = await availableCameras();
   // Get a specific camera from the list of available cameras.
-  final firstCamera = cameras.first;
+  final firstCamera = cameras;
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp(camera: firstCamera,));
 }
 
 class MyApp extends StatelessWidget {
-  final CameraDescription camera;
+  final List<CameraDescription> camera;
 
   const MyApp({
     Key? key,
@@ -71,7 +71,7 @@ class MyApp extends StatelessWidget {
           unselectedWidgetColor: Colors.grey,
           disabledColor: Colors.grey),
       routes: <String, WidgetBuilder>{
-        "/splash": (BuildContext context) => new SplashScreen(),
+        "/splash": (BuildContext context) => new AddPhotoScreen(),
         "/tuto": (BuildContext context) => new OnboardingScreen(),
         "/connexion": (BuildContext context) => new ConnexionScreen(),
         "/pro_particulier": (BuildContext context) =>

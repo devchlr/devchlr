@@ -17,7 +17,7 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
           Scaffold(
             key: _scaffoldKey,
             appBar:AppBar(
-              // leading:,
+              leading:Text(''),
               elevation: 0.0,
               flexibleSpace: Image(
                 image: AssetImage('assets/images/bgPageBohomme.png'),
@@ -154,7 +154,7 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
             children: [
               Padding(
                   padding: EdgeInsets.only(
-                    top:MediaQuery.of(context).size.height * 0.11,
+                    top:MediaQuery.of(context).size.height * 0.085,
                     left:MediaQuery.of(context).size.width * 0.43,
                     right:MediaQuery.of(context).size.width * 0.43,
                   ),
