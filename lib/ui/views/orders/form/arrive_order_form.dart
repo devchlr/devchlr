@@ -1,17 +1,15 @@
-import 'package:flutter_app/constants/iconList.dart';
 import 'package:flutter_app/model_views/order/arrive_view_model.dart';
 import 'package:flutter_app/models/commande.dart';
 import 'package:flutter_app/ui/styles/chaliar_color.dart';
 import 'package:flutter_app/ui/styles/text_style.dart';
-import 'package:flutter_app/ui/widgets/appBar.dart';
 import 'package:flutter_app/ui/widgets/button.dart';
 import 'package:flutter_app/ui/widgets/custom_botom_navigation_bar.dart';
 import 'package:flutter_app/ui/widgets/custom_header.dart';
 import 'package:flutter_app/ui/widgets/input_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:timelines/timelines.dart';
+
+
 class ArriveeFormScreen extends StatefulWidget {
   OrderDeliveryInformation? deliveryInformation;
   ArriveeFormScreen({this.deliveryInformation});
@@ -31,24 +29,12 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
           builder: (context, model, child) =>
       Scaffold(
       key: _scaffoldKey,
-      // appBar: ChaliarMenu.topBar(
-      //     leading: GestureDetector(
-      //       onTap: (){
-      //         Navigator.pop(context);
-      //       },
-      //       child: Icon(Icons.arrow_back_ios),
-      //     ),
-      //     title: 'Commande',
-      //     bgColor: ChaliarColors.whiteColor,
-      //     imageBackground: 'assets/images/header.png'
-      // ),
-      // bottomNavigationBar: CustomBottomNavigationBar(),
       body: Stack(
         children: [
           Column(
             children: [
               SizedBox(
-                height: MediaQuery.of(context).size.width*0.18,),
+                height: 110,),
               Expanded(
                 flex: 1,
                 child: Container(
@@ -249,7 +235,9 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
           ),
         ],
       ),
-    )));
+    ),
+      ),
+      );
   }
 }
 

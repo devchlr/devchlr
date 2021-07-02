@@ -43,7 +43,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
           Column(
             children: [
               SizedBox(
-                height: MediaQuery.of(context).size.width*0.2,),
+                height:110,),
               SizedBox(height: 57.0,),
               Padding(padding: EdgeInsets.only(
                 left: MediaQuery.of(context).size.width*0.5

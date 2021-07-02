@@ -59,12 +59,11 @@ class _PreCommandeScreenState extends State<PreCommandeScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 SizedBox(
-                  height: MediaQuery.of(context).size.width*0.18,),
+                  height: 110,),
                 Container(
                   margin: EdgeInsets.only(
                       left: 10.0,
                       right: 10.0,
-                      top: 10.0
                   ),
                   height: MediaQuery.of(context).size.height * 0.2,
                   decoration: BoxDecoration(

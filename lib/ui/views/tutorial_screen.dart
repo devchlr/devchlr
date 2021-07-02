@@ -70,7 +70,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     children: <Widget>[
                       Container(
                         padding: EdgeInsets.only(
-                          top: MediaQuery.of(context).size.height*0.12
+                          top: 110,
                         ),
                         color: Color(0xffefeff1),
                         height: MediaQuery.of(context).size.height,

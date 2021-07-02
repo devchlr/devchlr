@@ -52,7 +52,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
             ),
             GestureDetector(
               onTap: (){
-
+                Navigator.pushNamed(context, '/home_course');
               },
               child: Center(
                 child: SvgPicture.asset(

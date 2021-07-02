@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/ui/styles/chaliar_color.dart';
 import 'package:flutter_app/ui/styles/text_style.dart';
-import 'package:flutter_app/ui/widgets/appBar.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_app/ui/widgets/button.dart';
 import 'package:flutter_app/ui/widgets/custom_header.dart';
 class FaqScreen extends StatefulWidget {
@@ -18,12 +18,6 @@ class _FaqScreenState extends State<FaqScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      // appBar: ChaliarMenu.topBar(
-      //     leading: Icon(Icons.arrow_back_ios),
-      //     title: 'Faq',
-      //     bgColor: ChaliarColors.whiteColor,
-      //     imageBackground: 'assets/images/header.png'
-      // ),
       body:
           Stack(
            children: [
@@ -42,18 +36,23 @@ class _FaqScreenState extends State<FaqScreen> {
                  }
                  return Stack(
                    children: [
+                     Container(
+                       color: Color(0xffffff),
+                     ),
                      Column(
                        children: [
                          Container(
-                           height: MediaQuery.of(context).size.height*0.18,
+                           height: 157,
                          ),
                          Container(
                            height: 40,
-                           decoration: BoxDecoration(
-                             color: ChaliarColors.whiteColor,
-                           ),
                            child: Center(
-                             child: Text('Comment pouvons nous vous aider ?'),
+                             child: Text('Comment pouvons nous vous aider ?',
+                             style: AppTextStyle.appBarHeader(
+                               color: Color(0xff042C5C),
+                               size: 18,
+                               fontWeight: FontWeight.w400
+                             ),),
                            ),
                          ),
                          Expanded(
@@ -78,44 +77,6 @@ class _FaqScreenState extends State<FaqScreen> {
                                    ),
                                  );
                                }).toList(),
-                               //   Card(
-                               //     elevation: 2.0,
-                               //     child: ExpansionTile(
-                               //       trailing: Text(''),
-                               //       title: Text("Quelles sont les différentes étapes de ma candidature ?",style:AppTextStyle.bodyfooterField(color: ChaliarColors.secondaryColors),),
-                               //       children: [
-                               //       ],
-                               //     ),
-                               //   ),
-                               //   SizedBox(height: 13.0,),
-                               //   Card(
-                               //     elevation: 2.0,
-                               //     child: ExpansionTile(
-                               //       trailing: Text(''),
-                               //       title: Text("Comment fonctionne le contrôle d'identité ?",style:AppTextStyle.bodyfooterField(color: ChaliarColors.secondaryColors),),
-                               //       children: [
-                               //       ],
-                               //     ),
-                               //   ),
-                               //   Padding(
-                               //     padding: EdgeInsets.only(
-                               //       top: MediaQuery.of(context).size.height * 0.05,
-                               //     ),
-                               //     child: Center(
-                               //       child: ButtonChaliar(
-                               //           onTap: () {
-                               //           },
-                               //           buttonText: 'Contacter le support',
-                               //           height: MediaQuery.of(context).size.height * 0.07,
-                               //           mediaQueryWidth: 0.30,
-                               //           borderRaduis: 50,
-                               //           backgroundcolor: ChaliarColors.primaryColors,
-                               //           bordercolor: ChaliarColors.primaryColors,
-                               //           textStyle: AppTextStyle.button(
-                               //               color: ChaliarColors.whiteColor)),
-                               //     ),
-                               //   )
-                               // ],
                              ),
                            ),
                          ),
@@ -127,8 +88,7 @@ class _FaqScreenState extends State<FaqScreen> {
                              ),
                              child: Center(
                                child: ButtonChaliar(
-                                   onTap: () {
-                                   },
+                                   onTap: ()=>launch("tel://+33 84 808 808"),
                                    buttonText: 'Contacter le support',
                                    height: MediaQuery.of(context).size.height * 0.07,
                                    mediaQueryWidth: 0.30,
@@ -156,8 +116,6 @@ class _FaqScreenState extends State<FaqScreen> {
              ),
            ],
           ),
-
-
     );
   }
 }

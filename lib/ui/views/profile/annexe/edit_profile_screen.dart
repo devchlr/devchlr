@@ -20,28 +20,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: ChaliarMenu.topBar(
-      //     leading: GestureDetector(
-      //       onTap: (){
-      //         Navigator.pop(context);
-      //       },
-      //       child: Icon(Icons.arrow_back_ios,color: Color(0xffd8d8d8),),
-      //     ),
-      //     description: '',
-      //     title: 'Profil',
-      //     bgColor: Color(0xffF3F3F3),
-      //     imageBackground: 'assets/images/header.png'
-      // ),
       backgroundColor: Color(0xffF3F3F3),
       body: Stack(
         children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.width*0.2,),
           Container(
             color: Color(0xffF3F3F3),
           ),
           Padding(padding: EdgeInsets.only(
-            top: 100,
+            top: 130,
             left: 30,
             right: 30
           ),

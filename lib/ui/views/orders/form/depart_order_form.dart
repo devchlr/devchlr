@@ -61,26 +61,12 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
             builder: (context, model, child) =>
                 Scaffold(
                   key: _scaffoldKey,
-                  // appBar: ChaliarMenu.topBar(
-                  //     leading: GestureDetector(
-                  //       onTap: (){
-                  //         Navigator.pop(context);
-                  //       },
-                  //       child: Icon(Icons.arrow_back_ios),
-                  //     ),
-                  //     title: 'Commande',
-                  //     bgColor: Colors.white,
-                  //     imageBackground: 'assets/images/header.png'
-                  // ),
-                  // bottomNavigationBar: CustomBottomNavigationBar(
-                  //   bgColor:Colors.transparent,
-                  // ),
                   body: Stack(
                     children: [
                       Column(
                         children: [
                           SizedBox(
-                            height: MediaQuery.of(context).size.width*0.18,),
+                            height: 110,),
                           Expanded(
                             flex: 1,
                             child: Container(

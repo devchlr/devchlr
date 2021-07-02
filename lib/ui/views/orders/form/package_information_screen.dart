@@ -35,17 +35,10 @@ class _TailleColisScreenState extends State<TailleColisScreen> {
         children: [
           Scaffold(
             key: _scaffoldKey,
-            // appBar: ChaliarMenu.topBar(
-            //     title: 'Votre commande',
-            //     description: '7 avenue de la grande Armée/75003 Paris',
-            //     bgColor: ChaliarColors.whiteColor,
-            //     imageBackground: 'assets/images/header.png'
-            // ),
             body: Stack(
               children: [
                 Padding(
                   padding: EdgeInsets.only(
-
                   ),
                   child: CustomHearder(
                     title: 'Votre commande',
@@ -55,7 +48,7 @@ class _TailleColisScreenState extends State<TailleColisScreen> {
                 Column(
                   children: [
                     SizedBox(
-                      height: 90,
+                      height: 110,
                     ),
                     Container(
                       height: 48,
@@ -65,7 +58,7 @@ class _TailleColisScreenState extends State<TailleColisScreen> {
                           left: 20.0,right: 20.0
                       ),
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black),
+                        border: Border.all(color: Color(0xff042C5C)),
                         color: ChaliarColors.whiteColor,
                       ),
                       child:  Padding(

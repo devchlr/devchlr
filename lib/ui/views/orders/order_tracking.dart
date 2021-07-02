@@ -40,26 +40,18 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
     return
       Scaffold(
         backgroundColor: Color(0xffF3F3F3),
-        // appBar: ChaliarMenu.topBar(
-        //     title: 'Commande',
-        //     bgColor: Color(0xffF3F3F3),
-        //     imageBackground: 'assets/images/header.png'
-        // ),
-        //  bottomNavigationBar:
-        // ,
         body: Stack(
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Container(
-                  height: 90,
+                  height: 110,
                 ),
                 Container(
                   margin: EdgeInsets.only(
                       left: 10.0,
                       right: 10.0,
-                      top: 10.0
                   ),
                   height: MediaQuery.of(context).size.height * 0.2,
                   decoration: BoxDecoration(

@@ -24,18 +24,18 @@ class _HomeMessageScreenState extends State<HomeMessageScreen> {
              Column(
                children: [
                  Container(
-                   height: 60,
+                   height: 110,
                  ),
                  Expanded(child: ListView(
                    children: [
                      SizedBox(
-                       height: 20,
+                       height: 10,
                      ),
                      Row(
                        mainAxisAlignment: MainAxisAlignment.end,
                        children: [
                          GestureDetector(
-                           onTap: ()=>launch("tel://21213123123"),
+                           onTap: ()=>launch("tel://+33 84 808 808"),
                            child: Text('APPELER',style: AppTextStyle.appBarHeader(
                                color: Color(0xff042C5C),
                                size: 8.64,

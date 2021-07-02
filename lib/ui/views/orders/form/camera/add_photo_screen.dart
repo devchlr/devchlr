@@ -52,7 +52,7 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
                 ListView(
                   children: [
                     SizedBox(
-                      height: MediaQuery.of(context).size.height *0.22,
+                      height: 171,
                     ),
                     Center(
                       child: Text(
@@ -62,7 +62,7 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: 57,
+                      height: 60,
                     ),
                     Center(
                       child:GestureDetector(
@@ -101,7 +101,7 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
                       ,
                     ),
                     SizedBox(
-                      height:30,
+                      height:28,
                     ),
                     Center(
                       child: GestureDetector(
@@ -115,7 +115,7 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height:50 ,),
+                    SizedBox(height:40 ,),
                     SvgPicture.asset(
                       "assets/images/bonhomme.svg",
                       height: 325,

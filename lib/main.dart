@@ -14,6 +14,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_app/ui/views/course/home_course.dart';
 import 'package:flutter_app/ui/views/facture/home_facturation.dart';
 import 'package:flutter_app/ui/views/message/home_message.dart';
 import 'package:flutter_app/ui/views/annexe/about.dart';
@@ -100,6 +101,7 @@ class MyApp extends StatelessWidget {
         "/order_message": (BuildContext context) => new HomeMessageScreen(),
         "/about": (BuildContext context) => new AboutScreen(),
         "/term_condition": (BuildContext context) => new TermConditionScreen(),
+        "/home_course":(BuildContext context)=>new HomeCourseScreen(),
       },
     );
   }
