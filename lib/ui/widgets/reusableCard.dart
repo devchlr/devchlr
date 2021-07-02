@@ -47,7 +47,7 @@ class ReusableCard extends StatelessWidget {
                 inconAsset!,
                 height: 37,
                 width: 61,
-                color: assetColour==null?ChaliarColors.whiteGreyColor:assetColour,
+                color: group==size?Colors.white:Color(0xffD8D8D8),
               ),
             ),
             SizedBox(

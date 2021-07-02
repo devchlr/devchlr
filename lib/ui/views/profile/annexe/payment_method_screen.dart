@@ -5,6 +5,7 @@ import 'package:flutter_app/ui/styles/chaliar_font.dart';
 import 'package:flutter_app/ui/styles/text_style.dart';
 import 'package:flutter_app/ui/widgets/appBar.dart';
 import 'package:flutter_app/ui/widgets/button.dart';
+import 'package:flutter_app/ui/widgets/custom_header.dart';
 import 'package:flutter_app/ui/widgets/svg_button.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_credit_card/credit_card_widget.dart';
@@ -21,18 +22,18 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ChaliarMenu.topBar(
-          leading: GestureDetector(
-            onTap: (){
-              Navigator.pop(context);
-            },
-            child: Icon(Icons.arrow_back_ios,color: Color(0xffd8d8d8)),
-          ),
-          description: '',
-          title: 'Méthode de paiement',
-          bgColor: Color(0xffF3F3F3),
-          imageBackground: 'assets/images/header.png'
-      ),
+      // appBar: ChaliarMenu.topBar(
+      //     leading: GestureDetector(
+      //       onTap: (){
+      //         Navigator.pop(context);
+      //       },
+      //       child: Icon(Icons.arrow_back_ios,color: Color(0xffd8d8d8)),
+      //     ),
+      //     description: '',
+      //     title: 'Méthode de paiement',
+      //     bgColor: Color(0xffF3F3F3),
+      //     imageBackground: 'assets/images/header.png'
+      // ),
       backgroundColor: Color(0xffF3F3F3),
       body: Stack(
         children: [
@@ -41,11 +42,16 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
           ),
           Column(
             children: [
-              SizedBox(height: 37.0,),
+              SizedBox(
+                height: MediaQuery.of(context).size.width*0.2,),
+              SizedBox(height: 57.0,),
               Padding(padding: EdgeInsets.only(
                 left: MediaQuery.of(context).size.width*0.5
               ),
               child: GestureDetector(
+                onTap: (){
+                  Navigator.pushNamed(context, '/add_payment_method');
+                },
                 child: Row(
                   children: [
                     SvgIconButton(
@@ -244,7 +250,27 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                         color: ChaliarColors.whiteColor)),
               )
             ],
-          )
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+                top: 0
+            ),
+            child: CustomHearder(
+              title: "Méthode de paiement",
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height*0.08,
+                left: MediaQuery.of(context).size.width*0.02
+            ),
+            child: GestureDetector(
+              onTap: (){
+                Navigator.pop(context);
+              },
+              child: Icon(Icons.arrow_back_ios,color: Colors.white,),
+            ),
+          ),
 
         ],
       ),

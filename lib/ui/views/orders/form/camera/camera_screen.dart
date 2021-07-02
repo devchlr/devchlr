@@ -4,11 +4,14 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/constants/iconList.dart';
 import 'package:flutter_app/model_views/order/cameraMV.dart';
+import 'package:flutter_app/ui/views/orders/form/camera/thumbails/image.dart';
 import 'package:flutter_app/ui/widgets/svg_button.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_app/ui/views/orders/form/camera/display_picture_screen.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart' as pPath;
+
 
 // A screen that allows users to take a picture using a given camera.
 class TakePictureScreen extends StatefulWidget {
@@ -27,7 +30,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
   late Future<void> _initializeControllerFuture;
   //image picker
   final _picker = ImagePicker();
-
+  String? image;
   Future getImage()async{
     final PickedFile? pickedFile = await _picker.getImage(source: ImageSource.gallery);
     // final File file = File(pickedFile.path);
@@ -38,11 +41,12 @@ class TakePictureScreenState extends State<TakePictureScreen> {
             new DisplayPictureScreen(imagePath: pickedFile.path)));
   }
 
+
+
   @override
 
   void initState(){
     super.initState();
-    // initCamera(widget.camera.first);
     _controller = CameraController(
       // Get a specific camera from the list of available cameras.
       widget.camera.first,
@@ -129,7 +133,6 @@ class TakePictureScreenState extends State<TakePictureScreen> {
                                               flashModeIsOn=true;
                                               print('flash on');
                                             }
-
                                           },
                                            child: SvgIconButton(
                                               iconSize: 50,
@@ -145,10 +148,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
                                     child:Row(
                                         mainAxisAlignment:MainAxisAlignment.spaceEvenly,
                                         children:[
-                                          GestureDetector(
-                                            onTap:getImage,
-                                            child: Icon(Icons.panorama,size: 43,color: Colors.white,),
-                                          ),
+                                          Images(onTap: getImage,),
                                           GestureDetector(
                                             onTap: () async {
                                               // await model.takePhoto(context, _initializeControllerFuture, _controller);

@@ -51,7 +51,7 @@ class DepartFormViewModel extends BaseModel{
   }
 
   void formEditingController(BuildContext context){
-    customShowSnackBar.initUserRequestAnimation(context);
+    // customShowSnackBar.initUserRequestAnimation(context);
     // if(validatorForm()){
     //   OrderDeliveryInformation deliveryInformation = new OrderDeliveryInformation(
     //       delivery_schedule: delivery_schedule.text,

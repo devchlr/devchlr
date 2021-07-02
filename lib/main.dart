@@ -14,6 +14,8 @@ import 'dart:async';
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_app/ui/views/facture/home_facturation.dart';
+import 'package:flutter_app/ui/views/message/home_message.dart';
 import 'package:flutter_app/ui/views/annexe/about.dart';
 import 'package:flutter_app/ui/views/annexe/condionnal_term_detail_screen.dart';
 import 'package:flutter_app/ui/views/annexe/faq_screen.dart';
@@ -28,6 +30,8 @@ import 'package:flutter_app/ui/views/orders/form/depart_order_form.dart';
 import 'package:flutter_app/ui/views/orders/form/package_information_screen.dart';
 import 'package:flutter_app/ui/views/orders/form/resume_order_screen.dart';
 import 'package:flutter_app/ui/views/orders/home_order_screen.dart';
+import 'package:flutter_app/ui/views/orders/order_scanning.dart';
+import 'package:flutter_app/ui/views/orders/order_tracking.dart';
 import 'package:flutter_app/ui/views/profile/annexe/add_payment_method_screen.dart';
 import 'package:flutter_app/ui/views/profile/annexe/edit_profile_screen.dart';
 import 'package:flutter_app/ui/views/profile/annexe/payment_method_screen.dart';
@@ -71,7 +75,7 @@ class MyApp extends StatelessWidget {
           unselectedWidgetColor: Colors.grey,
           disabledColor: Colors.grey),
       routes: <String, WidgetBuilder>{
-        "/splash": (BuildContext context) => new AddPhotoScreen(),
+        "/splash": (BuildContext context) => new SplashScreen(),
         "/tuto": (BuildContext context) => new OnboardingScreen(),
         "/connexion": (BuildContext context) => new ConnexionScreen(),
         "/pro_particulier": (BuildContext context) =>
@@ -88,10 +92,14 @@ class MyApp extends StatelessWidget {
         '/home_profile':(BuildContext context)=>new HomeProfileScreen(),
         '/edit_profile':(BuildContext context)=>new EditProfileScreen(),
         '/payment_method':(BuildContext context)=>new PaymentMethodScreen(),
-
+        '/add_payment_method':(BuildContext context)=>new AddPaymentMethodScreen(),
+        '/home_facturation':(BuildContext context)=>new HomeFacturationScreen(),
          "/faq": (BuildContext context) => new FaqScreen(),
+        "/order_tracking": (BuildContext context) => new OrderTrackingScreen(),
+        "/order_scaning": (BuildContext context) => new OrderScanScreen(),
+        "/order_message": (BuildContext context) => new HomeMessageScreen(),
         "/about": (BuildContext context) => new AboutScreen(),
-        // "/pre-condition": (BuildContext context) => new PreOnboardingScreen(),
+        "/term_condition": (BuildContext context) => new TermConditionScreen(),
       },
     );
   }

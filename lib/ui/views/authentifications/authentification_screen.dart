@@ -10,6 +10,7 @@ import 'package:flutter_app/ui/widgets/custom_showSnackBar.dart';
 import 'package:pin_input_text_field/pin_input_text_field.dart';
 import 'package:flutter/gestures.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PhoneOptValidateScreen extends StatefulWidget {
   String? phone;
@@ -80,10 +81,7 @@ class _PhoneOptValidateScreenState extends State<PhoneOptValidateScreen>{
                                 children: [
                                   TextSpan(
                                     recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                      customShowSnackBar.initUserRequestAnimation(context);
-                                        print('phone call');
-                                      },
+                                      ..onTap = ()=>launch("tel://21213123123"),
                                     text: "${widget.phone}",
                                     style: AppTextStyle.header3_light(
                                         color: ChaliarColors.primaryColors,

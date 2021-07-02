@@ -94,7 +94,10 @@ class OnboardingPageWidget extends StatelessWidget {
                         bordercolor: ChaliarColors.primaryColors,
                         textStyle: AppTextStyle.button(
                             color: ChaliarColors.primaryColors)),
-                  )
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
                 ],
               ),
             ),

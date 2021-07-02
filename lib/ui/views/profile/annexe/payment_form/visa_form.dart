@@ -23,7 +23,7 @@ class _VisaPaymentFormState extends State<VisaPaymentForm> {
     return ListView(
       children: [
         SizedBox(
-          height: 40,
+          height: 10,
         ),
         Center(
           child: Text(

@@ -26,6 +26,8 @@ public final class GeneratedPluginRegistrant {
     flutterEngine.getPlugins().add(new com.example.libphonenumber_plugin.LibphonenumberPlugin());
     flutterEngine.getPlugins().add(new io.flutter.plugins.pathprovider.PathProviderPlugin());
     flutterEngine.getPlugins().add(new io.flutter.plugins.share.SharePlugin());
+      com.follow2vivek.storagepath.StoragePathPlugin.registerWith(shimPluginRegistry.registrarFor("com.follow2vivek.storagepath.StoragePathPlugin"));
+    flutterEngine.getPlugins().add(new io.flutter.plugins.urllauncher.UrlLauncherPlugin());
     flutterEngine.getPlugins().add(new io.flutter.plugins.videoplayer.VideoPlayerPlugin());
   }
 }

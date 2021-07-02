@@ -214,7 +214,9 @@ class _SingInScreenState extends State<SingInScreen> {
                             height: MediaQuery.of(context).size.height * 0.04,
                           ),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.pushNamed(context, '/term_condition');
+                            },
                             child: Container(
                               margin: EdgeInsets.only(left: 20, right: 20),
                               child: Center(

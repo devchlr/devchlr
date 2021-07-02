@@ -6,6 +6,7 @@ import 'package:flutter_app/ui/widgets/appBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/ui/widgets/button.dart';
 import 'package:flutter_app/ui/widgets/custom_botom_navigation_bar.dart';
+import 'package:flutter_app/ui/widgets/custom_header.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:timelines/timelines.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -45,11 +46,11 @@ class _PreCommandeScreenState extends State<PreCommandeScreen> {
     return
       Scaffold(
         backgroundColor: Color(0xffF3F3F3),
-        appBar: ChaliarMenu.topBar(
-            title: 'Commande',
-            bgColor: Color(0xffF3F3F3),
-            imageBackground: 'assets/images/header.png'
-        ),
+        // appBar: ChaliarMenu.topBar(
+        //     title: 'Commande',
+        //     bgColor: Color(0xffF3F3F3),
+        //     imageBackground: 'assets/images/header.png'
+        // ),
        //  bottomNavigationBar:
        // ,
         body: Stack(
@@ -57,13 +58,15 @@ class _PreCommandeScreenState extends State<PreCommandeScreen> {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.width*0.18,),
                 Container(
                   margin: EdgeInsets.only(
                       left: 10.0,
                       right: 10.0,
                       top: 10.0
                   ),
-                  height: MediaQuery.of(context).size.height * 0.15,
+                  height: MediaQuery.of(context).size.height * 0.2,
                   decoration: BoxDecoration(
                     color: Color(0xffF3F3F3),
                   ),
@@ -141,7 +144,8 @@ class _PreCommandeScreenState extends State<PreCommandeScreen> {
               padding: EdgeInsets.only(
                 top: MediaQuery.of(context).size.height * 0.6,
               ),
-              child: Center(
+              child:
+              Center(
                 child: ButtonChaliar(
                     onTap: () {
                       Navigator.pushNamed(context, '/commande_depart_form');
@@ -157,12 +161,20 @@ class _PreCommandeScreenState extends State<PreCommandeScreen> {
               ),
             ),
             Padding(padding: EdgeInsets.only(
-              top:MediaQuery.of(context).size.height*0.81,
+              top:MediaQuery.of(context).size.height*0.91,
             ),
               child:  CustomBottomNavigationBar(
                 bgColor: Colors.transparent,
               ),
-            )
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                  top: 0
+              ),
+              child: CustomHearder(
+                title: "Commande",
+              ),
+            ),
           ],
         ),
       );

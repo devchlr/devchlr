@@ -5,6 +5,7 @@ import 'package:flutter_app/ui/styles/chaliar_font.dart';
 import 'package:flutter_app/ui/styles/text_style.dart';
 import 'package:flutter_app/ui/widgets/appBar.dart';
 import 'package:flutter_app/ui/widgets/button.dart';
+import 'package:flutter_app/ui/widgets/custom_header.dart';
 import 'package:flutter_app/ui/widgets/input_field.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -19,26 +20,28 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ChaliarMenu.topBar(
-          leading: GestureDetector(
-            onTap: (){
-              Navigator.pop(context);
-            },
-            child: Icon(Icons.arrow_back_ios,color: Color(0xffd8d8d8),),
-          ),
-          description: '',
-          title: 'Profil',
-          bgColor: Color(0xffF3F3F3),
-          imageBackground: 'assets/images/header.png'
-      ),
+      // appBar: ChaliarMenu.topBar(
+      //     leading: GestureDetector(
+      //       onTap: (){
+      //         Navigator.pop(context);
+      //       },
+      //       child: Icon(Icons.arrow_back_ios,color: Color(0xffd8d8d8),),
+      //     ),
+      //     description: '',
+      //     title: 'Profil',
+      //     bgColor: Color(0xffF3F3F3),
+      //     imageBackground: 'assets/images/header.png'
+      // ),
       backgroundColor: Color(0xffF3F3F3),
       body: Stack(
         children: [
+          SizedBox(
+            height: MediaQuery.of(context).size.width*0.2,),
           Container(
             color: Color(0xffF3F3F3),
           ),
           Padding(padding: EdgeInsets.only(
-            top: 50,
+            top: 100,
             left: 30,
             right: 30
           ),
@@ -180,7 +183,27 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         color: ChaliarColors.whiteColor)),
               )
             ],
-          ),)
+          ),),
+          Padding(
+            padding: EdgeInsets.only(
+                top: 0
+            ),
+            child: CustomHearder(
+              title: "Profil",
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height*0.08,
+                left: MediaQuery.of(context).size.width*0.02
+            ),
+            child: GestureDetector(
+              onTap: (){
+                Navigator.pop(context);
+              },
+              child: Icon(Icons.arrow_back_ios,color: Colors.white,),
+            ),
+          ),
         ],
       ),
     );

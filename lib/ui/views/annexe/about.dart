@@ -3,6 +3,7 @@ import 'package:flutter_app/ui/styles/chaliar_color.dart';
 import 'package:flutter_app/ui/styles/text_style.dart';
 import 'package:flutter_app/ui/widgets/appBar.dart';
 import 'package:flutter_app/ui/widgets/custom_botom_navigation_bar.dart';
+import 'package:flutter_app/ui/widgets/custom_header.dart';
 
 
 class AboutScreen extends StatelessWidget {
@@ -11,7 +12,7 @@ class AboutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: ChaliarMenu.topBar(title: 'À propos',bgColor: ChaliarColors.whiteColor,imageBackground: 'assets/images/header.png'),
+      // appBar: ChaliarMenu.topBar(title: 'À propos',bgColor: ChaliarColors.whiteColor,imageBackground: 'assets/images/header.png'),
       // bottomNavigationBar: CustomBottomNavigationBar(
       // ),
       body: Stack(
@@ -30,7 +31,7 @@ class AboutScreen extends StatelessWidget {
               // crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
-                  height: 20,
+                  height: MediaQuery.of(context).size.height*0.15,
                 ),
                 Text('À propos de Chaliar',textAlign: TextAlign.center,style: AppTextStyle.headerApp1(color: ChaliarColors.blackColor,)),
                 SizedBox(
@@ -48,12 +49,20 @@ class AboutScreen extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.only(
-              top:MediaQuery.of(context).size.height*0.81,
+              top:MediaQuery.of(context).size.height*0.91,
             ),
             child:  CustomBottomNavigationBar(
               bgColor: Colors.transparent,
             ),
-          )
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+                top: 0
+            ),
+            child: CustomHearder(
+              title: "À propos",
+            ),
+          ),
         ],
       ),
     );

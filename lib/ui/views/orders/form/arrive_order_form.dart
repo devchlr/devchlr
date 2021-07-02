@@ -6,6 +6,7 @@ import 'package:flutter_app/ui/styles/text_style.dart';
 import 'package:flutter_app/ui/widgets/appBar.dart';
 import 'package:flutter_app/ui/widgets/button.dart';
 import 'package:flutter_app/ui/widgets/custom_botom_navigation_bar.dart';
+import 'package:flutter_app/ui/widgets/custom_header.dart';
 import 'package:flutter_app/ui/widgets/input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -30,22 +31,24 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
           builder: (context, model, child) =>
       Scaffold(
       key: _scaffoldKey,
-      appBar: ChaliarMenu.topBar(
-          leading: GestureDetector(
-            onTap: (){
-              Navigator.pop(context);
-            },
-            child: Icon(Icons.arrow_back_ios),
-          ),
-          title: 'Commande',
-          bgColor: ChaliarColors.whiteColor,
-          imageBackground: 'assets/images/header.png'
-      ),
+      // appBar: ChaliarMenu.topBar(
+      //     leading: GestureDetector(
+      //       onTap: (){
+      //         Navigator.pop(context);
+      //       },
+      //       child: Icon(Icons.arrow_back_ios),
+      //     ),
+      //     title: 'Commande',
+      //     bgColor: ChaliarColors.whiteColor,
+      //     imageBackground: 'assets/images/header.png'
+      // ),
       // bottomNavigationBar: CustomBottomNavigationBar(),
       body: Stack(
         children: [
           Column(
             children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.width*0.18,),
               Expanded(
                 flex: 1,
                 child: Container(
@@ -200,7 +203,7 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: 60.0,
+                          height: 100.0,
                         ),
                       ],
                     ),
@@ -218,12 +221,32 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
           ),
           Padding(
             padding: EdgeInsets.only(
-              top:MediaQuery.of(context).size.height*0.81,
+              top:MediaQuery.of(context).size.height*0.92,
             ),
             child:  CustomBottomNavigationBar(
               bgColor: Colors.transparent,
             ),
-          )
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+                top: 0
+            ),
+            child: CustomHearder(
+              title: "Commande",
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height*0.08,
+                left: MediaQuery.of(context).size.width*0.02
+            ),
+            child: GestureDetector(
+              onTap: (){
+                Navigator.pop(context);
+              },
+              child: Icon(Icons.arrow_back_ios,color: Colors.white,),
+            ),
+          ),
         ],
       ),
     )));

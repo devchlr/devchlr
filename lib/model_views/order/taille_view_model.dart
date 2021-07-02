@@ -24,8 +24,8 @@ class TailleScreeenViewmodel extends BaseModel{
   }
 
   void formEditingController(BuildContext context){
-    customShowSnackBar.initUserRequestAnimation(context);
-    if(validator()){
+    // customShowSnackBar.initUserRequestAnimation(context);
+    if(true){
       OrderPackageInformation packageInformation=new OrderPackageInformation(package_nature:package_nature.text,package_size: package_size);
       Navigator.push(context,
           new MaterialPageRoute(

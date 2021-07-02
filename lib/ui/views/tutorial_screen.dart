@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_app/model_views/tutoVM.dart';
 import 'package:flutter_app/ui/styles/text_style.dart';
 import 'package:flutter_app/ui/widgets/appBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/ui/styles/chaliar_color.dart';
+import 'package:flutter_app/ui/widgets/custom_header.dart';
 import 'package:flutter_app/ui/widgets/onboarding_page.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -59,7 +61,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         builder: (context, model, child) =>
 
             Scaffold(
-              appBar: ChaliarMenu.topBar(imageBackground:'assets/images/header.png',title: 'Démarrer',bgColor:Colors.white),
+              // appBar: ChaliarMenu.topBar(imageBackground:'assets/images/header.png',title: 'Démarrer',bgColor:Colors.white),
               body: AnnotatedRegion<SystemUiOverlayStyle>(
                 value: SystemUiOverlayStyle.light,
                 child: Container(
@@ -67,6 +69,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   child: Stack(
                     children: <Widget>[
                       Container(
+                        padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height*0.12
+                        ),
                         color: Color(0xffefeff1),
                         height: MediaQuery.of(context).size.height,
                         width: MediaQuery.of(context).size.width,
@@ -113,6 +118,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               },
                             ),
                           ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            top: 0
+                        ),
+                        child: CustomHearder(
+                          title: "Démarrer",
                         ),
                       ),
                     ],

@@ -283,7 +283,7 @@ class _ResumeOrderScreenState extends State<ResumeOrderScreen> {
               Center(
                 child: ButtonChaliar(
                     onTap: () {
-                      Navigator.pushNamed(context, '/resume_order_screen');
+                      Navigator.pushNamed(context, '/order_scaning');
                     },
                     buttonText: 'Valider ma commande',
                     height: MediaQuery.of(context).size.height * 0.07,
@@ -293,7 +293,10 @@ class _ResumeOrderScreenState extends State<ResumeOrderScreen> {
                     bordercolor: ChaliarColors.primaryColors,
                     textStyle: AppTextStyle.button(
                         color: ChaliarColors.whiteColor)),
-              )
+              ),
+              SizedBox(
+                height: 50.0,
+              ),
             ],
           ),
 

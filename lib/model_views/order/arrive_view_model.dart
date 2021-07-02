@@ -38,8 +38,8 @@ class ArriveScreenViewModel extends BaseModel{
   }
 
   formEditingController(BuildContext context){
-    customShowSnackBar.initUserRequestAnimation(context);
-  if(validatorForm()){
+    // customShowSnackBar.initUserRequestAnimation(context);
+  if(true){
     OrderRecipientInformation recipientInformation = OrderRecipientInformation(
         arrival_address: arrival_address.text,
         recipient_phone_number: recipient_phone_number.text,
@@ -58,8 +58,5 @@ class ArriveScreenViewModel extends BaseModel{
     customShowSnackBar.initUserRequestAnimationError(context, 'Tous les champs doivent etres renseignes');
     print('donne du formulaire non conforme');
   }
-
   }
-
-
 }

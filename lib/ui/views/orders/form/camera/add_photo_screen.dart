@@ -1,6 +1,7 @@
 import 'package:flutter_app/ui/styles/chaliar_color.dart';
 import 'package:flutter_app/ui/styles/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/ui/widgets/custom_header.dart';
 import 'package:flutter_svg/svg.dart';
 
 class AddPhotoScreen extends StatefulWidget {
@@ -16,32 +17,6 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
         children: [
           Scaffold(
             key: _scaffoldKey,
-            appBar:AppBar(
-              leading:Text(''),
-              elevation: 0.0,
-              flexibleSpace: Image(
-                image: AssetImage('assets/images/bgPageBohomme.png'),
-                fit: BoxFit.fill,
-              ),
-              title: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Center(child: Text(
-                    'Votre commande',
-                    style: AppTextStyle.appBarHeader(color: ChaliarColors.whiteColor),
-                  ),),
-                  Center(child: Text(
-                    '7 avenue de la grande Armée/75003 Paris',
-                    style: AppTextStyle.caption(color: ChaliarColors.whiteColor),
-                  ),),
-                  Container(
-                    height: 5.0,
-                  )
-                ],
-              ),
-              backgroundColor: ChaliarColors.primaryColors,
-            ),
             body:
             Stack(
               children: [
@@ -67,10 +42,17 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
                     ),
                   ],
                 ),
+                Padding(padding: EdgeInsets.only(
+                ),
+                  child: CustomHearder(
+                    title: 'Votre commande',
+                    description: '7 avenue de la grande Armée/75003 Paris',
+                  ),
+                ),
                 ListView(
                   children: [
                     SizedBox(
-                      height: MediaQuery.of(context).size.height *0.15,
+                      height: MediaQuery.of(context).size.height *0.22,
                     ),
                     Center(
                       child: Text(
@@ -122,10 +104,15 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
                       height:30,
                     ),
                     Center(
-                      child: Text(
-                        'passer cette étape',
-                        style: AppTextStyle.addPhotoCaption(color: ChaliarColors.whiteColor),
-                        textAlign: TextAlign.center,
+                      child: GestureDetector(
+                        onTap: (){
+                          Navigator.pushNamed(context, '/resume_order_screen');
+                        },
+                        child: Text(
+                          'passer cette étape',
+                          style: AppTextStyle.addPhotoCaption(color: ChaliarColors.whiteColor),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                     ),
                     SizedBox(height:50 ,),
@@ -136,37 +123,32 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
                     )
                   ],
                 ),
-                // Positioned(
-                //   bottom: 10.0,
-                //   right: 20.0,
-                //   child: SvgPicture.asset(
-                //     "assets/images/bonhomme.svg",
-                //     height: 325,
-                //     width: 297,
-                //   ),
-                // ),
-
               ],
             ),
           ),
-          Column(
+    Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
                   padding: EdgeInsets.only(
-                    top:MediaQuery.of(context).size.height * 0.085,
-                    left:MediaQuery.of(context).size.width * 0.43,
-                    right:MediaQuery.of(context).size.width * 0.43,
+                    top:MediaQuery.of(context).size.height * 0.12,
+                    left:MediaQuery.of(context).size.width * 0.42,
+                    right:MediaQuery.of(context).size.width * 0.42,
                   ),
-                  child:CircleAvatar(
-                    radius: 25.0,
-                    backgroundColor: ChaliarColors.whiteColor,
-                    child: Icon(Icons.close_outlined,color: ChaliarColors.primaryColors,),
+                  child:GestureDetector(
+                    onTap:(){
+                      Navigator.pushNamed(context, '/resume_order_screen');
+                    },
+                    child: CircleAvatar(
+                      radius: 25.0,
+                      backgroundColor: ChaliarColors.whiteColor,
+                      child: Icon(Icons.close_outlined,color: ChaliarColors.primaryColors,),
+                    ),
                   )
-              ),
+              )
             ],
           ),
-          Positioned(
+         Positioned(
             top: MediaQuery.of(context).size.height*0.065,
               left: MediaQuery.of(context).size.width*0.05,
               child:  GestureDetector(

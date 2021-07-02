@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/ui/styles/chaliar_color.dart';
 import 'package:flutter_app/ui/styles/text_style.dart';
 import 'package:flutter_app/ui/widgets/appBar.dart';
+import 'package:flutter_app/ui/widgets/custom_header.dart';
 
 
 class TermConditionScreen extends StatelessWidget {
@@ -22,12 +23,9 @@ class TermConditionScreen extends StatelessWidget {
             );
           }
           return Scaffold(
-          appBar: ChaliarMenu.topBar(title: 'Condition générale',bgColor: ChaliarColors.whiteColor,imageBackground: 'assets/images/header.png'),
+          // appBar: ChaliarMenu.topBar(title: 'Condition générale',bgColor: ChaliarColors.whiteColor,imageBackground: 'assets/images/header.png'),
           body: Stack(
           children: [
-            Container(
-            color: ChaliarColors.whiteColor,
-            ),
             Card(
             elevation: 0,
             margin: EdgeInsets.only(
@@ -38,6 +36,9 @@ class TermConditionScreen extends StatelessWidget {
               // mainAxisAlignment: MainAxisAlignment.center,
               // crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height*0.15,
+                ),
                 Text('Condition générale',textAlign: TextAlign.center,style: AppTextStyle.headerApp1(color: ChaliarColors.blackColor,)),
                 SizedBox(
                   height: 20,
@@ -51,7 +52,15 @@ class TermConditionScreen extends StatelessWidget {
                 )
               ],
               ),
-            )
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                  top: 0
+              ),
+              child: CustomHearder(
+                title: "Condition générale",
+              ),
+            ),
           ],
           ),
             );

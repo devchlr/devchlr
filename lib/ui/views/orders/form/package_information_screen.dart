@@ -6,6 +6,7 @@ import 'package:flutter_app/ui/styles/chaliar_color.dart';
 import 'package:flutter_app/ui/styles/text_style.dart';
 import 'package:flutter_app/ui/widgets/appBar.dart';
 import 'package:flutter_app/ui/widgets/button.dart';
+import 'package:flutter_app/ui/widgets/custom_header.dart';
 import 'package:flutter_app/ui/widgets/input_field.dart';
 import 'package:flutter_app/ui/widgets/reusableCard.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,6 +24,7 @@ TailleColisScreen({this.deliveryInformation,this.recipientInformation});
 
 class _TailleColisScreenState extends State<TailleColisScreen> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  bool dismitCircle=false;
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<TailleScreeenViewmodel>(
@@ -33,24 +35,37 @@ class _TailleColisScreenState extends State<TailleColisScreen> {
         children: [
           Scaffold(
             key: _scaffoldKey,
-            appBar: ChaliarMenu.topBar(
-                title: 'Votre commande',
-                description: '7 avenue de la grande Armée/75003 Paris',
-                bgColor: ChaliarColors.whiteColor,
-                imageBackground: 'assets/images/header.png'
-            ),
+            // appBar: ChaliarMenu.topBar(
+            //     title: 'Votre commande',
+            //     description: '7 avenue de la grande Armée/75003 Paris',
+            //     bgColor: ChaliarColors.whiteColor,
+            //     imageBackground: 'assets/images/header.png'
+            // ),
             body: Stack(
               children: [
+                Padding(
+                  padding: EdgeInsets.only(
+
+                  ),
+                  child: CustomHearder(
+                    title: 'Votre commande',
+                    description: '7 avenue de la grande Armée/75003 Paris',
+                  ),
+                ),
                 Column(
                   children: [
+                    SizedBox(
+                      height: 90,
+                    ),
                     Container(
                       height: 48,
-                      width: MediaQuery.of(context).size.width,
+                      width: MediaQuery.of(context).size.width*0.75,
                       margin: EdgeInsets.only(
-                          top: 20.0,
+                          top: 70.0,
                           left: 20.0,right: 20.0
                       ),
                       decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black),
                         color: ChaliarColors.whiteColor,
                       ),
                       child:  Padding(
@@ -79,9 +94,9 @@ class _TailleColisScreenState extends State<TailleColisScreen> {
                     ),
                     Expanded(
                       flex: 1,
-                      child: Container(
-                          padding: EdgeInsets.only(
-                              left: 15.0,right: 15.0,bottom: 10.0,top: 10.0
+                      child:
+                      Container(
+                          margin: EdgeInsets.only(
                           ),
                           color: ChaliarColors.whiteColor,
                           child:ListView(
@@ -92,7 +107,7 @@ class _TailleColisScreenState extends State<TailleColisScreen> {
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         ReusableCard(
-                                          size: 's',
+                                          size: '${PackageSize.small}',
                                           title: 'Taille S',
                                           price: '39',
                                           description: 'Tiens dans une boite à chaussure (téléphone, clé, …)',
@@ -104,14 +119,13 @@ class _TailleColisScreenState extends State<TailleColisScreen> {
                                           },
                                         ),
                                         ReusableCard(
-                                          size: 'm',
+                                          size: '${PackageSize.medium}',
                                           title: 'Taille M',
                                           price: '69',
                                           description: 'Tiens dans une valise cabine(ordinateur, platine …)',
                                           colour: model.package_size==PackageSize.medium?ChaliarColors.whiteColor:ChaliarColors.primaryColors,
                                           bgColour: model.package_size==PackageSize.medium?ChaliarColors.primaryColors:ChaliarColors.whiteColor,
                                           inconAsset:SvgIcons.scooter,
-                                          assetColour: ChaliarColors.whiteColor,
                                           onPress: (){
                                             model.selectedCard(PackageSize.medium);
                                           },
@@ -125,7 +139,7 @@ class _TailleColisScreenState extends State<TailleColisScreen> {
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         ReusableCard(
-                                          size: 'l',
+                                          size: '${PackageSize.large}',
                                           title: 'Taille L',
                                           price: '89',
                                           description: 'Tiens dans le coffre d’une voiture(tv, valise …)',
@@ -138,7 +152,7 @@ class _TailleColisScreenState extends State<TailleColisScreen> {
                                         ),
 
                                         ReusableCard(
-                                          size: 'xl',
+                                          size: '${PackageSize.extralarge}',
                                           title: 'Taille XL',
                                           price: '129',
                                           description: 'Nécessite un petit utilitaire(canapé, armoire…)',
@@ -182,23 +196,31 @@ class _TailleColisScreenState extends State<TailleColisScreen> {
               ],
             ),
           ),
-          Column(
+          dismitCircle==false? Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
                   padding: EdgeInsets.only(
-                    top:MediaQuery.of(context).size.height * 0.1,
+                    top:MediaQuery.of(context).size.height * 0.12,
                     left:MediaQuery.of(context).size.width * 0.42,
                     right:MediaQuery.of(context).size.width * 0.42,
                   ),
-                  child:CircleAvatar(
-                    radius: 25.0,
-                    backgroundColor: ChaliarColors.whiteColor,
-                    child: Icon(Icons.close_outlined,color: ChaliarColors.primaryColors,),
+                  child:GestureDetector(
+                    onTap:(){
+                      print('circle clicked');
+                      setState(() {
+                        dismitCircle=true;
+                      });
+                    },
+                    child: CircleAvatar(
+                      radius: 25.0,
+                      backgroundColor: ChaliarColors.whiteColor,
+                      child: Icon(Icons.close_outlined,color: ChaliarColors.primaryColors,),
+                    ),
                   )
               )
             ],
-          )
+          ):Container(),
         ],
       )));
   }

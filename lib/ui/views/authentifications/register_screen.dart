@@ -378,7 +378,7 @@ class UserRegisterScreen extends StatelessWidget {
                             ],
                           ),
                           SizedBox(
-                              height: 10.0
+                              height: 30.0
                           ),
                         ],
                       ),

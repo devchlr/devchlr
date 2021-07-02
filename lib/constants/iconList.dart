@@ -1,6 +1,10 @@
 const String assets = "assets/icons/";
 
 class SvgIcons {
+static const String paper_plane = assets + "paper_plane.svg";
+static const String pin = assets + "pin.svg";
+  static const String start = assets + "start.svg";
+static const String radar_chaliar = assets + "radar_chaliar.svg";
 static const String pencil = assets + "pencil.svg";
 static const String white_visa = assets + "white_visa.svg";
 static const String calendar = assets + "calendar.svg";

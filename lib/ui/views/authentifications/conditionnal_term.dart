@@ -120,7 +120,7 @@ class _ConditionGeneraleScreenState extends State<ConditionGeneraleScreen> {
                                         alignment: Alignment(- MediaQuery.of(context).size.width * 0.007, 0),
                                         child:GestureDetector(
                                           onTap: () {
-                                            print('Condition text typed');
+                                            Navigator.pushNamed(context, '/term_condition');
                                           },
                                           child: Text(
                                             'Vous acceptez nos conditions générales\nd\'utilisations',

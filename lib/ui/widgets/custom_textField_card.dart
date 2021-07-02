@@ -26,7 +26,8 @@ class CustomTextFieldCard extends StatelessWidget {
         height: card_size,
         child: ListTile(
           leading: leading,
-          title: Center(
+          title:
+          Center(
             child: TextField(
               obscureText: obscure_field!,
               controller: controller,
