@@ -31,7 +31,7 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
   Completer<GoogleMapController> _controller = Completer();
 
   GoogleMapController? mapController;
-  final LatLng _center = const LatLng(45.521563, -122.677433);
+  final LatLng _center = const LatLng(48.85341, 2.3488);
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
   }
@@ -110,13 +110,12 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                   ),
                 ),
                 Expanded(
-                  flex: 1,
                   child:  Container(
                     child: GoogleMap(
                       onMapCreated: _onMapCreated,
                       initialCameraPosition: CameraPosition(
                         target: _center,
-                        zoom: 11.0,
+                        zoom: 13.0,
                       ),
                     ),
                   ),

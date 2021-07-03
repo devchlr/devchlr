@@ -8,12 +8,13 @@ import 'package:flutter_app/ui/widgets/svg_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/model_views/authentification/register_screenVM.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:provider/provider.dart';
 
 class UserRegisterScreen extends StatelessWidget {
   final String typeUSer;
+  String initialCountry = 'fR';
+  PhoneNumber number = PhoneNumber(isoCode: 'FR');
   UserRegisterScreen({this.typeUSer='particulier'});
   @override
   Widget build(BuildContext context) {
@@ -22,6 +23,7 @@ class UserRegisterScreen extends StatelessWidget {
       child: Consumer<RegisterScreenVM>(
         builder: (context, model, child) =>
             Scaffold(
+              resizeToAvoidBottomInset: true,
               body: Stack(
                 children: [
                   Container(
@@ -66,8 +68,6 @@ class UserRegisterScreen extends StatelessWidget {
                               placeholder: "Prénom",
                               textFillColor: ChaliarColors.blackColor,
                               maxlenght: 250,
-
-                              // controller: model.surname,
                             ),
                           ),
                           SizedBox(
@@ -82,7 +82,6 @@ class UserRegisterScreen extends StatelessWidget {
                               placeholder: "Nom",
                               textFillColor: ChaliarColors.blackColor,
                               maxlenght: 250,
-                              // controller: model.name,
                             ),
                           ),
                           SizedBox(
@@ -98,8 +97,6 @@ class UserRegisterScreen extends StatelessWidget {
                               placeholder: "Email",
                               textFillColor: ChaliarColors.blackColor,
                               maxlenght: 300,
-                              // controller: model.email,
-                              // controller: model.email,
                             ),
                           ),
                           SizedBox(
@@ -155,6 +152,7 @@ class UserRegisterScreen extends StatelessWidget {
                             padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.07, right: MediaQuery.of(context).size.width * 0.07),
                             child:
                             InternationalPhoneNumberInput(
+                              initialValue: number,
                               onInputChanged: (PhoneNumber number) {
                                 model.phone=number.phoneNumber;
                                 print(number.phoneNumber);
@@ -163,13 +161,14 @@ class UserRegisterScreen extends StatelessWidget {
                                 print(value);
                               },
                               selectorConfig: SelectorConfig(
-                                selectorType: PhoneInputSelectorType.DROPDOWN,
+                                showFlags: false,
+                                selectorType: PhoneInputSelectorType.DIALOG,
                               ),
                               ignoreBlank: false,
                               inputDecoration: new InputDecoration(
-                                border: InputBorder.none,
+                                // border: InputBorder.none,
                                 focusedBorder: InputBorder.none,
-                                enabledBorder: InputBorder.none,
+                                // enabledBorder: InputBorder.none,
                                 errorBorder: InputBorder.none,
                                 disabledBorder: InputBorder.none,
                                 contentPadding:
@@ -190,13 +189,6 @@ class UserRegisterScreen extends StatelessWidget {
                                 print('On Saved: $number');
                               },
                             ),
-                            // InputField(
-                            //   fieldSize: MediaQuery.of(context).size.height * 0.02,
-                            //   label: "Numéro de téléphone",
-                            //   controller: model.phoneNumber,
-                            //   textFillColor: ChaliarColors.blackColor,
-                            //   maxlenght: 300,
-                            // ),
                           ),
                           typeUSer == 'particulier'?SizedBox(
                             height: 0,
@@ -386,6 +378,8 @@ class UserRegisterScreen extends StatelessWidget {
                   )
                 ],
               ),
-            ),),);
+            ),
+      ),
+    );
   }
 }

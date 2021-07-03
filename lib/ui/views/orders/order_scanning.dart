@@ -34,7 +34,7 @@ class _OrderScanScreenState extends State<OrderScanScreen> {
   Completer<GoogleMapController> _controller = Completer();
 
   GoogleMapController? mapController;
-  final LatLng _center = const LatLng(45.521563, -122.677433);
+  final LatLng _center = const LatLng(48.85341, 2.3488);
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
   }

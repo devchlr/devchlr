@@ -29,7 +29,7 @@ class _SingInScreenState extends State<SingInScreen> {
       child: Consumer<AuthentificationConnexionVM>(
         builder: (context, model, child) =>
             Scaffold(
-              resizeToAvoidBottomInset: false,
+              resizeToAvoidBottomInset: true,
               body: Stack(
                 fit: StackFit.expand,
                 children: [
@@ -41,17 +41,12 @@ class _SingInScreenState extends State<SingInScreen> {
                       ),
                     ),
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                  ListView(
+
                     children: [
-                      Expanded(
-                          flex: 3,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
+
                               SizedBox(
-                                height: MediaQuery.of(context).size.height * 0.1,
+                                height: 59,
                               ),
                               Center(
                                 child: SvgPicture.asset(
@@ -61,20 +56,17 @@ class _SingInScreenState extends State<SingInScreen> {
                                 ),
                               ),
                               SizedBox(
-                                height: MediaQuery.of(context).size.height * 0.02,
+                                height: 63,
                               ),
-                              Text.rich(
-                                TextSpan(
-                                  text: "Contents de vous revoir",
-                                  style: AppTextStyle.headerApp1(color: ChaliarColors.whiteColor),
-                                ),
-                              ),
-                            ],
-                          )),
-                      Expanded(
-                        flex: 3,
-                        child: ListView(children: [
-
+                             Center(child:  Text.rich(
+                               TextSpan(
+                                 text: "Contents de vous revoir",
+                                 style: AppTextStyle.headerApp1(color: ChaliarColors.whiteColor),
+                               ),
+                             ),),
+                      SizedBox(
+                        height: 39,
+                      ),
                          Padding(
                             padding: EdgeInsets.only(
                             left: MediaQuery.of(context).size.width * 0.1,
@@ -89,6 +81,7 @@ class _SingInScreenState extends State<SingInScreen> {
                                child: ListTile(
                                  title:
                                  InternationalPhoneNumberInput(
+                                   spaceBetweenSelectorAndTextField: 0,
                                    onInputChanged: (PhoneNumber number) {
                                      model.phone=number.phoneNumber;
                                      print(number.phoneNumber);
@@ -98,7 +91,7 @@ class _SingInScreenState extends State<SingInScreen> {
                                      print(value);
                                    },
                                    selectorConfig: SelectorConfig(
-                                     selectorType: PhoneInputSelectorType.DROPDOWN,
+                                     selectorType: PhoneInputSelectorType.DIALOG,
                                    ),
                                    ignoreBlank: false,
                                    inputDecoration: new InputDecoration(
@@ -110,16 +103,16 @@ class _SingInScreenState extends State<SingInScreen> {
                                      contentPadding:
                                      EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
                                      hintText: 'Telephone',
-                                     // hintStyle:placeholderStyle,
                                    ),
                                    autoValidateMode: AutovalidateMode.disabled,
                                    selectorTextStyle: TextStyle(color: Colors.black),
-                                   // initialValue: number,
                                    textFieldController: model.phoneNumber,
                                    formatInput: false,
                                    keyboardType:
-                                   TextInputType.numberWithOptions(signed: true, decimal: true),
-                                   // inputBorder: OutlineInputBorder(),
+                                   TextInputType.numberWithOptions(
+                                       signed: true,
+                                       decimal: true
+                                   ),
                                    onSaved: (PhoneNumber number) {
                                      print('On Saved: $number');
                                    },
@@ -128,24 +121,8 @@ class _SingInScreenState extends State<SingInScreen> {
                              ),
                            ),
                          ),
-
-                          // Padding(
-                          //   padding: EdgeInsets.only(
-                          //       left: MediaQuery.of(context).size.width * 0.1,
-                          //       right: MediaQuery.of(context).size.width * 0.1),
-                          //   child: CustomTextFieldCard(
-                          //     card_raduis: 50,
-                          //     card_size: 60,
-                          //     leading: SvgIconButton(
-                          //         iconAsset: SvgIcons.profile,
-                          //         onPressed: () {
-                          //         }),
-                          //     placeholder: 'Telephone',
-                          //     controller: model.phoneNumber,
-                          //   ),
-                          // ),
                           SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.02,
+                            height: 23,
                           ),
                           Padding(
                             padding: EdgeInsets.only(
@@ -171,7 +148,7 @@ class _SingInScreenState extends State<SingInScreen> {
                             ),
                           ),
                           SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.02,
+                            height:23,
                           ),
                           GestureDetector(
                             onTap: () {},
@@ -190,7 +167,7 @@ class _SingInScreenState extends State<SingInScreen> {
                             ),
                           ),
                           SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.04,
+                            height: 39,
                           ),
                           Padding(
                             padding: EdgeInsets.only(
@@ -202,7 +179,7 @@ class _SingInScreenState extends State<SingInScreen> {
                               },
                               buttonText: 'Suivant',
                               height: MediaQuery.of(context).size.height * 0.065,
-                              mediaQueryWidth: 0.25,
+                              mediaQueryWidth: 0.23,
                               borderRaduis: 40,
                               backgroundcolor: ChaliarColors.secondaryColors,
                               bordercolor: ChaliarColors.secondaryColors,
@@ -211,7 +188,7 @@ class _SingInScreenState extends State<SingInScreen> {
                             ),
                           ),
                           SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.04,
+                            height:30,
                           ),
                           GestureDetector(
                             onTap: () {
@@ -229,13 +206,15 @@ class _SingInScreenState extends State<SingInScreen> {
                               ),
                             ),
                           ),
-                        ]),
+                      SizedBox(
+                        height: 146,
                       ),
+                        ]),
+
                     ],
                   )
-                ],
               ),
-            ),),);
+            ),);
   }
 }
 

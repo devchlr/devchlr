@@ -20,17 +20,14 @@ class PreCommandeScreen extends StatefulWidget {
 }
 
 class _PreCommandeScreenState extends State<PreCommandeScreen> {
-
   void initState() {
     super.initState();
     isSingIn();
   }
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
   Completer<GoogleMapController> _controller = Completer();
-
   GoogleMapController? mapController;
-  final LatLng _center = const LatLng(45.521563, -122.677433);
+  final LatLng _center = const LatLng(48.85341, 2.3488);
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
   }

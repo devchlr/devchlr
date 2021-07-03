@@ -61,6 +61,7 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
             builder: (context, model, child) =>
                 Scaffold(
                   key: _scaffoldKey,
+                  resizeToAvoidBottomInset: true,
                   body: Stack(
                     children: [
                       Column(
@@ -72,7 +73,7 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                             child: Container(
                               padding: EdgeInsets.only(
                                   left: 20.0,
-                                  right: 20.0
+                                  right: 20.0,
                               ),
                               color: ChaliarColors.whiteColor,
                               child:
@@ -164,7 +165,7 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                                                   model.selectTypeLivraison(TypeLivraison.programme);
                                                 },
                                               ),
-                                              title: Text("Livraison programmé",style:AppTextStyle.bodyfooterField(color: ChaliarColors.secondaryColors)
+                                              title: Text("livraison programmée",style:AppTextStyle.bodyfooterField(color: ChaliarColors.secondaryColors)
                                                 ,),
                                               children: <Widget>[
                                                 Container(

@@ -44,7 +44,7 @@ class _HomeProfileScreenState extends State<HomeProfileScreen> {
           Column(
             children: [
               Container(
-                height: MediaQuery.of(context).size.height * 0.45,
+                height: 310,
                 decoration: BoxDecoration(
                   color: Color(0xffF3F3F3),
                   image: DecorationImage(
@@ -61,16 +61,16 @@ class _HomeProfileScreenState extends State<HomeProfileScreen> {
           Column(
             children: [
               Container(
-                height: MediaQuery.of(context).size.height * 0.45,
+                height: 310,
                 child: ListView(
                 children: [
                   SizedBox(
-                    height: 70,
+                    height: 30,
                   ),
                   Center(
                     child: CircleAvatar(
                       backgroundColor: Colors.transparent,
-                      radius: 90,
+                      radius: 80,
                       backgroundImage: AssetImage('assets/images/profileInage.png'),
                     ),
                   ),
@@ -95,67 +95,76 @@ class _HomeProfileScreenState extends State<HomeProfileScreen> {
                     ),
                   )
                 ],
-              ),),
+              ),
+              ),
               Expanded(
-                  child:Padding(
+                  child:
+                  Padding(
                     padding: EdgeInsets.only(
                       left: MediaQuery.of(context).size.width*0.08,
                       right: MediaQuery.of(context).size.width*0.08
                     ),
                     child:  ListView(
                       children: [
-                        Text('GENERAL',style: AppTextStyle.appBarHeader(
-                          size: 13,
-                          color: Color(0xff77869E),
-                          fontFamily: AppFontFamilly.avenirHeavy
-                        ),),
+                        Padding(padding: EdgeInsets.only(
+                          left: 5,
+                        ),
+                          child: Text('GENERAL',style: AppTextStyle.appBarHeader(
+                              size: 13,
+                              color: Color(0xff77869E),
+                              fontFamily: AppFontFamilly.avenirHeavy
+                          ),),
+                        ),
                         SizedBox(
-                          height: 15.0,
+                          height: 16.0,
                         ),
                         CustomProfileListTile(title:'Mes informations',iconAsset:SvgIcons.ticket,onTap:(){
                           model.getPageByName(context, '/edit_profile');
                         },),
                         SizedBox(
-                          height: 10.0,
+                          height: 12.0,
                         ),
                         CustomProfileListTile(title:'Méthode de paiement',iconAsset:SvgIcons.credit_card,onTap:(){
                          model.getPageByName(context, '/payment_method');
                         },),
                         SizedBox(
-                          height: 10.0,
+                          height: 13.0,
                         ),
                         CustomProfileListTile(title:'Facturation',
                           iconAsset:SvgIcons.invoice,onTap:(){
                           model.getPageByName(context, '/home_facturation');
                           },),
                         SizedBox(
-                          height: 15.0,
+                          height: 21.0,
                         ),
-                        Text('CHART',style: AppTextStyle.appBarHeader(
+                Padding(padding: EdgeInsets.only(
+                  left: 5,
+                ),
+                  child:Text('CHART',style: AppTextStyle.appBarHeader(
                             size: 13,
                             color: Color(0xff77869E),
                             fontFamily: AppFontFamilly.avenirHeavy
-                        ),),
+                        ),),),
                         SizedBox(
-                          height: 10.0,
+                          height: 14.0,
                         ),
                         CustomProfileListTile(title:'Aide',iconAsset:SvgIcons.question,onTap:(){
                           model.getPageByName(context, '/faq');
                         },),
                         SizedBox(
-                          height: 10.0,
+                          height: 12.0,
                         ),
                         CustomProfileListTile(title:'À propos',iconAsset:SvgIcons.smartphone,onTap:(){
                           model.getPageByName(context, '/about');
                         },),
                         SizedBox(
-                          height: 10.0,
+                          height: 16.0,
                         ),
                         CustomProfileListTile(title:'Partager l’application',iconAsset:SvgIcons.share,onTap:(){
                           model.sharedApp();
                         },),
                         SizedBox(
-                          height: 50.0,
+                          height: 44.0,
                         ),
                         GestureDetector(
                           onTap: (){
@@ -202,10 +211,10 @@ class _HomeProfileScreenState extends State<HomeProfileScreen> {
                         ),
                       ],
                     ),
-                  )
+                  ),
              )
             ],
-          )
+          ),
 
         ],
       ),

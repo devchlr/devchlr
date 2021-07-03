@@ -14,6 +14,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_app/ui/views/authentifications/authentification_screen.dart';
 import 'package:flutter_app/ui/views/course/home_course.dart';
 import 'package:flutter_app/ui/views/facture/home_facturation.dart';
 import 'package:flutter_app/ui/views/message/home_message.dart';

@@ -178,7 +178,7 @@ class _PhoneOptValidateScreenState extends State<PhoneOptValidateScreen>{
                               textAlign: TextAlign.center,
                               text: TextSpan(
                                 text:
-                                "En cliquannt ici vous acceptez notre Politique de confidentialité et nos  ",
+                                "En cliquant ici vous acceptez notre Politique de confidentialité et nos  ",
                                 style: AppTextStyle.header3_light(
                                     color: ChaliarColors.blackColor),
                                 children: [
@@ -187,7 +187,7 @@ class _PhoneOptValidateScreenState extends State<PhoneOptValidateScreen>{
                                       ..onTap = () {
                                         Navigator.pushNamed(context, '/term_condition');
                                       },
-                                    text: " Conditions générales d’utilisatios",
+                                    text: " Conditions générales d'utilisation",
                                     style: AppTextStyle.header3_light(
                                         color: ChaliarColors.primaryColors,
                                         isUnderlined: true),

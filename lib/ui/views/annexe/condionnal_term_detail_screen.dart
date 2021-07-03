@@ -39,7 +39,7 @@ class TermConditionScreen extends StatelessWidget {
                 SizedBox(
                   height: MediaQuery.of(context).size.height*0.15,
                 ),
-                Text('Condition générale',textAlign: TextAlign.center,style: AppTextStyle.headerApp1(color: ChaliarColors.blackColor,)),
+                Text('Conditions générales',textAlign: TextAlign.center,style: AppTextStyle.headerApp1(color: ChaliarColors.blackColor,)),
                 SizedBox(
                   height: 20,
                 ),

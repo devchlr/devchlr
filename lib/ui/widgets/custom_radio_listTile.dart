@@ -44,37 +44,34 @@ class CustomRadioListTile extends StatelessWidget {
                   color: group == value
                       ? ChaliarColors.secondaryColors
                       : ChaliarColors.whiteGreyColor)),
-          child: Expanded(
-            flex: 1,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                ListTile(
-                  title: Text(
-                    title!,
-                    style: AppTextStyle.header4(color: Color(0xff2F3547)),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              ListTile(
+                title: Text(
+                  title!,
+                  style: AppTextStyle.header4(color: Color(0xff2F3547)),
+                ),
+                subtitle: Text(
+                  subtile!,
+                  style: AppTextStyle.caption(color: Color(0xff98A2C0)),
+                ),
+                trailing: value==group?new GestureDetector(
+                  onTap: onClick,
+                  child: CircleAvatar(
+                    child: Icon(Icons.check,color: Colors.white,),
+                    radius: 15.0,
+                    backgroundColor: Color(0xff042C5C),
                   ),
-                  subtitle: Text(
-                    subtile!,
-                    style: AppTextStyle.caption(color: Color(0xff98A2C0)),
-                  ),
-                  trailing: value==group?new GestureDetector(
-                    onTap: onClick,
-                    child: CircleAvatar(
-                      child: Icon(Icons.check,color: Colors.white,),
-                      radius: 15.0,
-                      backgroundColor: Color(0xff042C5C),
-                    ),
-                  ):new GestureDetector(
-                    onTap: onClick,
-                    child: CircleAvatar(
-                      radius: 10.0,
-                      backgroundColor: Color(0xffD4DAF4),
-                    ),
+                ):new GestureDetector(
+                  onTap: onClick,
+                  child: CircleAvatar(
+                    radius: 10.0,
+                    backgroundColor: Color(0xffD4DAF4),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

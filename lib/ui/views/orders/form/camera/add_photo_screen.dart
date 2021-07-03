@@ -10,6 +10,7 @@ class AddPhotoScreen extends StatefulWidget {
 }
 class _AddPhotoScreenState extends State<AddPhotoScreen> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  bool dismitCircle=false;
   @override
   Widget build(BuildContext context) {
     return
@@ -89,9 +90,9 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
                                 flex: 3,
                                 child: Padding(
                                   padding: EdgeInsets.only(
-                                      top:20.0
+                                      right: 30
                                   ),
-                                  child:Text('Prendre la photo',style: AppTextStyle.addPhotoBtn(color: ChaliarColors.whiteColor)
+                                  child:Center(child: Text('Prendre la photo',style: AppTextStyle.addPhotoBtn(color: ChaliarColors.whiteColor),)
                                   ),),
                               ),
                             ],
@@ -116,17 +117,22 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
                       ),
                     ),
                     SizedBox(height:40 ,),
-                    SvgPicture.asset(
-                      "assets/images/bonhomme.svg",
-                      height: 325,
-                      width: 297,
-                    )
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: 10
+                      ),
+                      child: SvgPicture.asset(
+                        "assets/images/bonhomme.svg",
+                        height: 325,
+                        width: 297,
+                      ),
+                    ),
                   ],
                 ),
               ],
             ),
           ),
-    Column(
+          dismitCircle==false? Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
@@ -137,7 +143,10 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
                   ),
                   child:GestureDetector(
                     onTap:(){
-                      Navigator.pushNamed(context, '/resume_order_screen');
+                      print('circle clicked');
+                      setState(() {
+                        dismitCircle=true;
+                      });
                     },
                     child: CircleAvatar(
                       radius: 25.0,
@@ -147,7 +156,29 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
                   )
               )
             ],
-          ),
+          ):Container(),
+         // Column(
+         //    mainAxisAlignment: MainAxisAlignment.start,
+         //    children: [
+         //      Padding(
+         //          padding: EdgeInsets.only(
+         //            top:MediaQuery.of(context).size.height * 0.12,
+         //            left:MediaQuery.of(context).size.width * 0.42,
+         //            right:MediaQuery.of(context).size.width * 0.42,
+         //          ),
+         //          child:GestureDetector(
+         //            onTap:(){
+         //              Navigator.pushNamed(context, '/resume_order_screen');
+         //            },
+         //            child: CircleAvatar(
+         //              radius: 25.0,
+         //              backgroundColor: ChaliarColors.whiteColor,
+         //              child: Icon(Icons.close_outlined,color: ChaliarColors.primaryColors,),
+         //            ),
+         //          )
+         //      )
+         //    ],
+         //  ),
          Positioned(
             top: MediaQuery.of(context).size.height*0.065,
               left: MediaQuery.of(context).size.width*0.05,
@@ -156,7 +187,7 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
               Navigator.pop(context);
             },
             child: Icon(Icons.arrow_back_ios,color: Colors.white,size: 20,),
-          ))
+          ),),
         ],
       );
   }

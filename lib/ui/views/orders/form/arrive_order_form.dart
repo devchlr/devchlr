@@ -29,6 +29,7 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
           builder: (context, model, child) =>
       Scaffold(
       key: _scaffoldKey,
+        resizeToAvoidBottomInset: true,
       body: Stack(
         children: [
           Column(
