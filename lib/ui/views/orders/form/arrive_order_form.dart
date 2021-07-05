@@ -35,7 +35,7 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
           Column(
             children: [
               SizedBox(
-                height: 110,),
+                height: 120,),
               Expanded(
                 flex: 1,
                 child: Container(
@@ -45,8 +45,11 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
                   ),
                   color: ChaliarColors.whiteColor,
                   child: Card(
-                    elevation: 1.5,
+                    elevation: 2,
                     child: ListView(
+                      padding: EdgeInsets.only(
+                        top: 0
+                      ),
                       children: [
                         ListTile(
                           title: Text('Position d\'arrivée du colis',

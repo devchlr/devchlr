@@ -26,10 +26,14 @@ class _HomeMessageScreenState extends State<HomeMessageScreen> {
                  Container(
                    height: 110,
                  ),
-                 Expanded(child: ListView(
+                 Expanded(
+                     child: ListView(
+                       padding: EdgeInsets.only(
+                         top: 0
+                       ),
                    children: [
                      SizedBox(
-                       height: 10,
+                       height: 20,
                      ),
                      Row(
                        mainAxisAlignment: MainAxisAlignment.end,

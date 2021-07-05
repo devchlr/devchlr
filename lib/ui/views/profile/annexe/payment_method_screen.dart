@@ -22,29 +22,18 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: ChaliarMenu.topBar(
-      //     leading: GestureDetector(
-      //       onTap: (){
-      //         Navigator.pop(context);
-      //       },
-      //       child: Icon(Icons.arrow_back_ios,color: Color(0xffd8d8d8)),
-      //     ),
-      //     description: '',
-      //     title: 'Méthode de paiement',
-      //     bgColor: Color(0xffF3F3F3),
-      //     imageBackground: 'assets/images/header.png'
-      // ),
       backgroundColor: Color(0xffF3F3F3),
       body: Stack(
         children: [
           Container(
             color: Color(0xffF3F3F3),
           ),
-          Column(
+          ListView(
+            padding: EdgeInsets.only(
+              top: 110
+            ),
             children: [
-              SizedBox(
-                height:110,),
-              SizedBox(height: 57.0,),
+              SizedBox(height: 27.0,),
               Padding(padding: EdgeInsets.only(
                 left: MediaQuery.of(context).size.width*0.5
               ),
@@ -117,7 +106,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
               ),
               SizedBox(height: 40.0,),
               Padding(padding: EdgeInsets.only(
-                right: MediaQuery.of(context).size.width*0.5,
+                left: MediaQuery.of(context).size.width*0.1,
               ),
                 child: Text(
                   'MES CARTES ENREGITSR',

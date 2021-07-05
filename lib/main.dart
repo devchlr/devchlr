@@ -15,6 +15,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_app/ui/views/authentifications/authentification_screen.dart';
+import 'package:flutter_app/ui/views/authentifications/conditionnal_term.dart';
 import 'package:flutter_app/ui/views/course/home_course.dart';
 import 'package:flutter_app/ui/views/facture/home_facturation.dart';
 import 'package:flutter_app/ui/views/message/home_message.dart';
@@ -77,7 +78,7 @@ class MyApp extends StatelessWidget {
           unselectedWidgetColor: Colors.grey,
           disabledColor: Colors.grey),
       routes: <String, WidgetBuilder>{
-        "/splash": (BuildContext context) => new SplashScreen(),
+        "/splash": (BuildContext context) => new ConditionGeneraleScreen(),
         "/tuto": (BuildContext context) => new OnboardingScreen(),
         "/connexion": (BuildContext context) => new ConnexionScreen(),
         "/pro_particulier": (BuildContext context) =>

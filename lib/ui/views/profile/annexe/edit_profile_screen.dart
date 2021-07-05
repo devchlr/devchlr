@@ -32,8 +32,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             right: 30
           ),
           child: ListView(
+            padding: EdgeInsets.only(
+              top: 10
+            ),
             children: [
-              Padding(padding: EdgeInsets.only(
+              Padding(
+                padding: EdgeInsets.only(
                 // top: 60,
                 // left: 30
               ),

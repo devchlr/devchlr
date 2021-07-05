@@ -42,11 +42,12 @@ class _SingInScreenState extends State<SingInScreen> {
                     ),
                   ),
                   ListView(
-
+                    padding: EdgeInsets.only(
+                      top: 50
+                    ),
                     children: [
-
                               SizedBox(
-                                height: 59,
+                                height: 20,
                               ),
                               Center(
                                 child: SvgPicture.asset(
@@ -56,7 +57,7 @@ class _SingInScreenState extends State<SingInScreen> {
                                 ),
                               ),
                               SizedBox(
-                                height: 63,
+                                height: 43,
                               ),
                              Center(child:  Text.rich(
                                TextSpan(
@@ -65,7 +66,7 @@ class _SingInScreenState extends State<SingInScreen> {
                                ),
                              ),),
                       SizedBox(
-                        height: 39,
+                        height: 29,
                       ),
                          Padding(
                             padding: EdgeInsets.only(
@@ -122,7 +123,7 @@ class _SingInScreenState extends State<SingInScreen> {
                            ),
                          ),
                           SizedBox(
-                            height: 23,
+                            height: 20,
                           ),
                           Padding(
                             padding: EdgeInsets.only(
@@ -148,7 +149,7 @@ class _SingInScreenState extends State<SingInScreen> {
                             ),
                           ),
                           SizedBox(
-                            height:23,
+                            height:20,
                           ),
                           GestureDetector(
                             onTap: () {},
@@ -167,7 +168,7 @@ class _SingInScreenState extends State<SingInScreen> {
                             ),
                           ),
                           SizedBox(
-                            height: 39,
+                            height: 29,
                           ),
                           Padding(
                             padding: EdgeInsets.only(

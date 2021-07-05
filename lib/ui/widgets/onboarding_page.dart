@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_app/ui/styles/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -35,7 +36,7 @@ class OnboardingPageWidget extends StatelessWidget {
           ),
         Padding(
             padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 0.59,
+              top: MediaQuery.of(context).size.height * 0.56,
             ),
             child: Container(
               decoration: BoxDecoration(
@@ -49,6 +50,9 @@ class OnboardingPageWidget extends StatelessWidget {
                   left: MediaQuery.of(context).size.height * 0.05,
                   right: MediaQuery.of(context).size.height * 0.05),
               child: ListView(
+                padding: EdgeInsets.only(
+                  top: 10
+                ),
                 children: <Widget>[
                   Center(
                       child: Text(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/ui/styles/chaliar_color.dart';
 import 'package:flutter_app/ui/styles/text_style.dart';
-import 'package:flutter_app/ui/widgets/appBar.dart';
 import 'package:flutter_app/ui/widgets/custom_botom_navigation_bar.dart';
 import 'package:flutter_app/ui/widgets/custom_header.dart';
 
@@ -12,9 +11,6 @@ class AboutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      // appBar: ChaliarMenu.topBar(title: 'À propos',bgColor: ChaliarColors.whiteColor,imageBackground: 'assets/images/header.png'),
-      // bottomNavigationBar: CustomBottomNavigationBar(
-      // ),
       body: Stack(
         children: [
           Container(
@@ -27,11 +23,12 @@ class AboutScreen extends StatelessWidget {
                 right: 20
             ),
             child: ListView(
-              // mainAxisAlignment: MainAxisAlignment.center,
-              // crossAxisAlignment: CrossAxisAlignment.center,
+              padding: EdgeInsets.only(
+                top: 110
+              ),
               children: [
                 SizedBox(
-                  height: 110,
+                   height: 30,
                 ),
                 Text('À propos de Chaliar',textAlign: TextAlign.center,
                     style: AppTextStyle.appBarHeader(

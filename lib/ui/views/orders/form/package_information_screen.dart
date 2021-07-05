@@ -41,7 +41,7 @@ class _TailleColisScreenState extends State<TailleColisScreen> {
                 ListView(
                   children: [
                     SizedBox(
-                      height: 21,
+                      height: 51,
                     ),
                     Container(
                       height: 48,

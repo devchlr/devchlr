@@ -43,7 +43,7 @@ class ConnexionScreen extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        height: MediaQuery.of(context).size.height * 0.23,
+                        height: MediaQuery.of(context).size.height * 0.33,
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage("assets/images/menuFooter.png"),
@@ -60,7 +60,7 @@ class ConnexionScreen extends StatelessWidget {
                             children: [
                               Padding(
                                 padding: EdgeInsets.only(
-                                  top: 61,
+                                  top: 20,
                                 ),
                                 child: Center(
                                   child: SvgPicture.asset(
@@ -71,7 +71,7 @@ class ConnexionScreen extends StatelessWidget {
                                 ),
                               ),
                               SizedBox(
-                                height: 41,
+                                height: 21,
                               ),
                               Text(
                                 "Commandez un \ntransporteur",
@@ -80,7 +80,7 @@ class ConnexionScreen extends StatelessWidget {
                                 AppTextStyle.headerApp1(color: ChaliarColors.whiteColor),
                               ),
                               SizedBox(
-                                height: 30,
+                                height: 20,
                               ),
                               Text(
                                 "Ouvert entre 06h00 et 23h00",
@@ -140,7 +140,7 @@ class ConnexionScreen extends StatelessWidget {
                                 color: Color(0xff34B3E8),size: 11)),
                       ),
                       SizedBox(
-                        height: 22,
+                        height: 20,
                       ),
                       Text(
                         "Devenir Chaliar",

@@ -63,6 +63,9 @@ class _FaqScreenState extends State<FaqScreen> {
                                  right: 20.0
                              ),
                              child: ListView(
+                               padding:EdgeInsets.only(
+                                 top: 0
+                               ),
                                children: snapshot.data!.docs.map((document){
                                  return Card(
                                    elevation: 2.0,

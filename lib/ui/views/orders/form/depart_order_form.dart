@@ -67,7 +67,7 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                       Column(
                         children: [
                           SizedBox(
-                            height: 110,),
+                            height: 130,),
                           Expanded(
                             flex: 1,
                             child: Container(
@@ -78,8 +78,11 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                               color: ChaliarColors.whiteColor,
                               child:
                               Card(
-                                elevation: 1.5,
+                                elevation: 2,
                                 child: ListView(
+                                  padding: EdgeInsets.only(
+                                    top: 0
+                                  ),
                                   children: [
                                     ListTile(
                                       title: Text('Position de départ du colis',

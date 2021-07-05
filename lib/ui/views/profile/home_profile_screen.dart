@@ -105,6 +105,9 @@ class _HomeProfileScreenState extends State<HomeProfileScreen> {
                       right: MediaQuery.of(context).size.width*0.08
                     ),
                     child:  ListView(
+                      padding: EdgeInsets.only(
+                        top: 10
+                      ),
                       children: [
                         Padding(padding: EdgeInsets.only(
                           left: 5,

@@ -124,7 +124,7 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
             ),
             Padding(
               padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.7,
+                top: MediaQuery.of(context).size.height * 0.68,
               ),
               child: Card(
                 shape: RoundedRectangleBorder(
@@ -144,6 +144,9 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                       right: 20
                   ),
                   child: ListView(
+                    padding: EdgeInsets.only(
+                      top: 10
+                    ),
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -26,6 +26,9 @@ class _HomeFacturationScreenState extends State<HomeFacturationScreen> {
             right: MediaQuery.of(context).size.height*0.05,
           ),
             child: ListView(
+              padding: EdgeInsets.only(
+                top: 0
+              ),
               children: [
                Center(
                  child:  Card(
@@ -44,6 +47,9 @@ class _HomeFacturationScreenState extends State<HomeFacturationScreen> {
                 child: DropdownButton<String>(
                   focusColor:Colors.white,
                   value: _chosenValue,
+                  underline: Container(
+                    color: Colors.white,
+                  ),
                   elevation: 5,
                   style: TextStyle(color: Colors.white),
                   iconEnabledColor:Colors.black,
