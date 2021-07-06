@@ -11,10 +11,8 @@
 // import 'package:client_chaliar/ui/views/faq/faq_screen.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_app/services/preferences/shared_preference_service.dart';
 import 'package:flutter_app/ui/views/authentifications/authentification_screen.dart';
 import 'package:flutter_app/ui/views/authentifications/conditionnal_term.dart';
 import 'package:flutter_app/ui/views/course/home_course.dart';
@@ -68,6 +66,7 @@ class MyApp extends StatelessWidget {
 
   // This widget is the root of your application.
   @override
+
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowMaterialGrid: false,
@@ -85,6 +84,7 @@ class MyApp extends StatelessWidget {
         "/connexion": (BuildContext context) => new ConnexionScreen(),
         "/pro_particulier": (BuildContext context) =>
         new ProParticulierScreen(),
+        "/phone_auth":(BuildContext context)=>new PhoneOptValidateScreen(),
         "/inscription": (BuildContext context) => new UserRegisterScreen(),
         "/singin": (BuildContext context) => new SingInScreen(),
         "/pre_commande": (BuildContext context) => new PreCommandeScreen(),

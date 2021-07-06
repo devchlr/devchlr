@@ -5,6 +5,7 @@ import 'package:flutter_app/ui/styles/chaliar_font.dart';
 import 'package:flutter_app/ui/styles/chaliar_icon_size.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/ui/widgets/button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:async';
 
@@ -29,9 +30,9 @@ class _SplashScreenState extends State<SplashScreen> {
               () => Navigator.pushReplacementNamed(context, nextPage==''?'/tuto':nextPage));
     }else{
       print('toujours actif');
-      // widget._auth.signOut();
+      String nextPage= await sharedPreferenceService.getStartPreferencePage();
       Timer(Duration(seconds: 6),
-              () => Navigator.pushReplacementNamed(context, '/pre_commande'));
+              () => Navigator.pushReplacementNamed(context, nextPage));
     }
   }
 
@@ -52,26 +53,29 @@ class _SplashScreenState extends State<SplashScreen> {
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 200.0,
+                  ),
+                  Center(
+                    child: SvgPicture.asset(
+                      "assets/images/logo.svg",
+                      height: AppIconSize.large,
+                      width: AppIconSize.large,
+                    ),
+                  ),
+                ],
+              ),
               Expanded(
-                  flex: 5,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 200.0,
-                      ),
-                      Center(
-                        child: SvgPicture.asset(
-                          "assets/images/logo.svg",
-                          height: AppIconSize.large,
-                          width: AppIconSize.large,
-                        ),
-                      ),
-                    ],
-                  )),
-              Expanded(
-                flex: 1,
-                child: Row(
+                child: Container()
+                ,
+              ),
+              Container(
+                height: 70,
+                child: Center(
+                    child:Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
@@ -85,7 +89,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       ),
                     )
                   ],
-                ),
+                )),
               )
             ],
           )

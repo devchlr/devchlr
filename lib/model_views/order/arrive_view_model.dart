@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/model_views/base_model.dart';
 import 'package:flutter_app/models/commande.dart';
+import 'package:flutter_app/services/google_place/place_service.dart';
 import 'package:flutter_app/ui/views/orders/form/package_information_screen.dart';
 import 'package:flutter_app/ui/widgets/custom_showSnackBar.dart';
 
@@ -14,6 +15,12 @@ class ArriveScreenViewModel extends BaseModel{
   TextEditingController recipient_note=TextEditingController();
   OrderDeliveryInformation? orderDeliveryInformation;
   CustomShowSnackBar customShowSnackBar =CustomShowSnackBar();
+  GooglePlaceService googlePlaceService=GooglePlaceService();
+
+  Future getPlaceSugestion(String value)async{
+    var result= await googlePlaceService.getPlaceSugestion(value);
+    return result;
+  }
 
   bool validatorForm(){
     if(arrival_address.text.isEmpty){

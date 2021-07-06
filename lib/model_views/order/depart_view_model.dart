@@ -9,11 +9,14 @@ import 'package:flutter_app/model_views/base_model.dart';
 import 'package:flutter_app/models/commande.dart';
 import 'package:flutter_app/services/database/api.dart';
 import 'package:flutter_app/services/database/order_store_service.dart';
+import 'package:flutter_app/services/google_place/place_service.dart';
 import 'package:flutter_app/ui/views/orders/form/arrive_order_form.dart';
 import 'package:flutter_app/ui/widgets/custom_showSnackBar.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import 'package:google_place/google_place.dart';
 
 class DepartFormViewModel extends BaseModel{
+  GooglePlaceService googlePlaceService=GooglePlaceService();
   TextEditingController departure_address=TextEditingController();
   DateRangePickerController delivery_date=DateRangePickerController();
   TextEditingController delivery_schedule=TextEditingController();
@@ -49,6 +52,12 @@ class DepartFormViewModel extends BaseModel{
     }
     return true;
   }
+
+  Future getPlaceSugestion(String value)async{
+    var result= await googlePlaceService.getPlaceSugestion(value);
+    return result;
+  }
+
 
   void selectTypeLivraison(String value){
     group=value;

@@ -145,7 +145,7 @@ class _TailleColisScreenState extends State<TailleColisScreen> {
                         ),
 
                     SizedBox(
-                      height: 51,
+                      height: 21,
                     ),
                     Container(
                       padding: EdgeInsets.only(
@@ -154,8 +154,8 @@ class _TailleColisScreenState extends State<TailleColisScreen> {
                       child:Center(
                         child: ButtonChaliar(
                             onTap: () {
-                              model.formEditingController(context);
-                              // Navigator.pushNamed(context, '/add_photo');
+                             // model.formEditingController(context);
+                               Navigator.pushNamed(context, '/add_photo');
                             },
                             buttonText: 'Suivant',
                             height: MediaQuery.of(context).size.height * 0.07,

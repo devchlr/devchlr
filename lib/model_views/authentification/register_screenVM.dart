@@ -10,6 +10,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_app/services/fire_auth_service.dart';
 import 'package:flutter_app/services/fire_store_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/services/preferences/shared_preference_service.dart';
 import 'package:flutter_app/ui/views/authentifications/authentification_screen.dart';
 import 'package:flutter_app/ui/widgets/custom_showSnackBar.dart';
 import 'package:uuid/uuid.dart';
@@ -18,9 +19,7 @@ class RegisterScreenVM extends BaseModel{
    final FirebaseAuth auth = FirebaseAuth.instance;
   FirestoreService _firestoreService = FirestoreService();
   FireAuthService _fireAuthService=FireAuthService();
-  // final AuthenticationService _authenticationService = AuthenticationService();
-  // final NavigationService _navigationService = NavigationService();
-  // final DialogService _dialogService = DialogService();
+ SharedPreferenceService sharedPreferenceService=SharedPreferenceService();
 
   UserChaliar? _currentUser;
   bool obscureText = true;
@@ -151,7 +150,7 @@ class RegisterScreenVM extends BaseModel{
 
 
   Future<String> validatorPartInformation() async {
-    if (validate_email) {
+    if (!validate_email) {
       var user = await _firestoreService.getUserByFieldValue('email',email.text);
 
       if (user == null) {
@@ -243,11 +242,19 @@ class RegisterScreenVM extends BaseModel{
     }
   }
 
-  void getOPTScreen(context,String? phoneNumber,String? uid) {
-    Navigator.push(context,
-        new MaterialPageRoute(
-            builder: (BuildContext context) =>
-            new PhoneOptValidateScreen(phone: phoneNumber,uid:uid ,)));
+  void getOPTScreen(context,String? phoneNumber,String? uid) async{
+    await sharedPreferenceService.setRegisterPreferenceInformation(uid!, phoneNumber!).then((value)async{
+      if(value){
+        await sharedPreferenceService.setStartPreferencePage('/phone_auth').then((val){
+          if(val){
+            Navigator.push(context,
+                new MaterialPageRoute(
+                    builder: (BuildContext context) =>
+                    new PhoneOptValidateScreen(phone: phoneNumber,uid:uid ,)));
+          }
+        });
+      }
+    });
   }
 
   void googleRegister(BuildContext context){

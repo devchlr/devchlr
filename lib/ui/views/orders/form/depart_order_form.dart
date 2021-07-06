@@ -1,3 +1,4 @@
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter_app/constants/type_livraison.dart';
 import 'package:flutter_app/model_views/order/depart_view_model.dart';
 import 'package:flutter_app/ui/styles/chaliar_color.dart';
@@ -7,9 +8,13 @@ import 'package:flutter_app/ui/widgets/custom_botom_navigation_bar.dart';
 import 'package:flutter_app/ui/widgets/custom_header.dart';
 import 'package:flutter_app/ui/widgets/input_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/ui/widgets/suggestion_input.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart' show DateFormat;
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import 'package:flutter_typeahead/cupertino_flutter_typeahead.dart';
+
 
 
 class DepartFormScreen extends StatefulWidget {
@@ -48,6 +53,8 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
     DateTime h = DateTime.now();
     String formattedHour = DateFormat('kk').format(h);
     String formattedMinute = DateFormat('mm').format(h);
+    String heure='';
+    String minute='';
     String lsHour = TimeOfDay.now().hour.toString().padLeft(2, '0');
     String lsMinute = TimeOfDay.now().minute.toString().padLeft(2, '0');
     return ChangeNotifierProvider<DepartFormViewModel>(
@@ -94,16 +101,22 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                                         left: MediaQuery.of(context).size.width * 0.07,
                                         right: MediaQuery.of(context).size.width * 0.07,
                                       ),
-                                      child: InputField(
-                                        fieldSize: MediaQuery.of(context).size.height * 0.025,
-                                        label: "Adresse de départ",
-                                        isBorder: true,
-                                        textLabelColor: ChaliarColors.secondaryColors,
-                                        maxlenght: 250,
-                                        backgroundColor: ChaliarColors.whiteGreyColor,
-                                        borderColor: ChaliarColors.primaryColors,
-                                        controller: model.departure_address,
-                                      ),
+                                      child: CustomSugestionInput(
+                                        placeholder: 'Adresse de départ',
+                                        suggestionsCallback: (pattern) async {
+                                          return await model.getPlaceSugestion(pattern);
+                                        },
+                                        itemBuilder: (context, suggestion) {
+                                          return ListTile(
+                                            title: Text(suggestion.toString()),
+                                          );
+                                        },
+                                        onSuggestionSelected: (suggestion) {
+                                          model.departure_address.text=suggestion.toString();
+                                        },
+                                        controller:model.departure_address,
+                                      )
+                                     ,
                                     ),
                                     SizedBox(
                                       height: 13.0,
@@ -121,7 +134,7 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                                             decoration: BoxDecoration(
                                                 color: ChaliarColors.whiteGreyColor,
                                                 borderRadius: BorderRadius.circular(6.0),
-                                                border: Border.all(color: ChaliarColors.primaryColors,width: 0.5)
+                                                // border: Border.all(color: ChaliarColors.primaryColors,width: 0.5)
                                             ),
                                             child: ListTile(
                                               trailing: Radio(
@@ -153,7 +166,7 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                                             decoration: BoxDecoration(
                                                 color: ChaliarColors.whiteGreyColor,
                                                 borderRadius: BorderRadius.circular(6.0),
-                                                border: Border.all(color: ChaliarColors.primaryColors,width: 0.5)
+                                                // border: Border.all(color: ChaliarColors.primaryColors,width: 0.5)
                                             ),
                                             child: ExpansionTile(
                                               initiallyExpanded: model.group==TypeLivraison.programme?true:false,
@@ -206,67 +219,114 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                                           decoration: BoxDecoration(
                                               color: ChaliarColors.whiteGreyColor,
                                               borderRadius: BorderRadius.circular(6.0),
-                                              border: Border.all(color: ChaliarColors.primaryColors,width: 0.5)
+                                              // border: Border.all(color: ChaliarColors.primaryColors,width: 0.5)
                                           ),
                                           child: ExpansionTile(
                                             trailing: Text(''),
                                             title: Text("Définir l’horaire de livraison",style:AppTextStyle.bodyfooterField(color: ChaliarColors.secondaryColors)
                                               ,),
                                             children: <Widget>[
-                                              // Container(
-                                              //   margin:EdgeInsets.only(
-                                              //       left: 20.0,right: 20.0,bottom: 10.0
-                                              //   ),
-                                              //   child:DateTimePicker(
-                                              //     type: DateTimePickerType.time,
-                                              //     controller: model.delivery_schedule,
-                                              //     //initialValue: lsHour,
-                                              //     // icon: Icon(Icons.access_time),
-                                              //     timeLabelText: "",
-                                              //     use24HourFormat: true,
-                                              //     //locale: Locale('en', 'US'),
-                                              //     // onChanged: (val) => setState(() => _valueChanged4 = val),
-                                              //     // validator: (val) {
-                                              //     //   setState(() => _valueToValidate4 = val ?? '');
-                                              //     //   return null;
-                                              //     // },
-                                              //     // onSaved: (val) => setState(() => _valueSaved4 = val ?? ''),
-                                              //   ),
-                                              //   // GestureDetector(
-                                              //   //   onTap: (){},
-                                              //   //   child: Row(
-                                              //   //     mainAxisAlignment: MainAxisAlignment.center,
-                                              //   //     crossAxisAlignment: CrossAxisAlignment.center,
-                                              //   //     children: [
-                                              //   //       Container(
-                                              //   //         height: 80,
-                                              //   //         width: 80,
-                                              //   //         padding: EdgeInsets.all(10.0),
-                                              //   //         decoration: BoxDecoration(
-                                              //   //             borderRadius: BorderRadius.circular(0.0),
-                                              //   //             border: Border.all(color: ChaliarColors.primaryColors,width: 0.5)
-                                              //   //         ),
-                                              //   //         child: Center(
-                                              //   //           child: Text('$formattedHour'),
-                                              //   //         ),
-                                              //   //       ),
-                                              //   //       SizedBox(width: 10.0,),
-                                              //   //       Container(
-                                              //   //           height: 80,
-                                              //   //           width: 80,
-                                              //   //           padding: EdgeInsets.all(10.0),
-                                              //   //           decoration: BoxDecoration(
-                                              //   //               borderRadius: BorderRadius.circular(0.0),
-                                              //   //               border: Border.all(color: ChaliarColors.primaryColors,width: 0.5)
-                                              //   //           ),
-                                              //   //           child: Center(
-                                              //   //             child: Text('$formattedMinute'),
-                                              //   //           )
-                                              //   //       )
-                                              //   //     ],
-                                              //   //   ),
-                                              //   // ),
-                                              // )
+                                                GestureDetector(
+                                                  onTap: ()async{
+                                                   showTimePicker(
+                                                      context: context,
+                                                      initialTime: TimeOfDay(hour:int.parse(formattedHour) , minute: int.parse(formattedMinute)),
+                                                      builder: (BuildContext context, Widget? child) {
+                                                        return MediaQuery(
+                                                          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+                                                          child: child!,
+                                                        );
+                                                      },
+                                                    ).then((value){
+                                                      DateTime  newDate = new DateTime.now();
+                                                      new DateTime(newDate.year, newDate.month, newDate.day, value!.hour, value.minute);
+                                                      setState(() {
+                                                        formattedHour = newDate.hour.toString();
+                                                         formattedMinute = newDate.minute.toString();
+                                                      });
+                                                      print(newDate);
+                                                      model.delivery_schedule.text=newDate.toString();
+                                                      print(model.delivery_schedule.text);
+                                                    });
+                                                  },
+                                                  child: Row(
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    children: [
+                                                      Container(
+                                                        padding:EdgeInsets.only(
+                                                          top: 10,
+                                                          bottom: 10,
+                                                        ),
+                                                        child: Row(
+                                                          mainAxisAlignment:MainAxisAlignment.center,
+                                                          children: [
+                                                            Container(
+                                                            height: 50,
+                                                            width: 50,
+                                                            padding: EdgeInsets.all(10.0),
+                                                            decoration: BoxDecoration(
+                                                                borderRadius: BorderRadius.circular(0.0),
+                                                                border: Border.all(color: ChaliarColors.primaryColors,width: 1)
+                                                            ),
+                                                            child: Center(
+                                                              child: Text('${heure==''?formattedHour[0]:heure[0]}'),
+                                                            ),
+                                                          ),
+                                                            SizedBox(width: 10.0,),
+                                                            Container(
+                                                              height: 50,
+                                                              width: 50,
+                                                              padding: EdgeInsets.all(10.0),
+                                                              decoration: BoxDecoration(
+                                                                  borderRadius: BorderRadius.circular(0.0),
+                                                                  border: Border.all(color: ChaliarColors.primaryColors,width: 1)
+                                                              ),
+                                                              child: Center(
+                                                                child: Text('${heure==''?formattedHour[1]:heure[1]}'),
+                                                              ),
+                                                            ),
+                                                            SizedBox(width: 10.0,),
+                                                            Center(
+                                                              child: Text(':',style: AppTextStyle.appBarHeader(
+                                                                size: 22,
+                                                                color: ChaliarColors.secondaryColors,
+                                                                fontWeight: FontWeight.bold
+                                                              ),),
+                                                            ),
+                                                            SizedBox(width: 10.0,),
+                                                            Container(
+                                                                height: 50,
+                                                                width: 50,
+                                                                padding: EdgeInsets.all(10.0),
+                                                                decoration: BoxDecoration(
+                                                                    borderRadius: BorderRadius.circular(0.0),
+                                                                    border: Border.all(color: ChaliarColors.primaryColors,width: 1)
+                                                                ),
+                                                                child: Center(
+                                                                  child: Text('${formattedMinute[0]}'),
+                                                                )
+                                                            ),
+                                                            SizedBox(width: 10.0,),
+                                                            Container(
+                                                                height: 50,
+                                                                width: 50,
+                                                                padding: EdgeInsets.all(10.0),
+                                                                decoration: BoxDecoration(
+                                                                    borderRadius: BorderRadius.circular(0.0),
+                                                                    border: Border.all(color: ChaliarColors.primaryColors,width: 1)
+                                                                ),
+                                                                child: Center(
+                                                                  child: Text('${formattedMinute[1]}'),
+                                                                )
+                                                            )
+                                                          ],
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+
 
                                             ],
                                           ),
@@ -361,8 +421,8 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                                       child: Center(
                                         child: ButtonChaliar(
                                             onTap: () {
-                                              model.formEditingController(context);
-                                               // Navigator.pushNamed(context, '/commande_arrivee_form');
+                                              //model.formEditingController(context);
+                                                Navigator.pushNamed(context, '/commande_arrivee_form');
                                             },
                                             buttonText: 'Suivant',
                                             height: MediaQuery.of(context).size.height * 0.07,

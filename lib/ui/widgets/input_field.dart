@@ -66,10 +66,10 @@ class InputField extends StatelessWidget {
         onSubmitted: onSubmitted,
         controller: controller,
         autofocus: autofocus!,
-        style: AppTextStyle.header2(
-            color: textFillColor==null
-                ? ChaliarColors.blackColor
-                : textFillColor!),
+        style: AppTextStyle.appBarHeader(
+            fontWeight: FontWeight.w400,
+            size: 12,
+            color: ChaliarColors.secondaryColors),
         textAlignVertical: TextAlignVertical(y: 0.6),
         decoration: InputDecoration(
           errorStyle: AppTextStyle.appBarHeader(
@@ -79,10 +79,7 @@ class InputField extends StatelessWidget {
           ),
           errorText: errorText,
           border: isBorder!
-              ? OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(raduis!),
-                  borderSide: BorderSide(
-                      color: borderColor!, width: 0.5, style: BorderStyle.solid))
+              ? InputBorder.none
               : null,
           hintText: label == null ? 'label' : label,
           hintStyle: AppTextStyle.bodyfooterField(
@@ -100,10 +97,7 @@ class InputField extends StatelessWidget {
           suffixIcon: suffixIcon,
           prefixIcon: prefixIcon,
           enabledBorder: isBorder!
-              ? OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(raduis!),
-                  borderSide: BorderSide(
-                      color: borderColor!, width: 0.5, style: BorderStyle.solid))
+              ? InputBorder.none
               : null,
           // isDense: true, // Added this
           contentPadding: EdgeInsets.only(

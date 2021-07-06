@@ -7,6 +7,7 @@ import 'package:flutter_app/ui/widgets/custom_botom_navigation_bar.dart';
 import 'package:flutter_app/ui/widgets/custom_header.dart';
 import 'package:flutter_app/ui/widgets/input_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/ui/widgets/suggestion_input.dart';
 import 'package:provider/provider.dart';
 
 
@@ -61,15 +62,20 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
                         ),
                         Padding(
                           padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.07, right: MediaQuery.of(context).size.width * 0.07),
-                          child: InputField(
-                            fieldSize: MediaQuery.of(context).size.height * 0.025,
-                            label: "Adresse de d\'arrivée",
-                            isBorder: true,
-                            textLabelColor: ChaliarColors.secondaryColors,
-                            maxlenght: 250,
-                            backgroundColor: ChaliarColors.whiteGreyColor,
-                            borderColor: ChaliarColors.primaryColors,
-                            controller: model.arrival_address,
+                          child: CustomSugestionInput(
+                            placeholder: 'Adresse de d\'arrivée',
+                            suggestionsCallback: (pattern) async {
+                              return await model.getPlaceSugestion(pattern);
+                            },
+                            itemBuilder: (context, suggestion) {
+                              return ListTile(
+                                title: Text(suggestion.toString()),
+                              );
+                            },
+                            onSuggestionSelected: (suggestion) {
+                              model.arrival_address.text=suggestion.toString();
+                            },
+                            controller:model.arrival_address,
                           ),
                         ),
                         SizedBox(
@@ -178,9 +184,9 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
                           child: Center(
                             child: ButtonChaliar(
                                 onTap: () {
-                                  model.orderDeliveryInformation=widget.deliveryInformation;
-                                  model.formEditingController(context);
-                                 // Navigator.pushNamed(context, '/taille_colli');
+                                  // model.orderDeliveryInformation=widget.deliveryInformation;
+                                  // model.formEditingController(context);
+                                  Navigator.pushNamed(context, '/taille_colli');
                                 },
                                 buttonText: 'Valider',
                                 height: MediaQuery.of(context).size.height * 0.07,

@@ -25,11 +25,11 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
             body:
             Stack(
               children: [
-                Column(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Container(
+                SingleChildScrollView(
+                  child: Stack(
+                    children: [
+                      Container(
+                        height:650,
                         decoration: BoxDecoration(
                           color: ChaliarColors.whiteColor,
                           image: DecorationImage(
@@ -38,14 +38,87 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
                           ),
                         ),
                       ),
-                    ),
-                    Container(
-                      height: MediaQuery.of(context).size.height * 0.2,
-                      decoration: BoxDecoration(
-                        color: ChaliarColors.whiteColor,
+                      Column(
+                        children: [
+                          SizedBox(
+                            height: 200,
+                          ),
+                          Center(
+                            child: Text(
+                              'Vous Aurez deux fois plus de chances\nde trouver un chaliar si vous ajoutez\ndes photos de votre annonce.',
+                              style: AppTextStyle.addPhotodesc(color: ChaliarColors.whiteColor),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 60,
+                          ),
+                          Center(
+                            child:GestureDetector(
+                              onTap:(){
+                                Navigator.pushNamed(context, '/take_picture');
+                              } ,
+                              child:Container(
+                                height: 60,
+                                width: MediaQuery.of(context).size.height * 0.3,
+                                decoration:BoxDecoration(
+                                  color: ChaliarColors.secondaryColors,
+                                  borderRadius: BorderRadius.circular(100.0),
+                                ),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: Center(
+                                        child: Icon(Icons.camera_alt,color: ChaliarColors.whiteColor,),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 3,
+                                      child: Padding(
+                                        padding: EdgeInsets.only(
+                                            right: 30
+                                        ),
+                                        child:Center(child: Text('Prendre la photo',style: AppTextStyle.addPhotoBtn(color: ChaliarColors.whiteColor),)
+                                        ),),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                            ,
+                          ),
+                          SizedBox(
+                            height:28,
+                          ),
+                          Center(
+                            child: GestureDetector(
+                              onTap: (){
+                                Navigator.pushNamed(context, '/resume_order_screen');
+                              },
+                              child: Text(
+                                'passer cette étape',
+                                style: AppTextStyle.addPhotoCaption(color: ChaliarColors.whiteColor),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height:40 ,),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: 10
+                            ),
+                            child: SvgPicture.asset(
+                              "assets/images/bonhomme.svg",
+                              height: 325,
+                              width: 297,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 Padding(padding: EdgeInsets.only(
                 ),
@@ -53,85 +126,6 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
                     title: 'Votre commande',
                     description: '7 avenue de la grande Armée/75003 Paris',
                   ),
-                ),
-                ListView(
-                  children: [
-                    SizedBox(
-                      height: 171,
-                    ),
-                    Center(
-                      child: Text(
-                        'Vous Aurez deux fois plus de chances\nde trouver un chaliar si vous ajoutez\ndes photos de votre annonce.',
-                        style: AppTextStyle.addPhotodesc(color: ChaliarColors.whiteColor),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 60,
-                    ),
-                    Center(
-                      child:GestureDetector(
-                        onTap:(){
-                          Navigator.pushNamed(context, '/take_picture');
-                        } ,
-                        child:Container(
-                          height: 60,
-                          width: MediaQuery.of(context).size.height * 0.3,
-                          decoration:BoxDecoration(
-                            color: ChaliarColors.secondaryColors,
-                            borderRadius: BorderRadius.circular(100.0),
-                          ),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                flex: 1,
-                                child: Center(
-                                  child: Icon(Icons.camera_alt,color: ChaliarColors.whiteColor,),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 3,
-                                child: Padding(
-                                  padding: EdgeInsets.only(
-                                      right: 30
-                                  ),
-                                  child:Center(child: Text('Prendre la photo',style: AppTextStyle.addPhotoBtn(color: ChaliarColors.whiteColor),)
-                                  ),),
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
-                      ,
-                    ),
-                    SizedBox(
-                      height:28,
-                    ),
-                    Center(
-                      child: GestureDetector(
-                        onTap: (){
-                          Navigator.pushNamed(context, '/resume_order_screen');
-                        },
-                        child: Text(
-                          'passer cette étape',
-                          style: AppTextStyle.addPhotoCaption(color: ChaliarColors.whiteColor),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-                    SizedBox(height:40 ,),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: 10
-                      ),
-                      child: SvgPicture.asset(
-                        "assets/images/bonhomme.svg",
-                        height: 325,
-                        width: 297,
-                      ),
-                    ),
-                  ],
                 ),
               ],
             ),

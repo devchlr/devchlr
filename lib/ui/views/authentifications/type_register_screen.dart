@@ -18,34 +18,24 @@ class ProParticulierScreen extends StatelessWidget {
       child: Consumer<AuthentificationHomeScreenMV>(
         builder: (context, model, child) =>
             Scaffold(
-              body: Stack(
-                fit: StackFit.expand,
-                children: [
-                  Column(
-                    children: [
-                      Container(
-                        height: 375,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage("assets/images/bgBlueHmVelo.png"),
-                            fit: BoxFit.fill,
-                          ),
+              body:SingleChildScrollView(
+                child: Stack(
+                  children: [
+                    Container(
+                      height: 450,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage("assets/images/bgBlueHmVelo.png"),
+                          fit: BoxFit.fill,
                         ),
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: ChaliarColors.whiteColor,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(left: 15, right: 15),
-                    child: ListView(
+                    ),
+                    Column(
                         children: [
                           Padding(
                             padding: EdgeInsets.only(
-                                top: 53),
+                                top: 120,
+                            ),
                             child: Center(
                               child: SvgPicture.asset(
                                 "assets/images/logo.svg",
@@ -65,6 +55,10 @@ class ProParticulierScreen extends StatelessWidget {
                                 height: MediaQuery.of(context).size.height * 0.03,
                               ),
                               Container(
+                                padding: EdgeInsets.only(
+                                  left: MediaQuery.of(context).size.width * 0.05,
+                                  right: MediaQuery.of(context).size.width * 0.05,
+                                ),
                                 child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:CrossAxisAlignment.center,
@@ -143,9 +137,10 @@ class ProParticulierScreen extends StatelessWidget {
                             ],
                           ),
                         ]),
-                  )
-                ],
-              ),
+                  ],
+                ) ,
+              )
+
             ),),);
   }
 }

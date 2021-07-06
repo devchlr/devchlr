@@ -1,4 +1,5 @@
 import 'package:flutter_app/models/user.dart';
+import 'package:flutter_app/services/preferences/shared_preference_service.dart';
 import 'package:flutter_app/ui/styles/chaliar_color.dart';
 import 'package:flutter_app/ui/styles/text_style.dart';
 // import 'package:flutter_app/ui/views/auth/condition_generale_screen.dart';
@@ -21,12 +22,17 @@ class PhoneOptValidateScreen extends StatefulWidget {
 }
 
 class _PhoneOptValidateScreenState extends State<PhoneOptValidateScreen>{
-
+  SharedPreferenceService sharedPreferenceService=SharedPreferenceService();
   AuthentificationVM _validator=AuthentificationVM();
   void initState(){
     super.initState();
+    getPreferenceInfo();
     getUser();
     _validator.uid=widget.uid;
+  }
+  void getPreferenceInfo()async{
+    widget.phone= widget.phone??await sharedPreferenceService.getPreferenceByFieldName('register_phone');
+    widget.uid= widget.uid??await sharedPreferenceService.getPreferenceByFieldName('register_email');
   }
   void getUser()async{
     sendSmsOpt();
