@@ -8,9 +8,9 @@ class Order{
   final String? order_id;
   final String? user_id;
   final String? delivery_id;
-  final OrderDeliveryInformation? deliveryInformation;
-  final OrderRecipientInformation? recipientInformation;
-  final OrderPackageInformation? packageInformation;
+  final Map<String,dynamic>? deliveryInformation;
+  final Map<String,dynamic>? recipientInformation;
+  final Map<String,dynamic>? packageInformation;
 
   Order(
       {this.order_price,
@@ -27,9 +27,9 @@ class Order{
         order_id=json['order_id'],
         user_id=json['user_id'],
         delivery_id=json['delivery_id'],
-        deliveryInformation=OrderDeliveryInformation.fromJson(json['deliveryInformation']),
-        recipientInformation=OrderRecipientInformation.fromJson(json['recipientInformation']),
-        packageInformation=OrderPackageInformation.fromJson(json['packageInformation']);
+        deliveryInformation=json['deliveryInformation'],
+        recipientInformation=json['recipientInformation'],
+        packageInformation=json['packageInformation'];
 
   Map<String,dynamic>toJson()=>{
   'order_price':order_price,

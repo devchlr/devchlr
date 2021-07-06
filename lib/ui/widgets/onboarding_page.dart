@@ -36,7 +36,7 @@ class OnboardingPageWidget extends StatelessWidget {
           ),
         Padding(
             padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 0.56,
+              top: MediaQuery.of(context).size.height * 0.4,
             ),
             child: Container(
               decoration: BoxDecoration(
@@ -78,7 +78,7 @@ class OnboardingPageWidget extends StatelessWidget {
                     child: ButtonChaliar(
                         onTap: onTap,
                         buttonText: buttonText,
-                        height: MediaQuery.of(context).size.height * 0.07,
+                        height: 48,
                         mediaQueryWidth: 0.8,
                         borderRaduis: 50,
                         backgroundcolor: ChaliarColors.whiteColor,

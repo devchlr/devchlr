@@ -5,10 +5,10 @@ import 'package:flutter_app/services/fire_store_service.dart';
 // import 'package:flutter_app/ui/views/auth/preCondition_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/services/preferences/shared_preference_service.dart';
 import 'package:flutter_app/ui/views/authentifications/pre_contionnal_screen.dart';
 import 'package:flutter_app/ui/widgets/custom_showSnackBar.dart';
 class AuthentificationVM extends BaseModel{
-
   FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   FirestoreService _storeService = FirestoreService();
   UserChaliar? currentUser;
@@ -20,7 +20,7 @@ class AuthentificationVM extends BaseModel{
   String? uid;
   BuildContext? context;
   CustomShowSnackBar customShowSnackBar=CustomShowSnackBar();
-
+  SharedPreferenceService sharedPreferenceService=SharedPreferenceService();
   void signInWithPhoneAuthCredential(
       PhoneAuthCredential phoneAuthCredential,BuildContext context) async {
     // customShowSnackBar.initUserRequestAnimation(context);
@@ -29,6 +29,7 @@ class AuthentificationVM extends BaseModel{
       final authCredential =
       await _firebaseAuth.signInWithCredential(phoneAuthCredential);
       if(authCredential.user != null){
+        customShowSnackBar.initUserRequestAnimationSucess(context, 'Compte créer avec sucess');
         goToNextSCreen(context,uid!);
       }
     } on FirebaseAuthException catch (e) {
@@ -47,7 +48,7 @@ class AuthentificationVM extends BaseModel{
 
   //verifier le code pin
   sendSmsOpt(String phoneNumber,BuildContext context)async{
-    customShowSnackBar.initUserRequestAnimation(context);
+    // customShowSnackBar.initUserRequestAnimation(context);
     phone=phoneNumber;
     await _firebaseAuth.verifyPhoneNumber(
       phoneNumber: phoneNumber,
@@ -67,7 +68,6 @@ class AuthentificationVM extends BaseModel{
     );
   }
 
-
   void confirmOPT(BuildContext context) async {
     PhoneAuthCredential phoneAuthCredential =
     PhoneAuthProvider.credential(verificationId: _verificationId!, smsCode: pin!);
@@ -75,13 +75,14 @@ class AuthentificationVM extends BaseModel{
   }
 
 //function qui redirige vers la page OPT
-  void goToNextSCreen(BuildContext context,String uid){
-    Navigator.push(context,
-        new MaterialPageRoute(
-            builder: (BuildContext context) =>
-            new PreOnboardingScreen(uid: uid)));
-    // Navigator.of(context).pushNamedAndRemoveUntil('/condition_generale', (Route<dynamic> route) => false);
-
+  void goToNextSCreen(BuildContext context,String uid)async{
+    bool isCommit= await sharedPreferenceService.setStartPreferencePage('/singin');
+    if(isCommit){
+      Navigator.push(context,
+          new MaterialPageRoute(
+              builder: (BuildContext context) =>
+              new PreOnboardingScreen(uid: uid)));
+    }
   }
 
 }

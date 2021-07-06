@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:transparent_image/transparent_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/image.dart';
 import 'package:storage_path/storage_path.dart';
@@ -20,6 +19,7 @@ class _ImagesState extends State<Images> with AutomaticKeepAliveClientMixin{
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
           List<dynamic> list = json.decode(snapshot.data);
+          print('liste des images:${list[0]}');
           ImageModel imageModel = ImageModel.fromJson(list[0]);
           return GestureDetector(
               onTap:widget.onTap,
@@ -31,7 +31,7 @@ class _ImagesState extends State<Images> with AutomaticKeepAliveClientMixin{
               width: 54,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: FileImage(File(imageModel.files!.first)),
+                  image: new FileImage(File(imageModel.files!.first)),
               fit: BoxFit.fill,
             )
 

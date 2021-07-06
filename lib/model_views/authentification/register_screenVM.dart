@@ -43,6 +43,19 @@ class RegisterScreenVM extends BaseModel{
   bool password_obscure=true;
   bool confirm_password_obscure=true;
 
+  bool validate_surname=false;
+   bool validate_name=false;
+   bool validate_email=false;
+   bool validate_password=false;
+   bool validate_passwordBis=false;
+   bool validate_phoneNumber=false;
+   bool validate_facturationAdress=false;
+   bool validate_codePostal=false;
+   bool validate_city=false;
+   bool validate_societe=false;
+   bool validate_street=false;
+
+   bool loading=false;
 
   void updatePasswordIcon(bool val){
     password_obscure=password_obscure?false:true;
@@ -53,79 +66,135 @@ class RegisterScreenVM extends BaseModel{
     notifyListeners();
   }
 
+  void validateSurname(){
+    if (surname.text == null || surname.text.isEmpty||surname.text.length<2) {
+       validate_surname=true;
+    }else{
+      validate_surname=false;
+    }
+    notifyListeners();
+  }
+   void validateName(){
+     if (name.text == null || name.text.isEmpty||name.text.length<2) {
+       validate_name=true;
+     }else{
+       validate_name=false;
+     }
+     notifyListeners();
+   }
+   void validateEmail(){
+     validate_email = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email.text)?false:true;
+     notifyListeners();
+   }
+
+   void validatePassord(){
+     validate_password=RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$').hasMatch(password.text)?false:true;
+     notifyListeners();
+   }
+
+   void validatePasswordBis(){
+     validate_passwordBis=(password.text==password_confirm.text)?false:true;
+     notifyListeners();
+   }
+
+   void validatePhoneNumber(){
+     if (phone == null || phone!.isEmpty||phone!.length<9) {
+       validate_phoneNumber=true;
+     }else{
+       validate_phoneNumber=false;
+     }
+     notifyListeners();
+   }
+   void validateAdresseFacturation(){
+     if (facturationAdress.text == null || facturationAdress.text.isEmpty||facturationAdress.text.length<2) {
+       validate_facturationAdress=true;
+     }else{
+       validate_facturationAdress=false;
+     }
+     notifyListeners();
+   }
+   void validateCodePostal(){
+     if (codePostal.text == null || codePostal.text.isEmpty||codePostal.text.length<2) {
+       validate_codePostal=true;
+     }else{
+       validate_codePostal=false;
+     }
+     notifyListeners();
+   }
+
+   void validateCity(){
+     if (city.text == null || city.text.isEmpty||city.text.length<2) {
+       validate_city=true;
+     }else{
+       validate_city=false;
+     }
+     notifyListeners();
+   }
+
+   void validateStreet(){
+     if (street.text == null || street.text.isEmpty||street.text.length<2) {
+       validate_street=true;
+     }else{
+       validate_street=false;
+     }
+     notifyListeners();
+   }
+
+   void validateSociete(){
+     if (societe.text == null || societe.text.isEmpty||societe.text.length<2) {
+       validate_societe=true;
+     }else{
+       validate_societe=false;
+     }
+     notifyListeners();
+   }
+
+
   Future<String> validatorPartInformation() async {
-    if (email.text == null || email.text.isEmpty) {
-      return '404';
-    } else {
-      var user = await _firestoreService.getUser(phoneNumber.text);
+    if (validate_email) {
+      var user = await _firestoreService.getUserByFieldValue('email',email.text);
+
       if (user == null) {
-        return '200';
+        print('ICI');
+        if (!validate_surname&&!validate_name&&!validate_codePostal&&!validate_city&&!validate_facturationAdress) {
+          return '200';
+        }else{
+          return '404';
+        }
+      }else{
+        return '404';
       }
-    }
-    if (surname.text == null || surname.text.isEmpty) {
+    } else {
       return '404';
     }
-    if (name.text == null || name.text.isEmpty) {
-      return '404';
-    }
-    if (codePostal.text == null || codePostal.text.isEmpty) {
-      return '404';
-    }
-    if (city.text == null || city.text.isEmpty) {
-      return '404';
-    }
-    if (facturationAdress.text == null || facturationAdress.text.isEmpty) {
-      return '404';
-    }
-    return '200';
   }
   Future<String> validatorProInformation() async {
-    if (email.text == null || email.text.isEmpty) {
-      return '404';
-    } else {
-      var user = await _firestoreService.getUser(phoneNumber.text);
+    if (validate_email) {
+       var user = await _firestoreService.getUserByFieldValue('email',email.text);
       if (user == null) {
-        return '200';
+        if (!validate_societe&&!validate_street&&!validate_surname&&!validate_name&&!validate_codePostal&&!validate_city&&!validate_facturationAdress) {
+          return '200';
+        }else{
+          return '400';
+        }
+      }else {
+        return '404';
       }
-    }
-    if (surname.text == null || surname.text.isEmpty) {
+    } else {
       return '404';
     }
-    if (name.text == null || name.text.isEmpty) {
-      return '404';
-    }
-    if (codePostal.text == null || codePostal.text.isEmpty) {
-      return '404';
-    }
-    if (city.text == null || city.text.isEmpty) {
-      return '404';
-    }
-    if (facturationAdress.text == null || facturationAdress.text.isEmpty) {
-      return '404';
-    }
-    if (societe.text == null || societe.text.isEmpty) {
-      return '404';
-    }
-    if (password.text == null || password.text.isEmpty) {
-      return '404';
-    }
-    if (passwordBis.text == null || passwordBis.text.isEmpty) {
-      return '404';
-    }
-    if (password.text ==  passwordBis.text) {
-      return '404';
-    }
-    return '200';
   }
   void createUser(BuildContext context, String typeUser) async {
-    customShowSnackBar.initUserRequestAnimation(context);
+      loading=true;
+      notifyListeners();
     if (typeUser == TypeUser.particulier) {
       if (await validatorPartInformation() == '404') {
-        customShowSnackBar.initUserRequestAnimationError(context, 'Tous les champs doivent être renseignés');
+        loading=false;
+        notifyListeners();
+        customShowSnackBar.initUserRequestAnimationError(context, 'Tous les champs doivent être correctement renseignés');
       } else if (await validatorPartInformation() == '200') {
        await _fireAuthService.registerByEmailandPassword(email.text, password.text);
        var userCredential =await auth.currentUser;
-       print('uid:${userCredential?.uid}');
         _currentUser =  UserChaliar(
           id: userCredential?.uid,
           email: email.text,
@@ -139,15 +208,15 @@ class RegisterScreenVM extends BaseModel{
           password: password.text
         );
         await _firestoreService.createUser(_currentUser!);
-        customShowSnackBar.initUserRequestAnimationSucess(context, 'Compte créer avec sucess');
-
-        Timer(Duration(seconds: 6),
-                () =>  getOPTScreen(context,phoneNumber.text,_currentUser?.id));
-
+       loading=false;
+       notifyListeners();
+       getOPTScreen(context,phone,_currentUser?.id);
       }
     } else if (typeUser == TypeUser.professionnel) {
       if (await validatorPartInformation() == '404') {
-        customShowSnackBar.initUserRequestAnimationError(context, 'Tous les champs doivent être renseignés');
+        loading=false;
+        notifyListeners();
+        customShowSnackBar.initUserRequestAnimationError(context, 'Tous les champs doivent être correctement renseignés');
       } else if (await validatorPartInformation() == '200') {
         await _fireAuthService.registerByEmailandPassword(email.text, password.text);
         var userCredential =await auth.currentUser;
@@ -167,8 +236,9 @@ class RegisterScreenVM extends BaseModel{
             password: password.text
         );
         await _firestoreService.createUser(_currentUser!);
-        customShowSnackBar.initUserRequestAnimationSucess(context, 'Compte créer avec sucess');
-        getOPTScreen(context,phoneNumber.text,_currentUser?.id);
+        loading=false;
+        notifyListeners();
+        getOPTScreen(context,phone,_currentUser?.id);
       }
     }
   }
@@ -189,6 +259,7 @@ class RegisterScreenVM extends BaseModel{
     customShowSnackBar.initUserRequestAnimation(context);
     customShowSnackBar.initUserRequestAnimationError(context, 'connexion facebook server lost');
   }
+
   void appleRegister(BuildContext context){
     customShowSnackBar.initUserRequestAnimation(context);
     customShowSnackBar.initUserRequestAnimationError(context, 'connexion apple server lost');

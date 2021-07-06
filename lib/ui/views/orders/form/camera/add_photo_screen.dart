@@ -3,8 +3,12 @@ import 'package:flutter_app/ui/styles/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/ui/widgets/custom_header.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_app/models/commande.dart';
 
 class AddPhotoScreen extends StatefulWidget {
+  OrderDeliveryInformation? deliveryInformation;
+  OrderRecipientInformation? recipientInformation;
+  AddPhotoScreen({this.deliveryInformation,this.recipientInformation});
   @override
   _AddPhotoScreenState createState() => _AddPhotoScreenState();
 }

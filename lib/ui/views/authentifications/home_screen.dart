@@ -17,7 +17,8 @@ class ConnexionScreen extends StatelessWidget {
         builder: (context, model, child) =>
             Scaffold(
               resizeToAvoidBottomInset: true,
-              body: Stack(
+              body:
+              Stack(
                 fit: StackFit.expand,
                 children: [
                   Column(

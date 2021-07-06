@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:flutter_app/services/preferences/shared_preference_service.dart';
 import 'package:flutter_app/ui/styles/chaliar_color.dart';
 import 'package:flutter_app/ui/styles/chaliar_font.dart';
 import 'package:flutter_app/ui/styles/chaliar_icon_size.dart';
@@ -14,14 +15,18 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  SharedPreferenceService sharedPreferenceService=SharedPreferenceService();
   void initState() {
     super.initState();
     nextScreen();
   }
   void nextScreen()async{
     if(await widget._auth.currentUser==null){
+      print('oki1');
+      String nextPage= await sharedPreferenceService.getStartPreferencePage();
+      print(nextPage=='');
       Timer(Duration(seconds: 6),
-              () => Navigator.pushReplacementNamed(context, '/tuto'));
+              () => Navigator.pushReplacementNamed(context, nextPage==''?'/tuto':nextPage));
     }else{
       print('toujours actif');
       // widget._auth.signOut();

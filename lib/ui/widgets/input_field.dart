@@ -25,9 +25,11 @@ class InputField extends StatelessWidget {
   final bool? obscureText;
   final TextInputType? typeInput;
   final int? minlent;
-
+  final String? errorText;
   InputField(
-      {this.obscureText=false,
+      {
+        this.errorText,
+        this.obscureText=false,
         this.typeInput,
         this.placeholder,
       this.label,
@@ -70,6 +72,12 @@ class InputField extends StatelessWidget {
                 : textFillColor!),
         textAlignVertical: TextAlignVertical(y: 0.6),
         decoration: InputDecoration(
+          errorStyle: AppTextStyle.appBarHeader(
+            color: Colors.red,
+            size: 12,
+            fontWeight: FontWeight.w400
+          ),
+          errorText: errorText,
           border: isBorder!
               ? OutlineInputBorder(
                   borderRadius: BorderRadius.circular(raduis!),

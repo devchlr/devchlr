@@ -4,6 +4,7 @@ import 'package:flutter_app/ui/styles/chaliar_font.dart';
 import 'package:flutter_app/ui/styles/text_style.dart';
 import 'package:flutter_app/ui/widgets/button.dart';
 import 'package:flutter_app/ui/widgets/input_field.dart';
+import 'package:flutter_app/ui/widgets/loading.dart';
 import 'package:flutter_app/ui/widgets/svg_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ class UserRegisterScreen extends StatelessWidget {
       create: (context) => RegisterScreenVM(),
       child: Consumer<RegisterScreenVM>(
         builder: (context, model, child) =>
+        model.loading?LoadingForm():
             Scaffold(
               resizeToAvoidBottomInset: true,
               body: Stack(
@@ -49,8 +51,8 @@ class UserRegisterScreen extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(
                         top: MediaQuery.of(context).size.height*0.1,
-                        left: MediaQuery.of(context).size.width * 0.08,
-                        right: MediaQuery.of(context).size.width * 0.08
+                        left: MediaQuery.of(context).size.width * 0.05,
+                        right: MediaQuery.of(context).size.width * 0.05
                     ),
                     child: Card(
                       shape: RoundedRectangleBorder(
@@ -58,6 +60,9 @@ class UserRegisterScreen extends StatelessWidget {
                       ),
                       elevation: 2,
                       child: ListView(
+                        padding: EdgeInsets.only(
+                          top: 0
+                        ),
                         children: [
                           Padding(
                             padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.07, right: MediaQuery.of(context).size.width * 0.07),
@@ -68,6 +73,10 @@ class UserRegisterScreen extends StatelessWidget {
                               placeholder: "Prénom",
                               textFillColor: ChaliarColors.blackColor,
                               maxlenght: 250,
+                              errorText: model.validate_surname?'format du Prénom incorrect':null,
+                                onChanged: (value){
+                                  model.validateSurname();
+                                }
                             ),
                           ),
                           SizedBox(
@@ -82,6 +91,10 @@ class UserRegisterScreen extends StatelessWidget {
                               placeholder: "Nom",
                               textFillColor: ChaliarColors.blackColor,
                               maxlenght: 250,
+                                errorText: model.validate_name?'format du Nom incorrect':null,
+                                onChanged: (value){
+                                  model.validateName();
+                                }
                             ),
                           ),
                           SizedBox(
@@ -97,6 +110,10 @@ class UserRegisterScreen extends StatelessWidget {
                               placeholder: "Email",
                               textFillColor: ChaliarColors.blackColor,
                               maxlenght: 300,
+                                errorText: model.validate_email?'format de l\'email incorrect':null,
+                                onChanged: (value){
+                                  model.validateEmail();
+                                }
                             ),
                           ),
                           SizedBox(
@@ -108,6 +125,10 @@ class UserRegisterScreen extends StatelessWidget {
                               fieldSize: MediaQuery.of(context).size.height * 0.02,
                               label: "Mot de passe",
                               controller: model.password,
+                              errorText: model.validate_password?'format du mot de passe incorrect minimun  1 une lettre majuscule 1 lettre minuscule 1 nombre  1 carractere special ( ! @ # \$ & * ~ )':null,
+                              onChanged: (value){
+                              model.validatePassord();
+                              },
                               suffixIcon:GestureDetector(
                                 onTap: (){
                                   model.updatePasswordIcon(model.password_obscure);
@@ -116,7 +137,6 @@ class UserRegisterScreen extends StatelessWidget {
                               ),
                               typeInput: TextInputType.text,
                               obscureText: model.password_obscure,
-                              placeholder: "Email",
                               textFillColor: ChaliarColors.blackColor,
                               maxlenght: 300,
                             ),
@@ -130,6 +150,10 @@ class UserRegisterScreen extends StatelessWidget {
                               fieldSize: MediaQuery.of(context).size.height * 0.02,
                               label: "Confirmation de mot de passe",
                               controller: model.password_confirm,
+                              errorText: model.validate_passwordBis?'les mots de passe ne correspondent pas':null,
+                              onChanged: (value){
+                                model.validatePasswordBis();
+                              },
                               suffixIcon:GestureDetector(
                                 onTap: (){
                                   model.updateConfirmPasswordIcon(model.confirm_password_obscure);
@@ -138,7 +162,6 @@ class UserRegisterScreen extends StatelessWidget {
                               ),
                               typeInput: TextInputType.text,
                               obscureText: model.confirm_password_obscure,
-                              placeholder: "Email",
                               textFillColor: ChaliarColors.blackColor,
                               maxlenght: 300,
                               // controller: model.email,
@@ -155,6 +178,7 @@ class UserRegisterScreen extends StatelessWidget {
                               initialValue: number,
                               onInputChanged: (PhoneNumber number) {
                                 model.phone=number.phoneNumber;
+                                model.validatePhoneNumber();
                                 print(number.phoneNumber);
                               },
                               onInputValidated: (bool value) {
@@ -166,6 +190,7 @@ class UserRegisterScreen extends StatelessWidget {
                               ),
                               ignoreBlank: false,
                               inputDecoration: new InputDecoration(
+                                errorText: model.validate_phoneNumber?'Numero de telephone incorrect':null,
                                 // border: InputBorder.none,
                                 focusedBorder: InputBorder.none,
                                 // enabledBorder: InputBorder.none,
@@ -206,7 +231,11 @@ class UserRegisterScreen extends StatelessWidget {
                                 label: "Nom société",
                                 maxlenght: 250,
                                 textFillColor: ChaliarColors.blackColor,
-                                controller: model.societe
+                                controller: model.societe,
+                              errorText: model.validate_societe?'Nom société non valide':null,
+                              onChanged: (value){
+                                model.validateSociete();
+                              },
                             ),
                           ),
                           typeUSer == 'particulier'?SizedBox(
@@ -225,7 +254,7 @@ class UserRegisterScreen extends StatelessWidget {
                                 label: "Siret (facultatif)",
                                 maxlenght: 250,
                                 textFillColor: ChaliarColors.blackColor,
-                                controller: model.siret
+                                controller: model.siret,
                             ),
                           ),
                           typeUSer == 'particulier'?SizedBox(
@@ -241,7 +270,11 @@ class UserRegisterScreen extends StatelessWidget {
                                 label: "Adresse de facturation",
                                 maxlenght: 250,
                                 textFillColor: ChaliarColors.blackColor,
-                                controller: model.facturationAdress
+                                controller: model.facturationAdress,
+                              errorText: model.validate_facturationAdress?'Adresse de facruration non valide':null,
+                              onChanged: (value){
+                                model.validateAdresseFacturation();
+                              },
                             ),
                           ),
                           SizedBox(
@@ -254,7 +287,11 @@ class UserRegisterScreen extends StatelessWidget {
                                 label: "Code Postal",
                                 maxlenght: 20,
                                 textFillColor: ChaliarColors.blackColor,
-                                controller: model.codePostal
+                                controller: model.codePostal,
+                              errorText: model.validate_codePostal?'Code postal non valide':null,
+                              onChanged: (value){
+                                model.validateCodePostal();
+                              },
                             ),
                           ),
                           SizedBox(
@@ -267,11 +304,15 @@ class UserRegisterScreen extends StatelessWidget {
                                 label: "Ville",
                                 maxlenght: 250,
                                 textFillColor: ChaliarColors.blackColor,
-                                controller: model.city
+                                controller: model.city,
+                              errorText: model.validate_city?'Ville non valide':null,
+                              onChanged: (value){
+                                model.validateCity();
+                              },
                             ),
                           ),
                           SizedBox(
-                            height: 61,
+                            height: 31,
                           ),
                           Center(
                             child: ButtonChaliar(

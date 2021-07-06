@@ -1,18 +1,13 @@
-import 'package:flutter_app/constants/iconList.dart';
 import 'package:flutter_app/constants/type_livraison.dart';
 import 'package:flutter_app/model_views/order/depart_view_model.dart';
 import 'package:flutter_app/ui/styles/chaliar_color.dart';
 import 'package:flutter_app/ui/styles/text_style.dart';
-import 'package:flutter_app/ui/widgets/appBar.dart';
 import 'package:flutter_app/ui/widgets/button.dart';
 import 'package:flutter_app/ui/widgets/custom_botom_navigation_bar.dart';
 import 'package:flutter_app/ui/widgets/custom_header.dart';
 import 'package:flutter_app/ui/widgets/input_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:date_time_picker/date_time_picker.dart';
-import 'package:timelines/timelines.dart';
 import 'package:intl/intl.dart' show DateFormat;
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
@@ -62,6 +57,7 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                 Scaffold(
                   key: _scaffoldKey,
                   resizeToAvoidBottomInset: true,
+                  backgroundColor: Colors.white,
                   body: Stack(
                     children: [
                       Column(
@@ -366,7 +362,7 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                                         child: ButtonChaliar(
                                             onTap: () {
                                               model.formEditingController(context);
-                                               Navigator.pushNamed(context, '/commande_arrivee_form');
+                                               // Navigator.pushNamed(context, '/commande_arrivee_form');
                                             },
                                             buttonText: 'Suivant',
                                             height: MediaQuery.of(context).size.height * 0.07,
