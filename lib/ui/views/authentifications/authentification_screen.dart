@@ -43,13 +43,12 @@ class _PhoneOptValidateScreenState extends State<PhoneOptValidateScreen>{
           _validator.uid=widget.uid;
         });
       });
-     getUser();
+     sendSmsOpt();
   }
-  void getUser()async{
-    sendSmsOpt();
-  }
-  void sendSmsOpt()async{
-    await _validator.sendSmsOpt(widget.phone!,context);
+
+  sendSmsOpt()async{
+    String phone=widget.phone!;
+    await _validator.sendSmsOpt(phone,context);
   }
   @override
   Widget build(BuildContext context) {
@@ -176,10 +175,10 @@ class _PhoneOptValidateScreenState extends State<PhoneOptValidateScreen>{
                           model.loading? SizedBox(height: 20.0,):Container(),
                           Center(
                             child: ButtonChaliar(
-                                onTap: () {
+                                onTap: ()async{
                                   model.context=context;
                                   model.uid=widget.uid;
-                                  model.confirmOPT(context);
+                                  await model.confirmOPT(context);
                                 },
                                 buttonText: 'Envoyer le code',
                                 height: 60.0,

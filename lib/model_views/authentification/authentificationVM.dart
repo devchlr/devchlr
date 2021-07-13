@@ -6,6 +6,7 @@ import 'package:flutter_app/services/fire_store_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/services/preferences/shared_preference_service.dart';
+import 'package:flutter_app/ui/views/authentifications/conditionnal_term.dart';
 import 'package:flutter_app/ui/views/authentifications/pre_contionnal_screen.dart';
 import 'package:flutter_app/ui/widgets/custom_showSnackBar.dart';
 class AuthentificationVM extends BaseModel{
@@ -15,7 +16,7 @@ class AuthentificationVM extends BaseModel{
   UserChaliar? currentUser;
   String? phone;
   String? pin;
-  String? _verificationId;
+  var _verificationId;
   bool loading=false;
   bool? isGetOpt;
   String? uid;
@@ -24,27 +25,26 @@ class AuthentificationVM extends BaseModel{
   SharedPreferenceService sharedPreferenceService=SharedPreferenceService();
 
 
-  void signInWithPhoneAuthCredential(
-      PhoneAuthCredential phoneAuthCredential,BuildContext context) async {
+  void signInWithPhoneAuthCredentialD(
+      PhoneAuthCredential phoneAuthCredential,BuildContext context){
     loading=true;
     notifyListeners();
-    try {
-      await _firebaseAuth.signInWithCredential(phoneAuthCredential).then((authCredential){
+    // try {
+      _firebaseAuth.signInWithCredential(phoneAuthCredential).then((authCredential){
         if(authCredential.user != null){
           loading=false;
           notifyListeners();
           customShowSnackBar.initUserRequestAnimationSucess(context, 'Compte créer avec sucess');
-          goToNextSCreen(context,uid!);
+          var user=_firebaseAuth.currentUser;
+          goToNextSCreen(context,user!.uid);
         }
       });
-    } on FirebaseAuthException catch (e) {
-      loading=false;
-      notifyListeners();
-      customShowSnackBar.initUserRequestAnimationError(context, e.message!);
-      notifyListeners();
-      print(e.message);
-    }
-    notifyListeners();
+    // } on FirebaseAuthException catch (e) {
+    //   loading=false;
+    //   notifyListeners();
+    //   customShowSnackBar.initUserRequestAnimationError(context, '${e.message}');
+    //   notifyListeners();
+    // }
   }
   //function function qui recupere le numero du user
   void getUserData(String number)async{
@@ -54,36 +54,53 @@ class AuthentificationVM extends BaseModel{
   }
 
   //verifier le code pin
-  sendSmsOpt(String phoneNumber,BuildContext context)async{
+  sendSmsOpt(String phoneNumber,BuildContext context){
     loading=true;
     notifyListeners();
     phone=phoneNumber;
     var verificationAuth= _firebaseAuth.verifyPhoneNumber(
       phoneNumber: phoneNumber,
-      timeout: const Duration(seconds: 60),
-      verificationCompleted: (phoneAuthCredential) async {
-        signInWithPhoneAuthCredential(phoneAuthCredential,context);
+      timeout: const Duration(seconds: 120),
+      verificationCompleted: (PhoneAuthCredential credential) async{
+      var authCredential=  await _firebaseAuth.signInWithCredential(credential);
+          if(authCredential.user != null){
+            loading=false;
+            notifyListeners();
+            customShowSnackBar.initUserRequestAnimationSucess(context, 'Compte créer avec sucess');
+            goToNextSCreen(context,uid!);
+          }else{
+            print('error');
+            return;
+          }
       },
-      verificationFailed: (verificationFailed) async {
+      verificationFailed: (verificationFailed){
         loading=false;
         notifyListeners();
-        customShowSnackBar.initUserRequestAnimationError(context, verificationFailed.message!);
+        customShowSnackBar.initUserRequestAnimationError(context, '${verificationFailed.message}');
         notifyListeners();
-        print(verificationFailed.message);
       },
-      codeSent: (verificationId, resendingToken) async {
+      codeSent: (verificationId, resendingToken)async{
+        bool isAddPhoneCred=await sharedPreferenceService.setPhoneCred(verificationId);
+        if(isAddPhoneCred)print('dans code send ${_verificationId}');
         _verificationId = verificationId;
+
       },
-      codeAutoRetrievalTimeout: (verificationId) async {},
+      codeAutoRetrievalTimeout: (String verificationId){
+        verificationId = verificationId;
+        print(verificationId);
+        print("Timout");
+      },
     );
     verificationAuth.then((value){
       print('oki');
     });
   }
 
-  void confirmOPT(BuildContext context) async {
+  confirmOPT(BuildContext context) async {
+    print('vriId ici confirm opt: ${_verificationId}');
+    String phoneCred= await sharedPreferenceService.getPhoneCred();
     PhoneAuthCredential phoneAuthCredential =
-    PhoneAuthProvider.credential(verificationId: _verificationId!, smsCode: pin!);
+     PhoneAuthProvider.credential(verificationId: phoneCred, smsCode: pin!);
     signInWithPhoneAuthCredential(phoneAuthCredential,context);
   }
 
@@ -94,8 +111,41 @@ class AuthentificationVM extends BaseModel{
       Navigator.push(context,
           new MaterialPageRoute(
               builder: (BuildContext context) =>
-              new PreOnboardingScreen(uid: uid)));
+              new ConditionGeneraleScreen(userId:uid)));
     }
   }
+
+
+
+  String? verificationId;
+
+  bool showLoading = false;
+
+  void signInWithPhoneAuthCredential(
+      PhoneAuthCredential phoneAuthCredential,BuildContext context) async {
+    loading=true;
+    notifyListeners();
+    try {
+      final authCredential =
+      await _firebaseAuth.signInWithCredential(phoneAuthCredential);
+
+      if(authCredential.user != null){
+          loading=false;
+          notifyListeners();
+          customShowSnackBar.initUserRequestAnimationSucess(context, 'Compte créer avec sucess');
+          var user=_firebaseAuth.currentUser;
+          goToNextSCreen(context,uid!);
+        // Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeScreen()));
+      }
+
+    } on FirebaseAuthException catch (e) {
+      loading=false;
+      notifyListeners();
+      customShowSnackBar.initUserRequestAnimationError(context, '${e.message}');
+    }
+  }
+
+
+
 
 }

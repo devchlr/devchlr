@@ -4,6 +4,7 @@ import 'package:flutter_app/models/user.dart';
 import 'package:flutter_app/services/fire_store_service.dart';
 
 class ConditionnalTermViewModel extends BaseModel{
+  FirestoreService firestoreService = FirestoreService();
   UserChaliar? currentUser;
   final _auth = FirebaseAuth.instance;
   FirestoreService _storeService = FirestoreService();
@@ -27,5 +28,10 @@ class ConditionnalTermViewModel extends BaseModel{
     return userResult;
   }
 
+  getUserD(){
+    var user = _auth.currentUser;
+    print(user!.uid);
+    return firestoreService.getUserFuture(user.uid);
+  }
 
 }

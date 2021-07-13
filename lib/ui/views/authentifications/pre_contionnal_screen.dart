@@ -21,20 +21,7 @@ class _PreOnboardingScreenState extends State<PreOnboardingScreen> {
     var userData = await conditionnalTermViewModel.getUserData(widget.uid!);
     print(userData['id']);
     Navigator.push(context,MaterialPageRoute(builder:(context){
-      return  ConditionGeneraleScreen(user: new UserChaliar(
-          id: userData['id'],
-          name: userData['name'],
-          surname: userData['surname'],
-          email: userData['email'],
-          phone : userData['phone'],
-          street : userData['street'],
-          facturationAdresse : userData['facturationAdresse'],
-          codePostal : userData['codePostal'],
-          city : userData['city'],
-          siret:userData['siret'],
-          societe:userData['societe'],
-          userRole : userData['userRole']
-      ),);
+      return  ConditionGeneraleScreen();
     }));
   }
   @override

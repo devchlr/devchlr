@@ -24,6 +24,20 @@ class SharedPreferenceService{
     return orderId;
   }
 
+  //phone credential
+  Future<bool> setPhoneCred(String orderId)async{
+    SharedPreferences prefs = await _prefs;
+    prefs.setString("phone_credential", orderId);
+    return prefs.commit();
+  }
+
+  Future<String> getPhoneCred()async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? orderId= prefs.getString("phone_credential");
+    return orderId!;
+  }
+
+
     Future<String?> getRegisterPreferencePage()async{
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? routeNamed= prefs.getString("register_form_page")??null;

@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_app/ui/styles/chaliar_color.dart';
 import 'package:flutter_app/ui/styles/text_style.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,8 +11,8 @@ import 'package:flutter_app/ui/widgets/button.dart';
 import 'package:provider/provider.dart';
 
 class ConditionGeneraleScreen extends StatefulWidget {
-  UserChaliar? user;
-  ConditionGeneraleScreen({this.user});
+  final String? userId;
+  ConditionGeneraleScreen({this.userId});
   @override
   _ConditionGeneraleScreenState createState() => _ConditionGeneraleScreenState();
 }
@@ -20,7 +21,6 @@ class _ConditionGeneraleScreenState extends State<ConditionGeneraleScreen> {
   @override
   void initState() {
     super.initState();
-    print(widget.user?.phone);
   }
   @override
   Widget build(BuildContext context) {
@@ -60,12 +60,25 @@ class _ConditionGeneraleScreenState extends State<ConditionGeneraleScreen> {
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.05,
                           ),
-                          Text.rich(
-                            TextSpan(
-                              text: "Bienvenue ${widget.user?.surname},",
-                              style: AppTextStyle.headerApp1(color: ChaliarColors.whiteColor),
-                            ),
-                          ),
+                                    FutureBuilder(future:model.getUserD(),
+              builder: (context,AsyncSnapshot<DocumentSnapshot>snapshot) {
+                if (snapshot.connectionState != ConnectionState.done) {
+                  return CircularProgressIndicator();
+                }
+                if (snapshot.data!=null){
+                  Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
+                  var user=UserChaliar.fromData(data);
+                  print(snapshot.data!.data());
+                  return  Text.rich(
+                    TextSpan(
+                      text: "Bienvenue , ${user.surname}",
+                      style: AppTextStyle.headerApp1(color: ChaliarColors.whiteColor),
+                    ),
+                  );
+                } return CircularProgressIndicator();
+                    }),
+
+
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.02,
                           ),
