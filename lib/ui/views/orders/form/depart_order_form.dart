@@ -10,6 +10,7 @@ import 'package:flutter_app/ui/widgets/input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/ui/widgets/suggestion_input.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:google_place/google_place.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart' show DateFormat;
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -53,10 +54,6 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
     DateTime h = DateTime.now();
     String formattedHour = DateFormat('kk').format(h);
     String formattedMinute = DateFormat('mm').format(h);
-    String heure='';
-    String minute='';
-    String lsHour = TimeOfDay.now().hour.toString().padLeft(2, '0');
-    String lsMinute = TimeOfDay.now().minute.toString().padLeft(2, '0');
     return ChangeNotifierProvider<DepartFormViewModel>(
         create: (context) => DepartFormViewModel(),
         child: Consumer<DepartFormViewModel>(
@@ -115,6 +112,7 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                                           model.departure_address.text=suggestion.toString();
                                         },
                                         controller:model.departure_address,
+                                        errorText: model.adressValid?'Champ Adresse de depart incorrect':null,
                                       )
                                      ,
                                     ),
@@ -153,6 +151,17 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                                     SizedBox(
                                       height: 13.0,
                                     ),
+                                    model.isDateValid?Center(
+                                      child: Text('Erreur la date de livraison est depasse\n veuillez renseiner une date valide',
+                                      style: AppTextStyle.appBarHeader(
+                                        color: Colors.red,
+                                        size: 12,
+                                        fontWeight: FontWeight.bold
+                                      ),),
+                                    ):Container(),
+                                    model.isDateValid?SizedBox(
+                                      height: 13.0,
+                                    ):Container(),
                                     GestureDetector(
                                         onTap: (){
                                           model.selectTypeLivraison(TypeLivraison.programme);
@@ -166,7 +175,7 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                                             decoration: BoxDecoration(
                                                 color: ChaliarColors.whiteGreyColor,
                                                 borderRadius: BorderRadius.circular(6.0),
-                                                // border: Border.all(color: ChaliarColors.primaryColors,width: 0.5)
+                                                border: model.isDateValid?Border.all(color: Colors.red,width: 1):null,
                                             ),
                                             child: ExpansionTile(
                                               initiallyExpanded: model.group==TypeLivraison.programme?true:false,
@@ -197,11 +206,13 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                                                               showNavigationArrow: true,
                                                               // onSelectionChanged: _onSelectionChanged,
                                                               selectionMode: DateRangePickerSelectionMode.single,
+                                                              onSelectionChanged: (DateRangePickerSelectionChangedArgs args){
+                                                                model.isDateValid;
+                                                              },
                                                             ),
                                                           ],
                                                         ))
                                                 )
-
                                               ],
                                             ),
                                           ),
@@ -238,15 +249,14 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                                                         );
                                                       },
                                                     ).then((value){
-                                                      DateTime  newDate = new DateTime.now();
-                                                      new DateTime(newDate.year, newDate.month, newDate.day, value!.hour, value.minute);
-                                                      setState(() {
-                                                        formattedHour = newDate.hour.toString();
-                                                         formattedMinute = newDate.minute.toString();
-                                                      });
-                                                      print(newDate);
-                                                      model.delivery_schedule.text=newDate.toString();
-                                                      print(model.delivery_schedule.text);
+                                                      model.myDate=value;
+                                                      var t=value;
+                                                     if(t!=null){
+                                                       final now = new DateTime.now();
+                                                       model.delivery_schedule.selectedDate=new DateTime(now.year, now.month, now.day, t.hour, t.minute);
+                                                       model.changeTime();
+                                                       model.pickTime();
+                                                     }
                                                     });
                                                   },
                                                   child: Row(
@@ -270,7 +280,7 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                                                                 border: Border.all(color: ChaliarColors.primaryColors,width: 1)
                                                             ),
                                                             child: Center(
-                                                              child: Text('${heure==''?formattedHour[0]:heure[0]}'),
+                                                              child: Text('${model.lsHour.length>1?model.lsHour[0]:'0'}'),
                                                             ),
                                                           ),
                                                             SizedBox(width: 10.0,),
@@ -283,7 +293,7 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                                                                   border: Border.all(color: ChaliarColors.primaryColors,width: 1)
                                                               ),
                                                               child: Center(
-                                                                child: Text('${heure==''?formattedHour[1]:heure[1]}'),
+                                                                child: Text('${model.lsHour.length>1?model.lsHour[1]:model.lsHour[0]}'),
                                                               ),
                                                             ),
                                                             SizedBox(width: 10.0,),
@@ -304,7 +314,7 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                                                                     border: Border.all(color: ChaliarColors.primaryColors,width: 1)
                                                                 ),
                                                                 child: Center(
-                                                                  child: Text('${formattedMinute[0]}'),
+                                                                  child: Text('${model.lsMinute.length>1?model.lsMinute[0]:'0'}'),
                                                                 )
                                                             ),
                                                             SizedBox(width: 10.0,),
@@ -317,7 +327,7 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                                                                     border: Border.all(color: ChaliarColors.primaryColors,width: 1)
                                                                 ),
                                                                 child: Center(
-                                                                  child: Text('${formattedMinute[1]}'),
+                                                                  child: Text('${model.lsMinute.length>1?model.lsMinute[1]:model.lsMinute[0]}'),
                                                                 )
                                                             )
                                                           ],
@@ -326,8 +336,6 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                                                     ],
                                                   ),
                                                 ),
-
-
                                             ],
                                           ),
                                         )
@@ -346,6 +354,12 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                                         backgroundColor: ChaliarColors.whiteGreyColor,
                                         borderColor: ChaliarColors.primaryColors,
                                         controller: model.delivery_firt_name,
+                                        errorText: model.surnameIsValid?"Le champs Prénom est incorrect":null,
+                                        onChanged: (value){
+                                          // model.isAdressValid();
+                                          // model.isSurnameValid();
+                                          model.dateValide();
+                                        },
                                       ),
                                     ),
                                     SizedBox(
@@ -362,6 +376,13 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                                         backgroundColor: ChaliarColors.whiteGreyColor,
                                         borderColor: ChaliarColors.primaryColors,
                                         controller: model.delivery_name,
+                                        errorText: model.nameIsValid?"Le champs Nom est incorrect":null,
+                                        onChanged: (value){
+                                          model.isNameValid();
+                                          model.isSurnameValid();
+                                          model.isAdressValid();
+                                        },
+
                                       ),
                                     ),
                                     SizedBox(
@@ -378,6 +399,14 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                                         backgroundColor: ChaliarColors.whiteGreyColor,
                                         borderColor: ChaliarColors.primaryColors,
                                         controller: model.phone_number,
+                                        errorText: model.phoneIsValid?"Le champs Numéro de téléphone est incorrect":null,
+                                        onChanged: (value){
+                                          model.isPhoneValid();
+                                          model.isNameValid();
+                                          model.isSurnameValid();
+                                          model.isAdressValid();
+                                        },
+
                                       ),
                                     ),
                                     SizedBox(
@@ -394,6 +423,14 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                                         backgroundColor: ChaliarColors.whiteGreyColor,
                                         borderColor: ChaliarColors.primaryColors,
                                         controller: model.delivery_email,
+                                        errorText: model.emailIsValid?"Le champs Email est incorrect":null,
+                                        onChanged: (value){
+                                          model.isEmailValid();
+                                          model.isPhoneValid();
+                                          model.isNameValid();
+                                          model.isSurnameValid();
+                                          model.isAdressValid();
+                                        },
                                       ),
                                     ),
                                     SizedBox(
@@ -410,6 +447,9 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                                         backgroundColor: ChaliarColors.whiteGreyColor,
                                         borderColor: ChaliarColors.primaryColors,
                                         controller: model.delivery_group,
+                                        // onChanged: (value){
+                                        //   model.getLocalisation(model.departure_address.text);
+                                        // },
                                       ),
                                     ),
                                     SizedBox(
@@ -421,8 +461,8 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
                                       child: Center(
                                         child: ButtonChaliar(
                                             onTap: () {
-                                              //model.formEditingController(context);
-                                                Navigator.pushNamed(context, '/commande_arrivee_form');
+                                              model.formEditingController(context);
+                                              //   Navigator.pushNamed(context, '/commande_arrivee_form');
                                             },
                                             buttonText: 'Suivant',
                                             height: MediaQuery.of(context).size.height * 0.07,

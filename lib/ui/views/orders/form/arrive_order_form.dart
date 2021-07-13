@@ -21,6 +21,14 @@ class ArriveeFormScreen extends StatefulWidget {
 
 class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  ArriveScreenViewModel arriveScreenViewModel=ArriveScreenViewModel();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    arriveScreenViewModel.orderDeliveryInformation=widget.deliveryInformation;
+    print(arriveScreenViewModel.orderDeliveryInformation!.departure_address!.toJson());
+  }
   @override
   Widget build(BuildContext context) {
     return
@@ -75,6 +83,7 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
                             onSuggestionSelected: (suggestion) {
                               model.arrival_address.text=suggestion.toString();
                             },
+                            errorText: model.vArrivalAdress?'Erreur le champ adress est mal renseigne':null,
                             controller:model.arrival_address,
                           ),
                         ),
@@ -92,6 +101,11 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
                             backgroundColor: ChaliarColors.whiteGreyColor,
                             borderColor: ChaliarColors.primaryColors,
                             controller: model.firt_name_recipient,
+                            errorText: model.vfirstNameR?'erreur format inccorect':null,
+                            onChanged: (value){
+                              model.arrivaAdressV();
+                              model.firstNameR();
+                            },
                           ),
                         ),
                         SizedBox(
@@ -108,6 +122,12 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
                             backgroundColor: ChaliarColors.whiteGreyColor,
                             borderColor: ChaliarColors.primaryColors,
                             controller: model.name_recipient,
+                            errorText: model.vNameR?'erreur format inccorect':null,
+                            onChanged: (value){
+                              model.arrivaAdressV();
+                              model.firstNameR();
+                              model.nameR();
+                            },
                           ),
                         ),
                         SizedBox(
@@ -124,6 +144,13 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
                             backgroundColor: ChaliarColors.whiteGreyColor,
                             borderColor: ChaliarColors.primaryColors,
                             controller: model.recipient_phone_number,
+                            errorText: model.vPhoneR?'erreur format inccorect':null,
+                            onChanged: (value){
+                              model.arrivaAdressV();
+                              model.firstNameR();
+                              model.nameR();
+                              model.phoneR();
+                            },
                           ),
                         ),
                         SizedBox(
@@ -140,6 +167,14 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
                             backgroundColor: ChaliarColors.whiteGreyColor,
                             borderColor: ChaliarColors.primaryColors,
                             controller: model.recipient_email,
+                            errorText: model.vEmailR?'erreur format inccorect':null,
+                            onChanged: (value){
+                              model.arrivaAdressV();
+                              model.firstNameR();
+                              model.nameR();
+                              model.phoneR();
+                              model.emailR();
+                            },
                           ),
                         ),
                         SizedBox(
@@ -156,6 +191,10 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
                             backgroundColor: ChaliarColors.whiteGreyColor,
                             borderColor: ChaliarColors.primaryColors,
                             controller: model.recipient_group,
+                            errorText: model.vGroupR?'erreur format inccorect':null,
+                            onChanged: (value){
+                              model.groupR();
+                            },
                           ),
                         ),
                         SizedBox(
@@ -172,6 +211,10 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
                             backgroundColor: ChaliarColors.whiteGreyColor,
                             borderColor: ChaliarColors.primaryColors,
                             controller: model.recipient_note,
+                            errorText: model.vNoteR?'erreur format inccorect':null,
+                            onChanged: (value){
+                              model.noteR();
+                            },
                           ),
                         ),
                         SizedBox(
@@ -184,9 +227,9 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
                           child: Center(
                             child: ButtonChaliar(
                                 onTap: () {
-                                  // model.orderDeliveryInformation=widget.deliveryInformation;
-                                  // model.formEditingController(context);
-                                  Navigator.pushNamed(context, '/taille_colli');
+                                  model.orderDeliveryInformation=widget.deliveryInformation;
+                                  model.formEditingController(context);
+                                  // Navigator.pushNamed(context, '/taille_colli');
                                 },
                                 buttonText: 'Valider',
                                 height: MediaQuery.of(context).size.height * 0.07,

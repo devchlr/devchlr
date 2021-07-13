@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/ui/widgets/button.dart';
 import 'package:flutter_app/model_views/authentification/authentificationVM.dart';
 import 'package:flutter_app/ui/widgets/custom_showSnackBar.dart';
+import 'package:flutter_app/ui/widgets/loading.dart';
 import 'package:pin_input_text_field/pin_input_text_field.dart';
 import 'package:flutter/gestures.dart';
 import 'package:provider/provider.dart';
@@ -27,12 +28,22 @@ class _PhoneOptValidateScreenState extends State<PhoneOptValidateScreen>{
   void initState(){
     super.initState();
     getPreferenceInfo();
-    getUser();
-    _validator.uid=widget.uid;
+
   }
   void getPreferenceInfo()async{
-    widget.phone= widget.phone??await sharedPreferenceService.getPreferenceByFieldName('register_phone');
-    widget.uid= widget.uid??await sharedPreferenceService.getPreferenceByFieldName('register_email');
+      await sharedPreferenceService.getPreferenceByFieldName('register_phone').then((phone)async{
+        setState(() {
+          widget.phone= widget.phone??phone;
+        });
+        await sharedPreferenceService.getPreferenceByFieldName('register_email').then((uid){
+          setState(() {
+            widget.uid= widget.uid??uid;
+          });
+          print(widget.uid);
+          _validator.uid=widget.uid;
+        });
+      });
+     getUser();
   }
   void getUser()async{
     sendSmsOpt();
@@ -161,6 +172,8 @@ class _PhoneOptValidateScreenState extends State<PhoneOptValidateScreen>{
                           SizedBox(
                             height: 50.0,
                           ),
+                          model.loading?LoadingForm(bgColor: ChaliarColors.primaryColors,):Container(),
+                          model.loading? SizedBox(height: 20.0,):Container(),
                           Center(
                             child: ButtonChaliar(
                                 onTap: () {

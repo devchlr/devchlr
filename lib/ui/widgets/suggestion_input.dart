@@ -10,8 +10,9 @@ class CustomSugestionInput extends StatelessWidget {
   final Widget Function(BuildContext,Object?) ?itemBuilder;
   final void Function(Object?)? onSuggestionSelected;
   final String? placeholder;
+  final String? errorText;
 
- const CustomSugestionInput({this.placeholder, Key? key,this.controller,this.suggestionsCallback,this.itemBuilder,this.onSuggestionSelected}) : super(key: key);
+ const CustomSugestionInput({this.errorText,this.placeholder, Key? key,this.controller,this.suggestionsCallback,this.itemBuilder,this.onSuggestionSelected}) : super(key: key);
 
 
   @override
@@ -26,6 +27,7 @@ class CustomSugestionInput extends StatelessWidget {
                 size: 12,
                 color: ChaliarColors.secondaryColors),
             decoration: InputDecoration(
+              enabled: false,
                 filled: true,
                 fillColor: ChaliarColors.whiteGreyColor,
                 contentPadding: EdgeInsets.only(
@@ -38,6 +40,7 @@ class CustomSugestionInput extends StatelessWidget {
                     size: 12,
                     fontWeight: FontWeight.w400
                 ),
+                errorText: errorText,
                 hintText: placeholder,
                 hintStyle: AppTextStyle.appBarHeader(
                   size: 12,

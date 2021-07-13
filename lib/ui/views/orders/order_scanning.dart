@@ -1,5 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_app/constants/iconList.dart';
+import 'package:flutter_app/model_views/order/order_scanning.dart';
+import 'package:flutter_app/models/adress.dart';
+import 'package:flutter_app/models/commande.dart';
 import 'package:flutter_app/ui/styles/chaliar_color.dart';
 import 'package:flutter_app/ui/styles/text_style.dart';
 import 'package:flutter_app/ui/widgets/appBar.dart';
@@ -7,13 +11,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/ui/widgets/button.dart';
 import 'package:flutter_app/ui/widgets/custom_botom_navigation_bar.dart';
 import 'package:flutter_app/ui/widgets/custom_header.dart';
+import 'package:flutter_app/ui/widgets/loading.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'package:timelines/timelines.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
+import 'package:flutter/scheduler.dart';
 
 
 class OrderScanScreen extends StatefulWidget {
+  String? orderId;
+  OrderScanScreen({this.orderId});
   FirebaseAuth _auth =FirebaseAuth.instance;
   @override
   _OrderScanScreenState createState() => _OrderScanScreenState();
@@ -23,7 +32,6 @@ class _OrderScanScreenState extends State<OrderScanScreen> {
 
   void initState() {
     super.initState();
-    nextScreen();
   }
   void nextScreen()async{
       Timer(Duration(seconds: 10),
@@ -40,16 +48,32 @@ class _OrderScanScreenState extends State<OrderScanScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    return
-      Scaffold(
+    return ChangeNotifierProvider<OrderScanningVM>(
+        create: (context) => OrderScanningVM(),
+        child: Consumer<OrderScanningVM>(
+            builder: (context, model, child) =>
+        StreamBuilder<DocumentSnapshot>(
+        stream: model.getOrderInformation(widget.orderId!),
+    builder: (context, snapshot){
+    // if(snapshot.connectionState!=ConnectionState.done){
+    // return Container(
+    // child: Center(
+    // child: CircularProgressIndicator(color: Colors.blue,),
+    // ),
+    // );
+    // }
+    Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
+    // print(data);
+    var order=Order.fromJson(data);
+    var deliveryInformation=OrderDeliveryInformation.fromJson(order.deliveryInformation!);
+    var packageInfornation=OrderPackageInformation.fromJson(order.packageInformation!);
+    var recipientInformation=OrderRecipientInformation.fromJson(order.recipientInformation!);
+    AdressLocalisation departAdress=deliveryInformation.departure_address!;
+    AdressLocalisation arrivalAdress=recipientInformation.arrival_address!;
+    print('order id :${order.orderId}');
+    if(order.isValidate!=true){
+      return  Scaffold(
         backgroundColor: Color(0xffF3F3F3),
-        // appBar: ChaliarMenu.topBar(
-        //     title: 'Commande',
-        //     bgColor: Color(0xffF3F3F3),
-        //     imageBackground: 'assets/images/header.png'
-        // ),
-        //  bottomNavigationBar:
-        // ,
         body: Stack(
           children: [
             Column(
@@ -71,7 +95,8 @@ class _OrderScanScreenState extends State<OrderScanScreen> {
                   child: ListView(
                     children: [
                       GestureDetector(
-                        onTap:()=>Navigator.pushNamed(context, '/commande_depart_form'),
+                        onTap:() {
+                        },
                         child: TimelineTile(
                           nodeAlign: TimelineNodeAlign.start,
                           contents: Card(
@@ -79,7 +104,7 @@ class _OrderScanScreenState extends State<OrderScanScreen> {
                               height: 44.1,
                               width: MediaQuery.of(context).size.width,
                               padding: EdgeInsets.all(10.0),
-                              child: Text('12 Avenue de Paris , 94220 Charenton le Pont',style: AppTextStyle.captionPreCommande(color:ChaliarColors.secondaryColors),),
+                              child: Text('${departAdress.description}',style: AppTextStyle.captionPreCommande(color:ChaliarColors.secondaryColors),),
                             ),
                           ),
                           node: TimelineNode(
@@ -90,7 +115,9 @@ class _OrderScanScreenState extends State<OrderScanScreen> {
                           ),
                         ),
                       ),
-                      GestureDetector(onTap:()=>Navigator.pushNamed(context, '/commande_depart_form'),child: Container(
+                      GestureDetector(onTap:(){
+
+                         },child: Container(
                         margin: EdgeInsets.only(
                             left: 3.0
                         ),
@@ -102,7 +129,7 @@ class _OrderScanScreenState extends State<OrderScanScreen> {
                               height: 44.10,
                               width: MediaQuery.of(context).size.width,
                               padding: EdgeInsets.all(12.0),
-                              child: Text('39 Rue de Wagram , 75017 Paris',style: AppTextStyle.captionPreCommande(color:ChaliarColors.secondaryColors),),
+                              child: Text('${arrivalAdress.description}',style: AppTextStyle.captionPreCommande(color:ChaliarColors.secondaryColors),),
                             ),
                           ),
                           node: TimelineNode(
@@ -157,8 +184,8 @@ class _OrderScanScreenState extends State<OrderScanScreen> {
                         fit: BoxFit.fill,
                       ),
                     ),
-                    ),
                   ),
+                ),
               ],
             ),
             Padding(
@@ -179,9 +206,9 @@ class _OrderScanScreenState extends State<OrderScanScreen> {
                     height: 25,
                   ),
                   Text('Recherche d’un chaliar …',style: AppTextStyle.appBarHeader(
-                    size: 16,
-                    color: Color(0xffffffff),
-                    fontWeight: FontWeight.w400
+                      size: 16,
+                      color: Color(0xffffffff),
+                      fontWeight: FontWeight.w400
                   ),)
                 ],
               ),
@@ -197,10 +224,38 @@ class _OrderScanScreenState extends State<OrderScanScreen> {
           ],
         ),
       );
+    }
+
+     return IntitContainer();
+
+    })));
   }
 }
 
 
 
+class IntitContainer extends StatefulWidget {
+ IntitContainer({Key? key,}) : super(key: key);
+
+  @override
+  _IntitContainerState createState() => _IntitContainerState();
+}
+
+class _IntitContainerState extends State<IntitContainer> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Navigator.of(context).pushNamed('/order_tracking');
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      child: LoadingForm(),
+    );
+  }
+}
 
 

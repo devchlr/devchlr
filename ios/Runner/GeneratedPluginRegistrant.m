@@ -28,16 +28,40 @@
 @import firebase_core;
 #endif
 
+#if __has_include(<firebase_storage/FLTFirebaseStoragePlugin.h>)
+#import <firebase_storage/FLTFirebaseStoragePlugin.h>
+#else
+@import firebase_storage;
+#endif
+
 #if __has_include(<flutter_keyboard_visibility/FlutterKeyboardVisibilityPlugin.h>)
 #import <flutter_keyboard_visibility/FlutterKeyboardVisibilityPlugin.h>
 #else
 @import flutter_keyboard_visibility;
 #endif
 
+#if __has_include(<geocoder/GeocoderPlugin.h>)
+#import <geocoder/GeocoderPlugin.h>
+#else
+@import geocoder;
+#endif
+
+#if __has_include(<geolocator/GeolocatorPlugin.h>)
+#import <geolocator/GeolocatorPlugin.h>
+#else
+@import geolocator;
+#endif
+
 #if __has_include(<google_maps_flutter/FLTGoogleMapsPlugin.h>)
 #import <google_maps_flutter/FLTGoogleMapsPlugin.h>
 #else
 @import google_maps_flutter;
+#endif
+
+#if __has_include(<google_sign_in/FLTGoogleSignInPlugin.h>)
+#import <google_sign_in/FLTGoogleSignInPlugin.h>
+#else
+@import google_sign_in;
 #endif
 
 #if __has_include(<image_picker/FLTImagePickerPlugin.h>)
@@ -101,8 +125,12 @@
   [FLTFirebaseFirestorePlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseFirestorePlugin"]];
   [FLTFirebaseAuthPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseAuthPlugin"]];
   [FLTFirebaseCorePlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseCorePlugin"]];
+  [FLTFirebaseStoragePlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseStoragePlugin"]];
   [FlutterKeyboardVisibilityPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterKeyboardVisibilityPlugin"]];
+  [GeocoderPlugin registerWithRegistrar:[registry registrarForPlugin:@"GeocoderPlugin"]];
+  [GeolocatorPlugin registerWithRegistrar:[registry registrarForPlugin:@"GeolocatorPlugin"]];
   [FLTGoogleMapsPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTGoogleMapsPlugin"]];
+  [FLTGoogleSignInPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTGoogleSignInPlugin"]];
   [FLTImagePickerPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTImagePickerPlugin"]];
   [LibphonenumberPlugin registerWithRegistrar:[registry registrarForPlugin:@"LibphonenumberPlugin"]];
   [FLTLibphonenumberPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTLibphonenumberPlugin"]];

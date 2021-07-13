@@ -1,23 +1,38 @@
+import 'package:flutter_app/model_views/order/add_photoVM.dart';
 import 'package:flutter_app/ui/styles/chaliar_color.dart';
 import 'package:flutter_app/ui/styles/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/ui/widgets/custom_header.dart';
+import 'package:flutter_app/ui/widgets/loading.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_app/models/commande.dart';
+import 'package:provider/provider.dart';
 
 class AddPhotoScreen extends StatefulWidget {
   OrderDeliveryInformation? deliveryInformation;
   OrderRecipientInformation? recipientInformation;
-  AddPhotoScreen({this.deliveryInformation,this.recipientInformation});
+  OrderPackageInformation? packageInformation;
+  AddPhotoScreen({this.deliveryInformation,this.recipientInformation,this.packageInformation});
   @override
   _AddPhotoScreenState createState() => _AddPhotoScreenState();
 }
 class _AddPhotoScreenState extends State<AddPhotoScreen> {
+  AddPhotoVM addPhotoVM=AddPhotoVM();
+  void initState(){
+    super.initState();
+    addPhotoVM.orderRecipientInformation=widget.recipientInformation;
+    addPhotoVM.orderDeliveryInformation=widget.deliveryInformation;
+    addPhotoVM.orderPackageInformation=widget.packageInformation;
+  }
+
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   bool dismitCircle=false;
   @override
   Widget build(BuildContext context) {
-    return
+    return ChangeNotifierProvider<AddPhotoVM>(
+      create: (context) => AddPhotoVM(),
+      child: Consumer<AddPhotoVM>(
+          builder: (context, model, child) =>
       Stack(
         children: [
           Scaffold(
@@ -92,10 +107,20 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
                           SizedBox(
                             height:28,
                           ),
+                          model.isLoading?LoadingForm(
+                            bgColor: Colors.white,
+                          ):Container(),
+                          model.isLoading? SizedBox(
+                            height:28,
+                          ):Container(),
                           Center(
                             child: GestureDetector(
                               onTap: (){
-                                Navigator.pushNamed(context, '/resume_order_screen');
+                                model.orderDeliveryInformation=widget.deliveryInformation;
+                                model.orderRecipientInformation=widget.recipientInformation;
+                                model.orderPackageInformation=widget.packageInformation;
+                                model.getPackageResume(context);
+                                // Navigator.pushNamed(context, '/resume_order_screen');
                               },
                               child: Text(
                                 'passer cette étape',
@@ -124,7 +149,7 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
                 ),
                   child: CustomHearder(
                     title: 'Votre commande',
-                    description: '7 avenue de la grande Armée/75003 Paris',
+                    description: widget.recipientInformation!.arrival_address!.description??'',
                   ),
                 ),
               ],
@@ -187,7 +212,7 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
             child: Icon(Icons.arrow_back_ios,color: Colors.white,size: 20,),
           ),),
         ],
-      );
+      ),),);
   }
 }
 

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_app/model_views/base_model.dart';
 import 'package:flutter_app/services/fire_auth_service.dart';
 import 'package:flutter_app/services/fire_store_service.dart';
@@ -9,13 +10,14 @@ import 'package:flutter_app/ui/widgets/custom_showSnackBar.dart';
 class AuthentificationConnexionVM extends BaseModel{
   FirestoreService _storeService = FirestoreService();
   FireAuthService _fireAuthService = FireAuthService();
+  CustomShowSnackBar customShowSnackBar=CustomShowSnackBar();
+  FirebaseAuth auth=FirebaseAuth.instance;
   BuildContext? context;
   var user;
   bool password_obscure=true;
   String? phone;
   TextEditingController phoneNumber = TextEditingController();
   TextEditingController password = TextEditingController();
-  CustomShowSnackBar customShowSnackBar=CustomShowSnackBar();
   SharedPreferenceService sharedPreferenceService=SharedPreferenceService();
   bool loading=false;
   bool inputVerification(){
@@ -41,10 +43,24 @@ class AuthentificationConnexionVM extends BaseModel{
         print('erro 1');
       }else{
            // customShowSnackBar.initUserRequestAnimation(context);
-          _fireAuthService.signInWithEmailAndPassword(userResult['email'], password.text);
-          loading=false;
-          notifyListeners();
-          getOPTScreen(context);
+        var singIng=  _fireAuthService.signInWithEmailAndPassword(userResult['email'], password.text);
+        singIng.then((value)async{
+          var user= auth.currentUser;
+          print(auth.currentUser!.uid);
+          if(user!=null){
+            await sharedPreferenceService.setRegisterPreferenceInformation(userResult['id'], phone!).then((val) {
+              loading=false;
+              notifyListeners();
+              getOPTScreen(context);
+            });
+          }else{
+            loading=false;
+            notifyListeners();
+            customShowSnackBar.showDialogError(context: context,titleDialog: 'Erreur Formulaire de Connexion',errorDescription: value);
+
+          }
+        });
+
         }
     }else{
       loading=false;

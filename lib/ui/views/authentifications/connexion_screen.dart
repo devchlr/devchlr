@@ -6,12 +6,10 @@ import 'package:flutter_app/ui/styles/chaliar_color.dart';
 import 'package:flutter_app/ui/styles/text_style.dart';
 import 'package:flutter_app/ui/widgets/button.dart';
 import 'package:flutter_app/ui/widgets/custom_textField_card.dart';
-import 'package:flutter_app/ui/widgets/input_field.dart';
 import 'package:flutter_app/ui/widgets/loading.dart';
 import 'package:flutter_app/ui/widgets/svg_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 
@@ -29,7 +27,7 @@ class _SingInScreenState extends State<SingInScreen> {
       create: (context) => AuthentificationConnexionVM(),
       child: Consumer<AuthentificationConnexionVM>(
         builder: (context, model, child) =>
-           model.loading?LoadingForm(): Scaffold(
+          Scaffold(
               resizeToAvoidBottomInset: true,
               body: Stack(
                 fit: StackFit.expand,
@@ -152,6 +150,10 @@ class _SingInScreenState extends State<SingInScreen> {
                           SizedBox(
                             height:20,
                           ),
+                      model.loading?LoadingForm(
+                        bgColor: Colors.white,
+                      ):Container(),
+                      model.loading?SizedBox(height:20,):Container(),
                           GestureDetector(
                             onTap: () {},
                             child: Container(

@@ -23,7 +23,6 @@ class UserRegisterScreen extends StatelessWidget {
       create: (context) => RegisterScreenVM(),
       child: Consumer<RegisterScreenVM>(
         builder: (context, model, child) =>
-        model.loading?LoadingForm():
             Scaffold(
               resizeToAvoidBottomInset: true,
               body: Stack(
@@ -131,7 +130,7 @@ class UserRegisterScreen extends StatelessWidget {
                               },
                               suffixIcon:GestureDetector(
                                 onTap: (){
-                                  model.updatePasswordIcon(model.password_obscure);
+                                  model.updatePasswordIcon();
                                 },
                                 child:  model.password_obscure?Icon(Icons.visibility_off_outlined,color: ChaliarColors.whiteGreyColor):Icon(Icons.remove_red_eye_outlined,color: ChaliarColors.whiteGreyColor,),
                               ),
@@ -314,6 +313,8 @@ class UserRegisterScreen extends StatelessWidget {
                           SizedBox(
                             height: 31,
                           ),
+                          model.loading?LoadingForm():Container(),
+                          model.loading?SizedBox(height: 31,):Container(),
                           Center(
                             child: ButtonChaliar(
                                 onTap: () async{

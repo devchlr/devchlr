@@ -6,6 +6,7 @@ import 'package:flutter_app/ui/styles/text_style.dart';
 import 'package:flutter_app/ui/widgets/appBar.dart';
 import 'package:flutter_app/ui/widgets/button.dart';
 import 'package:flutter_app/ui/widgets/custom_header.dart';
+import 'package:flutter_app/ui/widgets/payement_method_radio.dart';
 import 'package:flutter_app/ui/widgets/svg_button.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_credit_card/credit_card_widget.dart';
@@ -19,6 +20,7 @@ class PaymentMethodScreen extends StatefulWidget {
 }
 
 class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
+  String group='1';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +64,8 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                     left: MediaQuery.of(context).size.width*0.1,
                     right: MediaQuery.of(context).size.width*0.1
                 ),
-                child: Container(
+                child:
+                Container(
                   child: CarouselSlider(
                     options: CarouselOptions(
                       autoPlay: true,
@@ -123,79 +126,23 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
               ),
                 child: Column(
                   children: [
-                    ListTile(
-                      title: Card(
-                        child: Container(
-                          padding: EdgeInsets.only(
-                            top: 20,
-                            left: 10
-                          ),
-                          height: 50,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children:[SvgIconButton(
-                              iconSize: 15,
-                              iconAsset: SvgIcons.white_visa,
-                            ),SizedBox(width: 10,),
-                              Text('…',style: AppTextStyle.appBarHeader(
-                                color: Color(0xff34B3E8),
-                                size: 10.8
-                              ),),
-                              SizedBox(width: 5,),
-                              Text('9946',style: AppTextStyle.appBarHeader(
-                                  color: Color(0xff34B3E8),
-                                  size: 10.8
-                              ),)
-                            ] ,
-                          ),
-                        ),
-                      ),
-                      trailing: CircleAvatar(
-                        radius: 15,
-                        backgroundImage: AssetImage('assets/images/add_photo_profile.png'),
-                        backgroundColor: Colors.transparent,
-                        child: CircleAvatar(
-                          radius: 5,
-                          backgroundColor: Color(0xff042C5C),
-                        ),
-                      ),
+                    CustomRadioCardCheckBox(
+                      value: '1',
+                      group: group,
+                      onTap: (){
+                        setState(() {
+                          group='1';
+                        });
+                      },
                     ),
-                    ListTile(
-                      title: Card(
-                        child: Container(
-                          padding: EdgeInsets.only(
-                              top: 20,
-                              left: 10
-                          ),
-                          height: 50,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children:[SvgIconButton(
-                              iconSize: 15,
-                              iconAsset: SvgIcons.white_visa,
-                            ),SizedBox(width: 10,),
-                              Text('…',style: AppTextStyle.appBarHeader(
-                                  color: Color(0xff34B3E8),
-                                  size: 10.8
-                              ),),
-                              SizedBox(width: 5,),
-                              Text('9946',style: AppTextStyle.appBarHeader(
-                                  color: Color(0xff34B3E8),
-                                  size: 10.8
-                              ),)
-                            ] ,
-                          ),
-                        ),
-                      ),
-                      trailing: CircleAvatar(
-                        radius: 15,
-                        backgroundImage: AssetImage('assets/images/add_photo_profile.png'),
-                        backgroundColor: Colors.transparent,
-                        // child: CircleAvatar(
-                        //   radius: 10,
-                        //   backgroundColor: Color(0xff042C5C),
-                        // ),
-                      ),
+                    CustomRadioCardCheckBox(
+                      value: '2',
+                      group: group,
+                      onTap: (){
+                        setState(() {
+                          group='2';
+                        });
+                      },
                     ),
                   ],
                 ),

@@ -1,9 +1,9 @@
 
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:flutter_app/models/message.dart';
+import 'package:uuid/uuid.dart';
 class DataBaseApi{
-
+  var uuid = Uuid();
   FirebaseFirestore _db=FirebaseFirestore.instance;
   final String? path;
   CollectionReference? ref;
@@ -28,10 +28,30 @@ class DataBaseApi{
     return ref!.snapshots();
   }
 
-  //get document by id
-  Future<DocumentSnapshot> getDocumentById(String id) {
-    return ref!.doc(id).get();
+  //stream data collection
+  Stream<DocumentSnapshot> streamDataCollectionById(String id){
+    return ref!.doc(id).snapshots();
   }
+
+  addDocumentField(String idDocument,Message message){
+    var id = uuid.v1();
+    ref!.doc(idDocument).set({
+      id.toString():message.toJson()
+    },SetOptions(merge: true)).then((value) {
+      print('merge Sucessfull');
+    }
+    );
+  }
+
+
+  //get document by id
+    Future<DocumentSnapshot> getDocumentById(String id){
+    return  ref!.doc(id).get();
+  }
+
+  // getUserFuture(String uid){
+  //   return  ref!.doc(uid).get();
+  // }
 
   Future getDocumentByFieldValue(String field,String value) async{
     var doc = await ref!.where(field,isEqualTo: value).limit(1).get();
@@ -52,8 +72,11 @@ class DataBaseApi{
     return ref!.add(data);
   }
 
+     addDocumentOrderId(String id)async {
+      await ref!.doc(id).set({'order_id':id},SetOptions(merge: true));
+  }
   //update data
-  Future<void> updateDocument(Map data , String id) {
-    return ref!.doc(id).set(data) ;
+  Future<void> setDocument(String id) {
+    return ref!.doc(id).set({});
   }
 }

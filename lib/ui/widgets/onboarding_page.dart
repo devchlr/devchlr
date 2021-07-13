@@ -38,7 +38,7 @@ class OnboardingPageWidget extends StatelessWidget {
             ),
           ),
           Container(
-            height: 250,
+            height: 500,
             decoration: BoxDecoration(
               color: ChaliarColors.whiteColor,
               borderRadius: BorderRadius.only(

@@ -9,30 +9,37 @@ import 'package:flutter_app/services/preferences/shared_preference_service.dart'
 import 'package:flutter_app/ui/views/authentifications/pre_contionnal_screen.dart';
 import 'package:flutter_app/ui/widgets/custom_showSnackBar.dart';
 class AuthentificationVM extends BaseModel{
+
   FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   FirestoreService _storeService = FirestoreService();
   UserChaliar? currentUser;
   String? phone;
   String? pin;
   String? _verificationId;
-  bool? showLoading=false;
+  bool loading=false;
   bool? isGetOpt;
   String? uid;
   BuildContext? context;
   CustomShowSnackBar customShowSnackBar=CustomShowSnackBar();
   SharedPreferenceService sharedPreferenceService=SharedPreferenceService();
+
+
   void signInWithPhoneAuthCredential(
       PhoneAuthCredential phoneAuthCredential,BuildContext context) async {
-    // customShowSnackBar.initUserRequestAnimation(context);
+    loading=true;
     notifyListeners();
     try {
-      final authCredential =
-      await _firebaseAuth.signInWithCredential(phoneAuthCredential);
-      if(authCredential.user != null){
-        customShowSnackBar.initUserRequestAnimationSucess(context, 'Compte créer avec sucess');
-        goToNextSCreen(context,uid!);
-      }
+      await _firebaseAuth.signInWithCredential(phoneAuthCredential).then((authCredential){
+        if(authCredential.user != null){
+          loading=false;
+          notifyListeners();
+          customShowSnackBar.initUserRequestAnimationSucess(context, 'Compte créer avec sucess');
+          goToNextSCreen(context,uid!);
+        }
+      });
     } on FirebaseAuthException catch (e) {
+      loading=false;
+      notifyListeners();
       customShowSnackBar.initUserRequestAnimationError(context, e.message!);
       notifyListeners();
       print(e.message);
@@ -48,15 +55,18 @@ class AuthentificationVM extends BaseModel{
 
   //verifier le code pin
   sendSmsOpt(String phoneNumber,BuildContext context)async{
-    // customShowSnackBar.initUserRequestAnimation(context);
+    loading=true;
+    notifyListeners();
     phone=phoneNumber;
-    await _firebaseAuth.verifyPhoneNumber(
+    var verificationAuth= _firebaseAuth.verifyPhoneNumber(
       phoneNumber: phoneNumber,
       timeout: const Duration(seconds: 60),
       verificationCompleted: (phoneAuthCredential) async {
         signInWithPhoneAuthCredential(phoneAuthCredential,context);
       },
       verificationFailed: (verificationFailed) async {
+        loading=false;
+        notifyListeners();
         customShowSnackBar.initUserRequestAnimationError(context, verificationFailed.message!);
         notifyListeners();
         print(verificationFailed.message);
@@ -66,6 +76,9 @@ class AuthentificationVM extends BaseModel{
       },
       codeAutoRetrievalTimeout: (verificationId) async {},
     );
+    verificationAuth.then((value){
+      print('oki');
+    });
   }
 
   void confirmOPT(BuildContext context) async {

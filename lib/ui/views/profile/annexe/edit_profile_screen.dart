@@ -1,17 +1,21 @@
+
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/model_views/profile/annexe/edit_ProfileVM.dart';
+import 'package:flutter_app/models/user.dart';
 import 'package:flutter_app/ui/styles/chaliar_color.dart';
 import 'package:flutter_app/ui/styles/chaliar_font.dart';
 import 'package:flutter_app/ui/styles/text_style.dart';
-import 'package:flutter_app/ui/widgets/appBar.dart';
 import 'package:flutter_app/ui/widgets/button.dart';
 import 'package:flutter_app/ui/widgets/custom_header.dart';
 import 'package:flutter_app/ui/widgets/input_field.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:provider/provider.dart';
+
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({Key? key}) : super(key: key);
-
   @override
   _EditProfileScreenState createState() => _EditProfileScreenState();
 }
@@ -19,7 +23,52 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   Widget build(BuildContext context) {
+    return ChangeNotifierProvider<EditProfileScreenMV>(
+        create: (context) => EditProfileScreenMV(),
+        child: Consumer<EditProfileScreenMV>(
+            builder: (context, model, child) =>
+    FutureBuilder(
+    future:model.getUserD(),
+    builder: (context,AsyncSnapshot<DocumentSnapshot>snapshot){
+    if(snapshot.connectionState!=ConnectionState.done){
     return Scaffold(
+      body: Container(
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      ),
+    );
+    }
+    Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
+    var user=UserChaliar.fromData(data);
+    model.initController(
+      email:user.email,
+      facturation_adress:user.facturationAdresse,
+      code_postal:user.codePostal,
+      phone:user.phone,
+    );
+
+    Widget builCircleAvatar(context){
+      return user.profile_url!=null?  CircleAvatar(
+        backgroundImage:NetworkImage(data['profile_url'].toString()),
+        backgroundColor: Colors.transparent,
+        radius: 56,
+      ):CircleAvatar(
+      backgroundImage:AssetImage('assets/images/add_photo_profile.png'),
+      backgroundColor: Colors.transparent,
+      radius: 56,
+      child:Center(
+      child: CircleAvatar(
+      backgroundColor: Color(0xffA9AEBE),
+      radius: 30,
+      child: Center(
+      child: Image.asset('assets/icons/camera.png',scale: 3.0,),
+      ),
+      ),
+      ),
+      );
+    }
+     return Scaffold(
       backgroundColor: Color(0xffF3F3F3),
       body: Stack(
         children: [
@@ -58,39 +107,35 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    CircleAvatar(
-                      backgroundImage: AssetImage('assets/images/add_photo_profile.png'),
-                      backgroundColor: Colors.transparent,
-                      radius: 56,
-                      child: Center(
-                        child: CircleAvatar(
-                          backgroundColor: Color(0xffA9AEBE),
-                          radius: 30,
-                          child: Center(
-                            child: Image.asset('assets/icons/camera.png',scale: 3.0,),
-                          ),
-                        ),
-                      ),
+                    GestureDetector(
+                      onTap: model.getImage,
+                      child:model.image!=null? CircleAvatar(
+                        radius: 56,
+                        backgroundImage: FileImage(model.file!),
+                      ): builCircleAvatar(context),
                     ),
                     SizedBox(
-                      width: 30.0,
+                      width: 10.0,
                     ),
                     Center(
-                      child: Text(
-                        'Ajouter une photo',
-                        style: AppTextStyle.appBarHeader(
-                          color: Color(0xff042C5C),
-                          size: 17,
+                      child:GestureDetector(
+                        onTap: model.getImage,
+                        child: Text(
+                          'Ajouter une photo',
+                          style: AppTextStyle.appBarHeader(
+                            color: Color(0xff042C5C),
+                            size: 17,
+                          ),
                         ),
-                      ),
+                      )
                     )
                   ],
                 ),
               ),SizedBox(height: 32,),
               InputField(
-                // controller: model.departure_address,
+                 controller: model.emailC,
                 fieldSize: MediaQuery.of(context).size.height * 0.025,
-                label: "Email",
+                label: '${user.email}',
                 isBorder: true,
                 textLabelColor: ChaliarColors.secondaryColors,
                 maxlenght: 250,
@@ -100,9 +145,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ),
               SizedBox(height: 23,),
               InputField(
-                // controller: model.departure_address,
+                controller: model.facturationAdress,
                 fieldSize: MediaQuery.of(context).size.height * 0.025,
-                label: "Adresse de facturation",
+                label: '${user.facturationAdresse==null?'Entrer une adresse de facturation':user.facturationAdresse}',
                 isBorder: true,
                 textLabelColor: ChaliarColors.secondaryColors,
                 maxlenght: 250,
@@ -112,9 +157,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ),
               SizedBox(height: 23,),
               InputField(
-                // controller: model.departure_address,
+                 controller: model.codePostal,
                 fieldSize: MediaQuery.of(context).size.height * 0.025,
-                label: "Code postal",
+                label: '${user.codePostal==null?'entrer un code Postal':user.codePostal}',
                 isBorder: true,
                 textLabelColor: ChaliarColors.secondaryColors,
                 maxlenght: 250,
@@ -124,10 +169,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ),
               SizedBox(height: 23,),
               InputField(
-                // controller: model.departure_address,
+                controller: model.phoneNumber,
                 fieldSize: MediaQuery.of(context).size.height * 0.025,
-                label: "Téléphone",
+                label: '${user.phone}',
                 isBorder: true,
+                fillColor: ChaliarColors.whiteGreyColor,
                 textLabelColor: ChaliarColors.secondaryColors,
                 maxlenght: 250,
                 backgroundColor: ChaliarColors.whiteGreyColor,
@@ -138,30 +184,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               Center(
                 child: ButtonChaliar(
                     onTap: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              backgroundColor: Colors.transparent,
-                              elevation: 50,
-                            content:  Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text('waiting...',style: AppTextStyle.appBarHeader(
-                                  color: ChaliarColors.whiteColor,
-                                ),),
-                                SpinKitCubeGrid(
-                                  color: Colors.blueAccent,
-                                  size: 50.0,
-                                )
-                              ],
-                            ),
-                            ),
-                            );
+                      model.updateUser(user.id!);
                       // model.formEditingController(context);
                       // Navigator.pushNamed(context, '/commande_arrivee_form');
                     },
                     buttonText: 'Valider',
-                    height: MediaQuery.of(context).size.height * 0.07,
+                    height: 48,
                     mediaQueryWidth: 0.45,
                     borderRaduis: 50,
                     backgroundcolor: ChaliarColors.primaryColors,
@@ -171,6 +199,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         fontWeight: FontWeight.w400,
                         fontFamily: AppFontFamilly.montserrat,
                         color: ChaliarColors.whiteColor)),
+              ),
+              SizedBox(
+                height: 30,
               )
             ],
           ),),
@@ -189,7 +220,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             ),
             child: GestureDetector(
               onTap: (){
-                Navigator.pop(context);
+                Navigator.pushNamed(context,'/home_profile');
               },
               child: Icon(Icons.arrow_back_ios,color: Colors.white,),
             ),
@@ -197,5 +228,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         ],
       ),
     );
+    })
+        ),);
   }
 }

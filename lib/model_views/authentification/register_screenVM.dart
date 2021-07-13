@@ -1,26 +1,26 @@
 import 'dart:async';
-
 import 'package:flutter_app/model_views/base_model.dart';
 import 'package:flutter_app/constants/type_user.dart';
 import 'package:flutter_app/models/user.dart';
-// import 'package:flutter_app/ui/views/auth/phone_opt/phone_number_validate.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_app/constants/iconList.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_app/services/auth_service/register_service.dart';
 import 'package:flutter_app/services/fire_auth_service.dart';
 import 'package:flutter_app/services/fire_store_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/services/preferences/shared_preference_service.dart';
+import 'package:flutter_app/services/user_register/google_register.dart';
 import 'package:flutter_app/ui/views/authentifications/authentification_screen.dart';
 import 'package:flutter_app/ui/widgets/custom_showSnackBar.dart';
-import 'package:uuid/uuid.dart';
 
 class RegisterScreenVM extends BaseModel{
    final FirebaseAuth auth = FirebaseAuth.instance;
   FirestoreService _firestoreService = FirestoreService();
   FireAuthService _fireAuthService=FireAuthService();
  SharedPreferenceService sharedPreferenceService=SharedPreferenceService();
-
+ GoogleRegisterService googleRegisterService=GoogleRegisterService();
+RegisterService registerService=RegisterService();
   UserChaliar? _currentUser;
   bool obscureText = true;
   String? phone;
@@ -56,172 +56,293 @@ class RegisterScreenVM extends BaseModel{
 
    bool loading=false;
 
-  void updatePasswordIcon(bool val){
-    password_obscure=password_obscure?false:true;
+  void updatePasswordIcon(){
+    password_obscure=registerService.updatePasswordIcon(password_obscure);
     notifyListeners();
   }
   void updateConfirmPasswordIcon(bool val){
-    confirm_password_obscure=confirm_password_obscure?false:true;
+    confirm_password_obscure=registerService.updatePasswordIcon(confirm_password_obscure);
     notifyListeners();
   }
 
   void validateSurname(){
-    if (surname.text == null || surname.text.isEmpty||surname.text.length<2) {
-       validate_surname=true;
-    }else{
-      validate_surname=false;
-    }
+    validate_surname=registerService.validateTextField(surname);
     notifyListeners();
   }
    void validateName(){
-     if (name.text == null || name.text.isEmpty||name.text.length<2) {
-       validate_name=true;
-     }else{
-       validate_name=false;
-     }
-     notifyListeners();
+    validate_name=registerService.validateTextField(name);
+    notifyListeners();
    }
    void validateEmail(){
-     validate_email = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email.text)?false:true;
+     validate_email = registerService.validateEmail(email);
      notifyListeners();
    }
 
    void validatePassord(){
-     validate_password=RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$').hasMatch(password.text)?false:true;
+     validate_password=registerService.validatePassord(password);
      notifyListeners();
    }
 
    void validatePasswordBis(){
-     validate_passwordBis=(password.text==password_confirm.text)?false:true;
+     validate_passwordBis=registerService.validatePasswordBis(password, password_confirm);
      notifyListeners();
    }
 
    void validatePhoneNumber(){
-     if (phone == null || phone!.isEmpty||phone!.length<9) {
-       validate_phoneNumber=true;
-     }else{
-       validate_phoneNumber=false;
-     }
-     notifyListeners();
+    validate_phoneNumber=registerService.validatePhoneNumber(phone!);
+    notifyListeners();
    }
    void validateAdresseFacturation(){
-     if (facturationAdress.text == null || facturationAdress.text.isEmpty||facturationAdress.text.length<2) {
-       validate_facturationAdress=true;
-     }else{
-       validate_facturationAdress=false;
-     }
-     notifyListeners();
+    validate_facturationAdress=registerService.validateTextField(facturationAdress);
+    notifyListeners();
    }
    void validateCodePostal(){
-     if (codePostal.text == null || codePostal.text.isEmpty||codePostal.text.length<2) {
-       validate_codePostal=true;
-     }else{
-       validate_codePostal=false;
-     }
-     notifyListeners();
+    validate_codePostal=registerService.validateTextField(codePostal);
+    notifyListeners();
    }
 
    void validateCity(){
-     if (city.text == null || city.text.isEmpty||city.text.length<2) {
-       validate_city=true;
-     }else{
-       validate_city=false;
-     }
-     notifyListeners();
+    validate_city=registerService.validateTextField(city);
+    notifyListeners();
    }
 
    void validateStreet(){
-     if (street.text == null || street.text.isEmpty||street.text.length<2) {
-       validate_street=true;
-     }else{
-       validate_street=false;
-     }
-     notifyListeners();
+    validate_street=registerService.validateTextField(street);
+    notifyListeners();
    }
 
    void validateSociete(){
-     if (societe.text == null || societe.text.isEmpty||societe.text.length<2) {
-       validate_societe=true;
-     }else{
-       validate_societe=false;
-     }
-     notifyListeners();
+   validate_societe=registerService.validateTextField(societe);
+   notifyListeners();
    }
 
 
-  Future<String> validatorPartInformation() async {
-    if (!validate_email) {
-      var user = await _firestoreService.getUserByFieldValue('email',email.text);
+  bool validatorPartInformation(BuildContext context){
+    var verifyIfUserExist=registerService.checkIfUserExist(email);
+    verifyIfUserExist.then((value){
+      if(value==true){
+        customShowSnackBar.showDialogError(context: context,titleDialog: 'Erreur Formulaire',errorDescription: 'L\'email Existent',errorSolution: 'L\'email renseigne appartient a ete utilise pour creer un compte utilisateur renseinger un email valide ou creer un nouveau coumpte');
+       return false;
+      }
+    });
+    validateSurname();
+    if(validate_surname){
+    customShowSnackBar.showDialogError(context: context,
+    titleDialog: 'Erreur Formulaire',
+    errorDescription: 'Le champs prenom est mal renseigner',
+    errorSolution: 'le champ prenom admet une chaine de carracteres d\'un minimum de 02 carractes'
+    );
+    return false;
+    }
+    validateName();
+    if(validate_name){
+    customShowSnackBar.showDialogError(context: context,
+    titleDialog: 'Erreur Formulaire',
+    errorDescription: 'Le champs Nom est mal renseigner',
+    errorSolution: 'le champ Nom admet une chaine de carracteres d\'un minimum de 02 carractes'
+    );
+    return false;
+    }
+    validateEmail();
+    if(validate_email){
+    customShowSnackBar.showDialogError(context: context,
+    titleDialog: 'Erreur Formulaire',
+    errorDescription: 'Le champs email est mal renseigner',
+    errorSolution: 'le champ email admet une chaine de carracteres au format (example@domain.com))'
+    );
+    return false;
+    }
+    validatePassord();
+    if(validate_password){
+    customShowSnackBar.showDialogError(context: context,
+    titleDialog: 'Erreur Formulaire',
+    errorDescription: 'Le champs Mot de passe est mal renseigner',
+    errorSolution: 'le champ Mot de passe admet une chaine de carracteres a un minimun de 8 carrecter chiffres et lettres compris et au minimun un carractere special'
+    );
+    return false;
+    }
+    validatePasswordBis();
+    if(validate_passwordBis){
+    customShowSnackBar.showDialogError(context: context,
+    titleDialog: 'Erreur Formulaire',
+    errorDescription: 'Les deux  Mots de passe doivent etre identique',
+    );
+    return false;
+    }
+    validatePhoneNumber();
+    if(validate_phoneNumber){
+    customShowSnackBar.showDialogError(context: context,
+    titleDialog: 'Erreur Formulaire',
+    errorDescription: 'Le champs telephone est mal renseigner',
+    errorSolution: 'le champ telephone admet une chaine de carracteres d\'un minimum de 09 carractes et n\'est constituer que des symbole [0-9]'
+    );
+    return false;
+    }
+    validateCodePostal();
+    if(validate_codePostal){
+    customShowSnackBar.showDialogError(context: context,
+    titleDialog: 'Erreur Formulaire',
+    errorDescription: 'Le champs Code postal est mal renseigner',
+    errorSolution: 'le champ Code postal admet une chaine de carracteres d\'un minimum de 02 carractes'
+    );
+    return false;
+    }
+    validateCity();
+    if(validate_city){
+    customShowSnackBar.showDialogError(context: context,
+    titleDialog: 'Erreur Formulaire',
+    errorDescription: 'Le champs Ville est mal renseigner',
+    errorSolution: 'le champ Ville admet une chaine de carracteres d\'un minimum de 02 carractes'
+    );
+    return false;
+    }
+    return true;
 
-      if (user == null) {
-        print('ICI');
-        if (!validate_surname&&!validate_name&&!validate_codePostal&&!validate_city&&!validate_facturationAdress) {
-          return '200';
-        }else{
-          return '404';
-        }
-      }else{
-        return '404';
-      }
-    } else {
-      return '404';
-    }
   }
-  Future<String> validatorProInformation() async {
-    if (validate_email) {
-       var user = await _firestoreService.getUserByFieldValue('email',email.text);
-      if (user == null) {
-        if (!validate_societe&&!validate_street&&!validate_surname&&!validate_name&&!validate_codePostal&&!validate_city&&!validate_facturationAdress) {
-          return '200';
-        }else{
-          return '400';
-        }
-      }else {
-        return '404';
+  bool validatorProInformation(BuildContext context){
+    var verifyIfUserExist=registerService.checkIfUserExist(email);
+    verifyIfUserExist.then((value){
+      if(value==true){
+        customShowSnackBar.showDialogError(context: context,titleDialog: 'Erreur Formulaire',errorDescription: 'L\'email Existent',errorSolution: 'L\'email renseigne appartient a ete utilise pour creer un compte utilisateur renseinger un email valide ou creer un nouveau coumpte');
+        return false;
       }
-    } else {
-      return '404';
+    });
+    validateSurname();
+    if(validate_surname){
+    customShowSnackBar.showDialogError(context: context,
+    titleDialog: 'Erreur Formulaire',
+    errorDescription: 'Le champs prenom est mal renseigner',
+    errorSolution: 'le champ prenom admet une chaine de carracteres d\'un minimum de 02 carractes'
+    );
+    return false;
     }
+    validateName();
+    if(validate_name){
+    customShowSnackBar.showDialogError(context: context,
+    titleDialog: 'Erreur Formulaire',
+    errorDescription: 'Le champs Nom est mal renseigner',
+    errorSolution: 'le champ Nom admet une chaine de carracteres d\'un minimum de 02 carractes'
+    );
+    return false;
+    }
+    validateEmail();
+    if(validate_email){
+    customShowSnackBar.showDialogError(context: context,
+    titleDialog: 'Erreur Formulaire',
+    errorDescription: 'Le champs email est mal renseigner',
+    errorSolution: 'le champ email admet une chaine de carracteres au format (example@domain.com))'
+    );
+    return false;
+    }
+    validatePassord();
+    if(validate_password){
+    customShowSnackBar.showDialogError(context: context,
+    titleDialog: 'Erreur Formulaire',
+    errorDescription: 'Le champs Mot de passe est mal renseigner',
+    errorSolution: 'le champ Mot de passe admet une chaine de carracteres a un minimun de 8 carrecter chiffres et lettres compris et au minimun un carractere special'
+    );
+    return false;
+    }
+    validatePasswordBis();
+    if(validate_passwordBis){
+    customShowSnackBar.showDialogError(context: context,
+    titleDialog: 'Erreur Formulaire',
+    errorDescription: 'Les deux  Mots de passe doivent etre identique',
+    );
+    return false;
+    }
+    validatePhoneNumber();
+    if(validate_phoneNumber){
+    customShowSnackBar.showDialogError(context: context,
+    titleDialog: 'Erreur Formulaire',
+    errorDescription: 'Le champs telephone est mal renseigner',
+    errorSolution: 'le champ telephone admet une chaine de carracteres d\'un minimum de 09 carractes et n\'est constituer que des symbole [0-9]'
+    );
+    return false;
+    }
+    validateCodePostal();
+    if(validate_codePostal){
+    customShowSnackBar.showDialogError(context: context,
+    titleDialog: 'Erreur Formulaire',
+    errorDescription: 'Le champs Code postal est mal renseigner',
+    errorSolution: 'le champ Code postal admet une chaine de carracteres d\'un minimum de 02 carractes'
+    );
+    return false;
+    }
+    validateSociete();
+    if(validate_societe){
+    customShowSnackBar.showDialogError(context: context,
+    titleDialog: 'Erreur Formulaire',
+    errorDescription: 'Le champs Societe est mal renseigner',
+    errorSolution: 'le champ Societe admet une chaine de carracteres d\'un minimum de 02 carractes'
+    );
+    return false;
+    }
+
+    validateStreet();
+    if(validate_street){
+    customShowSnackBar.showDialogError(context: context,
+    titleDialog: 'Erreur Formulaire',
+    errorDescription: 'Le champs Street est mal renseigner',
+    errorSolution: 'le champ Street admet une chaine de carracteres d\'un minimum de 02 carractes'
+    );
+    return false;
+    }
+
+    validateAdresseFacturation();
+    if(validate_facturationAdress){
+    customShowSnackBar.showDialogError(context: context,
+    titleDialog: 'Erreur Formulaire',
+    errorDescription: 'Le champs Adresse de facturation est mal renseigner',
+    errorSolution: 'le champ Adresse de facturation admet une chaine de carracteres d\'un minimum de 02 carractes'
+    );
+    return false;
+    }
+    validateCity();
+    if(validate_city){
+    customShowSnackBar.showDialogError(context: context,
+    titleDialog: 'Erreur Formulaire',
+    errorDescription: 'Le champs Ville est mal renseigner',
+    errorSolution: 'le champ Ville admet une chaine de carracteres d\'un minimum de 02 carractes'
+    );
+    return false;
+    }
+    return true;
+
   }
   void createUser(BuildContext context, String typeUser) async {
-      loading=true;
-      notifyListeners();
+
     if (typeUser == TypeUser.particulier) {
-      if (await validatorPartInformation() == '404') {
-        loading=false;
-        notifyListeners();
-        customShowSnackBar.initUserRequestAnimationError(context, 'Tous les champs doivent être correctement renseignés');
-      } else if (await validatorPartInformation() == '200') {
-       await _fireAuthService.registerByEmailandPassword(email.text, password.text);
-       var userCredential =await auth.currentUser;
-        _currentUser =  UserChaliar(
-          id: userCredential?.uid,
-          email: email.text,
-          userRole: TypeUser.particulier,
-          name: name.text,
-          surname: surname.text,
-          phone: phone,
-          facturationAdresse: facturationAdress.text,
-          codePostal: codePostal.text,
-          city: city.text,
-          password: password.text
+
+      if (validatorPartInformation(context)==true) {
+        print('oki ici');
+        UserChaliar user = new UserChaliar(
+            id: null,
+            email: email.text,
+            userRole: TypeUser.particulier,
+            name: name.text,
+            surname: surname.text,
+            phone: phone,
+            facturationAdresse: facturationAdress.text,
+            codePostal: codePostal.text,
+            city: city.text,
+            password: password.text
         );
-        await _firestoreService.createUser(_currentUser!);
-       loading=false;
-       notifyListeners();
-       getOPTScreen(context,phone,_currentUser?.id);
+        var checkifRegister= registerService.registerUser(user);
+        checkifRegister.then((result){
+          if(result!=null){
+            loading=false;
+            notifyListeners();
+            getOPTScreen(context,phone,result);
+          }else{
+            customShowSnackBar.showDialogError(context:context,titleDialog:'Erreur formulaire',errorDescription: 'Erreur lors de l\'enregistrement recommencer svp');
+          }
+        });
       }
     } else if (typeUser == TypeUser.professionnel) {
-      if (await validatorPartInformation() == '404') {
-        loading=false;
-        notifyListeners();
-        customShowSnackBar.initUserRequestAnimationError(context, 'Tous les champs doivent être correctement renseignés');
-      } else if (await validatorPartInformation() == '200') {
-        await _fireAuthService.registerByEmailandPassword(email.text, password.text);
-        var userCredential =await auth.currentUser;
-        print('uid:${userCredential?.uid}');
-        _currentUser =  UserChaliar(
-            id: userCredential?.uid,
+      if (validatorPartInformation(context) ==true) {
+        UserChaliar user  =  UserChaliar(
+            id: null,
             email: email.text,
             userRole: TypeUser.professionnel,
             name: name.text,
@@ -234,10 +355,16 @@ class RegisterScreenVM extends BaseModel{
             societe: societe.text,
             password: password.text
         );
-        await _firestoreService.createUser(_currentUser!);
-        loading=false;
-        notifyListeners();
-        getOPTScreen(context,phone,_currentUser?.id);
+        var checkifRegister= registerService.registerUser(user);
+        checkifRegister.then((result){
+          if(result!=null){
+            loading=false;
+            notifyListeners();
+            getOPTScreen(context,phone,result);
+          }else{
+            customShowSnackBar.showDialogError(context:context,titleDialog:'Erreur formulaire',errorDescription: 'Erreur lors de l\'enregistrement recommencer svp');
+          }
+        });
       }
     }
   }
@@ -257,9 +384,25 @@ class RegisterScreenVM extends BaseModel{
     });
   }
 
-  void googleRegister(BuildContext context){
-    customShowSnackBar.initUserRequestAnimation(context);
-    customShowSnackBar.initUserRequestAnimationError(context, 'connexion google server lost');
+  void googleRegister(BuildContext context)async{
+    await googleRegisterService.signInWithGoogle().then((result)async{
+      _currentUser =  UserChaliar(
+          id: result.user!.uid,
+          email: result.user!.email,
+          userRole: TypeUser.particulier,
+          name: result.user!.displayName,
+          surname: result.user!.displayName,
+          phone: result.user!.phoneNumber,
+      );
+      await _firestoreService.createUser(_currentUser!);
+      loading=false;
+      notifyListeners();
+      getOPTScreen(context,_currentUser?.phone,_currentUser?.id);
+    }).onError((error, stackTrace){
+      customShowSnackBar.initUserRequestAnimationError(context, '${error.toString()}');
+    }).catchError((onError){
+      customShowSnackBar.initUserRequestAnimationError(context, '${onError.toString()}');
+    });
   }
 
   void facebookRegister(BuildContext context){

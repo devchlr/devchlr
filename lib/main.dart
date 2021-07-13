@@ -9,6 +9,11 @@
 // import 'package:client_chaliar/ui/views/commande/taille_colli_screen.dart';
 // import 'package:client_chaliar/ui/views/commande1.dart';
 // import 'package:client_chaliar/ui/views/faq/faq_screen.dart';
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:camera/camera.dart';
@@ -52,8 +57,27 @@ Future<void> main() async{
   final firstCamera = cameras;
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  if (USE_EMULATOR) {
+    await _connectToFirebaseEmulator();
+  }
 
   runApp(MyApp(camera: firstCamera,));
+}
+
+
+const bool USE_EMULATOR = true;
+
+Future _connectToFirebaseEmulator() async {
+  final localHostString = Platform.isAndroid ? '10.0.2.2' : 'localhost';
+
+  FirebaseFirestore.instance.settings = Settings(
+    host: '$localHostString:8080',
+    sslEnabled: false,
+    persistenceEnabled: false,
+  );
+  await FirebaseAuth.instance.useEmulator('http://$localHostString:9099');
+  // [Storage | localhost:9199]
+  await firebase_storage.FirebaseStorage.instance.useStorageEmulator(localHostString, 9199);
 }
 
 class MyApp extends StatelessWidget {

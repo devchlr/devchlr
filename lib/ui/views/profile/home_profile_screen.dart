@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/constants/iconList.dart';
 import 'package:flutter_app/model_views/profile/home_profileMV.dart';
+import 'package:flutter_app/models/user.dart';
 import 'package:flutter_app/ui/styles/chaliar_color.dart';
 import 'package:flutter_app/ui/styles/chaliar_font.dart';
 import 'package:flutter_app/ui/styles/text_style.dart';
@@ -12,22 +14,16 @@ import 'package:flutter_app/ui/widgets/svg_button.dart';
 import 'package:provider/provider.dart';
 
 class HomeProfileScreen extends StatefulWidget {
-
-  HomeProfileScreen({Key? key}) : super(key: key);
+  HomeProfileScreen({Key? key,}) : super(key: key);
   @override
   _HomeProfileScreenState createState() => _HomeProfileScreenState();
 }
 
 class _HomeProfileScreenState extends State<HomeProfileScreen> {
-  HomeProfileMV homeProfileMV=HomeProfileMV();
-
-  void initState() {
+  void initState(){
     super.initState();
-    getU();
   }
-  void getU(){
-     homeProfileMV.getUser();
-  }
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<HomeProfileMV>(
@@ -67,12 +63,44 @@ class _HomeProfileScreenState extends State<HomeProfileScreen> {
                   SizedBox(
                     height: 30,
                   ),
-                  Center(
-                    child: CircleAvatar(
-                      backgroundColor: Colors.transparent,
-                      radius: 80,
-                      backgroundImage: AssetImage('assets/images/profileInage.png'),
-                    ),
+                  FutureBuilder(
+                    future:model.getUserD(),
+                    builder: (context,AsyncSnapshot<DocumentSnapshot>snapshot){
+                      if(snapshot.connectionState!=ConnectionState.done){
+                        return CircularProgressIndicator();
+                      }
+                      if(!snapshot.hasData) return CircularProgressIndicator();
+                      print(snapshot.data);
+                      Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
+                      var user=UserChaliar.fromData(data);
+                      return user.profile_url!=null?  CircleAvatar(
+                        backgroundImage:NetworkImage(user.profile_url.toString()),
+                        backgroundColor: Colors.transparent,
+                        radius: 80,
+                      ):CircleAvatar(
+                        backgroundImage:AssetImage('assets/images/profileInage.png'),
+                        backgroundColor: Colors.transparent,
+                        radius: 80,
+                      );
+                      //   Center(
+                      //   child: CircleAvatar(
+                      //     backgroundColor: Colors.transparent,
+                      //     radius: 80,
+                      //     backgroundImage: AssetImage(),
+                      //   ),
+                      // );
+                      //   Text(
+                      //   '${data['surname']}\n${data['name']}',
+                      //   textAlign: TextAlign.left,
+                      //   style: AppTextStyle.appBarHeader(
+                      //       size: 19,
+                      //       color: Color(0xffffffff),
+                      //       fontWeight: FontWeight.bold,
+                      //       fontFamily: AppFontFamilly.montserrat
+                      //   ),
+                      // );
+
+                    },
                   ),
                   SizedBox(
                     height: 20,
@@ -81,17 +109,31 @@ class _HomeProfileScreenState extends State<HomeProfileScreen> {
                     padding: EdgeInsets.only(
                       right: MediaQuery.of(context).size.width*0.1
                     ),
-                    child: Center(
-                      child: Text(
-                        '${model.currentUser?.surname==null?'Victor ':model.currentUser?.surname}\n${model.currentUser?.name==null?'Williams':model.currentUser?.name}',
-                        textAlign: TextAlign.left,
-                        style: AppTextStyle.appBarHeader(
-                            size: 19,
-                            color: Color(0xffffffff),
-                            fontWeight: FontWeight.bold,
-                            fontFamily: AppFontFamilly.montserrat
-                        ),
+                    child:
+                    Center(
+                      child: FutureBuilder(
+                        future:model.getUserD(),
+                        builder: (context,AsyncSnapshot<DocumentSnapshot>snapshot){
+                          if(snapshot.connectionState!=ConnectionState.done){
+                            return CircularProgressIndicator();
+                          }
+                          if(!snapshot.hasData) return CircularProgressIndicator();
+                          print(snapshot.data);
+                          Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
+                             return Text(
+                               '${data['surname']}\n${data['name']}',
+                               textAlign: TextAlign.left,
+                               style: AppTextStyle.appBarHeader(
+                                   size: 19,
+                                   color: Color(0xffffffff),
+                                   fontWeight: FontWeight.bold,
+                                   fontFamily: AppFontFamilly.montserrat
+                               ),
+                             );
+
+                        },
                       ),
+
                     ),
                   )
                 ],

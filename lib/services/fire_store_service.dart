@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_app/models/user.dart';
+
 class FirestoreService {
   final CollectionReference _usersCollectionReference =
       FirebaseFirestore.instance.collection("users");
@@ -12,15 +13,28 @@ class FirestoreService {
     }
   }
 
-  Future getUser(String uid) async {
-      DocumentSnapshot doc = await _usersCollectionReference.doc(uid).get();
-      if(doc.exists) {
-        print(doc.data());
-       return doc.data();
-      }else{
-        return null;
-      }
+  DocumentSnapshot<UserChaliar>? streamUser(String id) {
+    _usersCollectionReference
+        .doc(id)
+        .get().then((value) => value.data());
   }
+
+  Future getUser(String uid) async {
+      return await _usersCollectionReference.doc(uid).get();
+
+  }
+
+  Future setUser(String id, dynamic user)async{
+    await _usersCollectionReference.doc(id).update(user).then((value){
+      print('update is ok ');
+    });
+  }
+
+
+   getUserFuture(String uid){
+    return  _usersCollectionReference.doc(uid).get();
+  }
+
   Future getUserByFieldValue(String field,String value)async{
     var doc =await _usersCollectionReference
         .where(field,isEqualTo: value)
@@ -35,6 +49,24 @@ class FirestoreService {
         return doc.docs.first.data();
       }
     }
+  }
+
+
+  Future getUserByField(String field,String value)async{
+    var doc =await _usersCollectionReference
+        .where(field,isEqualTo: value)
+        .limit(1)
+        .get();
+    if(doc==null){
+      return doc;
+    }else{
+      if(doc.size==0){
+        return doc;
+      }else{
+        return doc;
+      }
+    }
+
   }
 }
 
