@@ -46,7 +46,6 @@ class AuthentificationConnexionVM extends BaseModel{
         var singIng=  _fireAuthService.signInWithEmailAndPassword(userResult['email'], password.text);
         singIng.then((value)async{
           var user= auth.currentUser;
-          print(auth.currentUser!.uid);
           if(user!=null){
             await sharedPreferenceService.setRegisterPreferenceInformation(userResult['id'], phone!).then((val) {
               loading=false;
@@ -65,7 +64,7 @@ class AuthentificationConnexionVM extends BaseModel{
     }else{
       loading=false;
       notifyListeners();
-      customShowSnackBar.initUserRequestAnimationError(context, 'tous les champs doivent etres renseigne');
+      customShowSnackBar.showDialogError(context: context,titleDialog: 'tous les champs doivent etres renseigne');
     }
   }
 

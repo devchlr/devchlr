@@ -63,8 +63,6 @@ class AddPhotoVM extends BaseModel{
     var order= orderDataBase.addDocument(data.toJson());
     order.then((value) async{
       await orderDataBase.addDocumentOrderId(value.id);
-
-
       var message=messageDataBase.setDocument(value.id);
       message.then((val){
         var pref=sharedPreferenceService.setNewOrder(value.id);
@@ -80,8 +78,43 @@ class AddPhotoVM extends BaseModel{
         });
       });
     });
-
   }
 
+
+  void getPhoto(BuildContext context){
+    isLoading=true;
+    notifyListeners();
+    var order_size=orderPackageInformation!.package_size;
+    var km_price=getPriceByDistance(order_size!);
+    var user = auth.currentUser;
+    Order data=new Order(
+        isValidate: false,
+        order_price: km_price,
+        order_km: getDistance(),
+        order_status: 'loading',
+        user_id: user!.uid,
+        deliveryInformation: orderDeliveryInformation?.toJson(),
+        packageInformation: orderPackageInformation?.toJson(),
+        recipientInformation: orderRecipientInformation?.toJson()
+    );
+    var order= orderDataBase.addDocument(data.toJson());
+    order.then((value) async{
+      await orderDataBase.addDocumentOrderId(value.id);
+      var message=messageDataBase.setDocument(value.id);
+      message.then((val){
+        var pref=sharedPreferenceService.setNewOrder(value.id);
+        pref.then((result){
+          if(result){
+            isLoading=false;
+            notifyListeners();
+            Navigator.push(context,
+                new MaterialPageRoute(
+                    builder: (BuildContext context) =>
+                    new ResumeOrderScreen(order: data,)));
+          }
+        });
+      });
+    });
+  }
 
 }

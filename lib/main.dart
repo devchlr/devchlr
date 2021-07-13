@@ -65,7 +65,7 @@ Future<void> main() async{
 }
 
 
-const bool USE_EMULATOR = false;
+const bool USE_EMULATOR = true;
 
 Future _connectToFirebaseEmulator() async {
   final localHostString = Platform.isAndroid ? '10.0.2.2' : 'localhost';

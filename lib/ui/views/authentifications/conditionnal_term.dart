@@ -60,7 +60,7 @@ class _ConditionGeneraleScreenState extends State<ConditionGeneraleScreen> {
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.05,
                           ),
-                                    FutureBuilder(future:model.getUserD(),
+                                    FutureBuilder(future:model.getUserD(widget.userId!),
               builder: (context,AsyncSnapshot<DocumentSnapshot>snapshot) {
                 if (snapshot.connectionState != ConnectionState.done) {
                   return CircularProgressIndicator();
@@ -130,18 +130,30 @@ class _ConditionGeneraleScreenState extends State<ConditionGeneraleScreen> {
                             height: MediaQuery.of(context).size.height * 0.01,
                           ),
                           Center(
-                            child: ButtonChaliar(
-                              onTap: () => Navigator.pushReplacementNamed(
-                                  context, '/pre_commande'),
-                              buttonText: 'C\'est parti',
-                              height: MediaQuery.of(context).size.height * 0.06,
-                              mediaQueryWidth: 0.25,
-                              borderRaduis: 40,
-                              backgroundcolor: ChaliarColors.primaryColors,
-                              bordercolor: ChaliarColors.primaryColors,
-                              textStyle: AppTextStyle.button(
-                                  color: ChaliarColors.whiteColor),
-                            ),
+                            child: FutureBuilder(future:model.getUserD(widget.userId!),
+                                builder: (context,AsyncSnapshot<DocumentSnapshot>snapshot) {
+                                  if (snapshot.connectionState != ConnectionState.done) {
+                                    return CircularProgressIndicator();
+                                  }
+                                  if (snapshot.data!=null){
+                                    Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
+                                    var user=UserChaliar.fromData(data);
+                                    print(snapshot.data!.data());
+                                    return  ButtonChaliar(
+                                      onTap: () {
+                                        model.getHomePage(context, user.email!, user.password!);
+                                      },
+                                      buttonText: 'C\'est parti',
+                                      height: MediaQuery.of(context).size.height * 0.06,
+                                      mediaQueryWidth: 0.25,
+                                      borderRaduis: 40,
+                                      backgroundcolor: ChaliarColors.primaryColors,
+                                      bordercolor: ChaliarColors.primaryColors,
+                                      textStyle: AppTextStyle.button(
+                                          color: ChaliarColors.whiteColor),
+                                    );
+                                  } return CircularProgressIndicator();
+                                }),
                           ),
                           SizedBox(
                             height:91,

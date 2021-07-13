@@ -20,7 +20,6 @@ class TakePictureScreen extends StatefulWidget {
     Key? key,
     required this.camera,
   }) : super(key: key);
-
   @override
   TakePictureScreenState createState() => TakePictureScreenState();
 }
