@@ -63,6 +63,8 @@ class AddPhotoVM extends BaseModel{
     var order= orderDataBase.addDocument(data.toJson());
     order.then((value) async{
       await orderDataBase.addDocumentOrderId(value.id);
+
+
       var message=messageDataBase.setDocument(value.id);
       message.then((val){
         var pref=sharedPreferenceService.setNewOrder(value.id);

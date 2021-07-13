@@ -77,6 +77,14 @@ class DataBaseApi{
   }
   //update data
   Future<void> setDocument(String id) {
-    return ref!.doc(id).set({});
+    return ref!.doc(id).set({
+     '01': {
+        'idUser': null,
+        'urlAvatar': null,
+        'username': null,
+        'message': null,
+        'createdAt': null,
+      }
+    });
   }
 }

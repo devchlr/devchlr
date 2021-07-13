@@ -50,6 +50,7 @@ class _HomeMessageScreenState extends State<HomeMessageScreen> {
     var user=UserChaliar.fromData(userData);
     print(user.surname);
     List<Message>listMessage=[];
+
     messageData.forEach((key, value) {
       listMessage.add(Message.fromJson(value));
     });
@@ -60,37 +61,38 @@ class _HomeMessageScreenState extends State<HomeMessageScreen> {
 
     List<Widget>listMessagBuild=[];
     listMessage.forEach((element) {
-      if(element.idUser==user.id){
-        listMessagBuild.add(
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Container(
-                  width: 192,
-                  height: 42,
-                  margin: EdgeInsets.only(
-                    bottom: 35,
-                  ),
-                  decoration: BoxDecoration(
-                      color: ChaliarColors.primaryColors,
-                      borderRadius: BorderRadius.all(Radius.circular(20))
-                  ),
-                  child: Center(
-                    child:Text('${element.message}',style: AppTextStyle.appBarHeader(
-                      color: Color(0xffffffff),
-                    ),),
-                  )
+      if(element.idUser!=null){
+        if(element.idUser==user.id){
+          listMessagBuild.add(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Container(
+                    width: 192,
+                    height: 42,
+                    margin: EdgeInsets.only(
+                      bottom: 35,
+                    ),
+                    decoration: BoxDecoration(
+                        color: ChaliarColors.primaryColors,
+                        borderRadius: BorderRadius.all(Radius.circular(20))
+                    ),
+                    child: Center(
+                      child:Text('${element.message}',style: AppTextStyle.appBarHeader(
+                        color: Color(0xffffffff),
+                      ),),
+                    )
 
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width*0.05,
-              )
-            ],
-          ),
-        );
-      }else{
-        String userName=element.username!;
-        listMessagBuild.add(
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width*0.05,
+                )
+              ],
+            ),
+          );
+        }else{
+          String userName=element.username!;
+          listMessagBuild.add(
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -105,9 +107,9 @@ class _HomeMessageScreenState extends State<HomeMessageScreen> {
                   ):CircleAvatar(
                     backgroundColor: Colors.transparent,
                     radius: 20,
-                   child: Center(
-                     child: Text('${userName[0]}'),
-                   ),
+                    child: Center(
+                      child: Text('${userName[0]}'),
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -131,8 +133,9 @@ class _HomeMessageScreenState extends State<HomeMessageScreen> {
                     )
                 ),
               ],
-            )
-        );
+            ),
+          );
+        }
       }
     });
     return Scaffold(

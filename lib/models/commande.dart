@@ -20,7 +20,7 @@ class Order{
   Order(
       {
         this.orderId,
-        this.isValidate,
+        this.isValidate=false,
         this.order_price,
         this.order_status,
         this.order_km,
