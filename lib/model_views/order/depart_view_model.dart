@@ -86,7 +86,7 @@ class DepartFormViewModel extends BaseModel{
   }
 
 int timeOfDayToInt(TimeOfDay time){
-  return time.hour.toInt() + time.minute.toInt();
+  return (time.hour.toInt()*3600) + (time.minute.toInt()*60);
 }
 
   bool phoneIsValid=false;
