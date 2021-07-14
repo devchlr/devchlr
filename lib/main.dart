@@ -46,6 +46,7 @@ import 'package:flutter_app/ui/views/profile/home_profile_screen.dart';
 import 'package:flutter_app/ui/views/splash_screen.dart';
 import 'package:flutter_app/ui/views/tutorial_screen.dart';
 // import 'package:client_chaliar/ui/views/faq/term_screen.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 
 Future<void> main() async{
   // Ensure that plugin services are initialized so that `availableCameras()`
@@ -61,6 +62,7 @@ Future<void> main() async{
     await _connectToFirebaseEmulator();
   }
 
+  Stripe.publishableKey = 'stripePublishableKey';
   runApp(MyApp(camera: firstCamera,));
 }
 

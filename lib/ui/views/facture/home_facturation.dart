@@ -20,8 +20,9 @@ class _HomeFacturationScreenState extends State<HomeFacturationScreen> {
    return Scaffold(
       body: Stack(
         children: [
-          Padding(padding: EdgeInsets.only(
-            top: 135,
+          Padding(
+            padding: EdgeInsets.only(
+            top: 175,
              left: MediaQuery.of(context).size.height*0.05,
             right: MediaQuery.of(context).size.height*0.05,
           ),
@@ -30,58 +31,7 @@ class _HomeFacturationScreenState extends State<HomeFacturationScreen> {
                 top: 0
               ),
               children: [
-               Center(
-                 child:  Card(
-                   shape: RoundedRectangleBorder(
-                     borderRadius: const BorderRadius.all(
-                       Radius.circular(20.0),
-                     ),
-                   ),
-            child: Container(
-              height: 32,
-              width: 198,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-              ),
-              child:Center(
-                child: DropdownButton<String>(
-                  focusColor:Colors.white,
-                  value: _chosenValue,
-                  underline: Container(
-                    color: Colors.white,
-                  ),
-                  elevation: 5,
-                  style: TextStyle(color: Colors.white),
-                  iconEnabledColor:Colors.black,
-                  items: <String>[
-                    '90 derniers jours',
-                    '60 derniers jours',
-                    '30 derniers jours',
-                    '7 derniers jours',
-                  ].map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value,style:TextStyle(color:Colors.black),),
-                    );
-                  }).toList(),
-                  hint:Text(
-                    "90 derniers jours",
-                    style: AppTextStyle.appBarHeader(
-                      color: Color(0xff042C5C),
-                      size: 11,
-                      fontWeight: FontWeight.w400
-                    ),
-                  ),
-                  onChanged: (value) {
-                    setState(() {
-                      _chosenValue = value;
-                    });
-                  },
-                ),
-              ),
-            ),
-                 ),
-               ),
+
                 SizedBox(
                   height: 28,
                 ),
@@ -756,13 +706,72 @@ class _HomeFacturationScreenState extends State<HomeFacturationScreen> {
               child: Icon(Icons.arrow_back_ios,color: Colors.white,),
             ),
           ),
-          Padding(padding: EdgeInsets.only(
+          Padding(
+            padding: EdgeInsets.only(
             top:MediaQuery.of(context).size.height*0.91,
           ),
             child:  CustomBottomNavigationBar(
               bgColor: Colors.transparent,
             ),
           ),
+          Padding(
+            padding: EdgeInsets.only(
+              top: 0,
+              bottom: MediaQuery.of(context).size.height*0.6
+            ),
+            child: Center(
+              child:  Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(20.0),
+                  ),
+                ),
+                child: Container(
+                  height: 32,
+                  width: 198,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                  ),
+                  child:Center(
+                    child: DropdownButton<String>(
+                      focusColor:Colors.white,
+                      value: _chosenValue,
+                      underline: Container(
+                        color: Colors.white,
+                      ),
+                      elevation: 5,
+                      style: TextStyle(color: Colors.white),
+                      iconEnabledColor:Colors.black,
+                      items: <String>[
+                        '90 derniers jours',
+                        '60 derniers jours',
+                        '30 derniers jours',
+                        '7 derniers jours',
+                      ].map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value,style:TextStyle(color:Colors.black),),
+                        );
+                      }).toList(),
+                      hint:Text(
+                        "90 derniers jours",
+                        style: AppTextStyle.appBarHeader(
+                            color: Color(0xff042C5C),
+                            size: 11,
+                            fontWeight: FontWeight.w400
+                        ),
+                      ),
+                      onChanged: (value) {
+                        setState(() {
+                          _chosenValue = value;
+                        });
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );

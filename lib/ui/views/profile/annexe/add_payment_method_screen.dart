@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/ui/views/profile/annexe/payment_form/visa_form.dart';
 import 'package:flutter_app/ui/widgets/custom_header.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
+
 
 class AddPaymentMethodScreen extends StatefulWidget {
   const AddPaymentMethodScreen({Key? key}) : super(key: key);
@@ -10,6 +12,12 @@ class AddPaymentMethodScreen extends StatefulWidget {
 }
 
 class _AddPaymentMethodScreenState extends State<AddPaymentMethodScreen> {
+
+  PaymentIntent? _retrievedPaymentIntent;
+  CardFieldInputDetails? _card;
+  SetupIntent? _setupIntentResult;
+  String _email = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +39,20 @@ class _AddPaymentMethodScreenState extends State<AddPaymentMethodScreen> {
                Center(
                  child: Image.asset('assets/images/methodpayement_method.png'),
                ),
-                Expanded(child:VisaPaymentForm(),)
+
+                Container(
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.all(16),
+                  child: CardField(
+                    onCardChanged: (card) {
+                      setState(() {
+                        _card=card;
+                      });
+                      print(_card?.expiryYear);
+                    },
+                  ),
+                ),
+                // Expanded(child:VisaPaymentForm(),)
               ],
             ),
           ),
