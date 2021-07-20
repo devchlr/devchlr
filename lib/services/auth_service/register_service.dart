@@ -42,8 +42,8 @@ class RegisterService{
     }
   }
 
-  Future<bool?> checkIfUserExist(TextEditingController controller)async{
-    var user = firestoreService.getUserByFieldValue('email',controller.text);
+  Future<bool?> checkIfUserExist(String value,String field)async{
+    var user = firestoreService.getUserByFieldValue(field,value);
     user.then((value){
       if(user==null){
         return false;
@@ -54,9 +54,9 @@ class RegisterService{
   }
 
   Future<String> registerUser(UserChaliar user)async{
-    await fireAuthService.registerByEmailandPassword(user.email!, user.password!);
-    var userCredential = auth.currentUser;
-    user.id=userCredential!.uid;
+    // await fireAuthService.registerByEmailandPassword(user.email!, user.password!);
+    // var userCredential = auth.currentUser;
+    // user.id=userCredential!.uid;
     await firestoreService.createUser(user);
     return user.id!;
   }

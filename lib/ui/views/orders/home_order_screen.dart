@@ -25,7 +25,6 @@ class _PreCommandeScreenState extends State<PreCommandeScreen> {
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
   }
-
   @override
   Widget build(BuildContext context) {
     return

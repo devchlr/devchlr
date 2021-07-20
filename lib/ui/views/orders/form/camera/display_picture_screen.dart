@@ -1,19 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/model_views/order/form/displayPicture.dart';
+import 'package:flutter_app/models/commande.dart';
 import 'dart:io';
 import 'package:flutter_app/ui/styles/chaliar_color.dart';
 import 'package:flutter_app/ui/styles/chaliar_font.dart';
 import 'package:flutter_app/ui/styles/text_style.dart';
 import 'package:flutter_app/ui/widgets/button.dart';
+import 'package:provider/provider.dart';
 
 
 class DisplayPictureScreen extends StatelessWidget {
   final String imagePath;
-  const DisplayPictureScreen({Key? key, required this.imagePath}) : super(key: key);
+
+  OrderPackageInformation?packageInformation;
+  OrderRecipientInformation?recipientInformation;
+  OrderDeliveryInformation?deliveryInformation;
+  double? order_km;
+  double?order_price;
+ DisplayPictureScreen({Key? key, required this.imagePath,this.packageInformation,this.recipientInformation,
+ this.deliveryInformation,this.order_km,this.order_price
+ }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final deviceRatio = size.width / size.height;
     return
+      ChangeNotifierProvider<DisplayPictureMV>(
+        create: (context) => DisplayPictureMV(),
+        child: Consumer<DisplayPictureMV>(
+            builder: (context, model, child) =>
       Scaffold(
         body: Stack(
           children: [
@@ -52,7 +67,13 @@ class DisplayPictureScreen extends StatelessWidget {
                     ),
                     ButtonChaliar(
                         onTap: () {
-                          Navigator.pushNamed(context, '/resume_order_screen');
+                          model.imagePath=imagePath;
+                          model.deliveryInformation=deliveryInformation;
+                          model.recipientInformation=recipientInformation;
+                          model.packageInformation=packageInformation;
+                          model.order_km=order_km;
+                          model.order_price=order_price;
+                          model.getResumeOrderScreen(context);
                         },
                         buttonText: 'Je Valide',
                         height: MediaQuery.of(context).size.height * 0.07,
@@ -68,6 +89,8 @@ class DisplayPictureScreen extends StatelessWidget {
             )
           ],
         ),
-      );
+      )
+
+    ));
   }
 }

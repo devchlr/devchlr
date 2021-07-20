@@ -53,17 +53,9 @@ class _OrderScanScreenState extends State<OrderScanScreen> {
         child: Consumer<OrderScanningVM>(
             builder: (context, model, child) =>
         StreamBuilder<DocumentSnapshot>(
-        stream: model.getOrderInformation(widget.orderId!),
+        stream: model.getOrderInformation(widget.orderId),
     builder: (context, snapshot){
-    // if(snapshot.connectionState!=ConnectionState.done){
-    // return Container(
-    // child: Center(
-    // child: CircularProgressIndicator(color: Colors.blue,),
-    // ),
-    // );
-    // }
     Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
-    // print(data);
     var order=Order.fromJson(data);
     var deliveryInformation=OrderDeliveryInformation.fromJson(order.deliveryInformation!);
     var packageInfornation=OrderPackageInformation.fromJson(order.packageInformation!);

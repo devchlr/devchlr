@@ -91,14 +91,29 @@ Order? orderInformation;
     ByteData byteData = await DefaultAssetBundle.of(context).load(path);
       MarkerId markerId = MarkerId(id);
       Marker marker =
-      Marker(markerId: markerId, icon: BitmapDescriptor.fromBytes(byteData.buffer.asUint8List()), position: position);
+      Marker(
+          markerId: markerId,
+          icon: BitmapDescriptor.fromBytes(byteData.buffer.asUint8List()),
+          position: position
+      );
       markers[markerId] = marker;
   }
 
+
+  // _addDelyveryMarker(LocationData newLocalData, String path,BuildContext context)async {
+  //   ByteData byteData = await DefaultAssetBundle.of(context).load(path);
+  //   MarkerId markerId = MarkerId(id);
+  //   Marker marker =
+  //   Marker(
+  //       markerId: markerId,
+  //       icon: BitmapDescriptor.fromBytes(byteData.buffer.asUint8List()),
+  //       position: position
+  //   );
+  //   markers[markerId] = marker;
+  // }
   Future<void> actualise()async{
 
   }
-
 
   getMessageScreen(String orderId,BuildContext context,String senderId){
     Navigator.push(context,

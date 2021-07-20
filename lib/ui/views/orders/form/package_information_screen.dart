@@ -1,6 +1,6 @@
 import 'package:flutter_app/constants/iconList.dart';
 import 'package:flutter_app/constants/package_size.dart';
-import 'package:flutter_app/model_views/order/taille_view_model.dart';
+import 'package:flutter_app/model_views/order/form/taille_view_model.dart';
 import 'package:flutter_app/models/commande.dart';
 import 'package:flutter_app/ui/styles/chaliar_color.dart';
 import 'package:flutter_app/ui/styles/text_style.dart';
@@ -103,7 +103,7 @@ class _TailleColisScreenState extends State<TailleColisScreen> {
                             ReusableCard(
                               size: '${PackageSize.small}',
                               title: 'Taille S',
-                              price: '${model.getPriceByDistance(PackageSize.small,widget.km_distance!).toInt()}',
+                              price: '${model.getPriceByDistance(PackageSize.small,widget.km_distance!).toStringAsFixed(2)}',
                               description: 'Tiens dans une boite à chaussure (téléphone, clé, …)',
                               colour: model.package_size==PackageSize.small?ChaliarColors.whiteColor:ChaliarColors.primaryColors,
                               bgColour: model.package_size==PackageSize.small?ChaliarColors.primaryColors:ChaliarColors.whiteColor,
@@ -115,7 +115,7 @@ class _TailleColisScreenState extends State<TailleColisScreen> {
                             ReusableCard(
                               size: '${PackageSize.medium}',
                               title: 'Taille M',
-                              price: '${model.getPriceByDistance(PackageSize.medium,widget.km_distance!).toInt()}',
+                              price: '${model.getPriceByDistance(PackageSize.medium,widget.km_distance!).toStringAsFixed(2)}',
                               description: 'Tiens dans une valise cabine(ordinateur, platine …)',
                               colour: model.package_size==PackageSize.medium?ChaliarColors.whiteColor:ChaliarColors.primaryColors,
                               bgColour: model.package_size==PackageSize.medium?ChaliarColors.primaryColors:ChaliarColors.whiteColor,
@@ -132,7 +132,7 @@ class _TailleColisScreenState extends State<TailleColisScreen> {
                             ReusableCard(
                               size: '${PackageSize.large}',
                               title: 'Taille L',
-                              price: '${model.getPriceByDistance(PackageSize.large,widget.km_distance!).toInt()}',
+                              price: '${model.getPriceByDistance(PackageSize.large,widget.km_distance!).toStringAsFixed(2)}',
                               description: 'Tiens dans le coffre d’une voiture(tv, valise …)',
                               colour: model.package_size==PackageSize.large?ChaliarColors.whiteColor:ChaliarColors.primaryColors,
                               bgColour: model.package_size==PackageSize.large?ChaliarColors.primaryColors:ChaliarColors.whiteColor,
@@ -145,7 +145,7 @@ class _TailleColisScreenState extends State<TailleColisScreen> {
                             ReusableCard(
                               size: '${PackageSize.extralarge}',
                               title: 'Taille XL',
-                              price: '${model.getPriceByDistance(PackageSize.extralarge,widget.km_distance!).toInt()}',
+                              price: '${model.getPriceByDistance(PackageSize.extralarge,widget.km_distance!).toStringAsFixed(2)}',
                               description: 'Nécessite un petit utilitaire(canapé, armoire…)',
                               colour: model.package_size==PackageSize.extralarge?ChaliarColors.whiteColor:ChaliarColors.primaryColors,
                               bgColour: model.package_size==PackageSize.extralarge?ChaliarColors.primaryColors:ChaliarColors.whiteColor,

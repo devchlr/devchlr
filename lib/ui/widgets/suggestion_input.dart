@@ -11,8 +11,13 @@ class CustomSugestionInput extends StatelessWidget {
   final void Function(Object?)? onSuggestionSelected;
   final String? placeholder;
   final String? errorText;
+  final Color? labelColor;
+  final Color?fillColors;
+  final FontWeight?weigth;
+  final bool? isUrderline;
 
- const CustomSugestionInput({this.errorText,this.placeholder, Key? key,this.controller,this.suggestionsCallback,this.itemBuilder,this.onSuggestionSelected}) : super(key: key);
+ const CustomSugestionInput({this.labelColor,this.fillColors,this.weigth,this.isUrderline=false,
+   this.errorText,this.placeholder, Key? key,this.controller,this.suggestionsCallback,this.itemBuilder,this.onSuggestionSelected}) : super(key: key);
 
 
   @override
@@ -21,15 +26,15 @@ class CustomSugestionInput extends StatelessWidget {
       child: TypeAheadField(
         textFieldConfiguration: TextFieldConfiguration(
             controller: controller,
-            // autofocus: true,
             style: AppTextStyle.appBarHeader(
               fontWeight: FontWeight.w400,
                 size: 12,
-                color: ChaliarColors.secondaryColors),
+                color: labelColor==null?ChaliarColors.secondaryColors:labelColor
+            ),
             decoration: InputDecoration(
               enabled: false,
                 filled: true,
-                fillColor: ChaliarColors.whiteGreyColor,
+                fillColor: fillColors==null?ChaliarColors.whiteGreyColor:fillColors,
                 contentPadding: EdgeInsets.only(
                     top:  MediaQuery.of(context).size.height * 0.025,
                     bottom: MediaQuery.of(context).size.height * 0.025,
@@ -44,9 +49,17 @@ class CustomSugestionInput extends StatelessWidget {
                 hintText: placeholder,
                 hintStyle: AppTextStyle.appBarHeader(
                   size: 12,
-                    color: ChaliarColors.secondaryColors),
-                border:InputBorder.none,
-                 enabledBorder: InputBorder.none,
+                    color: labelColor==null?ChaliarColors.secondaryColors:labelColor,
+                  fontWeight: weigth==null?FontWeight.w400:weigth!
+                ),
+                border:isUrderline==false?InputBorder.none:new UnderlineInputBorder(
+                    borderSide: new BorderSide(
+                    color: Colors.black
+                    ),),
+                 enabledBorder: isUrderline==false?InputBorder.none:new UnderlineInputBorder(
+                   borderSide: new BorderSide(
+                       color: Colors.black
+                   ),),
             )
         ),
         suggestionsCallback: suggestionsCallback!,

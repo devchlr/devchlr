@@ -2,8 +2,6 @@ import 'package:flutter_app/models/user.dart';
 import 'package:flutter_app/services/preferences/shared_preference_service.dart';
 import 'package:flutter_app/ui/styles/chaliar_color.dart';
 import 'package:flutter_app/ui/styles/text_style.dart';
-// import 'package:flutter_app/ui/views/auth/condition_generale_screen.dart';
-// import 'package:flutter_app/ui/views/auth/preCondition_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/ui/widgets/button.dart';
 import 'package:flutter_app/model_views/authentification/authentificationVM.dart';
@@ -15,9 +13,8 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PhoneOptValidateScreen extends StatefulWidget {
-  String? phone;
-  String? uid;
-  PhoneOptValidateScreen({this.phone,this.uid});
+  UserChaliar? user;
+  PhoneOptValidateScreen({this.user});
   @override
   _PhoneOptValidateScreenState createState() => _PhoneOptValidateScreenState();
 }
@@ -27,27 +24,16 @@ class _PhoneOptValidateScreenState extends State<PhoneOptValidateScreen>{
   AuthentificationVM _validator=AuthentificationVM();
   void initState(){
     super.initState();
+    _validator.currentUser=widget.user!;
     getPreferenceInfo();
-
   }
   void getPreferenceInfo()async{
-      await sharedPreferenceService.getPreferenceByFieldName('register_phone').then((phone)async{
-        setState(() {
-          widget.phone= widget.phone??phone;
-        });
-        await sharedPreferenceService.getPreferenceByFieldName('register_email').then((uid){
-          setState(() {
-            widget.uid= widget.uid??uid;
-          });
-          print(widget.uid);
-          _validator.uid=widget.uid;
-        });
-      });
      sendSmsOpt();
   }
 
   sendSmsOpt()async{
-    String phone=widget.phone!;
+    _validator.currentUser=widget.user!;
+    String phone=widget.user!.phone!;
     await _validator.sendSmsOpt(phone,context);
   }
   @override
@@ -97,8 +83,8 @@ class _PhoneOptValidateScreenState extends State<PhoneOptValidateScreen>{
                                 children: [
                                   TextSpan(
                                     recognizer: TapGestureRecognizer()
-                                      ..onTap = ()=>launch("tel://21213123123"),
-                                    text: "${widget.phone}",
+                                      ..onTap = ()=>launch("${widget.user!.phone}"),
+                                    text: "${widget.user!.phone!}",
                                     style: AppTextStyle.header3_light(
                                         color: ChaliarColors.primaryColors,
                                         isUnderlined: true),
@@ -157,7 +143,7 @@ class _PhoneOptValidateScreenState extends State<PhoneOptValidateScreen>{
                           GestureDetector(
                             onTap: () {
                               customShowSnackBar.initUserRequestAnimation(context);
-                              model.sendSmsOpt(widget.phone!,context);
+                              model.sendSmsOpt(widget.user!.phone!,context);
                             },
                             child: Text(
                               'Me renvoyer un code',
@@ -177,10 +163,10 @@ class _PhoneOptValidateScreenState extends State<PhoneOptValidateScreen>{
                             child: ButtonChaliar(
                                 onTap: ()async{
                                   model.context=context;
-                                  model.uid=widget.uid;
+                                  model.currentUser=widget.user!;
                                   await model.confirmOPT(context);
                                 },
-                                buttonText: 'Envoyer le code',
+                                buttonText: 'Valider le code',
                                 height: 60.0,
                                 mediaQueryWidth: 0.5,
                                 borderRaduis: 50,

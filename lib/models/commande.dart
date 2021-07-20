@@ -16,6 +16,8 @@ class Order{
   final Map<String,dynamic>? deliveryInformation;
   final Map<String,dynamic>? recipientInformation;
   final Map<String,dynamic>? packageInformation;
+  final DateTime? created_at;
+  final DateTime? updated_at;
 
   Order(
       {
@@ -28,7 +30,10 @@ class Order{
         this.delivery_id,
         this.deliveryInformation,
         this.recipientInformation,
-        this.packageInformation});
+        this.packageInformation,
+        this.created_at,
+        this.updated_at
+      });
   Order.fromJson(Map<String,dynamic>json):
         orderId=json['order_id'],
         isValidate=json['is_validate'],
@@ -36,6 +41,8 @@ class Order{
         order_status=json['order_status'],
         order_km=json['order_km'],
         user_id=json['user_id'],
+        created_at=Utils.toDateTime(json['created_at']),
+        updated_at=Utils.toDateTime(json['updated_at']),
         delivery_id=json['delivery_id'],
         deliveryInformation=json['deliveryInformation'],
         recipientInformation=json['recipientInformation'],
@@ -51,7 +58,9 @@ class Order{
     'delivery_id':delivery_id,
     'deliveryInformation':deliveryInformation,
     'recipientInformation':recipientInformation,
-    'packageInformation':packageInformation
+    'packageInformation':packageInformation,
+    'created_at':Utils.fromDateTimeToJson(created_at!),
+    'updated_at':Utils.fromDateTimeToJson(updated_at!),
   };
 }
 
@@ -153,9 +162,14 @@ class OrderRecipientInformation{
 }
 //package Order nature
 class OrderPackageInformation{
-  final String? package_nature;
-  final String? package_size;
-  final String? package_image;
+  String? package_nature;
+  String? package_size;
+  String? package_image;
+  setImage(String image)async{
+    package_image=image;
+  }
+
+
   OrderPackageInformation({
     this.package_nature,
     this.package_size,

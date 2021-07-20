@@ -5,6 +5,7 @@ import 'package:flutter_app/ui/styles/text_style.dart';
 import 'package:flutter_app/ui/widgets/button.dart';
 import 'package:flutter_app/ui/widgets/input_field.dart';
 import 'package:flutter_app/ui/widgets/loading.dart';
+import 'package:flutter_app/ui/widgets/suggestion_input.dart';
 import 'package:flutter_app/ui/widgets/svg_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -262,18 +263,44 @@ class UserRegisterScreen extends StatelessWidget {
                               :SizedBox(
                             height: 8,
                           ),
+                          // Padding(
+                          //   padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.07, right: MediaQuery.of(context).size.width * 0.07),
+                          //   child: InputField(
+                          //       fieldSize: MediaQuery.of(context).size.height * 0.02,
+                          //       label: "Adresse de facturation",
+                          //       maxlenght: 250,
+                          //       textFillColor: ChaliarColors.blackColor,
+                          //       controller: model.facturationAdress,
+                          //     errorText: model.validate_facturationAdress?'Adresse de facruration non valide':null,
+                          //     onChanged: (value){
+                          //       model.validateAdresseFacturation();
+                          //     },
+                          //   ),
+                          // ),
                           Padding(
-                            padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.07, right: MediaQuery.of(context).size.width * 0.07),
-                            child: InputField(
-                                fieldSize: MediaQuery.of(context).size.height * 0.02,
-                                label: "Adresse de facturation",
-                                maxlenght: 250,
-                                textFillColor: ChaliarColors.blackColor,
-                                controller: model.facturationAdress,
-                              errorText: model.validate_facturationAdress?'Adresse de facruration non valide':null,
-                              onChanged: (value){
-                                model.validateAdresseFacturation();
+                            padding: EdgeInsets.only(
+                              left: MediaQuery.of(context).size.width * 0.07,
+                              right: MediaQuery.of(context).size.width * 0.07,
+                            ),
+                            child: CustomSugestionInput(
+                              isUrderline: true,
+                              weigth: FontWeight.w400,
+                              labelColor: Colors.black,
+                              fillColors: Colors.white,
+                              placeholder: 'Adresse de facturation',
+                              suggestionsCallback: (pattern) async {
+                                return await model.getPlaceSugestion(pattern);
                               },
+                              itemBuilder: (context, suggestion) {
+                                return ListTile(
+                                  title: Text(suggestion.toString()),
+                                );
+                              },
+                              onSuggestionSelected: (suggestion) {
+                                model.facturationAdress.text=suggestion.toString();
+                              },
+                              controller:model.facturationAdress,
+                              errorText: model.validate_facturationAdress?'Adresse de facruration non valide':null,
                             ),
                           ),
                           SizedBox(

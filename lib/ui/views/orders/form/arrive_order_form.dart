@@ -1,4 +1,4 @@
-import 'package:flutter_app/model_views/order/arrive_view_model.dart';
+import 'package:flutter_app/model_views/order/form/arrive_view_model.dart';
 import 'package:flutter_app/models/commande.dart';
 import 'package:flutter_app/ui/styles/chaliar_color.dart';
 import 'package:flutter_app/ui/styles/text_style.dart';
@@ -26,8 +26,7 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    arriveScreenViewModel.orderDeliveryInformation=widget.deliveryInformation;
-    print(arriveScreenViewModel.orderDeliveryInformation!.departure_address!.toJson());
+    arriveScreenViewModel.orderDeliveryInformation=widget.deliveryInformation!;
   }
   @override
   Widget build(BuildContext context) {
@@ -227,7 +226,7 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
                           child: Center(
                             child: ButtonChaliar(
                                 onTap: () {
-                                  model.orderDeliveryInformation=widget.deliveryInformation;
+                                  model.orderDeliveryInformation=widget.deliveryInformation!;
                                   model.formEditingController(context);
                                   // Navigator.pushNamed(context, '/taille_colli');
                                 },
@@ -250,13 +249,6 @@ class _ArriveeFormScreenState extends State<ArriveeFormScreen> {
                 ),
               ),
             ],
-          ),
-          Positioned(
-            left: 10.0,
-            top: 30.0,
-            child: CircleAvatar(
-              radius: 5.0,
-            ),
           ),
           Padding(
             padding: EdgeInsets.only(

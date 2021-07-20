@@ -33,7 +33,6 @@ public final class GeneratedPluginRegistrant {
     flutterEngine.getPlugins().add(new io.flutter.plugins.share.SharePlugin());
     flutterEngine.getPlugins().add(new io.flutter.plugins.sharedpreferences.SharedPreferencesPlugin());
       com.follow2vivek.storagepath.StoragePathPlugin.registerWith(shimPluginRegistry.registrarFor("com.follow2vivek.storagepath.StoragePathPlugin"));
-    flutterEngine.getPlugins().add(new com.flutter.stripe.StripeAndroidPlugin());
     flutterEngine.getPlugins().add(new io.flutter.plugins.urllauncher.UrlLauncherPlugin());
     flutterEngine.getPlugins().add(new io.flutter.plugins.videoplayer.VideoPlayerPlugin());
   }

@@ -5,7 +5,7 @@ import 'package:flutter_app/services/database/api.dart';
 class OrderScanningVM extends BaseModel{
   DataBaseApi orderDatabase=DataBaseApi('orders');
 
-  Stream<DocumentSnapshot> getOrderInformation(String orderId){
-    return orderDatabase.streamDataCollectionById(orderId);
+  Stream<DocumentSnapshot> getOrderInformation(String? orderId){
+    return orderDatabase.streamDataCollectionById(orderId!);
   }
 }

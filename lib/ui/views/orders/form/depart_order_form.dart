@@ -1,6 +1,5 @@
-import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter_app/constants/type_livraison.dart';
-import 'package:flutter_app/model_views/order/depart_view_model.dart';
+import 'package:flutter_app/model_views/order/form/depart_view_model.dart';
 import 'package:flutter_app/ui/styles/chaliar_color.dart';
 import 'package:flutter_app/ui/styles/text_style.dart';
 import 'package:flutter_app/ui/widgets/button.dart';
@@ -9,14 +8,9 @@ import 'package:flutter_app/ui/widgets/custom_header.dart';
 import 'package:flutter_app/ui/widgets/input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/ui/widgets/suggestion_input.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:google_place/google_place.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart' show DateFormat;
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-import 'package:flutter_typeahead/cupertino_flutter_typeahead.dart';
-
-
 
 class DepartFormScreen extends StatefulWidget {
   @override
@@ -42,9 +36,6 @@ class _DepartFormScreenState extends State<DepartFormScreen> {
     final DateTime midDate =
     visibleStartDate.add(Duration(days: totalVisibleDays ~/ 2));
     headerString = DateFormat('MMMM yyyy').format(midDate).toString();
-    // SchedulerBinding.instance.addPostFrameCallback((duration) {
-    //   setState(() {});
-    // });
   }
   @override
   Widget build(BuildContext context) {

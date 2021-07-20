@@ -17,33 +17,39 @@ class _ImagesState extends State<Images> with AutomaticKeepAliveClientMixin{
     return FutureBuilder(
       future: StoragePath.imagesPath,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (snapshot.hasData) {
+        if (snapshot.data=='[]') {
+          return
+            GestureDetector(
+              onTap:widget.onTap,
+              child: Icon(Icons.panorama,size: 43,color: Colors.white,),
+            );
+        }
+
+        if (snapshot.data!='[]'||snapshot.data!=null) {
           List<dynamic> list = json.decode(snapshot.data);
-          print('liste des images:${list[0]}');
           ImageModel imageModel = ImageModel.fromJson(list[0]);
           return GestureDetector(
-              onTap:widget.onTap,
+            onTap:widget.onTap,
             onDoubleTap: (){
-                print(imageModel.files!.first);
+              print(imageModel.files!.first);
             },
             child:Container(
               height: 43,
               width: 54,
               decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: new FileImage(File(imageModel.files!.first)),
-              fit: BoxFit.fill,
-            )
+                  image: DecorationImage(
+                    image: new FileImage(File(imageModel.files!.first)),
+                    fit: BoxFit.fill,
+                  )
 
               ),
             ),
           );
-        } else {
-          return GestureDetector(
-            onTap:widget.onTap,
-            child: Icon(Icons.panorama,size: 43,color: Colors.white,),
-          );
         }
+        return GestureDetector(
+          onTap:widget.onTap,
+          child: Icon(Icons.panorama,size: 43,color: Colors.white,),
+        );
       },
     );
   }

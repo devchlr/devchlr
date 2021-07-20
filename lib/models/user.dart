@@ -1,6 +1,5 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:flutter_app/services/parsers/transformer.dart';
 class UserChaliar {
      String? id;
   final String? name;
@@ -16,6 +15,12 @@ class UserChaliar {
   final String? societe;
   final String? password;
   final String? profile_url;
+  final String? messaging_tk;
+  final DateTime? created_at;
+  final DateTime? updated_at;
+  final double?latitude;
+  final double? longitude;
+
 
   UserChaliar(
       {this.id,
@@ -32,6 +37,11 @@ class UserChaliar {
         this.societe,
         this.password,
         this.profile_url,
+        this.created_at,
+        this.updated_at,
+        this.latitude,
+        this.longitude,
+        this.messaging_tk
       });
 
   void setUserId(String id){
@@ -52,7 +62,12 @@ class UserChaliar {
         societe=data['societe'],
         password=data['password'],
         profile_url=data['profile_url'],
-        userRole = data['userRole'];
+        userRole = data['userRole'],
+        created_at=Utils.toDateTime(data['created_at']),
+        updated_at=Utils.toDateTime(data['updated_at']),
+        latitude=data['latitude'],
+        longitude=data['longitude'],
+     messaging_tk=data['messaging_tk'];
 
 
 
@@ -71,7 +86,12 @@ class UserChaliar {
            societe:data['societe'],
            password:data['password'],
            userRole : data['userRole'],
-         profile_url: data['profile_url']
+         profile_url: data['profile_url'],
+           created_at:Utils.toDateTime(data['created_at']),
+           updated_at:Utils.toDateTime(data['updated_at']),
+           latitude:data['latitude'],
+           longitude:data['longitude'],
+         messaging_tk: data['messaging_tk']
        );
      }
 
@@ -92,6 +112,11 @@ class UserChaliar {
            password:data['password'],
            userRole : data['userRole'],
          profile_url: data['profile_url'],
+           created_at:Utils.toDateTime(data['created_at']),
+           updated_at:Utils.toDateTime(data['updated_at']),
+         latitude:data['latitude'],
+         longitude:data['longitude'],
+         messaging_tk: data['messaging_tk']
        );
      }
 
@@ -110,7 +135,12 @@ class UserChaliar {
       'siret':siret,
       'societe':societe,
       'password':password,
-      'profile_url':profile_url
+      'profile_url':profile_url,
+      'created_at':Utils.fromDateTimeToJson(created_at!),
+      'updated_at':Utils.fromDateTimeToJson(updated_at!),
+      'latitude':latitude,
+      'longitude':longitude,
+      'messaging_tk':messaging_tk
     };
   }
 }

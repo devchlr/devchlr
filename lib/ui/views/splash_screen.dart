@@ -1,45 +1,19 @@
-import 'dart:ui';
-import 'package:flutter_app/services/preferences/shared_preference_service.dart';
-import 'package:flutter_app/ui/styles/chaliar_color.dart';
+import 'package:flutter_app/model_views/splashScreenMV.dart';
 import 'package:flutter_app/ui/styles/chaliar_font.dart';
 import 'package:flutter_app/ui/styles/chaliar_icon_size.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/ui/widgets/button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'dart:async';
 
 class SplashScreen extends StatefulWidget {
-  FirebaseAuth _auth =FirebaseAuth.instance;
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  SharedPreferenceService sharedPreferenceService=SharedPreferenceService();
+  SplashScreenMV splashScreenMV=SplashScreenMV();
   void initState() {
     super.initState();
-    nextScreen();
-  }
-  void nextScreen()async{
-    Timer(Duration(seconds: 6),
-              () => Navigator.pushReplacementNamed(context, nextPage==''?'/tuto':nextPage));
-//     if(await widget._auth.currentUser==null){
-//       print('oki1');
-      
-//       Timer(Duration(seconds: 6),
-//               () => Navigator.pushReplacementNamed(context, nextPage==''?'/tuto':nextPage));
-      
-//       String nextPage= await sharedPreferenceService.getStartPreferencePage();
-//       print(nextPage=='');
-//       Timer(Duration(seconds: 6),
-//               () => Navigator.pushReplacementNamed(context, nextPage==''?'/tuto':nextPage));
-//     }else{
-//       print('toujours actif');
-//       String nextPage= await sharedPreferenceService.getStartPreferencePage();
-//       Timer(Duration(seconds: 6),
-//               () => Navigator.pushReplacementNamed(context, nextPage));
-//     }
+    splashScreenMV.nextScreen(context);
   }
 
   @override

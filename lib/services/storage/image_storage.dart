@@ -37,16 +37,34 @@ class ImageStorageService{
     }
     var link =  ref.getDownloadURL();
     return link;
-
-       //  ref.getDownloadURL().then((downloadUrl){
-       //   var url = downloadUrl.toString();
-       //   return CloudStorageResult(
-       //     imageUrl: url,
-       //     imageFileName: imageFileName,
-       //   );
-       // });
   }
 
+  Future<String> uploadImageUserOrderImage(
+      @required File imageToUpload,
+      @required String title,
+      ) async{
+    var imageFileName =
+        title + DateTime.now().millisecondsSinceEpoch.toString();
+
+    // ref.putFile(imageToUpload);
+    //start ici
+    var uploadTask;
+    //add reference
+    firebase_storage.Reference ref =
+    firebase_storage.FirebaseStorage.instance.ref('/user_order/$title').child(imageFileName);
+    //add meta data
+    final metadata = firebase_storage.SettableMetadata(
+        contentType: 'image/png',
+        customMetadata: {'picked-file-path': imageToUpload.path});
+
+    if (kIsWeb) {
+      uploadTask = await ref.putData(await imageToUpload.readAsBytes(), metadata);
+    } else {
+      uploadTask =await ref.putFile(imageToUpload, metadata);
+    }
+    var link =  ref.getDownloadURL();
+    return link;
+  }
 
 
   Future<void> _downloadLink(firebase_storage.Reference ref) async {

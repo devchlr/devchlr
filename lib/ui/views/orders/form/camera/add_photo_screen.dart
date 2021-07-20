@@ -1,4 +1,4 @@
-import 'package:flutter_app/model_views/order/add_photoVM.dart';
+import 'package:flutter_app/model_views/order/form/add_photoVM.dart';
 import 'package:flutter_app/ui/styles/chaliar_color.dart';
 import 'package:flutter_app/ui/styles/text_style.dart';
 import 'package:flutter/material.dart';
@@ -71,7 +71,10 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
                           Center(
                             child:GestureDetector(
                               onTap:(){
-                                Navigator.pushNamed(context, '/take_picture');
+                                model.orderDeliveryInformation=widget.deliveryInformation;
+                                model.orderRecipientInformation=widget.recipientInformation;
+                                model.orderPackageInformation=widget.packageInformation;
+                                model.getPhoto(context);
                               } ,
                               child:Container(
                                 height: 60,
@@ -95,7 +98,12 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
                                         padding: EdgeInsets.only(
                                             right: 30
                                         ),
-                                        child:Center(child: Text('Prendre la photo',style: AppTextStyle.addPhotoBtn(color: ChaliarColors.whiteColor),)
+                                        child:Center(
+                                            child: Text(
+                                              'Prendre la photo',
+                                              style: AppTextStyle.addPhotoBtn(
+                                                  color: ChaliarColors.whiteColor
+                                              ),),
                                         ),),
                                     ),
                                   ],
@@ -120,7 +128,6 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
                                 model.orderRecipientInformation=widget.recipientInformation;
                                 model.orderPackageInformation=widget.packageInformation;
                                 model.getPackageResume(context);
-                                // Navigator.pushNamed(context, '/resume_order_screen');
                               },
                               child: Text(
                                 'passer cette étape',

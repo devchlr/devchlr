@@ -222,7 +222,6 @@ int timeOfDayToInt(TimeOfDay time){
           delivery_type: delivery_type.text,
           phone_number: phone_number.text
       );
-      print(deliveryInformation.toJson());
       Navigator.push(context,
           new MaterialPageRoute(
               builder: (BuildContext context) =>

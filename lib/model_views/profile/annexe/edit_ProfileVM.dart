@@ -46,7 +46,6 @@ class EditProfileScreenMV extends BaseModel{
       notifyListeners();
       print(value.toString());
       var setImage= firestoreService.setUser(user.uid,{'profile_url': value.toString()});
-
     });
     notifyListeners();
   }

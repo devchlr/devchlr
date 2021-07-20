@@ -1,19 +1,20 @@
 
 import 'package:flutter_app/model_views/base_model.dart';
 import 'package:flutter_app/models/user.dart';
+import 'package:flutter_app/services/auth_service/register_service.dart';
 import 'package:flutter_app/services/fire_store_service.dart';
-// import 'package:flutter_app/ui/views/auth/preCondition_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/services/preferences/shared_preference_service.dart';
 import 'package:flutter_app/ui/views/authentifications/conditionnal_term.dart';
-import 'package:flutter_app/ui/views/authentifications/pre_contionnal_screen.dart';
 import 'package:flutter_app/ui/widgets/custom_showSnackBar.dart';
 class AuthentificationVM extends BaseModel{
 
   FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   FirestoreService _storeService = FirestoreService();
+  RegisterService registerService=RegisterService();
   UserChaliar? currentUser;
+  UserChaliar? user;
   String? phone;
   String? pin;
   var _verificationId;
@@ -47,11 +48,11 @@ class AuthentificationVM extends BaseModel{
     // }
   }
   //function function qui recupere le numero du user
-  void getUserData(String number)async{
-    currentUser = await _storeService.getUser(number);
-    print(currentUser?.name);
-    notifyListeners();
-  }
+  // void getUserData(String number)async{
+  //   currentUser = await _storeService.getUser(number);
+  //   print(currentUser?.name);
+  //   notifyListeners();
+  // }
 
   //verifier le code pin
   sendSmsOpt(String phoneNumber,BuildContext context){
@@ -62,16 +63,7 @@ class AuthentificationVM extends BaseModel{
       phoneNumber: phoneNumber,
       timeout: const Duration(seconds: 120),
       verificationCompleted: (PhoneAuthCredential credential) async{
-      var authCredential=  await _firebaseAuth.signInWithCredential(credential);
-          if(authCredential.user != null){
-            loading=false;
-            notifyListeners();
-            customShowSnackBar.initUserRequestAnimationSucess(context, 'Compte créer avec sucess');
-            goToNextSCreen(context,uid!);
-          }else{
-            print('error');
-            return;
-          }
+        signInWithPhoneAuthCredential(credential, context);
       },
       verificationFailed: (verificationFailed){
         loading=false;
@@ -87,17 +79,14 @@ class AuthentificationVM extends BaseModel{
       },
       codeAutoRetrievalTimeout: (String verificationId){
         verificationId = verificationId;
-        print(verificationId);
-        print("Timout");
       },
     );
     verificationAuth.then((value){
-      print('oki');
+
     });
   }
 
   confirmOPT(BuildContext context) async {
-    print('vriId ici confirm opt: ${_verificationId}');
     String phoneCred= await sharedPreferenceService.getPhoneCred();
     PhoneAuthCredential phoneAuthCredential =
      PhoneAuthProvider.credential(verificationId: phoneCred, smsCode: pin!);
@@ -106,7 +95,7 @@ class AuthentificationVM extends BaseModel{
 
 //function qui redirige vers la page OPT
   void goToNextSCreen(BuildContext context,String uid)async{
-    bool isCommit= await sharedPreferenceService.setStartPreferencePage('/singin');
+    bool isCommit= await sharedPreferenceService.setStartPreferencePage('/connexion');
     if(isCommit){
       Navigator.push(context,
           new MaterialPageRoute(
@@ -130,12 +119,9 @@ class AuthentificationVM extends BaseModel{
       await _firebaseAuth.signInWithCredential(phoneAuthCredential);
 
       if(authCredential.user != null){
-          loading=false;
-          notifyListeners();
-          customShowSnackBar.initUserRequestAnimationSucess(context, 'Compte créer avec sucess');
-          var user=_firebaseAuth.currentUser;
-          goToNextSCreen(context,uid!);
-        // Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeScreen()));
+        authCredential.user!.updateEmail(currentUser!.email!);
+        authCredential.user!.updatePassword(currentUser!.password!);
+        savedUser(context,authCredential);
       }
 
     } on FirebaseAuthException catch (e) {
@@ -144,8 +130,20 @@ class AuthentificationVM extends BaseModel{
       customShowSnackBar.initUserRequestAnimationError(context, '${e.message}');
     }
   }
+  savedUser(BuildContext context,UserCredential authCredential){
+    currentUser!.setUserId(authCredential.user!.uid);
+    var checkifRegister= registerService.registerUser(currentUser!);
+    checkifRegister.then((result){
+      if(result!=null){
+        loading=false;
+        notifyListeners();
+        customShowSnackBar.initUserRequestAnimationSucess(context, 'Compte créer avec sucess');
+        goToNextSCreen(context,currentUser!.id!);
+      }else{
+        customShowSnackBar.showDialogError(context:context,titleDialog:'Erreur formulaire',errorDescription: 'Erreur lors de l\'enregistrement recommencer svp');
+      }
+    });
 
-
-
-
+  }
 }
+

@@ -50,7 +50,12 @@ class GooglePlaceService {
     return addresses;
   }
 
-  double getDistance(AdressLocalisation depart,AdressLocalisation arrival){
+  double getDistance(AdressLocalisation? depart,AdressLocalisation? arrival){
+    if(depart==null||arrival==null){
+      print('distance de depart :${depart}');
+      print('distance d arriver :${arrival}');
+      return -1;
+    }
     double distanceInMeters = Geolocator.distanceBetween(depart.lat!, depart.long!, arrival.lat!, arrival.long!);
     return distanceInMeters/1000;
   }
